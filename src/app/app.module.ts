@@ -18,7 +18,6 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { MessageComponent } from './message/message.component';
 import { MapTestComponent } from './map-test/map-test.component';
-import { geolocationServiceInjectables } from './services/map-test.service';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
@@ -56,8 +55,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
   providers: [
     ChatService,
     AuthGuard,
-    AuthService,
-    geolocationServiceInjectables
+    AuthService
     ],
   bootstrap: [AppComponent]
 })
