@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const sequelize = require('./connection');
 
-const seeder = require('./seedData/_seedMethods');
+//const seeder = require('./seedData/_seedMethods');
 
 const initDatabase = () => {
 	return new Promise((resolve, reject) => {

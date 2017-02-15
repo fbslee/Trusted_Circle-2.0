@@ -17,6 +17,10 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { MessageComponent } from './message/message.component';
+import { MapTestComponent } from './map-test/map-test.component';
+import { geolocationServiceInjectables } from './services/map-test.service';
+
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 
 @NgModule({
@@ -27,7 +31,8 @@ import { MessageComponent } from './message/message.component';
     HomeComponent,
     HeaderComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    MapTestComponent
   ],
   imports: [
     BrowserModule,
@@ -43,12 +48,16 @@ import { MessageComponent } from './message/message.component';
       { path: 'message', component: MessageComponent },
 
     ]),
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+        AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC4K9y-gZajK78CG6JFg2jfan2XtcDPY6w'
+    })
   ],
   providers: [
     ChatService,
     AuthGuard,
-    AuthService
+    AuthService,
+    geolocationServiceInjectables
     ],
   bootstrap: [AppComponent]
 })
