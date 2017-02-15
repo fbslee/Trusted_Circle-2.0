@@ -4,7 +4,10 @@ const sequelize = require('./../db/connection');
 var User = sequelize.define('user', {
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-  userName: Sequelize.STRING,
+  username: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   password: Sequelize.STRING,
   photo: Sequelize.STRING,
   upvotes: {
@@ -19,7 +22,8 @@ var User = sequelize.define('user', {
   lat: {
       type: Sequelize.FLOAT,
       defaultValue: 0
-  }
+  },
+  salt: Sequelize.STRING,
 });
 
 module.exports = User;

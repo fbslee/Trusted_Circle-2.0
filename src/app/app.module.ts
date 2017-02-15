@@ -20,6 +20,10 @@ import { MessageComponent } from './message/message.component';
 import { MapTestComponent } from './map-test/map-test.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { SignupComponent } from './login/signup/signup.component';
+import { SignupService } from './login/signup/signup.service';
+import { FormComponent } from './login/form/form.component';
+import { LoginService } from './login/form/login.service';
 
 
 @NgModule({
@@ -31,7 +35,10 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     HeaderComponent,
     ChatComponent,
     MessageComponent,
-    MapTestComponent
+    MapTestComponent,
+    LoginComponent,
+    SignupComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,10 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
       { path: '', component: HomeComponent 
       // canActivate: [AuthGuard] 
       },
-      { path: 'login', component: LoginComponent },
+      { path: 'login', component: LoginComponent, children: [
+        { path: '', component: FormComponent },
+        { path: 'signup', component: SignupComponent}
+      ]},
       { path: 'chat', component: ChatComponent },
       { path: 'message', component: MessageComponent },
 
@@ -55,7 +65,9 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
   providers: [
     ChatService,
     AuthGuard,
-    AuthService
+    AuthService,
+    SignupService,
+    LoginService
     ],
   bootstrap: [AppComponent]
 })

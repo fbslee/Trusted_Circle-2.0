@@ -1,0 +1,16 @@
+<md-card  class='signup'>
+
+  <table style="width: 100%" cellspacing="3"><tr>
+    <td><md-input-container style="width: 100%">
+      <input required md-input [(ngModel)]='inputUsername' placeholder="Username">
+    </md-input-container></td>
+    <td><md-input-container style="width: 100%">
+      <input required md-input type="password" [(ngModel)]='inputPassword' placeholder="Password">
+    </md-input-container></td>
+  </tr></table>
+
+  <p>
+    <button md-raised-button color='warn' (click)='submitSignup()' routerLink="/login/form" class='login' > SIGN UP </button>
+  </p>
+
+</md-card>

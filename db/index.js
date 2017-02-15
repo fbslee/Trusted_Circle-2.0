@@ -1,15 +1,23 @@
-var Sequelize = require('sequelize');
+// var Sequelize = require('sequelize');
 
-module.exports.sequelize = new Sequelize('mysql://admin:QFLTJKDFFHAWHTJZ@aws-us-west-2-portal.1.dblayer.com:15760/compose');
+// module.exports.sequelize = new Sequelize('mysql://admin:QFLTJKDFFHAWHTJZ@aws-us-west-2-portal.1.dblayer.com:15760/compose');
 
-// module.exports.User = this.sequelize.define('users', {
-//   username: {
-//     type: Sequelize.STRING,
-//     unique: true
-//   }, password: Sequelize.STRING,
-//     karma: Sequelize.INTEGER,
-//     salt: Sequelize.STRING
-// });
+// // module.exports.User = this.sequelize.define('users', {
+// //   firstName: Sequelize.STRING,
+// //   lastName: Sequelize.STRING,
+// //   username: {
+// //     type: Sequelize.STRING,
+// //     unique: true
+// //   },
+// //   password: Sequelize.STRING,
+// //   photo: Sequelize.STRING,
+// //   upvotes: {
+// //       type: Sequelize.INTEGER,
+// //       defaultValue: 0
+// //   },
+// //   salt: Sequelize.STRING,
+// //   trustedCounselor: Sequelize.BOOLEAN
+// // });
 
 // module.exports.Train = this.sequelize.define('trains', {
 //   name: Sequelize.STRING,
@@ -43,6 +51,6 @@ module.exports.sequelize = new Sequelize('mysql://admin:QFLTJKDFFHAWHTJZ@aws-us-
 // this.Train.belongsToMany(this.Tag, {through: 'TrainTag'});
 // this.Tag.belongsToMany(this.Train, {through: 'TrainTag'});
 
-this.sequelize.sync({
-  // force: true
-});
+// this.sequelize.sync({
+//   // force: true
+// });

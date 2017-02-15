@@ -3,7 +3,7 @@ var controller = require('./controllers');
 var passport = require('passport');
 var path = require('path');
 
-// router.get('/signup', controller.signup.get);
+router.get('/signup', controller.signup.get);
 // router.get('/trains', controller.train.get);
 // router.get('/gettrainsongs', controller.train.get);
 // router.get('/trainsbytag', controller.tags.get);

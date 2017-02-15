@@ -2,6 +2,7 @@ var bcrypt = require('bcryptjs'),
   rp = require('request-promise');
 
 const models = require('../models');
+// const usermodel = require('../../mode')
 
 // var train = {
 //   get: (req, res) => {
@@ -76,38 +77,38 @@ const models = require('../models');
 //   }
 // };
 
-// var signup = {
-//   get: function(req, res){
-//       res.render('/signup');
-//   },
-//   post: function(req, res){
-//     console.log('req.body object is: ', req.body);
-//     var username = req.body.username;
-//     var password = req.body.password;
+var signup = {
+  get: function(req, res){
+      res.render('/signup');
+  },
+  post: function(req, res){
+    console.log('req.body object is: ', req.body);
+    var username = req.body.username;
+    var password = req.body.password;
 
-//     if(!username || !password) {
-//       req.flash('error', 'Please fill out all fields');
-//       res.redirect('signup');
-//     }
+    if(!username || !password) {
+      req.flash('error', 'Please fill out all fields');
+      res.redirect('signup');
+    }
 
-//     var salt = bcrypt.genSaltSync(10);
-//     var hashedPassword = bcrypt.hashSync(password, salt);
+    var salt = bcrypt.genSaltSync(10);
+    var hashedPassword = bcrypt.hashSync(password, salt);
 
-//     var newUser = {
-//       username: username,
-//       salt: salt,
-//       password: hashedPassword
-//     };
+    var newUser = {
+      username: username,
+      salt: salt,
+      password: hashedPassword
+    };
 
-//     userModel.create(newUser).then( () => {
-//       console.log('user created');
-//       res.redirect('/');
-//       }).catch( (err) => {
-//       req.flash('error', 'Please choose a different username');
-//       res.redirect('/signup');
-//     });
-//   }
-// };
+    userModel.create(newUser).then( () => {
+      console.log('user created');
+      res.redirect('/');
+      }).catch( (err) => {
+      req.flash('error', 'Please choose a different username');
+      res.redirect('/signup');
+    });
+  }
+};
 
 // var favTrain = {
 //   post: (req, res) => {
@@ -125,7 +126,7 @@ const models = require('../models');
 
 module.exports = {
   // findHypemSongs: hypemCtrl.findHypemSongs,
-  // signup: signup,
+  signup: signup,
   // train: train,
   // tags: tags,
   // song: song,
