@@ -1,0 +1,28 @@
+<div *ngIf="!usernameStatus">
+    <label> Username: </label>
+    <input type="text" [(ngModel)]="username" name="username">
+    <br>
+    <button class="btn btn-primary" (click)="setUsername()">Submit</button>
+</div>
+
+<div *ngIf="usernameStatus">
+    Username: {{username}}
+</div>
+
+<div *ngIf="usernameStatus && username !== undefined">
+    <input type="text" placeholder="Enter a Message..." 
+    [(ngModel)]="message" 
+    name="message"
+    (keyup.enter)="sendMessage()"
+    >
+
+    <br />
+    <div *ngFor="let message of messages">
+        <strong>{{message.username}}</strong>: {{message.text}}
+    </div>
+
+</div>
+
+<div *ngIf="!usernameStatus">
+Please Log In to Chat
+</div>

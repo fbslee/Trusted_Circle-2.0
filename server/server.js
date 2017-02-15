@@ -7,6 +7,9 @@ require('../db');
 var bodyParser = require('body-parser');
 var router = require('./routes');
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -21,8 +24,24 @@ setupPassport(app);
 app.use('/api', router);
 
 
-var port = 3000;
-app.listen(port, function(){
-  console.log('App listening on port', port);
+io.on('connection', (socket) => {
+    console.log('a user has connected...');
+
+    socket.on('disconnect', () => {
+        console.log('a user has disconnected...')
+    });
+
+    socket.on('add-message', (message, username) => {
+        io.emit('message', { type: 'new-message', text: message, username: username });
+    });
+
 });
+
+
+var port = 3000 || process.env.PORT;
+
+
+http.listen(port, () => {
+    console.log("server is running on:", port)
+})
 
