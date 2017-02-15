@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const sequelize = require('./connection');
 
-const seeder = require('./seedData/_seedMethods');
+//const seeder = require('./seedData/_seedMethods');
 
 const initDatabase = () => {
 	return new Promise((resolve, reject) => {
@@ -11,6 +11,7 @@ const initDatabase = () => {
 		var Vote = require('./../models/votes.model');
 		var Message = require('./../models/messages.model');
         var User_Circle = require('./../models/user_circle.model');
+		var User_Topic = require('./../models/user_topic.model');
 		
 		User.hasMany(Message);
 		Message.belongsTo(User);
@@ -35,10 +36,10 @@ const initDatabase = () => {
 		});
 
         User.belongsToMany(Topic, {
-            through: 'favorite_topics'
+            through: User_Topic
         })
         Topic.belongsToMany(User, {
-            through: 'favorite_topics'
+            through: User_Topic
         })
 		
 		sequelize.sync({/*force: true*/}).then(err => {

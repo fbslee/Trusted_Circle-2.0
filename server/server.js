@@ -23,16 +23,26 @@ app.use(session({
 setupPassport(app);
 app.use('/api', router);
 
+var clients = {};
 
 io.on('connection', (socket) => {
     console.log('a user has connected...');
+    clients[socket.id] = socket;
+    console.log('connected user is:', socket.id);
 
-    socket.on('disconnect', () => {
-        console.log('a user has disconnected...')
+
+    socket.on('create', function(room) {
+        console.log('a user has connected to', room)
+        socket.join(room);
+        console.log(socket.rooms)
     });
 
-    socket.on('add-message', (message, username) => {
-        io.emit('message', { type: 'new-message', text: message, username: username });
+    socket.on('disconnect', () => {
+        console.log('a user has disconnected...', socket.id)
+    });
+
+    socket.on('add-message', (message, username, roomName) => {
+        io.emit('message', { type: 'new-message', text: message, username: username, roomName: roomName });
     });
 
 });

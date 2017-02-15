@@ -1,0 +1,20 @@
+
+
+<h1>{{ title }}</h1>
+
+<p>
+  map-test works!
+</p>
+<!--<sebm-google-map [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+</sebm-google-map>-->
+<h2> lat :{{ lat }} </h2>
+<h2> lng :{{ lng }} </h2>
+
+<h4> Browser Location </h4>
+<h2>{{location.longitude}}</h2>
+<h2>{{location.latitude}}</h2>
+
+<sebm-google-map [latitude]="location.latitude" [longitude]="location.longitude">
+  <sebm-google-map-marker [latitude]="location.latitude" [longitude]="location.longitude"></sebm-google-map-marker>
+</sebm-google-map>

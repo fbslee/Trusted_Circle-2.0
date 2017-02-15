@@ -11,7 +11,15 @@ var User = sequelize.define('user', {
       type: Sequelize.INTEGER,
       defaultValue: 0
   },
-  trustedCounselor: Sequelize.BOOLEAN
+  trustedCounselor: Sequelize.BOOLEAN,
+  long: {
+      type: Sequelize.FLOAT,
+      defaultValue: 0
+  },
+  lat: {
+      type: Sequelize.FLOAT,
+      defaultValue: 0
+  }
 });
 
 module.exports = User;

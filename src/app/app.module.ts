@@ -20,6 +20,9 @@ import { MessageComponent } from './message/message.component';
 import { MessageInputComponent } from './message-input/message-input.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageListComponent } from './message-list/message-list.component';
+import { MapTestComponent } from './map-test/map-test.component';
+
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 
 @NgModule({
@@ -34,6 +37,7 @@ import { MessageListComponent } from './message-list/message-list.component';
     MessageInputComponent,
     MessagesComponent,
     MessageListComponent
+    MapTestComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,10 @@ import { MessageListComponent } from './message-list/message-list.component';
       { path: 'messages', component: MessagesComponent },
 
     ]),
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+        AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC4K9y-gZajK78CG6JFg2jfan2XtcDPY6w'
+    })
   ],
   providers: [
     ChatService,

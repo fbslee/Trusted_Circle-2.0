@@ -1,4 +1,12 @@
 <div *ngIf="!usernameStatus">
+    <label> RoomName: </label>
+    <input type="text" [(ngModel)]="roomName" name="roomName">
+    <br>
+    <button class="btn btn-primary" (click)="joinRoom()">Submit</button>
+</div>
+
+
+<div *ngIf="!usernameStatus">
     <label> Username: </label>
     <input type="text" [(ngModel)]="username" name="username">
     <br>
