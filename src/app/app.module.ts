@@ -16,6 +16,7 @@ import { AuthService } from './services/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
+import { MessageComponent } from './message/message.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ChatService } from './services/chat.service';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    ChatComponent
+    ChatComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,8 @@ import { ChatService } from './services/chat.service';
       },
       { path: 'login', component: LoginComponent },
       { path: 'chat', component: ChatComponent },
+      { path: 'message', component: MessageComponent },
+
     ]),
     MaterialModule.forRoot()
   ],
