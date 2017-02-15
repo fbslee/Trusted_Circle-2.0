@@ -2,7 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var setupPassport = require('./passportSetup');
-const initDatabase = require('./db/config');
+const initDatabase = require('../db/config');
 
 var bodyParser = require('body-parser');
 var router = require('./routes');
