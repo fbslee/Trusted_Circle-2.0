@@ -2,7 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var setupPassport = require('./passportSetup');
-require('../db');
+const initDatabase = require('../db/config');
 
 var bodyParser = require('body-parser');
 var router = require('./routes');
@@ -41,7 +41,11 @@ io.on('connection', (socket) => {
 var port = 3000 || process.env.PORT;
 
 
-http.listen(port, () => {
-    console.log("server is running on:", port)
-})
+initDatabase().then(() => {
+  http.listen(port, () => {
+
+	  console.log("listening on port " + port);
+  });
+});
+
 
