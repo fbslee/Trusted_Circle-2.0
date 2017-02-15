@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChatService } from '../services/chat.service';
 
+// import * as Message from '../../../models/messages.model';
+
 @Component({
   // moduleId: module.id,
   selector: 'app-chat',
@@ -12,6 +14,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   messages: any = [];
   message: string;
+  rooms: any = [];
+  roomName: string;
   connection: any;
   usernameStatus: any = false;
 
@@ -35,8 +39,14 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.connection.unsubscribe();
    }
 
+  joinRoom () {
+    console.log('chat ChatComponent', this.roomName)
+     this._chatService.joinRoom(this.roomName);
+     this.roomName = '';
+   }
+
    sendMessage () {
-     this._chatService.sendMessage(this.message, this.username);
+     this._chatService.sendMessage(this.message, this.username, this.roomName);
      this.message = '';
    }
 

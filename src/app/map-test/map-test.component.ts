@@ -11,15 +11,21 @@ export class MapTestComponent implements OnInit {
     lat: number = 51.678418;
     lng: number = 7.809007;
 
+    location = {};
+    setPosition(position){
+      this.location = position.coords;
+      console.log(position.coords);
+    }
 
 
   constructor() { }
 
   ngOnInit() {
+     if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+      };
+   }
   
-  
-
-  }
 
 
 }
