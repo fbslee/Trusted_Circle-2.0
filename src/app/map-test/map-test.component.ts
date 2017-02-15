@@ -22,19 +22,4 @@ export class MapTestComponent implements OnInit {
   }
 
 
-  getLocation() {
-    navigator.geolocation.getCurrentPosition(showPosition)
-  }
-
-  showPosition(position) {
-    var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
-    +latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
-    
-    document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
-  }
-
-
-
 }
