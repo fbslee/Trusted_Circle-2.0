@@ -9,8 +9,15 @@ export class ChatService {
   private url = "http://localhost:3000"; //our server
   private socket: any;
   
-  sendMessage (message:string, username: string) {
-    this.socket.emit('add-message', message, username);
+  joinRoom (roomName: string) {
+    console.log('room created with', roomName)
+    sessionStorage.setItem('roomName', roomName);
+    this.socket.emit('create', roomName);
+  }
+
+
+  sendMessage (message:string, username: string, roomName: string) {
+    this.socket.emit('add-message', message, username, roomName);
   }
 
   getMessages() {
@@ -32,7 +39,7 @@ export class ChatService {
 
   setUsername (username: string) {
     console.log('username set: '+username);
-    console.log(sessionStorage);
+    console.log(sessionStorage, 'from the setUsername in chat.services.ts');
     sessionStorage.setItem('username', username);
   }
 
