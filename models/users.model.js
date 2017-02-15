@@ -13,11 +13,11 @@ var User = sequelize.define('user', {
   },
   trustedCounselor: Sequelize.BOOLEAN,
   long: {
-      type: Sequelize.DECIMAL,
+      type: Sequelize.FLOAT,
       defaultValue: 0
   },
   lat: {
-      type: Sequelize.DECIMAL,
+      type: Sequelize.FLOAT,
       defaultValue: 0
   }
 });
