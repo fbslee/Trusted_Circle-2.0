@@ -17,6 +17,9 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { MessageComponent } from './message/message.component';
+import { MessageInputComponent } from './message-input/message-input.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageListComponent } from './message-list/message-list.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { MessageComponent } from './message/message.component';
     HomeComponent,
     HeaderComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    MessageInputComponent,
+    MessagesComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,7 @@ import { MessageComponent } from './message/message.component';
       },
       { path: 'login', component: LoginComponent },
       { path: 'chat', component: ChatComponent },
-      { path: 'message', component: MessageComponent },
+      { path: 'messages', component: MessagesComponent },
 
     ]),
     MaterialModule.forRoot()
