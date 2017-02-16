@@ -4,14 +4,27 @@ const sequelize = require('./../db/connection');
 var User = sequelize.define('user', {
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-  userName: Sequelize.STRING,
+  username: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   password: Sequelize.STRING,
-  photo: Sequelize.STRING,
+  photo: {
+    type : Sequelize.STRING,
+    defaultValue: 'http://santetotal.com/wp-content/uploads/2014/05/default-user.png'
+  },
   upvotes: {
       type: Sequelize.INTEGER,
       defaultValue: 0
   },
-  trustedCounselor: Sequelize.BOOLEAN,
+  trustedCounselor: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   long: {
       type: Sequelize.FLOAT,
       defaultValue: 0
@@ -19,7 +32,8 @@ var User = sequelize.define('user', {
   lat: {
       type: Sequelize.FLOAT,
       defaultValue: 0
-  }
+  },
+  salt: Sequelize.STRING,
 });
 
 module.exports = User;

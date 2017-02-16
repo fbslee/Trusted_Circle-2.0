@@ -19,3 +19,7 @@ sequelize.authenticate()
   });
 
 module.exports = sequelize;
+
+// this.sequelize.sync({
+//   // force: true
+// });
