@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('./../db/connection');
 
 var Vote = sequelize.define('vote', {
-  ballot: {
+  choice: {
       type: Sequelize.STRING,
       defaultValue: null
   },

@@ -9,6 +9,7 @@ const initDatabase = () => {
 		var Circle = require('./../models/circles.model');
 		var Topic = require('./../models/topics.model');
 		var Vote = require('./../models/votes.model');
+		var Poll = require('./../models/polls.model');
 		var Message = require('./../models/messages.model');
         var User_Circle = require('./../models/user_circle.model');
 		var User_Topic = require('./../models/user_topic.model');
@@ -22,12 +23,18 @@ const initDatabase = () => {
 		Circle.hasMany(Topic);
 		Topic.belongsTo(Circle);
 
-		User.hasMany(Vote);
-		Vote.belongsTo(User,{foreignKey: 'id', as: 'votee'});
-		Vote.belongsTo(User,{foreignKey: 'id', as: 'voter'});
+		User.hasMany(Poll);
+		Poll.belongsTo(User,{foreignKey: 'id', as: 'suggestedMember'});
+		Poll.belongsTo(User,{foreignKey: 'id', as: 'suggestor'});
 
-		Circle.hasMany(Vote);
-		Vote.belongsTo(Circle);
+		User.hasMany(Vote);
+		Vote.belongsTo(User);
+
+		Poll.hasMany(Vote);
+		Vote.belongsTo(User);
+
+		Circle.hasMany(Poll);
+		Poll.belongsTo(Circle);
 
 		User.belongsToMany(Circle, {
 			through: User_Circle

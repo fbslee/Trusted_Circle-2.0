@@ -27,6 +27,7 @@ import { SignupComponent } from './login/signup/signup.component';
 import { SignupService } from './login/signup/signup.service';
 import { FormComponent } from './login/form/form.component';
 import { LoginService } from './login/form/login.service';
+import { VotesComponent } from './votes/votes.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { LoginService } from './login/form/login.service';
     MessageInputComponent,
     MessagesComponent,
     MessageListComponent
-    MapTestComponent
+    MapTestComponent,
+    VotesComponent
 
   ],
   imports: [
@@ -60,6 +62,7 @@ import { LoginService } from './login/form/login.service';
       ]},
       { path: 'chat', component: ChatComponent },
       { path: 'messages', component: MessagesComponent },
+      { path: 'votes', component: VotesComponent }, 
 
     ]),
     MaterialModule.forRoot(),
