@@ -1,3 +1,14 @@
-<p>
-  message works!
-</p>
+            <article class="panel panel-default">
+                <div class="panel-body">
+                    {{ message.body }}
+                </div>
+                <footer class="panel-footer">
+                    <div class="author">
+                        username
+                    </div>
+                    <div class="config">
+                        <a (click)="onEdit()">Edit</a>
+                        <a (click)="onDelete()">Delete</a>
+                    </div>
+                </footer>
+            </article>
