@@ -43,10 +43,12 @@ const initDatabase = () => {
             through: User_Topic
         })
 		
-		sequelize.sync({/*force: true*/}).then(err => {
+		sequelize.sync({force: true}).then(err => {
 			resolve();
 		});
 	});
 };
-
+// this.sequelize.sync({
+//   // force: true
+// });
 module.exports = initDatabase;

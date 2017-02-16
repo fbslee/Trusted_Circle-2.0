@@ -1,6 +1,7 @@
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var setupPassport = require('./passportSetup');
 const initDatabase = require('../db/config');
 
@@ -20,7 +21,9 @@ app.use(session({
   saveUninitialized: false,
   cookie: { maxAge: 6000000 }
 }));
+app.use(flash());
 setupPassport(app);
+
 app.use('/api', router);
 
 var clients = {};
@@ -52,7 +55,7 @@ var port = 3000 || process.env.PORT;
 
 
 initDatabase().then(() => {
-  http.listen(port, () => {
+  app.listen(port, () => {
 
 	  console.log("listening on port " + port);
   });

@@ -3,7 +3,7 @@ var controller = require('./controllers');
 var passport = require('passport');
 var path = require('path');
 
-// router.get('/signup', controller.signup.get);
+router.get('/signup', controller.signup.get);
 // router.get('/trains', controller.train.get);
 // router.get('/gettrainsongs', controller.train.get);
 // router.get('/trainsbytag', controller.tags.get);
@@ -17,7 +17,7 @@ router.get('/logout', (req, res) => {
 // router.post('/addtrain', controller.train.post);
 // router.post('/favtrain', controller.favTrain.post);
 // router.post('/hypemSongs', controller.findHypemSongs.post);
-// router.post('/signup', controller.signup.post);
+router.post('/signup', controller.signup.post);
 router.post('/login', (req, res, next) => {
 
   passport.authenticate('local', (err, user, info) => {
