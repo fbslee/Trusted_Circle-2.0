@@ -6,6 +6,10 @@ var Vote = sequelize.define('vote', {
       type: Sequelize.STRING,
       defaultValue: null
   },
+  complete: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+  }
 });
 
 module.exports = Vote;
