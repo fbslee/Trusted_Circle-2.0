@@ -17,7 +17,7 @@ router.get('/logout', (req, res) => {
 // router.post('/addtrain', controller.train.post);
 // router.post('/favtrain', controller.favTrain.post);
 // router.post('/hypemSongs', controller.findHypemSongs.post);
-// router.post('/signup', controller.signup.post);
+router.post('/signup', controller.signup.post);
 router.post('/login', (req, res, next) => {
 
   passport.authenticate('local', (err, user, info) => {

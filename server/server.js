@@ -21,6 +21,7 @@ app.use(session({
   cookie: { maxAge: 6000000 }
 }));
 setupPassport(app);
+
 app.use('/api', router);
 
 var clients = {};
@@ -52,7 +53,7 @@ var port = 3000 || process.env.PORT;
 
 
 initDatabase().then(() => {
-  http.listen(port, () => {
+  app.listen(port, () => {
 
 	  console.log("listening on port " + port);
   });

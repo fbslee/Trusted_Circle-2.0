@@ -10,6 +10,9 @@ import { SignupService } from './signup.service';
 export class SignupComponent implements OnInit {
   inputUsername: string;
   inputPassword: string;
+  inputEmail: string;
+  inputFirstname: string;
+  inputLastname: string;
 
   constructor(private signUpService: SignupService) { }
 
@@ -17,8 +20,11 @@ export class SignupComponent implements OnInit {
   }
 
   submitSignup = () => {
-    this.signUpService.signUp(this.inputUsername, this.inputPassword)
+    this.signUpService.signUp(this.inputUsername, this.inputPassword, this.inputEmail, this.inputFirstname, this.inputLastname)
     .subscribe(res => {
+      this.inputFirstname = '';
+      this.inputLastname = '';
+      this.inputEmail = '';
       this.inputUsername = '';
       this.inputPassword = '';
     }, err => {

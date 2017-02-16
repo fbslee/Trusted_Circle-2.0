@@ -8,13 +8,23 @@ var User = sequelize.define('user', {
     type: Sequelize.STRING,
     unique: true
   },
+  email: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   password: Sequelize.STRING,
-  photo: Sequelize.STRING,
+  photo: {
+    type : Sequelize.STRING,
+    defaultValue: 'http://santetotal.com/wp-content/uploads/2014/05/default-user.png'
+  },
   upvotes: {
       type: Sequelize.INTEGER,
       defaultValue: 0
   },
-  trustedCounselor: Sequelize.BOOLEAN,
+  trustedCounselor: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   long: {
       type: Sequelize.FLOAT,
       defaultValue: 0
