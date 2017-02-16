@@ -29,8 +29,13 @@ export class ChatComponent implements OnInit, OnDestroy {
    ngOnInit() {
     this.connection = this._chatService.getMessages().subscribe(
       message => {
-        console.log(message);
+        console.log('ROOM NAME', this.roomName);
+        console.log(message, 'this is from the chat component');
+        console.log(sessionStorage.getItem('roomName'))
+
+        
         this.messages.push(message)
+        
       }
     )
    }
@@ -42,15 +47,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   joinRoom () {
     console.log('chat ChatComponent', this.roomName)
      this._chatService.joinRoom(this.roomName);
-     this.roomName = '';
    }
 
    sendMessage () {
+    console.log('roomNAME IS!!!!', this.roomName);
      this._chatService.sendMessage(this.message, this.username, this.roomName);
      this.message = '';
    }
 
    setUsername() {
+
+    
+
      this._chatService.setUsername(this.username);
      console.log('setUsername SET!!!')
      if(this.username) {
@@ -58,4 +66,7 @@ export class ChatComponent implements OnInit, OnDestroy {
      }
      this.alert = 'Username is set';
    }
+
+
+
 }
