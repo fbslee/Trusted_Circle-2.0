@@ -17,6 +17,9 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { MessageComponent } from './message/message.component';
+import { MessageInputComponent } from './message-input/message-input.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageListComponent } from './message-list/message-list.component';
 import { MapTestComponent } from './map-test/map-test.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -31,6 +34,9 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     HeaderComponent,
     ChatComponent,
     MessageComponent,
+    MessageInputComponent,
+    MessagesComponent,
+    MessageListComponent
     MapTestComponent
   ],
   imports: [
@@ -44,7 +50,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
       },
       { path: 'login', component: LoginComponent },
       { path: 'chat', component: ChatComponent },
-      { path: 'message', component: MessageComponent },
+      { path: 'messages', component: MessagesComponent },
 
     ]),
     MaterialModule.forRoot(),
