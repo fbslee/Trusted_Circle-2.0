@@ -11,7 +11,10 @@ var User = sequelize.define('user', {
       type: Sequelize.INTEGER,
       defaultValue: 0
   },
-  trustedCounselor: Sequelize.BOOLEAN,
+  trustedCounselor: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+  },
   long: {
       type: Sequelize.FLOAT,
       defaultValue: 0
