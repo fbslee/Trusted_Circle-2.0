@@ -7,7 +7,7 @@ const initDatabase = require('../db/config');
 var bodyParser = require('body-parser');
 var router = require('./routes');
 
-var http = require('http').Server(app);
+var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 var app = express();
@@ -31,10 +31,9 @@ io.on('connection', (socket) => {
     console.log('connected user is:', socket.id);
 
 
-    socket.on('create', function(room) {
+    socket.on('create', (room) => {
         console.log('a user has connected to', room)
         socket.join(room);
-        console.log(socket.rooms)
     });
 
     socket.on('disconnect', () => {
@@ -42,7 +41,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('add-message', (message, username, roomName) => {
-        io.emit('message', { type: 'new-message', text: message, username: username, roomName: roomName });
+        socket.broadcast.to(roomName).emit('message', { type: 'new-message', text: message, username: username, roomName: roomName });
     });
 
 });
