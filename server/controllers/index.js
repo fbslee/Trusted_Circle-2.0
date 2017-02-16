@@ -8,14 +8,15 @@ var signup = {
       res.render('/signup');
   },
   post: function(req, res){
-    console.log('req.body object is: ', req);
     var username = req.body.username;
     var password = req.body.password;
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
     var email = req.body.email;
+    console.log('firstname')
 
     if(!username || !password) {
+      console.log('WHY GOD WHY')
       req.flash('error', 'Please fill out all fields');
       res.redirect('signup');
     }
