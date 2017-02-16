@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { MessageService } from './services/Message.service';
+import { MessageService } from './services/message.service';
 
 
 @Component({

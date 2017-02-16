@@ -42,7 +42,7 @@ import { VotesComponent } from './votes/votes.component';
     FormComponent,
     MessageInputComponent,
     MessagesComponent,
-    MessageListComponent
+    MessageListComponent,
     MapTestComponent,
     VotesComponent
 
