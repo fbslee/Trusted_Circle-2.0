@@ -8,10 +8,11 @@ const initDatabase = require('../db/config');
 var bodyParser = require('body-parser');
 var router = require('./routes');
 
+
+var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
-var app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
