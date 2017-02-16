@@ -22,8 +22,8 @@ var User = sequelize.define('user', {
       defaultValue: 0
   },
   trustedCounselor: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
   },
   long: {
       type: Sequelize.FLOAT,

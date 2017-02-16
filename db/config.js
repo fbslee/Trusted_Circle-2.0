@@ -23,7 +23,8 @@ const initDatabase = () => {
 		Topic.belongsTo(Circle);
 
 		User.hasMany(Vote);
-		Vote.belongsTo(User);
+		Vote.belongsTo(User,{foreignKey: 'id', as: 'votee'});
+		Vote.belongsTo(User,{foreignKey: 'id', as: 'voter'});
 
 		Circle.hasMany(Vote);
 		Vote.belongsTo(Circle);
