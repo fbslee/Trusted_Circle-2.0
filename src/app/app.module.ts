@@ -29,6 +29,13 @@ import { FormComponent } from './login/form/form.component';
 import { LoginService } from './login/form/login.service';
 import { VotesComponent } from './votes/votes.component';
 
+import { MapTestComponent } from './map-test/map-test.component';
+
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { MessageInputComponent } from './message-input/message-input.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageListComponent } from './message-list/message-list.component';
+
 
 @NgModule({
   declarations: [
@@ -42,10 +49,14 @@ import { VotesComponent } from './votes/votes.component';
     FormComponent,
     MessageInputComponent,
     MessagesComponent,
-    MessageListComponent
+    MessageListComponent,
     MapTestComponent,
-    VotesComponent
+    VotesComponent,
 
+    MapTestComponent,
+    MessageInputComponent,
+    MessagesComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,
