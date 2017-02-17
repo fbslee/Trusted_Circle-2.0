@@ -35,12 +35,10 @@ var signup = {
       email: email
     };
 
-    console.log('past conditional', newUser, salt)
-
     userModel.create(newUser).then( () => {
       console.log('user created');
       res.redirect('/');
-      }).catch( (err) => {
+    }).catch( (err) => {
       req.flash('error', 'Please choose a different username');
       res.redirect('/signup');
     });

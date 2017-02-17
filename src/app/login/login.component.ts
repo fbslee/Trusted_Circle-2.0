@@ -32,7 +32,6 @@ export class LoginComponent {
         this.router.navigateByUrl('');
       }, err => {
         console.log('err', err)
-        console.log('?')
       });
   }
 }
