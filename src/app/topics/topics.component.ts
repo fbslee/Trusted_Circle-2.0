@@ -8,7 +8,7 @@ import { CirclesComponent } from '../circles/circles.component';
 })
 export class TopicsComponent implements OnInit {
   newTopic: string;
-  circle: string = 'Hack Reactor';
+  circle: string = sessionStorage.getItem('circle');
   topics: any = ["Why don't we have president's day off?", "Where is Glenn?", "Why does my room smell so bad?"]
   clicked(topic){
     sessionStorage.setItem('topic', topic)
