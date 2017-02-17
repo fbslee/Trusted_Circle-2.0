@@ -1,21 +1,32 @@
     <nav class="navbar navbar-toggleable-md navbar-fixed-top navbar-default">
-      <a class="navbar-brand" [routerLink]="['/home']">Trusted Circle</a>
-
-      <button md-button class="btn btn-primary" [routerLink]="['/login']" routerLinkActive="active">
-        Login
-      </button>
-      <button md-button class="btn btn-primary" [routerLink]="['/circles']" routerLinkActive="active">
-        Circles
-      </button>
-      <button md-button class="btn btn-primary" [routerLink]="['/chat']" routerLinkActive="active">
-        Chat
-      </button>
-      <button md-button class="btn btn-primary" [routerLink]="['/messages']" routerLinkActive="active">
-        Messages
-      </button>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" [routerLink]="['/home']">Trusted Circle</a>
+            </div>
 
 
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/circles']" routerLinkActive="active">Circles</a></li>
+                <li><a [routerLink]="['/chat']" routerLinkActive="active">Chat</a></li>
+<li><a md-button class="btn btn-primary" [routerLink]="['/messages']" routerLinkActive="active">Messages</a></li>
 
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['/login']" routerLinkActive="active">Login</a></li>
+      </ul>
+    </div>
+
+
+
+</div>
     </nav>
 
     <!--<div class="container">

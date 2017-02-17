@@ -13,7 +13,7 @@ router.get('/test', function(req,res) {
 })
 
 //'/api/signup
-var Message = require('../models/message');
+// var Message = require('../models/message');
 router.get('/signup', controller.signup.get);
 // router.get('/trains', controller.train.get);
 // router.get('/gettrainsongs', controller.train.get);
@@ -73,7 +73,7 @@ router.post('/login', (req, res, next) => {
 
 });
 
-router.post('/messages', controller.messages.post);
+// router.post('/messages', controller.messages.post);
 
 
 module.exports = router;
