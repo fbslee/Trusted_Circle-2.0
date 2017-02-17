@@ -29,6 +29,8 @@ import { FormComponent } from './login/form/form.component';
 import { LoginService } from './login/form/login.service';
 import { VotesComponent } from './votes/votes.component';
 import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
+import { CirclesComponent } from './circles/circles.component';
+import { TopicsComponent } from './topics/topics.component';
 
 
 @NgModule({
@@ -46,11 +48,8 @@ import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/
     MessageListComponent,
     MapTestComponent,
     VotesComponent,
-
-    MapTestComponent,
-    MessageInputComponent,
-    MessagesComponent,
-    MessageListComponent
+    CirclesComponent,
+    TopicsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +67,8 @@ import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/
       { path: 'chat', component: ChatComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'votes', component: VotesComponent }, 
-
+      { path: 'circles', component: CirclesComponent }, 
+      { path: 'topics', component: TopicsComponent }
     ]),
     MaterialModule.forRoot(),
         AgmCoreModule.forRoot({

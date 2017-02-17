@@ -25,14 +25,6 @@ var User = sequelize.define('user', {
       type: Sequelize.BOOLEAN,
       defaultValue: false
   },
-  long: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0
-  },
-  lat: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0
-  },
   salt: Sequelize.STRING,
 });
 

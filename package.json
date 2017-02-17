@@ -1,6 +1,6 @@
 {
-  "name": "tr-app",
-  "version": "0.0.0",
+  "name": "trusted-circle",
+  "version": "1.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -11,7 +11,6 @@
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "^2.3.1",
     "@angular/compiler": "^2.3.1",
