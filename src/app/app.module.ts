@@ -16,10 +16,10 @@ import { AuthService } from './services/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
-import { MessageComponent } from './message/message.component';
-import { MessageInputComponent } from './message-input/message-input.component';
+import { MessageComponent } from './messages/message.component';
+import { MessageInputComponent } from './messages/message-input.component';
 import { MessagesComponent } from './messages/messages.component';
-import { MessageListComponent } from './message-list/message-list.component';
+import { MessageListComponent } from './messages/message-list.component';
 import { MapTestComponent } from './map-test/map-test.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -28,13 +28,7 @@ import { SignupService } from './login/signup/signup.service';
 import { FormComponent } from './login/form/form.component';
 import { LoginService } from './login/form/login.service';
 import { VotesComponent } from './votes/votes.component';
-
-import { MapTestComponent } from './map-test/map-test.component';
-
-import { AgmCoreModule } from 'angular2-google-maps/core';
-import { MessageInputComponent } from './message-input/message-input.component';
-import { MessagesComponent } from './messages/messages.component';
-import { MessageListComponent } from './message-list/message-list.component';
+import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
 
 
 @NgModule({
