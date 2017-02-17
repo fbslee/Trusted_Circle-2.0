@@ -20,6 +20,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   connection: any;
   usernameStatus: any = false;
   roomnameStatus: any = false;
+  roomSelected: any = false;
 
   listOfRooms: any = [];
   errorMessage: string;
@@ -56,6 +57,13 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.connection.unsubscribe();
    }
 
+
+  //  clickedOnRoomName(value) {
+  //    this.roomSelected = true;
+  //    this.joinRoom (value);
+  //    console.log(value);
+  //  }
+
   getRoomlist() {
     console.log('inside chat ChatComponent')
     this._chatService.getRoomlist()
@@ -69,10 +77,13 @@ export class ChatComponent implements OnInit, OnDestroy {
                       )
   }
 
-  joinRoom () {
-    console.log('chat ChatComponent', this.roomName)
+  joinRoom (someValue) {
+    console.log('this is the join room function', someValue);
+    console.log('joined room function chat ChatComponent is:', someValue)
+     this.roomName = someValue;
+     this.roomSelected = true;
      this.roomnameStatus = true;
-     this._chatService.joinRoom(this.roomName);
+     this._chatService.joinRoom(someValue);
    }
 
    sendMessage () {
