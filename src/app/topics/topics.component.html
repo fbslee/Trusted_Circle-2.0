@@ -5,3 +5,9 @@
         {{ topic }}
       </li>
 </ul>
+
+<input type="text" placeholder="New Topic To Discuss" 
+    [(ngModel)]="newTopic" 
+    name="newTopic"
+    (keyup.enter)="createTopic()"
+    >
