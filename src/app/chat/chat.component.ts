@@ -13,6 +13,10 @@ import { HttpModule, JsonpModule } from '@angular/http';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
+  username: any = sessionStorage.getItem('username');
+
+
+
   messages: any = [];
   message: string;
   rooms: any = [];
@@ -26,7 +30,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   errorMessage: string;
 
 
-  username: string;
+  //username: string;
   alert: any = false;
 
   constructor(private _chatService: ChatService) {
@@ -51,6 +55,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     console.log('AHHHHHH')
 
     console.log(this.listOfRooms, 'After called in ngonit')
+
+    if(this.username) {
+      this.usernameStatus = true;
+      console.log(this.username, 'this.username', this.usernameStatus);
+    }
    }
 
    ngOnDestroy() {
