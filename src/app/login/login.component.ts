@@ -21,12 +21,16 @@ export class LoginComponent {
   ngOnInit() {
   }
 
-  submitLogin = () => {
+  submitLogin = (value) => {
+    console.log(value);
+    
     this.loginService.login(this.user.username, this.user.password)
       .subscribe(res => {
+        sessionStorage.setItem('username', this.user.username);
         this.user.username = '';
         this.user.password = '';
         console.log('res from login is: ', res);
+        console.log('session username is:', sessionStorage.getItem('username'))
         console.log('res.status from login is: ', res.status);
         this.authService.isLoggedIn = true;
         this.router.navigateByUrl('');
