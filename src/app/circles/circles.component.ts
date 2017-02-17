@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./circles.component.scss']
 })
 export class CirclesComponent implements OnInit {
-  circles: any = ['Hack Reactor', 'Movies', 'Soccer']
+  circles: any = ['Hack Reactor', 'Movies', 'Soccer'];
+  clicked(val){
+    console.log(val);
+  }
   constructor() { }
 
   ngOnInit() {
