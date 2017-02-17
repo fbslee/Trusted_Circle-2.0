@@ -1,4 +1,4 @@
-<div *ngIf="!usernameStatus">
+<!--<div *ngIf="!usernameStatus">
     <label> RoomName: </label>
     <input type="text" [(ngModel)]="roomName" name="roomName">
     <br>
@@ -33,4 +33,64 @@
 
 <div *ngIf="!usernameStatus">
 Please Log In to Chat
+</div>-->
+
+<div class="col-md-8 col-md-offset-2">
+
+<div>
+
+<div *ngIf="!usernameStatus" class="col-sm-6">
+    <label> Username: </label>
+    <input type="text" [(ngModel)]="username" name="username">
+    <br>
+    <button class="btn btn-primary" (click)="setUsername()">Submit Username</button>
+</div>
+
+
+
+<div *ngIf="usernameStatus && roomnameStatus === false">
+    <label> RoomName: </label>
+    <input type="text" [(ngModel)]="roomName" name="roomName">
+    <br>
+    <button class="btn btn-primary" (click)="joinRoom()">Submit Room Name</button>
+</div>
+
+</div>
+
+<hr />
+
+
+<div *ngIf="usernameStatus">
+    Username: {{username}} , Room Name: {{roomName}}
+</div>
+
+<div *ngIf="usernameStatus && username !== undefined && roomnameStatus">
+    <input type="text" placeholder="Enter a Message..." 
+    [(ngModel)]="message" 
+    name="message"
+    (keyup.enter)="sendMessage()"
+    >
+
+    <br />
+    <div *ngFor="let message of messages">
+        <strong>{{message.username}}</strong>: {{message.text}}
+    </div>
+
+</div>
+
+<div *ngIf="!usernameStatus">
+Please Log In to Chat
+</div>
+
+        <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+
+</div>
+
+<br />
+
+<strong> should show here rooms </strong>
+<div *ngFor="let rooms of listOfRooms">
+
+    <strong>{{rooms.roomName}}</strong>
 </div>

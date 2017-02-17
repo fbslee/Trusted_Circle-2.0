@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChatService } from '../services/chat.service';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 // import * as Message from '../../../models/messages.model';
 
@@ -18,6 +19,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   roomName: string;
   connection: any;
   usernameStatus: any = false;
+  roomnameStatus: any = false;
+
+  listOfRooms: any = [];
+  errorMessage: string;
+
 
   username: string;
   alert: any = false;
@@ -38,14 +44,34 @@ export class ChatComponent implements OnInit, OnDestroy {
         
       }
     )
+
+    console.log('ngOnIT HAPPEN')
+    this.getRoomlist()
+    console.log('AHHHHHH')
+
+    console.log(this.listOfRooms, 'After called in ngonit')
    }
 
    ngOnDestroy() {
       this.connection.unsubscribe();
    }
 
+  getRoomlist() {
+    console.log('inside chat ChatComponent')
+    this._chatService.getRoomlist()
+                      .subscribe( (data) => {
+                        console.log("WHAT AM I???", data)
+                        data.forEach((val)=>{
+                          this.listOfRooms.push(val)
+                        }) 
+                        console.log('list of rooms', this.listOfRooms)
+                        }
+                      )
+  }
+
   joinRoom () {
     console.log('chat ChatComponent', this.roomName)
+     this.roomnameStatus = true;
      this._chatService.joinRoom(this.roomName);
    }
 
