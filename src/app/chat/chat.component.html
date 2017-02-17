@@ -48,12 +48,12 @@ Please Log In to Chat
 
 
 
-<div *ngIf="usernameStatus && roomnameStatus === false">
+<!--<div *ngIf="usernameStatus && roomnameStatus === false">
     <label> RoomName: </label>
     <input type="text" [(ngModel)]="roomName" name="roomName">
     <br>
     <button class="btn btn-primary" (click)="joinRoom()">Submit Room Name</button>
-</div>
+</div>-->
 
 </div>
 
@@ -64,7 +64,7 @@ Please Log In to Chat
     Username: {{username}} , Room Name: {{roomName}}
 </div>
 
-<div *ngIf="usernameStatus && username !== undefined && roomnameStatus">
+<div *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
     <input type="text" placeholder="Enter a Message..." 
     [(ngModel)]="message" 
     name="message"
@@ -82,15 +82,17 @@ Please Log In to Chat
 Please Log In to Chat
 </div>
 
-        <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <!--<button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-primary" type="submit">Save</button>-->
 
 </div>
 
 <br />
 
-<strong> should show here rooms </strong>
-<div *ngFor="let rooms of listOfRooms">
 
-    <strong>{{rooms.roomName}}</strong>
+<div *ngIf="roomSelected === false && usernameStatus">
+    <strong> Select Your Room </strong>
+<div  *ngFor="let rooms of listOfRooms">
+    <button  class="btn btn-primary" (click)="joinRoom(rooms.roomName)">{{rooms.roomName}}</button>
+</div> 
 </div>
