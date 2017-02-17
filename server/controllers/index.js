@@ -14,12 +14,14 @@ var signup = {
     var lastname = req.body.lastname;
     var email = req.body.email;
     console.log('firstname')
+    console.log(password, username)
 
     if(!username || !password) {
       console.log('WHY GOD WHY')
       req.flash('error', 'Please fill out all fields');
       res.redirect('signup');
     }
+    
 
     var salt = bcrypt.genSaltSync(10);
     var hashedPassword = bcrypt.hashSync(password, salt);
@@ -32,6 +34,8 @@ var signup = {
       lastname: lastname,
       email: email
     };
+
+    console.log('past conditional', newUser, salt)
 
     userModel.create(newUser).then( () => {
       console.log('user created');
@@ -59,7 +63,7 @@ var signup = {
 
 module.exports = {
   // findHypemSongs: hypemCtrl.findHypemSongs,
-  signup: signup,
+  signup: signup
   // train: train,
   // tags: tags,
   // song: song,

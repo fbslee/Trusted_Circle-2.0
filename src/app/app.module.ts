@@ -23,10 +23,9 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { MapTestComponent } from './map-test/map-test.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
-import { SignupComponent } from './login/signup/signup.component';
-import { SignupService } from './login/signup/signup.service';
-import { FormComponent } from './login/form/form.component';
-import { LoginService } from './login/form/login.service';
+import { SignupComponent } from './signup/signup.component';
+import { SignupService } from './signup/signup.service';
+import { LoginService } from './login/login.service';
 import { VotesComponent } from './votes/votes.component';
 
 
@@ -39,13 +38,11 @@ import { VotesComponent } from './votes/votes.component';
     ChatComponent,
     MessageComponent,
     SignupComponent,
-    FormComponent,
     MessageInputComponent,
     MessagesComponent,
-    MessageListComponent
+    MessageListComponent,
     MapTestComponent,
     VotesComponent
-
   ],
   imports: [
     BrowserModule,
@@ -53,13 +50,11 @@ import { VotesComponent } from './votes/votes.component';
     HttpModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent 
-      // canActivate: [AuthGuard] 
-      },
-      { path: 'login', component: LoginComponent, children: [
-        { path: '', component: FormComponent },
-        { path: 'signup', component: SignupComponent}
-      ]},
+      { path: '', component: HomeComponent
+      ,canActivate: [AuthGuard]
+     },
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
       { path: 'chat', component: ChatComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'votes', component: VotesComponent }, 

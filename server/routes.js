@@ -3,6 +3,12 @@ var controller = require('./controllers');
 var passport = require('passport');
 var path = require('path');
 
+router.get('/test', function(req,res) {
+  console.log('yuri is gay')
+  res.send()
+})
+
+//'/api/signup
 router.get('/signup', controller.signup.get);
 // router.get('/trains', controller.train.get);
 // router.get('/gettrainsongs', controller.train.get);
@@ -21,6 +27,7 @@ router.post('/signup', controller.signup.post);
 router.post('/login', (req, res, next) => {
 
   passport.authenticate('local', (err, user, info) => {
+    //????
     if (err) { return next(err); }
     if (!user) {
         res.status(400);

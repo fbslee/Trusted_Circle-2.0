@@ -2,17 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { SignupService } from './signup.service';
 
 @Component({
-    selector: 'app-signup-form',
+    selector: 'app-signup',
     templateUrl: './signup.component.html',
     styleUrls: ['./signup.component.scss']
 })
 
 export class SignupComponent implements OnInit {
-  inputUsername: string;
-  inputPassword: string;
-  inputEmail: string;
-  inputFirstname: string;
-  inputLastname: string;
+
+  user: any = {};
 
   constructor(private signUpService: SignupService) { }
 
@@ -20,13 +17,13 @@ export class SignupComponent implements OnInit {
   }
 
   submitSignup = () => {
-    this.signUpService.signUp(this.inputUsername, this.inputPassword, this.inputEmail, this.inputFirstname, this.inputLastname)
+    this.signUpService.signUp(this.user.username, this.user.password, this.user.email, this.user.firstname, this.user.lastname)
     .subscribe(res => {
-      this.inputFirstname = '';
-      this.inputLastname = '';
-      this.inputEmail = '';
-      this.inputUsername = '';
-      this.inputPassword = '';
+      this.user.firstname = '';
+      this.user.lastname = '';
+      this.user.email = '';
+      this.user.username = '';
+      this.user.password = '';
     }, err => {
       console.log('err', err);
     });

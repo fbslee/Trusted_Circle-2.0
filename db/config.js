@@ -50,7 +50,7 @@ const initDatabase = () => {
             through: User_Topic
         })
 		
-		sequelize.sync({force: true}).then(err => {
+		sequelize.sync().then(err => {
 			resolve();
 		});
 	});
