@@ -7,11 +7,12 @@ import { CirclesComponent } from '../circles/circles.component';
   styleUrls: ['./topics.component.scss']
 })
 export class TopicsComponent implements OnInit {
+  username: any = sessionStorage.getItem('username');
   newTopic: string;
-  circle: string = 'Hack Reactor';
+  circle: string = sessionStorage.getItem('circle');
   topics: any = ["Why don't we have president's day off?", "Where is Glenn?", "Why does my room smell so bad?"]
   clicked(topic){
-    console.log(topic)
+    sessionStorage.setItem('topic',topic)
   }
   createTopic(){
     if(this.topics.indexOf(this.newTopic) === -1){
@@ -22,7 +23,7 @@ export class TopicsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('what is circles component', typeof(CirclesComponent))
+    sessionStorage.removeItem('topic')
   }
 
 }

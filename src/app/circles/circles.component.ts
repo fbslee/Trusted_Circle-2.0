@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./circles.component.scss']
 })
 export class CirclesComponent implements OnInit {
+  username: any = sessionStorage.getItem('username');
   newCircle: string;
   circles: any = ['Hack Reactor', 'Movies', 'Soccer'];
   clicked(val){
-    console.log(val);
+    sessionStorage.setItem('circle',val);
   }
   createCircle(){
     if(this.circles.indexOf(this.newCircle) === -1){
@@ -20,6 +21,7 @@ export class CirclesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem('circle')
   }
 
 }
