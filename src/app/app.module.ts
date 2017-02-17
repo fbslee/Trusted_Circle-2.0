@@ -30,6 +30,7 @@ import { VotesComponent } from './votes/votes.component';
 import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
 import { CirclesComponent } from './circles/circles.component';
 import { TopicsComponent } from './topics/topics.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { TopicsComponent } from './topics/topics.component';
     MapTestComponent,
     VotesComponent,
     CirclesComponent,
-    TopicsComponent
+    TopicsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
