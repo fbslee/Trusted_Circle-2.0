@@ -58,12 +58,13 @@ import { TopicsComponent } from './topics/topics.component';
       { path: '', component: HomeComponent
         ,canActivate: [AuthGuard]
       },
+      { path: 'home', component: HomeComponent,canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'chat', component: ChatComponent },
-      { path: 'messages', component: MessagesComponent },
+      { path: 'chat', component: ChatComponent , canActivate: [AuthGuard] },
+      { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
       { path: 'votes', component: VotesComponent }, 
-      { path: 'circles', component: CirclesComponent }, 
+      { path: 'circles', component: CirclesComponent, canActivate: [AuthGuard] }, 
       { path: 'topics', component: TopicsComponent }
     ]),
     MaterialModule.forRoot(),
