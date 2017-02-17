@@ -2,12 +2,18 @@
 
 <ul>
       <li *ngFor="let topic of topics" (click)="clicked(topic)" [routerLink]="['/messages']">
-        {{ topic }}
+        {{ topic.body }} <strong>{{topic.user}}</strong>
       </li>
 </ul>
 
 <input type="text" placeholder="New Topic To Discuss" 
-    [(ngModel)]="newTopic" 
-    name="newTopic"
+    [(ngModel)]="newTopic.body" 
+    name="body"
     (keyup.enter)="createTopic()"
     >
+
+<ul>
+    <li *ngFor="let user of users">
+      {{user}}
+    </li>
+</ul>
