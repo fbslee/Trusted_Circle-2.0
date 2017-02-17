@@ -52,6 +52,7 @@ const initDatabase = () => {
 	
 		sequelize.sync().then(err => {
 
+
 			resolve();
 		});
 	
