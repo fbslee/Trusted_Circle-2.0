@@ -1,7 +1,7 @@
 <h1>These are the Circles that you belong to</h1>
 
 <ul>
-      <li *ngFor="let circle of circles">
+      <li *ngFor="let circle of circles" (click)="clicked(circle)" [routerLink]="['/topics']">
         {{ circle }}
       </li>
 </ul>
