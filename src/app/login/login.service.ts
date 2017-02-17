@@ -7,7 +7,7 @@ export class LoginService {
   constructor(private _http: Http) { }
 
   login(username, password) {
-    return this._http.post('api/login', {
+    return this._http.post('/api/login', {
       username: username,
       password: password
     });

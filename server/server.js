@@ -7,12 +7,9 @@ const initDatabase = require('../db/config');
 
 var bodyParser = require('body-parser');
 var router = require('./routes');
-
-
 var app = express();
-var http = require('http').createServer(app);
-
-var io = require('socket.io')(http);
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -57,7 +54,7 @@ var port = 3000 || process.env.PORT;
 
 
 initDatabase().then(() => {
-  http.listen(port, () => {
+  server.listen(port, () => {
 
 	  console.log("listening on port " + port);
   });

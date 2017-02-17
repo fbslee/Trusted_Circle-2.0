@@ -7,6 +7,12 @@ var bluebird = require('bluebird');
 const Sequelize = require('sequelize');
 const sequelize = require('../db/connection');
 
+router.get('/test', function(req,res) {
+  console.log('yuri is gay')
+  res.send()
+})
+
+//'/api/signup
 router.get('/signup', controller.signup.get);
 // router.get('/trains', controller.train.get);
 // router.get('/gettrainsongs', controller.train.get);
