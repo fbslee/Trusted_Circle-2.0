@@ -11,6 +11,11 @@ import { MessageService } from '../services/message.service'
 export class MessageComponent {
     @Input() message: Message;
     @Output() editClicked = new EventEmitter<string>();
+    @Input() voteCount = 0;
+    @Input() myVote = 0;
+
+    @Output('vote') change = new EventEmitter();
+
 
     constructor(private messageService: MessageService) {}
 
@@ -20,5 +25,26 @@ export class MessageComponent {
 
     onDelete() {
         this.messageService.deleteMessage(this.message);
+    }
+    upVote() {
+        if (this.myVote == 1) {
+            return;
+        }
+
+        this.myVote++;
+        this.emitEvent();
+    }
+
+    downVote() {
+        if (this.myVote == -1) {
+            return;
+        }
+
+        this.myVote--;
+        this.emitEvent();
+    }
+
+    emitEvent() {
+        this.change.emit({myVote: this.myVote});
     }
 }
