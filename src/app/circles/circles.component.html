@@ -5,3 +5,9 @@
         {{ circle }}
       </li>
 </ul>
+
+<input type="text" placeholder="New Circle Name" 
+    [(ngModel)]="newCircle" 
+    name="newCircle"
+    (keyup.enter)="createCircle()"
+    >

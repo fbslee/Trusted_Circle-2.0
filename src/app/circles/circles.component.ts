@@ -6,9 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./circles.component.scss']
 })
 export class CirclesComponent implements OnInit {
+  newCircle: string;
   circles: any = ['Hack Reactor', 'Movies', 'Soccer'];
   clicked(val){
     console.log(val);
+  }
+  createCircle(){
+    if(this.circles.indexOf(this.newCircle) === -1){
+      this.circles.push(this.newCircle);
+    }
+    this.newCircle = null;
   }
   constructor() { }
 
