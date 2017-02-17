@@ -7,7 +7,7 @@ import { MessageService } from '../services/message.service'
 @Component({
   selector: 'app-message-input',
   template: `
-  <h3>{{topic}}</h3>
+  <h3>{{topicBody}} posted by {{topicUser}}</h3>
   <div class="col-md-8 col-md-offset-2">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
@@ -31,7 +31,8 @@ import { MessageService } from '../services/message.service'
 
 export class MessageInputComponent {
     message: Message;
-    topic: string = sessionStorage.getItem('topic')
+    topicBody: string = sessionStorage.getItem('topicBody')
+    topicUser: string = sessionStorage.getItem('topicUser')
     constructor(private messageService: MessageService) {}
 
     onSubmit(form: NgForm) {
@@ -44,6 +45,5 @@ export class MessageInputComponent {
         this.message = null;
         form.resetForm();
     }
-
 
 }
