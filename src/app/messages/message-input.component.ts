@@ -20,7 +20,9 @@ import { MessageService } from '../services/message.service'
                     required>
         </div>
         <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Post as Username</button>
+                <button class="btn btn-default" type="submit">Post as Anonymous</button>
+
     </form>
 </div>
   `

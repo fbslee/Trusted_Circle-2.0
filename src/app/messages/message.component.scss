@@ -10,5 +10,17 @@
     display: inline-block;
     text-align: right;
     font-size: 12px;
-     width: 19%;
+    width: 19%;
 }
+
+.voter {
+        width: 15px;
+        font-size: 15px;
+        color: #999;
+        }
+        .vote-button {
+            cursor: pointer;
+        }
+        .highlighted {
+            color: gold;
+        }
