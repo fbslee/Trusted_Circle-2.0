@@ -2,12 +2,24 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
+import { Http, JsonpModule, Response } from '@angular/http';
 
 @Injectable()
 export class ChatService {
 
+  constructor (private http: Http) {}
+
   private url = "http://localhost:3000"; //our server
+  private url1 = "http://localhost:4200"; //our server
   private socket: any;
+
+  getRoomlist(): Observable<any> {
+    console.log('INSIDE getRoomlist')
+    return this.http.get(this.url1+'/api/roomlist')
+                    .map( ( res:Response ) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+  }
+
   
   joinRoom (roomName: string) {
     console.log('room created with', roomName)

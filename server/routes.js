@@ -2,6 +2,10 @@ var router = require('express').Router();
 var controller = require('./controllers');
 var passport = require('passport');
 var path = require('path');
+var bluebird = require('bluebird');
+
+const Sequelize = require('sequelize');
+const sequelize = require('../db/connection');
 
 router.get('/signup', controller.signup.get);
 // router.get('/trains', controller.train.get);
@@ -11,6 +15,32 @@ router.get('/signup', controller.signup.get);
 router.get('/logout', (req, res) => {
     console.log('logged user out');
     req.logout();
+});
+
+
+router.get('/roomList', (req, res) => {
+    console.log('/roomlist being hit!!!')
+
+    var Chatrooms = sequelize.define('chatrooms', {
+      roomName: Sequelize.STRING,
+      long: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0
+      },
+      lat: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0
+      }
+    });
+
+
+
+    
+    Chatrooms.findAll().then( (val) => {
+            res.send(val) 
+    })
+  
+
 });
 
 // router.post('/addsongtotrain', controller.song.post);
