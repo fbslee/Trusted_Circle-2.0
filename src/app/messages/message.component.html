@@ -1,0 +1,36 @@
+
+<div class="col-sm-1">
+<div class="voter">
+            <li 
+                class="glyphicon glyphicon-menu-up vote-button"
+                [class.highlighted]="myVote == 1"
+                (click)="upVote()"
+            ></li>
+            <span class="vote-count">{{ voteCount + myVote }}</span>
+            <li
+                class="glyphicon glyphicon-menu-down vote-button"
+                [class.highlighted]="myVote == -1"
+                (click)="downVote()"
+            ></li>
+        </div>
+</div>
+<div class="col-sm-11">
+<article class="panel panel-default">
+
+    <div class="panel-body">
+        {{ message.content }}
+                    
+    </div>
+    <footer class="panel-footer">
+        <div class="author">
+            {{ message.username }}
+        </div>
+        <div class="config">
+            <a (click)="onEdit()">Edit</a>
+            <a (click)="onDelete()">Delete</a>
+            
+        </div>
+
+    </footer>
+</article>
+</div>

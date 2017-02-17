@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
 
     socket.on('create', (room) => {
         console.log('a user has connected to', room)
+        
         socket.join(room);
     });
 
@@ -43,7 +44,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('add-message', (message, username, roomName) => {
-        socket.broadcast.to(roomName).emit('message', { type: 'new-message', text: message, username: username, roomName: roomName });
+        io.sockets.in(roomName).emit('message', { type: 'new-message', text: message, username: username, roomName: roomName });
     });
 
 });

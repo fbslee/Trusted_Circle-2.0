@@ -49,9 +49,9 @@ const initDatabase = () => {
         Topic.belongsToMany(User, {
             through: User_Topic
         })
-		console.log('please')
-		
-	sequelize.sync().then(err => {
+	
+		sequelize.sync().then(err => {
+
 			resolve();
 		});
 	

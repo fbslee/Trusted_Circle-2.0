@@ -16,10 +16,10 @@ import { AuthService } from './services/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
-import { MessageComponent } from './message/message.component';
-import { MessageInputComponent } from './message-input/message-input.component';
+import { MessageComponent } from './messages/message.component';
+import { MessageInputComponent } from './messages/message-input.component';
 import { MessagesComponent } from './messages/messages.component';
-import { MessageListComponent } from './message-list/message-list.component';
+import { MessageListComponent } from './messages/message-list.component';
 import { MapTestComponent } from './map-test/map-test.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -27,6 +27,9 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupService } from './signup/signup.service';
 import { LoginService } from './login/login.service';
 import { VotesComponent } from './votes/votes.component';
+import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
+import { CirclesComponent } from './circles/circles.component';
+import { TopicsComponent } from './topics/topics.component';
 
 
 @NgModule({
@@ -42,7 +45,9 @@ import { VotesComponent } from './votes/votes.component';
     MessagesComponent,
     MessageListComponent,
     MapTestComponent,
-    VotesComponent
+    VotesComponent,
+    CirclesComponent,
+    TopicsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,14 +56,15 @@ import { VotesComponent } from './votes/votes.component';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent
-      ,canActivate: [AuthGuard]
-     },
+        ,canActivate: [AuthGuard]
+      },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'chat', component: ChatComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'votes', component: VotesComponent }, 
-
+      { path: 'circles', component: CirclesComponent }, 
+      { path: 'topics', component: TopicsComponent }
     ]),
     MaterialModule.forRoot(),
         AgmCoreModule.forRoot({

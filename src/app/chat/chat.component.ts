@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChatService } from '../services/chat.service';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 // import * as Message from '../../../models/messages.model';
 
@@ -18,6 +19,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   roomName: string;
   connection: any;
   usernameStatus: any = false;
+  roomnameStatus: any = false;
+  roomSelected: any = false;
+
+  listOfRooms: any = [];
+  errorMessage: string;
+
 
   username: string;
   alert: any = false;
@@ -38,15 +45,45 @@ export class ChatComponent implements OnInit, OnDestroy {
         
       }
     )
+
+    console.log('ngOnIT HAPPEN')
+    this.getRoomlist()
+    console.log('AHHHHHH')
+
+    console.log(this.listOfRooms, 'After called in ngonit')
    }
 
    ngOnDestroy() {
       this.connection.unsubscribe();
    }
 
-  joinRoom () {
-    console.log('chat ChatComponent', this.roomName)
-     this._chatService.joinRoom(this.roomName);
+
+  //  clickedOnRoomName(value) {
+  //    this.roomSelected = true;
+  //    this.joinRoom (value);
+  //    console.log(value);
+  //  }
+
+  getRoomlist() {
+    console.log('inside chat ChatComponent')
+    this._chatService.getRoomlist()
+                      .subscribe( (data) => {
+                        console.log("WHAT AM I???", data)
+                        data.forEach((val)=>{
+                          this.listOfRooms.push(val)
+                        }) 
+                        console.log('list of rooms', this.listOfRooms)
+                        }
+                      )
+  }
+
+  joinRoom (someValue) {
+    console.log('this is the join room function', someValue);
+    console.log('joined room function chat ChatComponent is:', someValue)
+     this.roomName = someValue;
+     this.roomSelected = true;
+     this.roomnameStatus = true;
+     this._chatService.joinRoom(someValue);
    }
 
    sendMessage () {
