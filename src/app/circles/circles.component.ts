@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class CirclesComponent implements OnInit {
   newCircle: string;
   circles: any = ['Hack Reactor', 'Movies', 'Soccer'];
-  clicked(val){
-    console.log(val);
+  clicked(circle){
+    sessionStorage.setItem('circle', circle)
   }
   createCircle(){
     if(this.circles.indexOf(this.newCircle) === -1){
@@ -20,6 +20,7 @@ export class CirclesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem('circle')
   }
 
 }
