@@ -31,7 +31,7 @@ import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/
 import { CirclesComponent } from './circles/circles.component';
 import { TopicsComponent } from './topics/topics.component';
 import { FooterComponent } from './footer/footer.component';
-
+import { Parallax, ParallaxConfig  } from './home/parallax.directive';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,8 @@ import { FooterComponent } from './footer/footer.component';
     VotesComponent,
     CirclesComponent,
     TopicsComponent,
-    FooterComponent
+    FooterComponent,
+    Parallax,
   ],
   imports: [
     BrowserModule,
