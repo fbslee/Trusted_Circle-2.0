@@ -9,7 +9,7 @@ export class VotesComponent implements OnInit {
 
   suggestor: string = 'Felipe';
   suggestedMember: string = 'David';
-  board: string = 'Team Passive';
+  circle: string = 'Team Passive';
   
   constructor() { }
 

@@ -17,6 +17,10 @@ var Poll = sequelize.define('polls', {
   votesIn: {
       type: Sequelize.INTEGER,
       defaultValue: 0
+  },
+  votesFor: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0
   }
 });
 
