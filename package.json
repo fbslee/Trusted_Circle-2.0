@@ -59,7 +59,7 @@
     "soundmanager2": "^2.97.20150601-a",
     "ts-helpers": "^1.1.1",
     "url": "^0.11.0",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.7.4"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",

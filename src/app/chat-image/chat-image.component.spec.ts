@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MapTestComponent } from './map-test.component';
+import { ChatImageComponent } from './chat-image.component';
 
-describe('MapTestComponent', () => {
-  let component: MapTestComponent;
-  let fixture: ComponentFixture<MapTestComponent>;
+describe('ChatImageComponent', () => {
+  let component: ChatImageComponent;
+  let fixture: ComponentFixture<ChatImageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapTestComponent ]
+      declarations: [ ChatImageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapTestComponent);
+    fixture = TestBed.createComponent(ChatImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

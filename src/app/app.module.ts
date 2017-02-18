@@ -20,9 +20,7 @@ import { MessageComponent } from './messages/message.component';
 import { MessageInputComponent } from './messages/message-input.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageListComponent } from './messages/message-list.component';
-import { MapTestComponent } from './map-test/map-test.component';
 
-import { AgmCoreModule } from 'angular2-google-maps/core';
 import { SignupComponent } from './signup/signup.component';
 import { SignupService } from './signup/signup.service';
 import { LoginService } from './login/login.service';
@@ -30,8 +28,11 @@ import { VotesComponent } from './votes/votes.component';
 import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
 import { CirclesComponent } from './circles/circles.component';
 import { TopicsComponent } from './topics/topics.component';
+
 import { FooterComponent } from './footer/footer.component';
+
 import { Parallax, ParallaxConfig  } from './home/parallax.directive';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +46,6 @@ import { Parallax, ParallaxConfig  } from './home/parallax.directive';
     MessageInputComponent,
     MessagesComponent,
     MessageListComponent,
-    MapTestComponent,
     VotesComponent,
     CirclesComponent,
     TopicsComponent,
@@ -69,11 +69,7 @@ import { Parallax, ParallaxConfig  } from './home/parallax.directive';
       { path: 'votes', component: VotesComponent }, 
       { path: 'circles', component: CirclesComponent, canActivate: [AuthGuard] }, 
       { path: 'topics', component: TopicsComponent }
-    ]),
-    MaterialModule.forRoot(),
-        AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC4K9y-gZajK78CG6JFg2jfan2XtcDPY6w'
-    })
+    ])
   ],
   providers: [
     ChatService,

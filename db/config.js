@@ -13,6 +13,7 @@ const initDatabase = () => {
 		var Message = require('./../models/messages.model');
         var User_Circle = require('./../models/user_circle.model');
 		var User_Topic = require('./../models/user_topic.model');
+		var Chatrooms = require('./../models/chatrooms.model');
 		
 		User.hasMany(Message);
 		Message.belongsTo(User);

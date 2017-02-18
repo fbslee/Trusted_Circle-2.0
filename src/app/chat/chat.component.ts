@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChatService } from '../services/chat.service';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { ChatImageComponent } from '../chat-image/chat-image.component';
 
 // import * as Message from '../../../models/messages.model';
 
@@ -18,7 +19,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 
   messages: any = [];
-  message: string;
+  message: any;
   rooms: any = [];
   roomName: string;
   connection: any;
@@ -44,7 +45,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log(message, 'this is from the chat component');
         console.log(sessionStorage.getItem('roomName'))
 
-        
+        console.log('####about to push####:', message )
         this.messages.push(message)
         
       }
@@ -96,7 +97,7 @@ export class ChatComponent implements OnInit, OnDestroy {
    }
 
    sendMessage () {
-    console.log('roomNAME IS!!!!', this.roomName);
+     console.log('roomNAME IS!!!!', this.roomName);
      this._chatService.sendMessage(this.message, this.username, this.roomName);
      this.message = '';
    }
@@ -111,6 +112,10 @@ export class ChatComponent implements OnInit, OnDestroy {
      this.usernameStatus = true;
      }
      this.alert = 'Username is set';
+   }
+
+   usernameClick(username, i) {
+     console.log('username is', username, 'this is their i value:', i);
    }
 
 

@@ -72,9 +72,8 @@ Please Log In to Chat
     >
 
     <br />
-    <div *ngFor="let message of messages">
-        <strong>{{message.username}}</strong>: {{message.text}}
-    </div>
+    <div *ngFor="let message of messages; let i = index">
+       <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">{{message.username}}</a></strong>: {{message.text}}
 
 </div>
 
