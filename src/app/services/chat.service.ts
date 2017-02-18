@@ -24,11 +24,11 @@ export class ChatService {
   joinRoom (roomName: string) {
     console.log('room created with', roomName)
     sessionStorage.setItem('roomName', roomName);
-    this.socket.emit('create', roomName);
+    this.socket.emit('create', sessionStorage.getItem('username') , roomName);
   }
 
 
-  sendMessage (message:string, username: string, roomName: string) {
+  sendMessage (message:any, username: string, roomName: string) {
     this.socket.emit('add-message', message, username, roomName);
   }
 

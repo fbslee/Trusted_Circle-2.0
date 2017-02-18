@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/connection');
 
-var Circle = sequelize.define('circle', {
+var Circle = sequelize.define('circles', {
   name: Sequelize.STRING
 });
 

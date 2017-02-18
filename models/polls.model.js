@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./../db/connection');
 
-var Poll = sequelize.define('poll', {
+var Poll = sequelize.define('polls', {
   result: {
       type: Sequelize.STRING,
       defaultValue: null

@@ -33,9 +33,9 @@ io.on('connection', (socket) => {
     console.log('connected user is:', socket.id);
 
 
-    socket.on('create', (room) => {
+    socket.on('create', (username, room) => {
         console.log('a user has connected to', room)
-        
+        socket.emit('add-message', 'Has Joined', username , room);
         socket.join(room);
     });
 
