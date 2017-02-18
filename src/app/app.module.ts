@@ -28,7 +28,10 @@ import { VotesComponent } from './votes/votes.component';
 import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
 import { CirclesComponent } from './circles/circles.component';
 import { TopicsComponent } from './topics/topics.component';
-import { ChatImageComponent } from './chat-image/chat-image.component';
+
+import { FooterComponent } from './footer/footer.component';
+
+import { Parallax, ParallaxConfig  } from './home/parallax.directive';
 
 
 @NgModule({
@@ -46,7 +49,8 @@ import { ChatImageComponent } from './chat-image/chat-image.component';
     VotesComponent,
     CirclesComponent,
     TopicsComponent,
-    ChatImageComponent
+    FooterComponent,
+    Parallax,
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ var bcrypt = require('bcryptjs'),
   rp = require('request-promise');
 
 const userModel = require('../../models/users.model');
-// const Message = require('../models/message');
+// const Message = require('../../models/message.model');
 
 var signup = {
   get: function(req, res){
@@ -44,30 +44,29 @@ var signup = {
       res.redirect('/signup');
     });
   }
-
-  // var messages = {
-  //   get: function(req, res) {
-  //     Message.findAll ()
-  //     .then
-  //   }
-  //   post: function(req, res) {
-  //     var content = 
-  //   },
-  //   delete: function(req, res) {
-  //     Message.destroy({
-  //       where: {
-  //         id:req.params.id
-  //       }
-  //     })
-  //     .then(function(deletedRecords){
-  //       res.status(200).json(deletedRecords);
-  //     })
-  //     .catch((err)=> {
-  //       res.status(500).json(error);
-  //     })
-  //   }
-  // }
 };
+  var messages = {
+    // get: function(req, res) {
+    //   Message.findAll ()
+    //   .then
+    // },
+    post: function(req, res) {
+    },
+
+    delete: function(req, res) {
+      Message.destroy({
+        where: {
+          id:req.params.id
+        }
+      })
+      .then(function(deletedRecords){
+        res.status(200).json(deletedRecords);
+      })
+      .catch((err)=> {
+        res.status(500).json(error);
+      })
+    }
+  }
 
 // var favTrain = {
 //   post: (req, res) => {
