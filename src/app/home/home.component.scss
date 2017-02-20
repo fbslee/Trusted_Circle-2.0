@@ -1,0 +1,25 @@
+
+.parallaxOne {
+background-image: url('http://www.wordwalk.us/wp-content/uploads/2014/06/milky-way-galaxy-wallpaper-1920x1080.jpg');
+}
+*[parallax] {
+    height: 400px;
+    
+    background-size: cover;
+        background-position: center;
+background-attachment: fixed;
+}
+
+.parallaxThree {
+background-image: url('http://i.vimeocdn.com/video/393718537_1280x720.jpg');
+background-attachment: fixed;
+
+    
+}
+
+
+.parallaxTwo {
+background-image: url('http://images.dpchallenge.com/images_challenge/1000-1999/1073/800/Copyrighted_Image_Reuse_Prohibited_811857.jpg');
+
+    
+}

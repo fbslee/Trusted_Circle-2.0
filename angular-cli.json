@@ -18,9 +18,12 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+      "../path/to/semantic.min.css"
       ],
       "scripts": [
+      "../node_modules/jquery/dist/jquery.min.js",
+      "../node_modules/ng-semantic/bundles/semantic.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

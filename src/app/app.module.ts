@@ -25,16 +25,17 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupService } from './signup/signup.service';
 import { LoginService } from './login/login.service';
 import { VotesComponent } from './votes/votes.component';
-import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
 import { CirclesComponent } from './circles/circles.component';
 import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicsService } from './services/topics.service';
 
 import { FooterComponent } from './footer/footer.component';
-
-import { Parallax, ParallaxConfig  } from './home/parallax.directive';
 import { PollComponent } from './poll/poll.component';
+import { Parallax, ParallaxConfig  } from './parallax.directive';
+import { NgSemanticModule } from "ng-semantic";
+
+
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { PollComponent } from './poll/poll.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgSemanticModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent

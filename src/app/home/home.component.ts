@@ -1,24 +1,23 @@
-import { Component, OnInit, Directive } from '@angular/core';
-import { Ng2ParallaxScrollModule } from 'ng2-parallax-scroll';
-import { Parallax, ParallaxConfig  } from './parallax.directive';
+import { Component, OnInit, Directive,  } from '@angular/core';
+import { Parallax, ParallaxConfig  } from '../parallax.directive';
+import { NgSemanticModule } from "ng-semantic";
 
+declare var $:any;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 
 @Directive({
   
 })
 export class HomeComponent implements OnInit {
- parallaxConfig: ParallaxConfig = {
-    };
 
-  constructor() { }
 
   ngOnInit() {
+
   }
 
 }
