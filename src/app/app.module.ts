@@ -32,6 +32,7 @@ import { TopicsComponent } from './topics/topics.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { Parallax, ParallaxConfig  } from './home/parallax.directive';
+import { PollComponent } from './poll/poll.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { Parallax, ParallaxConfig  } from './home/parallax.directive';
     TopicsComponent,
     FooterComponent,
     Parallax,
+    PollComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { Parallax, ParallaxConfig  } from './home/parallax.directive';
       { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
       { path: 'votes', component: VotesComponent }, 
       { path: 'circles', component: CirclesComponent, canActivate: [AuthGuard] }, 
-      { path: 'topics', component: TopicsComponent }
+      { path: 'topics', component: TopicsComponent },
+      { path: 'poll', component: PollComponent }
     ])
   ],
   providers: [
