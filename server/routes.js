@@ -11,6 +11,7 @@ const Chatrooms = require('../models/chatrooms.model');
 const User = require('../models/users.model');
 const Topic = require('../models/topics.model');
 const Circle = require('../models/circles.model');
+const User_Circles = require('../models/user_circle.model');
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
@@ -32,6 +33,13 @@ router.get('/logout', (req, res) => {
 router.get('/users', (req, res) => {
     console.log('getting users');
     User.findAll().then( (data) => {
+        res.send(data)
+    })
+})
+
+router.get('/users_circles', (req, res) => {
+    console.log('getting users');
+    User_Circles.findAll().then( (data) => {
         res.send(data)
     })
 })

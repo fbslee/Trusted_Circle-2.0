@@ -25,8 +25,15 @@ export class CirclesService {
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
   }
 
-  getTopics(): Observable<any> {
+  getUserCircles(): Observable<any> {
     console.log('INSIDE getTopics in service')
+    return this.http.get(this.url1+'/api/users_circles')
+                    .map( ( res:Response ) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+  }
+
+  getTopics(): Observable<any> {
+    // console.log('INSIDE getTopics in service')
     return this.http.get(this.url1+'/api/topics')
                     .map( ( res:Response ) => res.json() )
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))

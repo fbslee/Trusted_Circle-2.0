@@ -31,11 +31,17 @@ export class CirclesComponent implements OnInit {
     // this.getTopics();
     this.getCircles();
   }
-  getCircles () {
-    console.log('inside getCircles function inside CirclesComponent')
+  getCircles () { //this also checks if the user is part of the circle
+    // console.log('inside getCircles function inside CirclesComponent')
     this._CirclesService.getCircles()
                       .subscribe( (data) => {
                         console.log("WHAT AM I???", data)
+
+
+
+
+
+
                         data.forEach((val)=>{
                           console.log(val);
                           this.circles.push(val.name)
@@ -46,22 +52,22 @@ export class CirclesComponent implements OnInit {
   }//end getTopics
 
   getTopics() {
-    console.log('inside getTopics function inside CirclesComponent')
+    // console.log('inside getTopics function inside CirclesComponent')
     this._CirclesService.getTopics()
                       .subscribe( (data) => {
-                        console.log("WHAT AM I???", data)
+                        // console.log("WHAT AM I???", data)
                         data.forEach((val)=>{
-                          console.log(val);
+                          // console.log(val);
                           this.circles.push(val.body)
                         }) 
-                        console.log('list of rooms', this.circles)
+                        // console.log('list of rooms', this.circles)
                         }
                       )
   }//end getTopics
 
   circleClicked(circleName) {
 
-     console.log('this is the Circle Name and clicked!', circleName,
+    console.log('this is the Circle Name and clicked!', circleName,
      'Setting the Circle Session');
      sessionStorage.setItem('circle', circleName);
   }
