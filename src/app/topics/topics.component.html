@@ -1,8 +1,10 @@
 <h1>These are the Topics being discussed in the Circle {{circle}} </h1>
 
 <ul>
-      <li *ngFor="let topic of topics" (click)="clicked(topic)" [routerLink]="['/messages']">
-        {{ topic }} 
+
+      <!--(click)="clicked(topic)"-->
+      <li *ngFor="let topic of topics" [routerLink]="['/messages']" >
+        <strong (click)="topicClicked(topic)">{{ topic }} </strong> 
         <!--<strong>{{topic.user}}</strong>-->
       </li>
 </ul>

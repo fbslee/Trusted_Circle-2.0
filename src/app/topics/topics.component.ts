@@ -32,6 +32,12 @@ export class TopicsComponent implements OnInit {
     this.getTopics();
   }
 
+  topicClicked(topicName) {
+    console.log('this is the topic!', topicName)
+    sessionStorage.setItem('topicBody', topicName)
+    sessionStorage.setItem('topicUser', "toBeFixed")
+  }
+
   getTopics() {
     console.log('inside getTopics function inside CirclesComponent')
     //find the current circles's Id by name
