@@ -9,6 +9,7 @@ const sequelize = require('../db/connection');
 
 const Chatrooms = require('../models/chatrooms.model');
 const Topic = require('../models/topics.model');
+const Circle = require('../models/circles.model');
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
@@ -38,8 +39,28 @@ router.get('/roomList', (req, res) => {
 
 });
 
+router.get('/circles', (req, res) => {
+    console.log('/circles being hit!!! for GET')
+    
+    Circle.findAll().then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
 router.get('/topics', (req, res) => {
-    console.log('/topics being hit!!!')
+    console.log('/topics being hit!!! for GET')
+    
+    Topic.findAll().then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
+router.post('/topics', (req, res) => {
+    console.log('/topics posting!!! from backend')
     
     Topic.findAll().then( (val) => {
             res.send(val) 
