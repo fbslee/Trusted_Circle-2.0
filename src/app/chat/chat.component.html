@@ -57,7 +57,6 @@ Please Log In to Chat
 
 <!--</div>-->
 
-<hr />
 
 
 
@@ -81,13 +80,13 @@ Please Log In to Chat
 
 <div class="row">
 <!--<div class="col-lg-4">-->
-      <div class="panel panel-info" style="max-height: 500px; overflow-y: scroll">
+      <div class="panel panel-info" style="height: 500px;max-height: 500px; overflow-y: scroll" #scrollMe >
                     <div class="panel-heading">
                                     <div *ngIf="usernameStatus">
                                         <strong > Username: {{username}} </strong> 
                                         <span *ngIf="roomnameStatus">
                                         <strong >| Room Name: {{roomName}} </strong>
-                                        <button class="btn btn-danger btn-right"> Change Room </button>
+                                        <button class="btn btn-danger btn-right" (click)="changeRoom()"> Change Room </button>
                                         </span>
 
                                     </div>
@@ -100,24 +99,18 @@ Please Log In to Chat
                         </div> 
                 </div>
 
-      <div class="panel panel-default">
-            <div *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
-                <input type="text" placeholder="Enter a Message..." 
-                [(ngModel)]="message" 
-                name="message"
-                (keyup.enter)="sendMessage()"
-                style="min-width: 100%;">
-            </div>
-      </div>
 
-      <div *ngFor="let message of messages; let i = index">
+
+      <div *ngFor="let message of messages; let item = index">
 
       <!--<div class="col-lg-4">-->
       <div class="panel panel-default">
-      <div class="panel-heading">{{message.username}}</div>
+      <div class="panel-heading">User: {{message.username}}</div>
       <div class="panel-body">
-          <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">{{message.username}}</a></strong>: {{message.text}}
-
+          <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">
+          <!--{{message.username}}-->
+          </a></strong>Message: {{message.text}}
+          <strong id="{{item}}"> Index {{item}} </strong>
       </div>
       </div>
         </div>
@@ -131,6 +124,19 @@ Please Log In to Chat
 </div>
 
 </div>
+
+
+      <div class="panel panel-default">
+            <div *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
+                <input type="text" placeholder="Enter a Message..." 
+                [(ngModel)]="message" 
+                name="message"
+                (keyup.enter)="sendMessage()"
+                style="min-width: 100%;">
+            </div>
+      </div>
+
+
 </div>
 
 
