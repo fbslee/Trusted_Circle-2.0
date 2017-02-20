@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SignupService } from './signup.service';
 import { LoginService } from '../login/login.service';
+import { AlertService } from '../services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-signup',
@@ -12,7 +14,8 @@ export class SignupComponent implements OnInit {
 
   user: any = {};
 
-  constructor(private signUpService: SignupService, private loginService: LoginService) { }
+  constructor(private signUpService: SignupService, private loginService: LoginService,
+   private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,7 +29,11 @@ export class SignupComponent implements OnInit {
       this.user.email = '';
       this.user.username = '';
       this.user.password = '';
-    }, err => {
+
+    this.router.navigate(['/login'])
+    this.alertService.success('Registration successful', true)
+    }
+    , err => {
       console.log('err', err);
     });
   }

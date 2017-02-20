@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import 'hammerjs';
 import 'underscore';
  
@@ -30,16 +31,15 @@ import { CirclesComponent } from './circles/circles.component';
 import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicsService } from './services/topics.service';
-import { ModalService } from './services/modal.service';
+import { AlertService } from './services/alert.service';
+import { ModalModule } from 'angular2-modal';
 
 import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { NgSemanticModule } from "ng-semantic";
-
-import { ModalComponent } from './modal/modal.component';
-
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -60,7 +60,7 @@ import { ModalComponent } from './modal/modal.component';
     FooterComponent,
     Parallax,
     PollComponent,
-    ModalComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +68,8 @@ import { ModalComponent } from './modal/modal.component';
     HttpModule,
     NgSemanticModule,
     NgbModule.forRoot(),
+    ModalModule.forRoot(),
+    BootstrapModalModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent
         // ,canActivate: [AuthGuard]
@@ -100,7 +102,7 @@ import { ModalComponent } from './modal/modal.component';
     AuthService,
     SignupService,
     LoginService,
-    ModalService
+    AlertService
     ],
   bootstrap: [AppComponent]
 })

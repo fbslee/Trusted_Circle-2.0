@@ -8,7 +8,7 @@ var Poll = sequelize.define('polls', {
   },
   maxVotes: {
       type: Sequelize.INTEGER,
-      defaultValue: 1
+      defaultValue: 0
   },
   status: {
       type: Sequelize.STRING,
