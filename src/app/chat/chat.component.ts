@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChatService } from '../services/chat.service';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { ChatImageComponent } from '../chat-image/chat-image.component';
+// import { ChatImageComponent } from '../chat-image/chat-image.component'; possibly not needed
 
 // import * as Message from '../../../models/messages.model';
 
@@ -13,10 +13,9 @@ import { ChatImageComponent } from '../chat-image/chat-image.component';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit, OnDestroy {
+   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   username: any = sessionStorage.getItem('username');
-
-
 
   messages: any = [];
   message: any;
@@ -39,6 +38,9 @@ export class ChatComponent implements OnInit, OnDestroy {
    }
 
    ngOnInit() {
+     //http://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
+    this.scrollToBottom();
+
     this.connection = this._chatService.getMessages().subscribe(
       message => {
         console.log('ROOM NAME', this.roomName);
@@ -46,6 +48,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log(sessionStorage.getItem('roomName'))
 
         console.log('####about to push####:', message )
+
         this.messages.push(message)
         
       }
@@ -63,9 +66,19 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
    }
 
+    ngAfterViewChecked() {        
+        this.scrollToBottom();        
+    } 
+
    ngOnDestroy() {
       this.connection.unsubscribe();
    }
+
+    scrollToBottom(): void {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        } catch(err) { }                 
+    }
 
 
   //  clickedOnRoomName(value) {
@@ -73,6 +86,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   //    this.joinRoom (value);
   //    console.log(value);
   //  }
+
+  changeRoom() {
+    this.roomSelected = false;
+    this.messages = [];
+  }
 
   getRoomlist() {
     console.log('inside chat ChatComponent')
@@ -98,8 +116,11 @@ export class ChatComponent implements OnInit, OnDestroy {
 
    sendMessage () {
      console.log('roomNAME IS!!!!', this.roomName);
+     if(this.message) {
+      //  console.log(this.message)
      this._chatService.sendMessage(this.message, this.username, this.roomName);
      this.message = '';
+     }
    }
 
    setUsername() {
