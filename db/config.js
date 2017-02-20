@@ -24,9 +24,9 @@ const initDatabase = () => {
 		Circle.hasMany(Topic);
 		Topic.belongsTo(Circle);
 
-		User.hasMany(Poll);
-		Poll.belongsTo(User,{foreignKey: 'id', as: 'suggestedMember'});
-		Poll.belongsTo(User,{foreignKey: 'id', as: 'suggestor'});
+		// User.hasMany(Poll);
+		Poll.belongsTo(User,{as: 'suggestedMember', foreignKey: 'suggestedMemberId'});
+		Poll.belongsTo(User,{as: 'suggestor', foreignKey: 'suggestorId'});
 
 		User.hasMany(Vote);
 		Vote.belongsTo(User);
