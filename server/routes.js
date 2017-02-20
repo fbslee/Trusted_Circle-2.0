@@ -7,6 +7,9 @@ var bluebird = require('bluebird');
 const Sequelize = require('sequelize');
 const sequelize = require('../db/connection');
 
+const Chatrooms = require('../models/chatrooms.model');
+const Topic = require('../models/topics.model');
+
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
   res.send()
@@ -27,23 +30,18 @@ router.get('/logout', (req, res) => {
 
 router.get('/roomList', (req, res) => {
     console.log('/roomlist being hit!!!')
-
-    var Chatrooms = sequelize.define('chatrooms', {
-      roomName: Sequelize.STRING,
-      long: {
-          type: Sequelize.FLOAT,
-          defaultValue: 0
-      },
-      lat: {
-          type: Sequelize.FLOAT,
-          defaultValue: 0
-      }
-    });
-
-
-
     
     Chatrooms.findAll().then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
+router.get('/topics', (req, res) => {
+    console.log('/topics being hit!!!')
+    
+    Topic.findAll().then( (val) => {
             res.send(val) 
     })
   
