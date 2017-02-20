@@ -60,22 +60,9 @@ Please Log In to Chat
 <hr />
 
 
-<div *ngIf="usernameStatus">
-    Username: {{username}} , Room Name: {{roomName}}
-</div>
 
-<div *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
-    <input type="text" placeholder="Enter a Message..." 
-    [(ngModel)]="message" 
-    name="message"
-    (keyup.enter)="sendMessage()"
-    >
 
-    <br />
-    <div *ngFor="let message of messages; let i = index">
-       <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">{{message.username}}</a></strong>: {{message.text}}
 
-</div>
 
 <div *ngIf="!usernameStatus">
 Please Log In to Chat
@@ -89,9 +76,61 @@ Please Log In to Chat
 <br />
 
 
-<div *ngIf="roomSelected === false && usernameStatus">
-    <strong> Select Your Room </strong>
-<div  *ngFor="let rooms of listOfRooms">
-    <button  class="btn btn-primary" (click)="joinRoom(rooms.roomName)">{{rooms.roomName}}</button>
-</div> 
+  <div class="jumbotron">
+    <div class="container">
+
+<div class="row">
+<!--<div class="col-lg-4">-->
+      <div class="panel panel-info" style="max-height: 500px; overflow-y: scroll">
+                    <div class="panel-heading">
+                                    <div *ngIf="usernameStatus">
+                                        <strong > Username: {{username}} </strong> 
+                                        <span *ngIf="roomnameStatus">
+                                        <strong >| Room Name: {{roomName}} </strong>
+                                        <button class="btn btn-danger btn-right"> Change Room </button>
+                                        </span>
+
+                                    </div>
+                    </div>
+      <div class="panel-body">
+                <div *ngIf="roomSelected === false && usernameStatus">
+                <strong> Select Your Room </strong>
+                        <div  *ngFor="let rooms of listOfRooms">
+                        <button  class="btn btn-primary" (click)="joinRoom(rooms.roomName)">{{rooms.roomName}}</button>
+                        </div> 
+                </div>
+
+      <div class="panel panel-default">
+            <div *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
+                <input type="text" placeholder="Enter a Message..." 
+                [(ngModel)]="message" 
+                name="message"
+                (keyup.enter)="sendMessage()"
+                style="min-width: 100%;">
+            </div>
+      </div>
+
+      <div *ngFor="let message of messages; let i = index">
+
+      <!--<div class="col-lg-4">-->
+      <div class="panel panel-default">
+      <div class="panel-heading">{{username}}</div>
+      <div class="panel-body">
+          <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">{{message.username}}</a></strong>: {{message.text}}
+
+      </div>
+      </div>
+        </div>
+
+
+
+
+       
+    </div>
+
 </div>
+
+</div>
+</div>
+
+

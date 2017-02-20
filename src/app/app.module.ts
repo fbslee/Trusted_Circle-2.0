@@ -27,6 +27,7 @@ import { LoginService } from './login/login.service';
 import { VotesComponent } from './votes/votes.component';
 import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/dist';
 import { CirclesComponent } from './circles/circles.component';
+import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
 
 import { FooterComponent } from './footer/footer.component';
@@ -73,6 +74,7 @@ import { Parallax, ParallaxConfig  } from './home/parallax.directive';
   ],
   providers: [
     ChatService,
+    CirclesService,
     AuthGuard,
     AuthService,
     SignupService,
