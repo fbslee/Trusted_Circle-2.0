@@ -61,6 +61,8 @@ export class LoginComponent {
         this.router.navigate(['']);
       }, err => {
         console.log('err', err)
+        err = 'Bad Login'
+        this.alertService.error(err);
       });
   }
 }
