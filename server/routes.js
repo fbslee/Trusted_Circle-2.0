@@ -8,6 +8,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db/connection');
 
 const Chatrooms = require('../models/chatrooms.model');
+const User = require('../models/users.model');
 const Topic = require('../models/topics.model');
 const Circle = require('../models/circles.model');
 
@@ -28,6 +29,12 @@ router.get('/logout', (req, res) => {
     req.logout();
 });
 
+router.get('/users', (req, res) => {
+    console.log('getting users');
+    User.findAll().then( (data) => {
+        res.send(data)
+    })
+})
 
 router.get('/roomList', (req, res) => {
     console.log('/roomlist being hit!!!')

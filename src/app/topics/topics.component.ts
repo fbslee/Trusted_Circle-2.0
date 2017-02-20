@@ -11,6 +11,8 @@ export class TopicsComponent implements OnInit {
   circle: string = sessionStorage.getItem('circle');
   topics: any = [];
   allCircles : any = [];
+  userInfo: {};
+  filteredItems: {};
   // topics: any = [{user: 'Felipe', body: "Why don't we have president's day off?"}, {user: 'David', body: "Where is Glenn?"}, {user:'Richard',body: "Why does my room smell so bad?"}]
   // users: any = ['David', 'Richard', 'Gabe', 'Kan', 'Ricky']
   
@@ -30,12 +32,37 @@ export class TopicsComponent implements OnInit {
   ngOnInit() {
     // sessionStorage.removeItem('topic')
     this.getTopics();
+    this.getUsers();
   }
 
   topicClicked(topicName) {
     console.log('this is the topic!', topicName)
     sessionStorage.setItem('topicBody', topicName)
     sessionStorage.setItem('topicUser', "toBeFixed")
+  }
+
+  filterItem(value){
+   if(!value) this.filteredItems = Object.assign([], this.userInfo); //when nothing has typed
+   this.filteredItems = Object.assign([], this.userInfo).filter(
+      item => item.username.toLowerCase().indexOf(value.toLowerCase()) > -1
+   )
+  }
+
+  printuser(user) {
+    console.log(user)
+    sessionStorage.setItem('username', user.username)
+    sessionStorage.setItem('userID', user.id)
+  }
+
+  getUsers() {
+    this._TopicsService.getUsers()
+                      .subscribe( (data) => {
+                        console.log("Where is this data man", data)
+                        this.userInfo = data;
+                        this.filterItem('');
+                        console.log('yo wtf', this.userInfo)
+                        console.log('goddamnit', this.filteredItems)
+                      })
   }
 
   getTopics() {

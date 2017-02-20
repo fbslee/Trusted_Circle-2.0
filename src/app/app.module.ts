@@ -29,12 +29,15 @@ import { CirclesComponent } from './circles/circles.component';
 import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicsService } from './services/topics.service';
+import { ModalService } from './services/modal.service';
 
 import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
+
 import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { NgSemanticModule } from "ng-semantic";
 
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -56,6 +59,7 @@ import { NgSemanticModule } from "ng-semantic";
     FooterComponent,
     Parallax,
     PollComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,18 +69,27 @@ import { NgSemanticModule } from "ng-semantic";
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent
-        ,canActivate: [AuthGuard]
+        // ,canActivate: [AuthGuard]
       },
-      { path: 'home', component: HomeComponent,canActivate: [AuthGuard] },
+      { path: 'home', component: HomeComponent
+      // ,canActivate: [AuthGuard] 
+      },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'chat', component: ChatComponent , canActivate: [AuthGuard] },
-      { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
+      { path: 'chat', component: ChatComponent 
+      // , canActivate: [AuthGuard] 
+      },
+      { path: 'messages', component: MessagesComponent
+      // , canActivate: [AuthGuard] 
+      },
       { path: 'votes', component: VotesComponent }, 
-      { path: 'circles', component: CirclesComponent, canActivate: [AuthGuard] }, 
+      { path: 'circles', component: CirclesComponent
+      // , canActivate: [AuthGuard] 
+      }, 
       { path: 'topics', component: TopicsComponent },
       { path: 'poll', component: PollComponent }
-    ])
+    ]),
+    MaterialModule.forRoot()
   ],
   providers: [
     TopicsService,
@@ -85,7 +98,8 @@ import { NgSemanticModule } from "ng-semantic";
     AuthGuard,
     AuthService,
     SignupService,
-    LoginService
+    LoginService,
+    ModalService
     ],
   bootstrap: [AppComponent]
 })

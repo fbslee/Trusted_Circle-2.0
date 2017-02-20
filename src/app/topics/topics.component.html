@@ -20,3 +20,11 @@
       {{user}}
     </li>
 </ul>
+
+<md-input-container>
+  <input mdInput #myInput placeholder="Add a User" [(ngModel)]="name" (input)="filterItem(myInput.value)" >
+</md-input-container>
+
+<div *ngFor="let item of filteredItems" (click)="printuser(item)">
+   {{item.username}}
+</div>
