@@ -19,11 +19,11 @@
       "mobile": false,
       "styles": [
         "styles.css",
-      "../path/to/semantic.min.css"
+        "semantic/semantic.min.css"
       ],
       "scripts": [
       "../node_modules/jquery/dist/jquery.min.js",
-      "../node_modules/ng-semantic/bundles/semantic.min.js"
+      "semantic/semantic.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'underscore';
+
+declare function require(name:string);
+var _ = require ('../../../node_modules/underscore/underscore');
 
 @Injectable()
 export class ModalService {
