@@ -39,7 +39,7 @@ export class CirclesComponent implements OnInit {
                           console.log(val);
                           this.circles.push(val.name)
                         }) 
-                        console.log('list of rooms', this.circles)
+                        console.log('list of Circles', this.circles)
                         }
                       )
   }//end getTopics

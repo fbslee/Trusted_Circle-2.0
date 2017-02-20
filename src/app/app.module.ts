@@ -29,6 +29,7 @@ import { Ng2ParallaxScrollModule } from '../../node_modules/ng2-parallax-scroll/
 import { CirclesComponent } from './circles/circles.component';
 import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
+import { TopicsService } from './services/topics.service';
 
 import { FooterComponent } from './footer/footer.component';
 
@@ -76,6 +77,7 @@ import { PollComponent } from './poll/poll.component';
     ])
   ],
   providers: [
+    TopicsService,
     ChatService,
     CirclesService,
     AuthGuard,
