@@ -101,29 +101,25 @@ Please Log In to Chat
 
 
 
-      <div *ngFor="let message of messages; let item = index">
+                <div *ngFor="let message of messages; let item = index">
 
-      <!--<div class="col-lg-4">-->
-      <div class="panel panel-default">
-      <div class="panel-heading">User: {{message.username}}</div>
-      <div class="panel-body">
-          <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">
-          <!--{{message.username}}-->
-          </a></strong>Message: {{message.text}}
-          <strong id="{{item}}"> Index {{item}} </strong>
-      </div>
-      </div>
-        </div>
+                <!--<div class="col-lg-4">-->
+                <div class="panel panel-default">
+                <div class="panel-heading">User: {{message.username}}</div>
+                <div class="panel-body">
+                    <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">
+                    <!--{{message.username}}-->
+                    </a></strong>Message: {{message.text}}
+                    <strong id="{{item}}"> Index {{item}} </strong>
+               </div>
+               </div>
+               </div>
+    </div>     <!--panel body close-->
+    </div>     <!--"panel panel-info"-->
 
 
 
-
-       
-    </div>
-
-</div>
-
-</div>
+</div> <!-- Row Close -->
 
 
       <div class="panel panel-default">
