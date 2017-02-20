@@ -36,7 +36,8 @@ export class CirclesComponent implements OnInit {
                       .subscribe( (data) => {
                         console.log("WHAT AM I???", data)
                         data.forEach((val)=>{
-                          this.circles.push(val)
+                          console.log(val);
+                          this.circles.push(val.body)
                         }) 
                         console.log('list of rooms', this.circles)
                         }
