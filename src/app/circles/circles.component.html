@@ -5,7 +5,9 @@
 <ul>
       <li *ngFor="let circle of circles" (click)="clicked(circle)" >
 
-        <div>{{ circle }}</div>
+        <div>
+          <strong (click)="circleClicked(circle)" [routerLink]="['/topics']" >{{ circle }}</strong>
+          </div>
       </li>
 </ul>
 
