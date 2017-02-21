@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CirclesService } from '../services/circles.service';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { NgSemanticModule } from "ng-semantic";
 @Component({
   selector: 'app-circles',
   templateUrl: './circles.component.html',

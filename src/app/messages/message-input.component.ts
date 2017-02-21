@@ -36,7 +36,8 @@ export class MessageInputComponent {
     constructor(private messageService: MessageService) {}
 
     onSubmit(form: NgForm) {
-        const message = new Message(form.value.content, sessionStorage.getItem('username'));
+        let message = new Message(form.value.content, sessionStorage.getItem('username'));
+        console.log('this is your message', message)
         this.messageService.addMessage(message);
         form.resetForm();
     }
