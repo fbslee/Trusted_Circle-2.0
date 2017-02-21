@@ -108,7 +108,7 @@ import { ResultsComponent } from './results/results.component';
     LoginService,
     AlertService,
     MessageService,
-    PollService
+    PollService,
     DataService
     ],
   bootstrap: [AppComponent]
