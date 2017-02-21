@@ -13,8 +13,8 @@ export class PollComponent implements OnInit {
   constructor(private _PollService: PollService) { }
 
 
-  Yes(){
-    this._PollService.sendPoll()
+  yes(){
+    this._PollService.yes()
   }
 
   ngOnInit() {
