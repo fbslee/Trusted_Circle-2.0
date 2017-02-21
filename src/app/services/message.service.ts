@@ -27,7 +27,6 @@ export class MessageService {
                 return message;
             })
             .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
-
     }
 
 
