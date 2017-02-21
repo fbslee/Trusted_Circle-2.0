@@ -117,6 +117,7 @@ router.post('/topics', (req, res) => {
 
 router.post('/poll', (req,res) => {
     console.log('COME OOOOOOOON /poll post is being hit in the backend')
+    res.send('post backend reached')
 })  
 
 // router.post('/addsongtotrain', controller.song.post);
