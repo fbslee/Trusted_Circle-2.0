@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { MessageComponent } from './messages/message.component';
+import { MessageService } from './services/message.service';
 import { MessageInputComponent } from './messages/message-input.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageListComponent } from './messages/message-list.component';
@@ -38,7 +39,6 @@ import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
-import { NgSemanticModule } from "ng-semantic";
 import { AlertComponent } from './alert/alert.component';
 
 
@@ -66,7 +66,6 @@ import { AlertComponent } from './alert/alert.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgSemanticModule,
     NgbModule.forRoot(),
     ModalModule.forRoot(),
     BootstrapModalModule,
@@ -102,7 +101,8 @@ import { AlertComponent } from './alert/alert.component';
     AuthService,
     SignupService,
     LoginService,
-    AlertService
+    AlertService,
+    MessageService
     ],
   bootstrap: [AppComponent]
 })
