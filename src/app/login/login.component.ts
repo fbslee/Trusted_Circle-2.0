@@ -56,6 +56,8 @@ export class LoginComponent {
         console.log('res from login is: ', res);
         console.log('session username is:', sessionStorage.getItem('username'))
         console.log('res.status from login is: ', res.status);
+        sessionStorage.setItem('userId', res.json().id)
+        console.log('user id ', sessionStorage.getItem('userId'))
         this.authService.isLoggedIn = true;
         this.alertService.clear();
         this.router.navigate(['']);
