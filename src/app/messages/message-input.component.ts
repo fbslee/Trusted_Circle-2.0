@@ -20,10 +20,8 @@ import { MessageService } from '../services/message.service'
                     name="content"
                     required>
         </div>
-        <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-primary" type="submit">Post as Username</button>
-                <button class="btn btn-default" type="submit">Post as Anonymous</button>
-
+        <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-default" type="submit">Post as Username</button>
     </form>
 </div>
   `
@@ -36,8 +34,23 @@ export class MessageInputComponent {
     constructor(private messageService: MessageService) {}
 
     onSubmit(form: NgForm) {
-        const message = new Message(form.value.content, sessionStorage.getItem('username'));
-        this.messageService.addMessage(message);
+        if(this.message) {
+            // Edit
+            this.message.body = form.value.content;
+            this.messageService.updateMessage(this.message)
+            .subscribe(
+                result => console.log(result)
+            );
+            this.message = null;
+        } else {
+            // Create
+            const message = new Message(form.value.content, 'username');
+            this.messageService.addMessage(message)
+                .subscribe(
+                    data => console.log(data),
+                    error => console.error(error)
+            );
+        }
         form.resetForm();
     }
 

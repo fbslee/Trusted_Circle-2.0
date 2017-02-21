@@ -12,6 +12,7 @@ const User = require('../models/users.model');
 const Topic = require('../models/topics.model');
 const Circle = require('../models/circles.model');
 const User_Circles = require('../models/user_circle.model');
+const Message = require('../models/messages.model');
 const User_Topics = require('../models/user_topic.model');
 
 router.get('/test', function(req,res) {
@@ -81,6 +82,27 @@ router.get('/topics', (req, res) => {
   
 
 });
+router.get('/messages', (req, res) => {
+    Message.findAll().then( (val) => {
+            res.send(val) 
+    })
+  });
+
+router.post('/messages', (req, res) => {
+    var body = req.body.body;
+    var username = req.body.username
+    console.log('this is data', req.body)
+    let newMessage = {
+        body: body,
+        username: username
+    }
+    Message.create(newMessage).then(function (newMessage) {
+        res.status(200).json(newMessage);
+      })
+      .catch(function (error){
+        res.status(500).json(error);
+      });
+  })
 
 router.post('/topics', (req, res) => {
     console.log('/topics posting!!! from backend')
@@ -118,7 +140,6 @@ router.post('/login', (req, res, next) => {
 
 });
 
-// router.post('/messages', controller.messages.post);
 
 
 module.exports = router;

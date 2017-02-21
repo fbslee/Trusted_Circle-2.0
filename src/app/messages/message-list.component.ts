@@ -8,7 +8,7 @@ import { MessageService } from '../services/message.service'
         <div class="col-md-8 col-md-offset-2">
             <app-message
                    [message]="message"
-                   (editClicked)="message.content = $event"
+                   (editClicked)="message.body = $event"
                     *ngFor="let message of messages"></app-message>
         </div>
     `
@@ -19,6 +19,6 @@ export class MessageListComponent implements OnInit {
     constructor(private messageService: MessageService) {}
 
     ngOnInit() {
-        this.messages = this.messageService.getMessages();
+        // this.messages = this.messageService.getMessages();
     }
 }
