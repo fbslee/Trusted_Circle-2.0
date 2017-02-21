@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
-  suggestedMember: string = sessionStorage.getItem('suggestedUsername')
-  circle: string = sessionStorage.getItem('circle')
+  suggestedMember: string = 'Richard'
+  circle: string = 'Team Passive'
   constructor() { }
 
   ngOnInit() {

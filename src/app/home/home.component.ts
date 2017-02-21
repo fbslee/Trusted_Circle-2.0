@@ -1,6 +1,8 @@
 import { Component, OnInit, Directive,  } from '@angular/core';
 import { Parallax, ParallaxConfig  } from '../parallax.directive';
+import { NgSemanticModule } from "ng-semantic";
 
+declare var $:any;
 
 @Component({
   selector: 'app-home',
