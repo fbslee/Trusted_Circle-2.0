@@ -88,9 +88,12 @@ router.post('/topics', (req, res) => {
     Topic.findAll().then( (val) => {
             res.send(val) 
     })
-  
 
 });
+
+router.post('/poll', (req,res) => {
+    console.log('COME OOOOOOOON /poll post is being hit in the backend')
+})  
 
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);

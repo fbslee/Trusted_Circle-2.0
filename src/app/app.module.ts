@@ -36,9 +36,11 @@ import { ModalModule } from 'angular2-modal';
 
 import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
+import { PollService } from './services/poll.service';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { AlertComponent } from './alert/alert.component';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { AlertComponent } from './alert/alert.component';
     FooterComponent,
     Parallax,
     PollComponent,
-    AlertComponent
+    AlertComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +91,8 @@ import { AlertComponent } from './alert/alert.component';
       // , canActivate: [AuthGuard] 
       }, 
       { path: 'topics', component: TopicsComponent },
-      { path: 'poll', component: PollComponent }
+      { path: 'poll', component: PollComponent },
+      { path: 'results', component: ResultsComponent }
     ]),
     MaterialModule.forRoot()
   ],
@@ -100,7 +104,8 @@ import { AlertComponent } from './alert/alert.component';
     AuthService,
     SignupService,
     LoginService,
-    AlertService
+    AlertService,
+    PollService
     ],
   bootstrap: [AppComponent]
 })
