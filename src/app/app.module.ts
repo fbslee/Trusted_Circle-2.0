@@ -44,6 +44,7 @@ import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { AlertComponent } from './alert/alert.component';
 import { ResultsComponent } from './results/results.component';
 
+import { DavidDataService } from './services/david-data.service';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { ResultsComponent } from './results/results.component';
     AlertService,
     MessageService,
     PollService,
-    DataService
+    DataService,
+    DavidDataService
     ],
   bootstrap: [AppComponent]
 })
