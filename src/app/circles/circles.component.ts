@@ -10,7 +10,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 export class CirclesComponent implements OnInit {
 
 
-  username: string = sessionStorage.getItem('username');
+  username: string = localStorage.getItem('username');
   newCircle: string;
   circlesUser: any = [];
   finalComparedCircles: any = [];
@@ -60,13 +60,13 @@ export class CirclesComponent implements OnInit {
                                                 for(var prop of this.circles) {
                                                   // console.log(prop, 'this is PROP!!~~~~~')
                                                   console.log(props.userId);
-                                                  if(sessionStorage.getItem('userId') == props.userId) {
+                                                  if(localStorage.getItem('userID') == props.userId) {
                                                   console.log('should be equal to 1:', props.userId, props)
                                                       if(props["circleId"] === prop["id"]) {
                                                         this.finalComparedCircles.push(prop["name"]);
                                                       }
                                                   }
-                                                  // if(props.userId === sessionStorage.getItem('userId') 
+                                                  // if(props.userId === localStorage.getItem('userID') 
                                                   // && prop["id"] === props.circleId
                                                   // && this.circles["id"] === this.circlesUser["circleId"] 
                                                   // ) {
@@ -74,7 +74,7 @@ export class CirclesComponent implements OnInit {
                                                   //   this.finalComparedCircles.push(prop["name"])
                                                   // }
                                                     // if ( this.circlesUser[props] === "circleId" && this.circles[prop] === "id" &&
-                                                    //     sessionStorage.getItem('userId') === this.circles[prop] && sessionStorage.getItem('userId') === this.circlesUser[props]) {
+                                                    //     localStorage.getItem('userID') === this.circles[prop] && sessionStorage.getItem('userId') === this.circlesUser[props]) {
                                                     //     console.log('it showed here!');
                                                     //     this.finalComparedCircles.push(this.circles["name"]);
                                                     // }

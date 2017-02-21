@@ -48,7 +48,6 @@ export class TopicsComponent implements OnInit {
                                 .subscribe( (data) => {
                                   console.log("WHAT AM I???", data)
                                   data.forEach((val)=>{
-                                    console.log(val, 'adbdababdababdadab');
                                     if(val.body === topicName){
                                     this.topicId = val.id; 
                                     console.log(data1, 'data from the getUSERTOPICS');

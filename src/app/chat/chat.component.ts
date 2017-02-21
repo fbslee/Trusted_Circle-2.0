@@ -15,7 +15,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 export class ChatComponent implements OnInit, OnDestroy {
    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-  username: any = sessionStorage.getItem('username');
+  username: any = localStorage.getItem('username');
 
   messages: any = [];
   message: any;
