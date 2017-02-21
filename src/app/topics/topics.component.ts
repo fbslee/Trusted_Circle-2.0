@@ -13,6 +13,8 @@ export class TopicsComponent implements OnInit {
   allCircles : any = [];
   userInfo: {};
   filteredItems: {};
+
+  topicId: any;
   // topics: any = [{user: 'Felipe', body: "Why don't we have president's day off?"}, {user: 'David', body: "Where is Glenn?"}, {user:'Richard',body: "Why does my room smell so bad?"}]
   // users: any = ['David', 'Richard', 'Gabe', 'Kan', 'Ricky']
   
@@ -37,8 +39,57 @@ export class TopicsComponent implements OnInit {
 
   topicClicked(topicName) {
     console.log('this is the topic!', topicName)
+    //GET TOPICS_USERS
+    this._TopicsService.getUsersTopics()
+                      .subscribe( (data1) => {
+                        console.log("Where is this data man", data1)
+                                //GET TOPICS
+                                this._TopicsService.getTopics()
+                                .subscribe( (data) => {
+                                  console.log("WHAT AM I???", data)
+                                  data.forEach((val)=>{
+                                    console.log(val, 'adbdababdababdadab');
+                                    if(val.body === topicName){
+                                    this.topicId = val.id; 
+                                    console.log(data1, 'data from the getUSERTOPICS');
+                                    console.log(this.topicId,'THIS IS TOPIC ID!');
+                                    
+                                        //GET USERS
+                                        this._TopicsService.getUsers()
+                                        .subscribe( (data3) => {
+                                          console.log("Where is this data man of GET USERS", data3)
+                                          for(var prop1 of data1) {
+                                            if(prop1.status === "original poster" && this.topicId === prop1.topicId) {
+                                              for(var prop3 of data3) {
+                                                console.log('proP333333', prop3)
+                                                if(prop3.id === prop1.userId) {
+                                                  console.log(prop3, prop1);
+                                                  sessionStorage.setItem('topicOwner', prop3.username);
+                                                  sessionStorage.setItem('topicUser', prop3.username);
+                                                  
+                                                }
+                                              }
+                                            
+
+                                              console.log( sessionStorage.getItem('topicOwner') );
+                                            } 
+                                          }
+
+
+
+                                        })
+
+  
+                                    }
+                                  }) 
+                                  }
+                                )//end getTopics function
+
+                      })
+
+
     sessionStorage.setItem('topicBody', topicName)
-    sessionStorage.setItem('topicUser', "toBeFixed")
+    sessionStorage.setItem('topicUser', sessionStorage.getItem('topicOwner'));
   }
 
   filterItem(value){
@@ -50,8 +101,8 @@ export class TopicsComponent implements OnInit {
 
   printuser(user) {
     console.log(user)
-    sessionStorage.setItem('username', user.username)
-    sessionStorage.setItem('userID', user.id)
+    sessionStorage.setItem('suggestedUsername', user.username)
+    sessionStorage.setItem('suggestedUserId', user.id)
   }
 
   getUsers() {

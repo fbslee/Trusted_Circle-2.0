@@ -7,7 +7,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import 'hammerjs';
-import 'underscore';
+// import 'underscore';
  
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -37,9 +37,11 @@ import { ModalModule } from 'angular2-modal';
 
 import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
+import { PollService } from './services/poll.service';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { AlertComponent } from './alert/alert.component';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import { AlertComponent } from './alert/alert.component';
     FooterComponent,
     Parallax,
     PollComponent,
-    AlertComponent
+    AlertComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,8 @@ import { AlertComponent } from './alert/alert.component';
       // , canActivate: [AuthGuard] 
       }, 
       { path: 'topics', component: TopicsComponent },
-      { path: 'poll', component: PollComponent }
+      { path: 'poll', component: PollComponent },
+      { path: 'results', component: ResultsComponent }
     ]),
     MaterialModule.forRoot()
   ],
@@ -102,7 +106,8 @@ import { AlertComponent } from './alert/alert.component';
     SignupService,
     LoginService,
     AlertService,
-    MessageService
+    MessageService,
+    PollService
     ],
   bootstrap: [AppComponent]
 })

@@ -13,6 +13,7 @@ const Topic = require('../models/topics.model');
 const Circle = require('../models/circles.model');
 const User_Circles = require('../models/user_circle.model');
 const Message = require('../models/messages.model');
+const User_Topics = require('../models/user_topic.model');
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
@@ -39,8 +40,15 @@ router.get('/users', (req, res) => {
 })
 
 router.get('/users_circles', (req, res) => {
-    console.log('getting users');
+    console.log('getting users circles');
     User_Circles.findAll().then( (data) => {
+        res.send(data)
+    })
+})
+
+router.get('/users_topics', (req, res) => {
+    console.log('getting users topics');
+    User_Topics.findAll().then( (data) => {
         res.send(data)
     })
 })
@@ -102,9 +110,12 @@ router.post('/topics', (req, res) => {
     Topic.findAll().then( (val) => {
             res.send(val) 
     })
-  
 
 });
+
+router.post('/poll', (req,res) => {
+    console.log('COME OOOOOOOON /poll post is being hit in the backend')
+})  
 
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);

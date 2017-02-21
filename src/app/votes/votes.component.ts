@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VotesComponent implements OnInit {
 
-  suggestor: string = 'Felipe';
-  suggestedMember: string = 'David';
-  circle: string = 'Team Passive';
+  suggestor: string = sessionStorage.getItem('username');
+  suggestedMember: string = sessionStorage.getItem('suggestedUsername');
+  circle: string = sessionStorage.getItem('circle');
   
   constructor() { }
 
