@@ -105,11 +105,7 @@ router.post('/messages', (req, res) => {
       });
   })
 
-router.post('/newmessage', (req, res) => {
-    console.log('this is data' , req)
 
-    // Message.create()
-})
 
 router.post('/topics', (req, res) => {
     console.log('/topics posting!!! from backend')
