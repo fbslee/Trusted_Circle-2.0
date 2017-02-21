@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Overlay } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,27 @@ import { Modal } from 'angular2-modal/plugins/bootstrap';
 })
 export class HeaderComponent implements OnInit {
 
+  private status = localStorage.getItem('username');
+  private n = 1;
+
   constructor(overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal) {
     overlay.defaultViewContainer = vcRef;
   }
 
   ngOnInit() {
-    
+    // console.log(localStorage.getItem('username')) {
+    //   this.status=true;
+    // }
+  }
+
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.status = null;
+  }
+
+  flag() {
+    this.status = 'true';
   }
 
   openModal() {

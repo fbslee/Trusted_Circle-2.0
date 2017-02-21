@@ -33,6 +33,7 @@ import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicsService } from './services/topics.service';
 import { AlertService } from './services/alert.service';
+import { DataService } from './services/data.service';
 import { ModalModule } from 'angular2-modal';
 
 import { FooterComponent } from './footer/footer.component';
@@ -74,22 +75,22 @@ import { ResultsComponent } from './results/results.component';
     BootstrapModalModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent
-        // ,canActivate: [AuthGuard]
+        ,canActivate: [AuthGuard]
       },
       { path: 'home', component: HomeComponent
-      // ,canActivate: [AuthGuard] 
+      ,canActivate: [AuthGuard] 
       },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'chat', component: ChatComponent 
-      // , canActivate: [AuthGuard] 
+      , canActivate: [AuthGuard] 
       },
       { path: 'messages', component: MessagesComponent
-      // , canActivate: [AuthGuard] 
+      , canActivate: [AuthGuard] 
       },
       { path: 'votes', component: VotesComponent }, 
       { path: 'circles', component: CirclesComponent
-      // , canActivate: [AuthGuard] 
+      , canActivate: [AuthGuard] 
       }, 
       { path: 'topics', component: TopicsComponent },
       { path: 'poll', component: PollComponent },
@@ -108,6 +109,7 @@ import { ResultsComponent } from './results/results.component';
     AlertService,
     MessageService,
     PollService
+    DataService
     ],
   bootstrap: [AppComponent]
 })

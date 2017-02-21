@@ -4,6 +4,7 @@ import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { AuthService} from '../services/auth.service';
 import { AlertService } from '../services/alert.service';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -28,18 +29,15 @@ export class LoginComponent {
     
     this.loginService.login(this.user.username, this.user.password)
       .subscribe(res => {
-        sessionStorage.setItem('username', this.user.username);
-
-
-        
+        localStorage.setItem('username', this.user.username);
 
         this.loginService.getUserId()
                                 .subscribe( (data) => {
                                   console.log("WHAT AM I???", data)
                                   data.forEach((val)=>{
                                     console.log('this is val:', val)
-                                    if(val["username"] === sessionStorage.getItem('username') ) {
-                                      sessionStorage.setItem('userID', val["id"])
+                                    if(val["username"] === localStorage.getItem('username') ) {
+                                      localStorage.setItem('userID', val["id"])
                                     }
 
                                   }) 
@@ -54,7 +52,7 @@ export class LoginComponent {
         this.user.password = '';
 
         console.log('res from login is: ', res);
-        console.log('session username is:', sessionStorage.getItem('username'))
+        console.log('session username is:', localStorage.getItem('username'))
         console.log('res.status from login is: ', res.status);
         sessionStorage.setItem('userId', res.json().id)
         console.log('user id ', sessionStorage.getItem('userId'))
