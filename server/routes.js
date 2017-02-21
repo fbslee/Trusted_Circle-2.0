@@ -14,7 +14,6 @@ const Circle = require('../models/circles.model');
 const User_Circles = require('../models/user_circle.model');
 const Message = require('../models/messages.model');
 const User_Topics = require('../models/user_topic.model');
-const Message = require('../models/messages.model');
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
