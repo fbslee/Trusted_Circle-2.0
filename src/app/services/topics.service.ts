@@ -38,6 +38,13 @@ export class TopicsService {
                     .map( ( res:Response ) => res.json() )
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
   }
+  
+  getUsersTopics(): Observable<any> {
+    console.log('INSIDE getUSersTopics in service')
+    return this.http.get(this.url1+'/api/users_topics')
+                    .map( ( res:Response ) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+  }
 
   getCircles(): Observable<any> {
     console.log('INSIDE getCircleId in service topics')
