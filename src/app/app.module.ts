@@ -38,7 +38,6 @@ import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
-import { NgSemanticModule } from "ng-semantic";
 import { AlertComponent } from './alert/alert.component';
 
 
@@ -66,7 +65,6 @@ import { AlertComponent } from './alert/alert.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgSemanticModule,
     NgbModule.forRoot(),
     ModalModule.forRoot(),
     BootstrapModalModule,
