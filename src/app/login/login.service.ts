@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 export class LoginService implements OnInit {
 
   private flag = false;
+  private dummyData: any;
+
 
   constructor(private _http: Http) { }
 
@@ -20,5 +22,11 @@ export class LoginService implements OnInit {
     return this._http.get('/api/users')
                     .map( ( res:Response ) => res.json() )
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+  }
+
+  storeDummyData () {
+    console.log(this.dummyData, 'before');
+    this.dummyData = 123;
+    console.log(this.dummyData, 'after');
   }
 }

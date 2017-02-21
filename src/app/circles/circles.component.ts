@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CirclesService } from '../services/circles.service';
 import { HttpModule, JsonpModule } from '@angular/http';
 
+import { DavidDataService } from '../services/david-data.service';
+
 @Component({
   selector: 'app-circles',
   templateUrl: './circles.component.html',
@@ -16,79 +18,40 @@ export class CirclesComponent implements OnInit {
   finalComparedCircles: any = [];
   circles: any = [];
   //['Hack Reactor', 'Movies', 'Soccer'];
-  clicked(circle){
-    sessionStorage.setItem('circle', circle)
-  }
-  createCircle(){
-    if(this.circles.indexOf(this.newCircle) === -1){
-      this.circles.push(this.newCircle);
-    }
-    this.newCircle = null;
-  }
-  constructor(private _CirclesService: CirclesService) { }
+
+  constructor(private _CirclesService: CirclesService,
+              private DavidDataService: DavidDataService
+              ) { }
 
   ngOnInit() {
     sessionStorage.removeItem('circle')
     // this.getTopics();
     this.getCircles();
   }
-  getCircles () { //this also checks if the user is part of the circle
-    // console.log('inside getCircles function inside CirclesComponent')
-    this._CirclesService.getCircles()
-                      .subscribe( (data) => {
-                        console.log("WHAT AM I???", data)
-                        data.forEach((val)=>{
-                          // console.log(val, ' this is val from getCircles from _CirclesService');
-                          this.circles.push(val);
-                        }) 
-                        //CHECK RECIEVED DATA
-                        // console.log(this.circles, 'this is the circles DATA')
-                                            
-                                            this._CirclesService.getUserCircles()
-                                            .subscribe( (data1) => {
-                                              // console.log("WHAT AM I getUserCircles???", data1)
-                                              data1.forEach((val)=>{
-                                                // console.log(val, 'from the getCircles');
-                                                this.circlesUser.push(val);
-                                              }) 
 
-                                              //CHECKED RECIEVED DATA
-                                              // console.log('list of userCircles', this.circlesUser, this.circles)
+  clicked(circle){
+    console.log('circle clicked')
+  }
+  createCircle(){
 
-                                              for(var props of this.circlesUser ) {
-                                                // console.log(props, 'THIS IS PROPS')
-                                                for(var prop of this.circles) {
-                                                  // console.log(prop, 'this is PROP!!~~~~~')
-                                                  console.log(props.userId);
-                                                  if(localStorage.getItem('userID') == props.userId) {
-                                                  console.log('should be equal to 1:', props.userId, props)
-                                                      if(props["circleId"] === prop["id"]) {
-                                                        this.finalComparedCircles.push(prop["name"]);
-                                                      }
-                                                  }
-                                                  // if(props.userId === localStorage.getItem('userID') 
-                                                  // && prop["id"] === props.circleId
-                                                  // && this.circles["id"] === this.circlesUser["circleId"] 
-                                                  // ) {
-                                                  //   console.log('FOUND ONE!!!')
-                                                  //   this.finalComparedCircles.push(prop["name"])
-                                                  // }
-                                                    // if ( this.circlesUser[props] === "circleId" && this.circles[prop] === "id" &&
-                                                    //     localStorage.getItem('userID') === this.circles[prop] && sessionStorage.getItem('userId') === this.circlesUser[props]) {
-                                                    //     console.log('it showed here!');
-                                                    //     this.finalComparedCircles.push(this.circles["name"]);
-                                                    // }
-                                                }
-                                              }
+  }
 
+  getCircles () { 
+    console.log('users to circle', this.DavidDataService.allUserCircles);
 
-
-                                              })
-
-                        })
-    
- 
-  }//end getTopics
+    console.log('data being transferred', this.DavidDataService.allCircles);
+    var allCirclesArray = this.DavidDataService.allCircles;
+    for(var circleObj of allCirclesArray) {
+      //example circleObj = 
+      // {id: 2, 
+      //   name: "Test Circle 2", 
+      //   totalMembers: 1, 
+      //   createdAt: "2017-02-20T23:08:21.560Z", 
+      //   updatedAt: "2017-02-20T23:08:21.560Z"
+      // }
+      console.log(circleObj);
+    }
+  }
 
   getTopics() {
     // console.log('inside getTopics function inside CirclesComponent')
@@ -106,9 +69,6 @@ export class CirclesComponent implements OnInit {
 
   circleClicked(circleName) {
 
-    console.log('this is the Circle Name and clicked!', circleName,
-     'Setting the Circle Session');
-     sessionStorage.setItem('circle', circleName);
   }
 
 }

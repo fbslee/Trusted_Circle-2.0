@@ -6,6 +6,7 @@ import { AuthService} from '../services/auth.service';
 import { AlertService } from '../services/alert.service';
 import { DataService } from '../services/data.service';
 
+import { DavidDataService } from '../services/david-data.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,63 @@ export class LoginComponent {
   constructor(private loginService: LoginService, 
               private router: Router, 
               private authService: AuthService,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private DavidDataService: DavidDataService
+              ) { }
 
   ngOnInit() {
+    this.getAllUsers();
+    this.getAllTopics();
+    this.getAllUsersTopics();
+    this.getAllCircles();
+    this.getAllUsersCircles();
   }
+
+  getAllUsers() {
+    this.DavidDataService.getUsers()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allUsers = data;
+                        console.log(this.DavidDataService.allUsers, 'who are the users?');
+                      })
+  }
+
+  getAllTopics() {
+    this.DavidDataService.getTopics()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allTopics = data;
+                        console.log(this.DavidDataService.allTopics, 'what are the topics');
+                      })
+  }
+
+  getAllUsersTopics() {
+    this.DavidDataService.getUsersTopics()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allUserTopics = data;
+                        console.log(this.DavidDataService.allUserTopics, 'what are the User-Topics');
+                      })
+  }
+  
+  getAllUsersCircles() {
+    this.DavidDataService.getUsersCircles()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allUserCircles = data;
+                        console.log(this.DavidDataService.allUserCircles, 'what are the User-Topics');
+                      })
+  }
+
+  getAllCircles() {
+    this.DavidDataService.getCircles()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allCircles = data;
+                        console.log(this.DavidDataService.allCircles, 'what are the circles?');
+                      })
+  }
+
 
   submitLogin = (value) => {
     console.log(value);
@@ -33,9 +87,9 @@ export class LoginComponent {
 
         this.loginService.getUserId()
                                 .subscribe( (data) => {
-                                  console.log("WHAT AM I???", data)
+                                  // console.log("WHAT AM I???", data)
                                   data.forEach((val)=>{
-                                    console.log('this is val:', val)
+                                    // console.log('this is val:', val)
                                     if(val["username"] === localStorage.getItem('username') ) {
                                       localStorage.setItem('userID', val["id"])
                                     }
@@ -51,16 +105,16 @@ export class LoginComponent {
         this.user.username = '';
         this.user.password = '';
 
-        console.log('res from login is: ', res);
-        console.log('session username is:', localStorage.getItem('username'))
-        console.log('res.status from login is: ', res.status);
+        // console.log('res from login is: ', res);
+        // console.log('session username is:', localStorage.getItem('username'))
+        // console.log('res.status from login is: ', res.status);
         sessionStorage.setItem('userId', res.json().id)
-        console.log('user id ', sessionStorage.getItem('userId'))
+        // console.log('user id ', sessionStorage.getItem('userId'))
         this.authService.isLoggedIn = true;
         this.alertService.clear();
         this.router.navigate(['']);
       }, err => {
-        console.log('err', err)
+        // console.log('err', err)
         err = 'Bad Login'
         this.alertService.error(err);
       });
