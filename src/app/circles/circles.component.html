@@ -3,7 +3,7 @@
         <!-- this was inside div for circles [routerLink]="['/topics']"-->
 
 <ul>
-      <li *ngFor="let circle of circles" (click)="clicked(circle)" >
+      <li *ngFor="let circle of finalComparedCircles" (click)="clicked(circle)" >
 
         <div>
           <strong (click)="circleClicked(circle)" [routerLink]="['/topics']" >{{ circle }}</strong>
