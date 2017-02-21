@@ -39,7 +39,7 @@ export class LoginComponent {
                                   data.forEach((val)=>{
                                     console.log('this is val:', val)
                                     if(val["username"] === sessionStorage.getItem('username') ) {
-                                      sessionStorage.setItem('userID', val["id"])
+                                      sessionStorage.setItem('userId', val["id"])
                                     }
 
                                   }) 
