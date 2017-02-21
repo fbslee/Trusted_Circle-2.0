@@ -7,7 +7,7 @@ import { TopicsService } from '../services/topics.service';
   styleUrls: ['./topics.component.scss']
 })
 export class TopicsComponent implements OnInit {
-  newTopic: any = {user: sessionStorage.getItem('username')};
+  newTopic: any = {user: sessionStorage.getItem('currentUsername')};
   circle: string = sessionStorage.getItem('circle');
   topics: any = [];
   allCircles : any = [];
@@ -50,8 +50,8 @@ export class TopicsComponent implements OnInit {
 
   printuser(user) {
     console.log(user)
-    sessionStorage.setItem('username', user.username)
-    sessionStorage.setItem('userID', user.id)
+    sessionStorage.setItem('suggestedUsername', user.username)
+    sessionStorage.setItem('suggestedUserid', user.id)
   }
 
   getUsers() {

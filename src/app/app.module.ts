@@ -7,7 +7,6 @@ import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import 'hammerjs';
-import 'underscore';
  
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -38,7 +37,6 @@ import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
-import { NgSemanticModule } from "ng-semantic";
 import { AlertComponent } from './alert/alert.component';
 
 
@@ -66,7 +64,6 @@ import { AlertComponent } from './alert/alert.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgSemanticModule,
     NgbModule.forRoot(),
     ModalModule.forRoot(),
     BootstrapModalModule,

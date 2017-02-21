@@ -28,7 +28,6 @@ export class LoginComponent {
     
     this.loginService.login(this.user.username, this.user.password)
       .subscribe(res => {
-        sessionStorage.setItem('username', this.user.username);
 
 
         
@@ -52,10 +51,10 @@ export class LoginComponent {
 
         this.user.username = '';
         this.user.password = '';
-
-        console.log('res from login is: ', res);
-        console.log('session username is:', sessionStorage.getItem('username'))
-        console.log('res.status from login is: ', res.status);
+        sessionStorage.setItem('currentUsername', res.json().username);
+        sessionStorage.setItem('currentUserid', res.json().id)
+        console.log('session username is:', sessionStorage.getItem('currentUsername'))
+        console.log('session userid is:', sessionStorage.getItem('currentUserid'));
         this.authService.isLoggedIn = true;
         this.alertService.clear();
         this.router.navigate(['']);
