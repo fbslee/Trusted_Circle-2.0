@@ -7,7 +7,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import 'hammerjs';
-import 'underscore';
+// import 'underscore';
  
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
