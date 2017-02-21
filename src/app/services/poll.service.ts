@@ -7,20 +7,12 @@ export class PollService {
 
   constructor (private _http: Http) {}
 
-  private url1 = "http://localhost:4200";
+  private url = "http://localhost:4200";
 
-  sendPoll(): Observable<any> {
+  yes() {
     console.log('INSIDE postTopics in service')
-    return this._http.post(this.url1+'/api/poll', {
-      yay: 'Yay'
+    return this._http.post(this.url+'/api/poll', {
+      test: 'Testing'
     });
   }
-
-//   getCircles(): Observable<any> {
-//     console.log('INSIDE getCircleId in service topics')
-//     return this.http.get(this.url1+'/api/circles')
-//                     .map( ( res:Response ) => res.json() )
-//                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
-//   }
-
 }

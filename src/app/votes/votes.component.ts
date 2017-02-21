@@ -13,6 +13,14 @@ export class VotesComponent implements OnInit {
   
   constructor() { }
 
+  accept(){
+    console.log('accepted')
+  }
+
+  deny(){
+    console.log('denied')
+  }
+
   ngOnInit() {
   }
 
