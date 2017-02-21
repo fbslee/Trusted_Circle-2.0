@@ -50,8 +50,8 @@ export class TopicsComponent implements OnInit {
 
   printuser(user) {
     console.log(user)
-    sessionStorage.setItem('username', user.username)
-    sessionStorage.setItem('userID', user.id)
+    sessionStorage.setItem('suggestedUsername', user.username)
+    sessionStorage.setItem('suggestedUserId', user.id)
   }
 
   getUsers() {
