@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http, JsonpModule, Response } from '@angular/http';
+import { Http, JsonpModule, Response, Headers } from '@angular/http';
 
 @Injectable()
 export class PollService {
@@ -9,10 +9,10 @@ export class PollService {
 
   private url = "http://localhost:4200";
 
-  yes() {
-    console.log('INSIDE postTopics in service')
-    return this._http.post(this.url+'/api/poll', {
+  yes(): Observable<any> {
+    console.log('INSIDE postpoll in service')
+    return this._http.post('http://localhost:4200/api/poll', {
       test: 'Testing'
-    });
+    })
   }
 }

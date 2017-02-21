@@ -14,7 +14,7 @@ export class PollComponent implements OnInit {
 
 
   yes(){
-    this._PollService.yes()
+    this._PollService.yes().subscribe(data => console.log(data, 'dis da data'))
   }
 
   ngOnInit() {
