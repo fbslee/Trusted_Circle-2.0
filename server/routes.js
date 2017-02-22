@@ -89,6 +89,88 @@ router.get('/circles', (req, res) => {
 
 
 //ROUTE TO FIND ALL THE CIRCLES THEY BELONG TO...
+router.get('/userCircleTopic/:userId'
+    // /:circleId/:topicId'
+, (req, res) => {
+
+    var userId = req.params.userId;
+
+    console.log('/circles being hit!!! for GET from param');
+    console.log(req.params);
+
+    var returnInfo = {
+        userId: userId,
+        circlesObj: [],
+        circleId: [],
+        topicsObj: [],
+        topicId: [],
+        circlesAndTopics: []
+    };
+
+    //finds all user's status on a topicId
+
+
+
+
+    //finds all circles a user belongs to
+    User_Circles.findAll({
+    where: {
+        userId: req.params.userId
+    }
+    }).then( (User_Circles_data) => {
+        //from data we want the circle Id
+
+        for(user_circles_column of User_Circles_data) {
+            // console.log(user_circles_column.dataValues);
+            if(user_circles_column.dataValues.userId.toString() === userId.toString()) {
+                // console.log(returnInfo);
+                returnInfo["circlesObj"].push (user_circles_column.dataValues);
+                returnInfo["circleId"].push (user_circles_column.dataValues.circleId);
+            }
+        }
+
+
+    }).then( () => {
+
+        console.log(returnInfo.circleId, 'inside second then');
+
+        for(var circleIden of returnInfo.circleId) {
+            Topic.find({
+                where : {
+                    circleId: circleIden
+                }
+            })
+            .then( (val) => {
+                if(val) {
+                console.log(circleIden);
+                console.log(val.dataValues, 'this is val!!!!!');
+                returnInfo["topicsObj"].push (val.dataValues);
+                returnInfo["topicId"].push (val.dataValues.id);
+
+                res.send(returnInfo)
+                }
+            })
+        }
+
+
+        
+
+    })
+
+
+
+
+    // Circle.findAll({
+    // where: {
+    //     id: req.params.id
+    //  }
+    // }).then( (val) => {
+    //         res.send(val) 
+    // })
+  
+
+});
+
 
 
 router.get('/circles/:id', (req, res) => {
@@ -106,6 +188,38 @@ router.get('/circles/:id', (req, res) => {
   
 
 });
+
+router.get('/messages/:id', (req, res) => {
+    console.log('/messages being hit!!! for GET from param');
+    console.log(req.params);
+    console.log(req.params.id);
+    
+    Message.findAll({
+    where: {
+        id: req.params.id
+     }
+    }).then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
+router.delete('/messages/:id', (req, res) => {
+
+    console.log(req.params);
+    console.log(req.params.id);
+    Message.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then( val => {
+        console.log(val);
+        res.send('deleted amount:'+val)
+    })
+});
+
+
 
 router.get('/topics', (req, res) => {
     console.log('/topics being hit!!! for GET')
