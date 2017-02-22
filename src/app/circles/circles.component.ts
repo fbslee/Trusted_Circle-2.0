@@ -38,18 +38,23 @@ export class CirclesComponent implements OnInit {
 
   getCircles () { 
     console.log('users to circle', this.DavidDataService.allUserCircles);
-
-    console.log('data being transferred', this.DavidDataService.allCircles);
+    console.log('current user logged in', localStorage.getItem('userID'));
+    var currentUser = localStorage.getItem('userID');
+    console.log('just circles', this.DavidDataService.allCircles);
+    var allUserCirclesArray =  this.DavidDataService.allUserCircles;
     var allCirclesArray = this.DavidDataService.allCircles;
-    for(var circleObj of allCirclesArray) {
-      //example circleObj = 
-      // {id: 2, 
-      //   name: "Test Circle 2", 
-      //   totalMembers: 1, 
-      //   createdAt: "2017-02-20T23:08:21.560Z", 
-      //   updatedAt: "2017-02-20T23:08:21.560Z"
-      // }
-      console.log(circleObj);
+    for(var UserCircleObj of allUserCirclesArray) {
+      for(var circleObj of allCirclesArray) {
+        if(UserCircleObj.circleId === circleObj.id) {
+          console.log(UserCircleObj["userId"] === currentUser);
+          if(UserCircleObj["userId"].toString() === currentUser) {
+          // console.log('this user has access', UserCircleObj.userId)
+            this.finalComparedCircles.push(circleObj.name);
+            console.log(this.DavidDataService.currentUsername, 'current username')
+
+          }
+        }
+      }
     }
   }
 

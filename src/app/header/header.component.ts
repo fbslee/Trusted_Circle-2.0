@@ -3,6 +3,8 @@ import { Overlay } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
 import { DataService } from '../services/data.service';
 
+import { DavidDataService } from '../services/david-data.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,7 +15,10 @@ export class HeaderComponent implements OnInit {
   private status = localStorage.getItem('username');
   private n = 1;
 
-  constructor(overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal) {
+  constructor(overlay: Overlay, 
+  vcRef: ViewContainerRef, 
+  public modal: Modal,
+  private DavidDataService: DavidDataService) {
     overlay.defaultViewContainer = vcRef;
   }
 
@@ -21,6 +26,11 @@ export class HeaderComponent implements OnInit {
     // console.log(localStorage.getItem('username')) {
     //   this.status=true;
     // }
+    this.getAllUsers();
+    this.getAllTopics();
+    this.getAllUsersTopics();
+    this.getAllCircles();
+    this.getAllUsersCircles();
   }
 
   logout() {
@@ -50,6 +60,51 @@ export class HeaderComponent implements OnInit {
                 <li>HTML content</li>
             </ul>`)
         .open();
+  }
+
+  getAllUsers() {
+    this.DavidDataService.getUsers()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allUsers = data;
+                        console.log(this.DavidDataService.allUsers, 'who are the users?');
+                      })
+  }
+
+  getAllTopics() {
+    this.DavidDataService.getTopics()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allTopics = data;
+                        console.log(this.DavidDataService.allTopics, 'what are the topics');
+                      })
+  }
+
+  getAllUsersTopics() {
+    this.DavidDataService.getUsersTopics()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allUserTopics = data;
+                        console.log(this.DavidDataService.allUserTopics, 'what are the User-Topics');
+                      })
+  }
+  
+  getAllUsersCircles() {
+    this.DavidDataService.getUsersCircles()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allUserCircles = data;
+                        console.log(this.DavidDataService.allUserCircles, 'what are the User-Topics');
+                      })
+  }
+
+  getAllCircles() {
+    this.DavidDataService.getCircles()
+                      .subscribe( (data) => {
+                        //console.log("Where is this data man", data)
+                        this.DavidDataService.allCircles = data;
+                        console.log(this.DavidDataService.allCircles, 'what are the circles?');
+                      })
   }
 
 }

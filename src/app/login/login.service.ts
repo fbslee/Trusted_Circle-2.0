@@ -11,6 +11,10 @@ export class LoginService implements OnInit {
 
   constructor(private _http: Http) { }
 
+  ngOnInit () {
+    
+  }
+
   login(username, password) {
     return this._http.post('/api/login', {
       username: username,
@@ -24,9 +28,9 @@ export class LoginService implements OnInit {
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
   }
 
-  storeDummyData () {
-    console.log(this.dummyData, 'before');
-    this.dummyData = 123;
-    console.log(this.dummyData, 'after');
-  }
+  // storeDummyData () {
+  //   console.log(this.dummyData, 'before');
+  //   this.dummyData = 123;
+  //   console.log(this.dummyData, 'after');
+  // }
 }
