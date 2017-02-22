@@ -13,6 +13,12 @@ public allUserTopics: any;
 public allUserCircles: any;
 public allCircles: any;
 
+public currentCircle: any;
+public currentUsername: any;
+public currentUserId: any;
+public currentTopic: any; 
+
+
 
 
   constructor(private http: Http) { }
