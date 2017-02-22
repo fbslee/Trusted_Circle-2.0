@@ -9,12 +9,14 @@ import { PollService } from '../services/poll.service';
 export class PollComponent implements OnInit {
   suggestedMember: string = sessionStorage.getItem('suggestedUsername')
   circle: string = sessionStorage.getItem('circle')
+  suggestor: string = localStorage.getItem('username')
 
   constructor(private _PollService: PollService) { }
 
 
   yes(){
-    this._PollService.yes().subscribe(data => console.log(data, 'dis da data'))
+    console.log(this.suggestedMember, this.circle, this.suggestor)
+    this._PollService.yes(this.suggestedMember, this.circle, this.suggestor).subscribe(data => console.log(data, 'dis da data'))
   }
 
   ngOnInit() {
