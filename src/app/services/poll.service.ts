@@ -9,10 +9,12 @@ export class PollService {
 
   private url = "http://localhost:4200";
 
-  yes(): Observable<any> {
+  yes(suggestedUser, circle, suggestor): Observable<any> {
     console.log('INSIDE postpoll in service')
     return this._http.post('http://localhost:4200/api/poll', {
-      test: 'Testing'
+      suggestedUser:suggestedUser,
+      circle: circle,
+      suggestor: suggestor
     })
   }
 }
