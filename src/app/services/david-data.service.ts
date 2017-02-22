@@ -18,8 +18,8 @@ public currentUsername: any;
 public currentUserId: any;
 public currentTopic: any; 
 
-
-
+public currentUserCirclesBelong: any;
+public currentUserTopicBelong: any; 
 
   constructor(private http: Http) { }
 

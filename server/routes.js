@@ -39,6 +39,19 @@ router.get('/users', (req, res) => {
     })
 })
 
+router.get('/users/:username', (req, res) => {
+    console.log('getting specific user');
+    console.log(req.params.username);
+
+    User.findAll({
+    where: {
+        username: req.params.username
+     }
+    }).then( (data) => {
+        res.send(data)
+    })
+})
+
 router.get('/users_circles', (req, res) => {
     console.log('getting users circles');
     User_Circles.findAll().then( (data) => {
@@ -64,9 +77,30 @@ router.get('/roomList', (req, res) => {
 });
 
 router.get('/circles', (req, res) => {
-    console.log('/circles being hit!!! for GET')
+    console.log('/circles being hit!!! for GET');
+    console.log(req.query);
     
     Circle.findAll().then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
+
+//ROUTE TO FIND ALL THE CIRCLES THEY BELONG TO...
+
+
+router.get('/circles/:id', (req, res) => {
+    console.log('/circles being hit!!! for GET from param');
+    console.log(req.params);
+    console.log(req.params.id);
+    
+    Circle.findAll({
+    where: {
+        id: req.params.id
+     }
+    }).then( (val) => {
             res.send(val) 
     })
   
@@ -82,6 +116,24 @@ router.get('/topics', (req, res) => {
   
 
 });
+
+router.get('/topics/:id', (req, res) => {
+    console.log('/topics being hit!!! for GET from param')
+    console.log(req.params);
+    console.log(req.params.id);
+    
+    Topic.findAll({
+    where: {
+        id: req.params.id
+     }
+    }).then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
+
 router.get('/messages', (req, res) => {
     Message.findAll().then( (val) => {
             res.send(val) 
