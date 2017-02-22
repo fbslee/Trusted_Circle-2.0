@@ -45,26 +45,20 @@ var signup = {
   }
 };
 
+var poll = {
+  post: function(req, res){
+    console.log('post req body', req.body)
+    res.send('post backend reached')
+  }
+}
 
-// var favTrain = {
-//   post: (req, res) => {
-//     console.log('Serving request for ', req.method, 'where url is ', req.url);
-
-//     var userId = req.session.passport ? req.session.passport.user : req.body.user;
-//     models.favTrain(req.body.trainName, req.body.trainImg, req.body.trainId, userId)
-//       .then(success => {
-//         res.send('User successfully favorited train ' + trainName);
-//       }).catch(err => {
-//         res.status(500).send(err);
-//       });
-//   }
-// };
+var vote= {
+  get: function(req, res){
+    
+  }
+}
 
 module.exports = {
-  // findHypemSongs: hypemCtrl.findHypemSongs,
-  signup: signup
-  // train: train,
-  // tags: tags,
-  // song: song,
-  // favTrain: favTrain
+  signup: signup,
+  poll: poll
 };

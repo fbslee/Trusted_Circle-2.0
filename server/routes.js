@@ -281,10 +281,7 @@ router.post('/topics', (req, res) => {
 
 });
 
-router.post('/poll', (req,res) => {
-    console.log('post req body', req.body)
-    res.send('post backend reached')
-})  
+router.post('/poll', controller.poll.post)  
 
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);
