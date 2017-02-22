@@ -3,6 +3,21 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http, JsonpModule, Response } from '@angular/http';
 
+import 'rxjs/add/operator/toPromise';
+
+import { Circle } from './Circle';
+
+//Circle Model
+// var Circle = sequelize.define('circles', {
+//   name: Sequelize.STRING,
+//   totalMembers: Sequelize.INTEGER
+// });
+//import { Hero } from './hero';
+// export class Hero {
+//   id: number;
+//   name: string;
+// }
+
 @Injectable()
 export class CirclesService {
 
@@ -10,6 +25,10 @@ export class CirclesService {
 
   private url1 = "http://localhost:4200"; //our server
   private socket: any;
+  private heroesUrl = 'api/heroes';  // URL to web api
+
+
+
 
   // postTopics(): Observable<any> {
   //   console.log('INSIDE getTopics in service')
