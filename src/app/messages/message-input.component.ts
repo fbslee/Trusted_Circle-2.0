@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Message } from './message.model';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { MessageService } from '../services/message.service'
 
@@ -39,7 +40,7 @@ export class MessageInputComponent {
             this.message.body = form.value.content;
             this.messageService.updateMessage(this.message)
             .subscribe(
-                result => console.log(result)
+                result => console.log("here is the result", result)
             );
             this.message = null;
         } else {
@@ -47,8 +48,8 @@ export class MessageInputComponent {
             const message = new Message(form.value.content, 'username');
             this.messageService.addMessage(message)
                 .subscribe(
-                    data => console.log(data),
-                    error => console.error(error)
+                    data => console.log("succss here is the data ", data),
+                    error => console.error("error here is the error ", error)
             );
         }
         form.resetForm();
