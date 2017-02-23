@@ -26,12 +26,39 @@ export class CirclesComponent implements OnInit {
   ngOnInit() {
     sessionStorage.removeItem('circle')
     // this.getTopics();
-    this.getCircles();
+    // this.getCircles();
+    // this.getCurrentUserCircles();
+    this.setCircles();
   }
+
 
   clicked(circle){
     console.log('circle clicked')
     sessionStorage.setItem('circle',circle)
+  }
+  createCircle(){
+
+
+  setCircles() {
+    this.DavidDataService.getAllCurrentUserData(localStorage.getItem('userID'))
+            .subscribe( (data) => {
+                        var theData = data
+
+                        for (var circle of theData.circlesObj) {
+                          this.finalComparedCircles.push(circle.name);
+                        }
+          })
+  }
+
+
+
+
+
+
+
+
+  clicked(circle){
+    console.log('circle clicked')
   }
   createCircle(){
 
@@ -59,6 +86,16 @@ export class CirclesComponent implements OnInit {
     }
   }
 
+  getCurrentUserCircles() {
+    // console.log('inside getTopics function inside CirclesComponent')
+    this.DavidDataService.getCurrentUserCircles()
+                      .subscribe( (data) => {
+                        console.log(this.DavidDataService.currentUserCirclesBelong);
+                        console.log(data, 'this is data and its subscribed');
+                        }) 
+            
+  }//end getTopics
+
   getTopics() {
     // console.log('inside getTopics function inside CirclesComponent')
     this._CirclesService.getTopics()
@@ -74,7 +111,12 @@ export class CirclesComponent implements OnInit {
   }//end getTopics
 
   circleClicked(circleName) {
+    console.log('the circle clicked on is!', circleName);
+    localStorage.setItem('currentCircle', circleName);
+
+  circleClicked(circleName) {
     sessionStorage.setItem('circle',circleName)
+
   }
 
 }

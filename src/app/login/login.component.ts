@@ -28,50 +28,6 @@ export class LoginComponent {
     
   }
 
-  // getAllUsers() {
-  //   this.DavidDataService.getUsers()
-  //                     .subscribe( (data) => {
-  //                       //console.log("Where is this data man", data)
-  //                       this.DavidDataService.allUsers = data;
-  //                       console.log(this.DavidDataService.allUsers, 'who are the users?');
-  //                     })
-  // }
-
-  // getAllTopics() {
-  //   this.DavidDataService.getTopics()
-  //                     .subscribe( (data) => {
-  //                       //console.log("Where is this data man", data)
-  //                       this.DavidDataService.allTopics = data;
-  //                       console.log(this.DavidDataService.allTopics, 'what are the topics');
-  //                     })
-  // }
-
-  // getAllUsersTopics() {
-  //   this.DavidDataService.getUsersTopics()
-  //                     .subscribe( (data) => {
-  //                       //console.log("Where is this data man", data)
-  //                       this.DavidDataService.allUserTopics = data;
-  //                       console.log(this.DavidDataService.allUserTopics, 'what are the User-Topics');
-  //                     })
-  // }
-  
-  // getAllUsersCircles() {
-  //   this.DavidDataService.getUsersCircles()
-  //                     .subscribe( (data) => {
-  //                       //console.log("Where is this data man", data)
-  //                       this.DavidDataService.allUserCircles = data;
-  //                       console.log(this.DavidDataService.allUserCircles, 'what are the User-Topics');
-  //                     })
-  // }
-
-  // getAllCircles() {
-  //   this.DavidDataService.getCircles()
-  //                     .subscribe( (data) => {
-  //                       //console.log("Where is this data man", data)
-  //                       this.DavidDataService.allCircles = data;
-  //                       console.log(this.DavidDataService.allCircles, 'what are the circles?');
-  //                     })
-  // }
 
 
   submitLogin = (value) => {
@@ -81,6 +37,8 @@ export class LoginComponent {
       .subscribe(res => {
         localStorage.setItem('username', this.user.username);
 
+        
+
         this.loginService.getUserId()
                                 .subscribe( (data) => {
                                   // console.log("WHAT AM I???", data)
@@ -88,8 +46,8 @@ export class LoginComponent {
                                     // console.log('this is val:', val)
                                     if(val["username"] === localStorage.getItem('username') ) {
                                       localStorage.setItem('userID', val["id"])
-                                      this.DavidDataService.currentUserId = val["id"];
-                                      this.DavidDataService.currentUsername = val["username"];
+                                      this.DavidDataService.getAllCurrentUserData( localStorage.getItem('userID') );
+
                                     }
 
                                   }) 

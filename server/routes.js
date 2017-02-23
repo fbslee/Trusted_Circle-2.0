@@ -98,118 +98,103 @@ router.get('/userCircleTopic/:userId'
     console.log('/circles being hit!!! for GET from param');
     console.log(req.params);
 
-    var returnInfo = {
-        userId: userId,
-        circlesObj: [],
-        circleId: [],
-        topicsObj: [],
-        topicId: [],
-        circlesAndTopics: {}
-    };
-
-    //finds all user's status on a topicId
-
-    // var loop = function () {
-
-    // }
-
-
-
-    //finds all circles a user belongs to
-    User_Circles.findAll({
-    where: {
-        userId: req.params.userId
-    }
-    }).then( (User_Circles_data) => {
-        //from data we want the circle Id
-
-        for(user_circles_column of User_Circles_data) {
-            // console.log(user_circles_column.dataValues);
-            if(user_circles_column.dataValues.userId.toString() === userId.toString()) {
-                // console.log(returnInfo);
-                returnInfo["circlesObj"].push (user_circles_column.dataValues);
-                returnInfo["circleId"].push (user_circles_column.dataValues.circleId);
+    User.find({
+        where: {
+            id: userId
+        }
+    })
+    .then( (userData) => {
+        returnInfo.usernameData = userData
+        return returnInfo
+    })
+    //Username has been Found [Step 2 Find the circles]
+    .then( () => {
+        //find all user_circle relationship [step 3 ]
+        User_Circles.findAll({
+            where : {
+                userId: userId
             }
-        }
+        }).then( (uCircleData) => {
+            // console.log(uCircleData, 'this is user circle data');
+            returnInfo.user_circles_Obj = uCircleData;
+            for( obj of uCircleData ) {
+                // console.log(obj.dataValues, '------------------0----------------');
+                returnInfo.circleId.push(obj.dataValues.circleId);
+            }
+            // res.send(returnInfo); check getting all the circles
+            return returnInfo
+        }).then( ()=> {
+            //I HAVE CIRCLE IDS from here
+            //FIND ALL CIRCLES
 
-
-    }).then( () => {
-
-        if(returnInfo.circleId.length === 0) {
-            res.send(returnInfo)
-        }
-
-        console.log(returnInfo.circleId, 'inside second then');
-
-        for(circleIden of returnInfo.circleId) {
-            Topic.findAll({
-                where : {
-                    circleId: circleIden
+            Circle.findAll({
+                where: {'id': returnInfo.circleId }
+            }).then( (circleData) => {
+                // console.log(circleData, '---------1---------')
+                for(cir of circleData) {
+                    // console.log(cir.dataValues,'------2------');
+                    returnInfo.circlesObj.push(cir.dataValues);
                 }
-            })
-            .then( (val) => {
-
-                    for(valItem of val) {
-                        // console.log('valItem', valItem.dataValues.circleId)
-                        returnInfo["topicsObj"].push (valItem.dataValues)
-                        returnInfo["topicId"].push (valItem.dataValues["id"]);
-                    }
-
-                    // console.log(val.length + '===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================')
-                    // console.log(val[0], 'this is Val');
-                    // console.log(val[0].dataValues, 'this is dataVal');
-                    // console.log(val[1].dataValues, 'this is dataVal 2')
-                // console.log(circleIden);
-                // console.log(val.dataValues, 'this is val!!!!!');
-                // returnInfo["topicsObj"].push (val.dataValues);
-                // returnInfo["topicId"].push (val.dataValues.id);
-                        
-
-                return returnInfo;
-            }).then( (rInfo) => {
-                console.log('```````rINFOis```````:', rInfo);
-
-                //this sets up the circle to topics relationship
-                for(var circles of rInfo.circlesObj) {
-                    for(var topics of rInfo.topicsObj) {
-                        if(circles.circleId === topics.circleId) {
-                            if(returnInfo.circlesAndTopics[circles.circleId]) {
-                                returnInfo.circlesAndTopics[circles.circleId].push(topics.id)
-                            } else {
-                                returnInfo.circlesAndTopics[circles.circleId] = [];
-                                returnInfo.circlesAndTopics[circles.circleId].push(topics.id)
+                // returnInfo.circlesObj.push(circleData.dataValues);
+                // res.send(returnInfo)
+                // returnInfo;
+                returnInfo
+            }).then( () => {
+                //FINDING CIRCLES AND TOPICS
+                Topic.findAll({})
+                .then ( (topicInfo) => {
+                    for(topic of topicInfo) {
+                        console.log(topic.dataValues,'------2------');
+                        for(cirId of returnInfo.circleId) {
+                            if(cirId === topic.dataValues.circleId) {
+                                returnInfo.topicId.push(topic.dataValues.id);
+                                returnInfo.topicsObj.push(topic.dataValues);
                             }
-                            
+                        }
+
+                    }
+                //WORK IN HERE
+
+                return returnInfo
+                }).then( () => {
+                for(circlesData of returnInfo.circlesObj) {
+                    for(topicsData of returnInfo.topicsObj) {
+                        if(circlesData.id === topicsData.circleId) {
+                            if(returnInfo.circles_topics[circlesData.id]) {
+                                returnInfo.circles_topics[circlesData.id].push (topicsData)
+                            } else {
+                                returnInfo.circles_topics[circlesData.id] = [];
+                                returnInfo.circles_topics[circlesData.id].push (topicsData);
+                            }
                         }
                     }
                 }
 
                 
-                res.send(rInfo);
-                // return rInfo;
+                res.send(returnInfo)
+                })
+
+
             })
-        }
+            
+            
 
+        })
 
-
-        
-
-
-        //DO NOT PUT RES.SEND HERE
-        // res.send(returnInfo);
     })
 
+    var returnInfo = {
+        userId: userId,
+        user_circles_Obj: [],
+        circlesObj: [],
+        circleId: [],
+        topicsObj: [],
+        topicId: [],
+        circles_topics: {},
+    };
 
 
-
-    // Circle.findAll({
-    // where: {
-    //     id: req.params.id
-    //  }
-    // }).then( (val) => {
-    //         res.send(val) 
-    // })
-  
+    // res.send(returnInfo)
 
 })
 
@@ -219,13 +204,7 @@ router.get('/circles/:id', (req, res) => {
     console.log(req.params);
     console.log(req.params.id);
     
-    Circle.findAll({
-    where: {
-        id: req.params.id
-     }
-    }).then( (val) => {
-            res.send(val) 
-    })
+
   
 
 });

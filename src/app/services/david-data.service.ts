@@ -20,8 +20,26 @@ public currentTopic: any;
 
 public currentUserCirclesBelong: any;
 public currentUserTopicBelong: any; 
+public currentUserCircleToTopicBelong: any; 
+
+public getAllCurrentUserDataStorage: any;
 
   constructor(private http: Http) { }
+
+    getAllCurrentUserData(id: string): Observable<any> {
+      console.log('GOT ALL THE DATA for', localStorage.getItem('userID'))
+
+    var data = this.http.get('/api/userCircleTopic/'+id)
+                    .map( ( res:Response ) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+
+    // console.log(this.getAllCurrentUserDataStorage);
+    // this.getAllCurrentUserDataStorage = data;
+    return data;
+    }
+
+
+
 
   getUsers(): Observable<any> {
     console.log('INSIDE DAVID service for getUsers')
@@ -67,6 +85,19 @@ public currentUserTopicBelong: any;
                     .map( ( res:Response ) => res.json() )
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
     this.allCircles = data;
+    return data;
+  }
+
+    getCurrentUserCircles(): Observable<any> {
+    console.log('INSIDE getCurrentUserCircles in service topics')
+    var id = localStorage.getItem('userID').toString();
+    console.log(id);
+    var url = '/api/userCircleTopic/'+id.toString();
+    console.log(url);
+     var data = this.http.get(url)
+                    .map( ( res:Response ) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+    this.currentUserCirclesBelong = data;
     return data;
   }
 
