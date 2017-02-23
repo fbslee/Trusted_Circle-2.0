@@ -31,6 +31,7 @@ export class CirclesComponent implements OnInit {
 
   clicked(circle){
     console.log('circle clicked')
+    sessionStorage.setItem('circle',circle)
   }
   createCircle(){
 
@@ -73,7 +74,7 @@ export class CirclesComponent implements OnInit {
   }//end getTopics
 
   circleClicked(circleName) {
-
+    sessionStorage.setItem('circle',circleName)
   }
 
 }
