@@ -17,7 +17,7 @@ import { MessageService } from '../services/message.service'
                     type="text"
                     id="content"
                     class="form-control"
-                    [ngModel]="message?.content"
+                    [ngModel]="message?.body"
                     name="content"
                     required>
         </div>
@@ -28,7 +28,7 @@ import { MessageService } from '../services/message.service'
   `
 })
 
-export class MessageInputComponent {
+export class MessageInputComponent implements OnInit {
     message: Message;
     topicBody: string = sessionStorage.getItem('topicBody')
     topicUser: string = sessionStorage.getItem('topicUser')
@@ -59,5 +59,11 @@ export class MessageInputComponent {
         this.message = null;
         form.resetForm();
     }
+    ngOnInit() {
+        this.messageService.messageIsEdit.subscribe(
+            (message: Message) => this.message = message
+        );
+    }
+
 
 }

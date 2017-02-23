@@ -270,6 +270,30 @@ router.post('/messages', (req, res) => {
       });
   })
 
+router.patch('/messages/:id', (req, res) => {
+    console.log("EDIT", req.params);
+    console.log("EDIT",req.body);
+    Message.update(req.body,{
+        where: {
+            id: req.params.id
+        }
+    }).then( val => {
+        console.log(val);
+    })
+});
+
+router.delete('/messages/:id', (req, res) => {
+    console.log("req params", req.params);
+    console.log("req params id",req.params.id);
+    Message.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then( val => {
+        console.log(val);
+    })
+});
+
 
 
 router.post('/topics', (req, res) => {
