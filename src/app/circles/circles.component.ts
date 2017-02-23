@@ -32,6 +32,13 @@ export class CirclesComponent implements OnInit {
   }
 
 
+  clicked(circle){
+    console.log('circle clicked')
+    sessionStorage.setItem('circle',circle)
+  }
+  createCircle(){
+
+
   setCircles() {
     this.DavidDataService.getAllCurrentUserData(localStorage.getItem('userID'))
             .subscribe( (data) => {
@@ -49,62 +56,67 @@ export class CirclesComponent implements OnInit {
 
 
 
-  // clicked(circle){
-  //   console.log('circle clicked')
-  // }
-  // createCircle(){
 
-  // }
+  clicked(circle){
+    console.log('circle clicked')
+  }
+  createCircle(){
 
-  // getCircles () { 
-  //   console.log('users to circle', this.DavidDataService.allUserCircles);
-  //   console.log('current user logged in', localStorage.getItem('userID'));
-  //   var currentUser = localStorage.getItem('userID');
-  //   console.log('just circles', this.DavidDataService.allCircles);
-  //   var allUserCirclesArray =  this.DavidDataService.allUserCircles;
-  //   var allCirclesArray = this.DavidDataService.allCircles;
-  //   for(var UserCircleObj of allUserCirclesArray) {
-  //     for(var circleObj of allCirclesArray) {
-  //       if(UserCircleObj.circleId === circleObj.id) {
-  //         console.log(UserCircleObj["userId"] === currentUser);
-  //         if(UserCircleObj["userId"].toString() === currentUser) {
-  //         // console.log('this user has access', UserCircleObj.userId)
-  //           this.finalComparedCircles.push(circleObj.name);
-  //           console.log(this.DavidDataService.currentUsername, 'current username')
+  }
 
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  getCircles () { 
+    console.log('users to circle', this.DavidDataService.allUserCircles);
+    console.log('current user logged in', localStorage.getItem('userID'));
+    var currentUser = localStorage.getItem('userID');
+    console.log('just circles', this.DavidDataService.allCircles);
+    var allUserCirclesArray =  this.DavidDataService.allUserCircles;
+    var allCirclesArray = this.DavidDataService.allCircles;
+    for(var UserCircleObj of allUserCirclesArray) {
+      for(var circleObj of allCirclesArray) {
+        if(UserCircleObj.circleId === circleObj.id) {
+          console.log(UserCircleObj["userId"] === currentUser);
+          if(UserCircleObj["userId"].toString() === currentUser) {
+          // console.log('this user has access', UserCircleObj.userId)
+            this.finalComparedCircles.push(circleObj.name);
+            console.log(this.DavidDataService.currentUsername, 'current username')
 
-  // getCurrentUserCircles() {
-  //   // console.log('inside getTopics function inside CirclesComponent')
-  //   this.DavidDataService.getCurrentUserCircles()
-  //                     .subscribe( (data) => {
-  //                       console.log(this.DavidDataService.currentUserCirclesBelong);
-  //                       console.log(data, 'this is data and its subscribed');
-  //                       }) 
+          }
+        }
+      }
+    }
+  }
+
+  getCurrentUserCircles() {
+    // console.log('inside getTopics function inside CirclesComponent')
+    this.DavidDataService.getCurrentUserCircles()
+                      .subscribe( (data) => {
+                        console.log(this.DavidDataService.currentUserCirclesBelong);
+                        console.log(data, 'this is data and its subscribed');
+                        }) 
             
-  // }//end getTopics
+  }//end getTopics
 
-  // getTopics() {
-  //   // console.log('inside getTopics function inside CirclesComponent')
-  //   this._CirclesService.getTopics()
-  //                     .subscribe( (data) => {
-  //                       // console.log("WHAT AM I???", data)
-  //                       data.forEach((val)=>{
-  //                         // console.log(val);
-  //                         this.circles.push(val.body)
-  //                       }) 
-  //                       // console.log('list of rooms', this.circles)
-  //                       }
-  //                     )
-  // }//end getTopics
+  getTopics() {
+    // console.log('inside getTopics function inside CirclesComponent')
+    this._CirclesService.getTopics()
+                      .subscribe( (data) => {
+                        // console.log("WHAT AM I???", data)
+                        data.forEach((val)=>{
+                          // console.log(val);
+                          this.circles.push(val.body)
+                        }) 
+                        // console.log('list of rooms', this.circles)
+                        }
+                      )
+  }//end getTopics
 
   circleClicked(circleName) {
     console.log('the circle clicked on is!', circleName);
     localStorage.setItem('currentCircle', circleName);
+
+  circleClicked(circleName) {
+    sessionStorage.setItem('circle',circleName)
+
   }
 
 }

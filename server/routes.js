@@ -325,7 +325,7 @@ router.post('/topics', (req, res) => {
 
 });
 
-router.post('/poll', controller.poll.post)  
+router.post('/poll', controller.poll.post) 
 
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);
