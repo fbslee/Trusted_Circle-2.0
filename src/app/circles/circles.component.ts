@@ -36,7 +36,6 @@ export class CirclesComponent implements OnInit {
     console.log('circle clicked')
     sessionStorage.setItem('circle',circle)
   }
-  createCircle(){
 
 
   setCircles() {
@@ -48,20 +47,6 @@ export class CirclesComponent implements OnInit {
                           this.finalComparedCircles.push(circle.name);
                         }
           })
-  }
-
-
-
-
-
-
-
-
-  clicked(circle){
-    console.log('circle clicked')
-  }
-  createCircle(){
-
   }
 
   getCircles () { 
@@ -113,10 +98,6 @@ export class CirclesComponent implements OnInit {
   circleClicked(circleName) {
     console.log('the circle clicked on is!', circleName);
     localStorage.setItem('currentCircle', circleName);
-
-  circleClicked(circleName) {
-    sessionStorage.setItem('circle',circleName)
-
   }
 
 }
