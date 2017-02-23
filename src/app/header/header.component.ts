@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
     this.getAllUsersTopics();
     this.getAllCircles();
     this.getAllUsersCircles();
+    // this.getAllCurrentUserData();
   }
 
   logout() {
@@ -61,6 +62,8 @@ export class HeaderComponent implements OnInit {
             </ul>`)
         .open();
   }
+
+
 
   getAllUsers() {
     this.DavidDataService.getUsers()
