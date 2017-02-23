@@ -104,11 +104,14 @@ router.get('/userCircleTopic/:userId'
         circleId: [],
         topicsObj: [],
         topicId: [],
-        circlesAndTopics: []
+        circlesAndTopics: {}
     };
 
     //finds all user's status on a topicId
 
+    // var loop = function () {
+
+    // }
 
 
 
@@ -132,29 +135,68 @@ router.get('/userCircleTopic/:userId'
 
     }).then( () => {
 
+        if(returnInfo.circleId.length === 0) {
+            res.send(returnInfo)
+        }
+
         console.log(returnInfo.circleId, 'inside second then');
 
-        for(var circleIden of returnInfo.circleId) {
-            Topic.find({
+        for(circleIden of returnInfo.circleId) {
+            Topic.findAll({
                 where : {
                     circleId: circleIden
                 }
             })
             .then( (val) => {
-                if(val) {
-                console.log(circleIden);
-                console.log(val.dataValues, 'this is val!!!!!');
-                returnInfo["topicsObj"].push (val.dataValues);
-                returnInfo["topicId"].push (val.dataValues.id);
 
-                res.send(returnInfo)
+                    for(valItem of val) {
+                        // console.log('valItem', valItem.dataValues.circleId)
+                        returnInfo["topicsObj"].push (valItem.dataValues)
+                        returnInfo["topicId"].push (valItem.dataValues["id"]);
+                    }
+
+                    // console.log(val.length + '===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================')
+                    // console.log(val[0], 'this is Val');
+                    // console.log(val[0].dataValues, 'this is dataVal');
+                    // console.log(val[1].dataValues, 'this is dataVal 2')
+                // console.log(circleIden);
+                // console.log(val.dataValues, 'this is val!!!!!');
+                // returnInfo["topicsObj"].push (val.dataValues);
+                // returnInfo["topicId"].push (val.dataValues.id);
+                        
+
+                return returnInfo;
+            }).then( (rInfo) => {
+                console.log('```````rINFOis```````:', rInfo);
+
+                //this sets up the circle to topics relationship
+                for(var circles of rInfo.circlesObj) {
+                    for(var topics of rInfo.topicsObj) {
+                        if(circles.circleId === topics.circleId) {
+                            if(returnInfo.circlesAndTopics[circles.circleId]) {
+                                returnInfo.circlesAndTopics[circles.circleId].push(topics.id)
+                            } else {
+                                returnInfo.circlesAndTopics[circles.circleId] = [];
+                                returnInfo.circlesAndTopics[circles.circleId].push(topics.id)
+                            }
+                            
+                        }
+                    }
                 }
+
+                
+                res.send(rInfo);
+                // return rInfo;
             })
         }
 
 
+
         
 
+
+        //DO NOT PUT RES.SEND HERE
+        // res.send(returnInfo);
     })
 
 
@@ -169,8 +211,7 @@ router.get('/userCircleTopic/:userId'
     // })
   
 
-});
-
+})
 
 
 router.get('/circles/:id', (req, res) => {
