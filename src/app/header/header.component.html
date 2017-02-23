@@ -20,7 +20,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><a (click)="openModal()"  routerLinkActive="active">Profile</a></li>
-        <li><a [routerLink]="['/login']" (click)="logout()"  routerLinkActive="active">Logout</a></li>
+        <li><a [routerLink]="['/login']" (click)="logout()" *ngIf="status" routerLinkActive="active">Logout</a></li>
         <!--<li>{{localStorage.getItem('username')}}</li>-->
       </ul>
     </div>
