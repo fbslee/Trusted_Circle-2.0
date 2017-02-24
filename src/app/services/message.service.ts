@@ -19,6 +19,15 @@ export class MessageService {
 
     messageIsEdit = new EventEmitter<Message>();
 
+    findUser(username): Observable<any> {
+
+    console.log('INSIDE getuser in service')
+    console.log('this is your user', username)
+    return this.http.get('/api/users/'+username)
+             .map( ( res:Response ) => res.json() )
+            .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+    }
+
     addMessage(message: Message) {
         let body = JSON.stringify(message);
         let headers = new Headers({'Content-Type': 'application/json'});

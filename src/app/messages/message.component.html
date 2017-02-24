@@ -23,19 +23,18 @@
                     
     </div>
     <footer class="panel-footer">
-        <div class="author" [popover]="myPopover">
+        <div class="author" [popover]="myPopover" popoverPlacement="right" [popoverOnHover]="true" (mouseenter) ="ttp( message.username )" [popoverCloseOnMouseOutside]="true">
             {{ message.username }}
 
-            <popover-content #myPopover 
-                title="Popover title" 
-                placement="right"
-                [animation]="true" 
-                [closeOnClickOutside]="true" >
-    <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
-    <b><i><span style="color: #ffc520">Popover With</span></i></b> <small>Html support</small>.
-</popover-content>
 
         </div>
+
+        <popover-content #myPopover 
+                title="Popover title" [closeOnMouseOutside]="true">
+                <div class="pfp">
+                    <img src="https://en.gravatar.com/userimage/35505219/a9313ffc6c7b5f8b4f49f704c1035ce0.jpg?size=200" alt="profile picture" class="profile-photo">
+                </div>
+            </popover-content>
         
         <div class="config">
             <a (click)="onEdit()">Edit</a>
