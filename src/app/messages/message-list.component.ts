@@ -14,6 +14,7 @@ import { MessageService } from '../services/message.service'
 })
 export class MessageListComponent implements OnInit {
     messages: Message[];
+    username: string = localStorage.getItem('username');
 
     constructor(private messageService: MessageService) {}
 
@@ -21,6 +22,7 @@ export class MessageListComponent implements OnInit {
        this.messageService.getMessages()
        .subscribe( (data) => {
            console.log('this is messages data inside list', data) 
+           console.log(this.username)
            this.messages = data;
     }
         // console.log()  

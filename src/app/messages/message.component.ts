@@ -18,7 +18,8 @@ export class MessageComponent {
 
     constructor(private messageService: MessageService) {}
 
-    onEdit() {
+    onEdit() {    
+
         this.messageService.editMessage(this.message)
       
     }
@@ -29,6 +30,7 @@ export class MessageComponent {
             result => console.log(result)
         );
     }
+
     upVote() {
         if (this.myVote == 1) {
             return;
