@@ -12,6 +12,11 @@ export class MessageService {
     constructor(private http: Http) {}
 
     private messages: Message[] = [];
+    username: string = localStorage.getItem('username');
+    userId: string = localStorage.getItem('userId');
+
+
+
     messageIsEdit = new EventEmitter<Message>();
 
     addMessage(message: Message) {
@@ -21,13 +26,12 @@ export class MessageService {
             .map((response: Response) => {
                 let result = response.json();
                 console.log('result', result);
-                let message = new Message(result.body, 'Dummy', result.id, null);
+                let message = new Message(result.body, this.username, result.votes ,result.id, this.userId);
+                console.log('message defined inside of the post', message)
                 this.messages.push(message);
                 return message;
             })
             .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
-
-
 
     }
 
@@ -38,7 +42,7 @@ export class MessageService {
                 console.log('inside getMessages in service', messages);
                 let transformedMessages: Message[] = [];
                 for (let message of messages) {
-                    transformedMessages.push(new Message(message.body, 'Dummy', message.id, null));
+                    transformedMessages.push(new Message(message.body, this.username, message.votes, message.id, this.userId));
                 }
                 this.messages = transformedMessages;
                 console.log('transformedMessages ', transformedMessages);
@@ -49,6 +53,12 @@ export class MessageService {
     editMessage(message: Message){
         this.messageIsEdit.emit(message);
 
+    }
+
+    VoteMessage(message: Message) {
+        let body = JSON.stringify(message);
+        let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.put('/api/messages/' + message.messageId, body, {headers: headers})    
     }
 
     updateMessage(message: Message) {

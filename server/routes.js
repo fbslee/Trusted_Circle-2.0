@@ -307,11 +307,14 @@ router.get('/messages', (req, res) => {
 
 router.post('/messages', (req, res) => {
     var body = req.body.body;
-    var username = req.body.username
+    var username = req.body.username;
+    var userId = req.body.userId;
     console.log('this is data', req.body)
     let newMessage = {
         body: body,
-        username: username
+        username: username,
+        userId: userId
+
     }
     Message.create(newMessage).then(function (newMessage) {
         res.status(200).json(newMessage);
