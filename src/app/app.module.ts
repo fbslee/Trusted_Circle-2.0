@@ -44,6 +44,7 @@ import { PollService } from './services/poll.service';
 import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { AlertComponent } from './alert/alert.component';
 import { ResultsComponent } from './results/results.component';
+import { PopoverModule } from 'ng2-popover';
 
 import { DavidDataService } from './services/david-data.service';
 
@@ -75,6 +76,7 @@ import { DavidDataService } from './services/david-data.service';
     NgbModule.forRoot(),
     ModalModule.forRoot(),
     BootstrapModalModule,
+    PopoverModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent
         ,canActivate: [AuthGuard]

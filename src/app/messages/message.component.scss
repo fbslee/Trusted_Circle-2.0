@@ -1,6 +1,6 @@
 
 .author {
-    display: inline-block;
+    display: inline;
     font-style: italic;
     font-size: 12px;
     width: 80%;
@@ -11,6 +11,7 @@
     text-align: right;
     font-size: 12px;
     width: 19%;
+    float: right;
 }
 
 .voter {

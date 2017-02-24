@@ -23,9 +23,20 @@
                     
     </div>
     <footer class="panel-footer">
-        <div class="author">
+        <div class="author" [popover]="myPopover">
             {{ message.username }}
+
+            <popover-content #myPopover 
+                title="Popover title" 
+                placement="right"
+                [animation]="true" 
+                [closeOnClickOutside]="true" >
+    <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Popover With</span></i></b> <small>Html support</small>.
+</popover-content>
+
         </div>
+        
         <div class="config">
             <a (click)="onEdit()">Edit</a>
             <a (click)="onDelete()">Delete</a>

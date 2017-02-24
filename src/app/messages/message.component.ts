@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Message } from './message.model';
 
+
 import { MessageService } from '../services/message.service'
 
 @Component({
@@ -22,6 +23,14 @@ export class MessageComponent {
 
         this.messageService.editMessage(this.message)
       
+    }
+
+    hov() {
+        console.log('nigga wtf')
+    }
+
+    hov2() {
+        console.log('left')
     }
 
     onDelete() {
