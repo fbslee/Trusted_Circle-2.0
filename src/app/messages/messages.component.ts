@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DavidDataService } from '../services/david-data.service';
 
 @Component({
   selector: 'app-messages',
@@ -13,6 +14,15 @@ import { Component } from '@angular/core';
   `
 })
 export class MessagesComponent {
+
+constructor (private DavidDataService: DavidDataService) {
+
+}
+
+ngOnInit () {
+
+}
+
 
 
 }

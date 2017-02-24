@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicsService } from '../services/topics.service';
+import { ActivatedRoute } from '@angular/router';
+import { Http, Response, Headers, JsonpModule } from "@angular/http";
+import { Observable } from 'rxjs/Observable';
+
+
+
+
+
 
 import { DavidDataService } from '../services/david-data.service';
 
@@ -16,14 +24,25 @@ export class TopicsComponent implements OnInit {
   userInfo: {};
   filteredItems: {};
 
+  user_topic: any;
+
   topicId: any;
   // topics: any = [{user: 'Felipe', body: "Why don't we have president's day off?"}, {user: 'David', body: "Where is Glenn?"}, {user:'Richard',body: "Why does my room smell so bad?"}]
   // users: any = ['David', 'Richard', 'Gabe', 'Kan', 'Ricky']
   
-  clicked(topic){
-    sessionStorage.setItem('topicBody', topic.body)
-    sessionStorage.setItem('topicUser', topic.user)
-  }
+  // clicked(topic, idx){
+  //   sessionStorage.setItem('topicBody', topic.body)
+
+  //   sessionStorage.setItem('topicUser', topic.user)
+  //   // console.log(this.daveData);
+  //   console.log(idx);
+  //   this.DavidDataService.clickedTopic = topic;
+  //   console.log(this.DavidDataService.clickedTopic);
+  //   localStorage.setItem('clickedTopic', topic)
+
+
+
+  // }
   // createTopic(){
   //   if(this.topics.indexOf(this.newTopic) === -1){
   //     this.topics.push(this.newTopic)
@@ -32,19 +51,27 @@ export class TopicsComponent implements OnInit {
   // }
 
   constructor(private _TopicsService: TopicsService,
-              private DavidDataService: DavidDataService
+              private DavidDataService: DavidDataService,
+              private route: ActivatedRoute,
+              private http: Http
               ) { }
 
   ngOnInit() {
     // sessionStorage.removeItem('topic')
     this.setTopics()
-
+    
   }
+
+
 
   setTopics() {
     this.DavidDataService.getAllCurrentUserData(localStorage.getItem('userID'))
             .subscribe( (data) => {
                         var theData = data
+
+
+                        this.user_topic = data.users_topicsALL;
+
 
                         for (var circles of theData.circlesObj) {
                           if(circles.name === localStorage.getItem('currentCircle')) {
@@ -62,7 +89,9 @@ export class TopicsComponent implements OnInit {
                           if(prop == idx) {
                             var topics = theData.circles_topics[prop]
                             for(var topic of topics) {
-                              this.topics.push(topic.body);
+
+                              this.topics.push([topic.body,topic.id]);
+                              console.log(this.topics);
                             }
                           }
                         }
@@ -77,7 +106,29 @@ export class TopicsComponent implements OnInit {
   }
 
 
+  topicClicked(topicName, idx) {
+    console.log('THISSSS', this.user_topic)
+    var arr_user_topic = this.user_topic;
+    this.DavidDataService.getUser(idx) 
+    .subscribe( (data) => {
+      console.log(data, 'DATA!!!!')
+      for(var user_topic of arr_user_topic) {
+        if(user_topic.userId == data.id) {
+          console.log(data.username);
+          sessionStorage.setItem('topicUser', data.username);
+        }
+      }
 
+
+
+
+    })
+    console.log('this is the id of the topic selected', idx)
+
+    sessionStorage.setItem('topicSelectedIdx', idx);
+    sessionStorage.setItem('topicBody', topicName)
+    localStorage.setItem('topicBody', topicName)
+  }
 
 
 
@@ -205,5 +256,43 @@ export class TopicsComponent implements OnInit {
 
 
   // }//end getTopics  
+
+  createTopic(name) {
+    console.log(name);
+    let body = {
+      body: name,
+      circleId: localStorage.getItem('currentCircleId'),
+      userId: localStorage.getItem('userID') || sessionStorage.getItem('userId')
+    }
+    console.log(body);
+
+    let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('/api/topics', body, {headers: headers})
+        .map(res => res.json()).subscribe((data) => {
+          this.topics.push([body.body, data.topicId]);
+          console.log(data)
+        })
+
+
+
+  }
+
+  
+    // addMessage(message: Message) {
+    //     let body = JSON.stringify(message);
+    //     let headers = new Headers({'Content-Type': 'application/json'});
+    //     return this.http.post('/api/messages', body, {headers: headers})
+    //         .map((response: Response) => {
+    //             let result = response.json();
+    //             console.log('result', result);
+    //             let message = new Message(result.body, 'Dummy', result.id, null);
+    //             this.messages.push(message);
+    //             return message;
+    //         })
+    //         .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
+
+
+
+    // }
 
 }

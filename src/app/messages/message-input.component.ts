@@ -30,8 +30,8 @@ import { MessageService } from '../services/message.service'
 
 export class MessageInputComponent implements OnInit {
     message: Message;
-    topicBody: string = sessionStorage.getItem('topicBody')
-    topicUser: string = sessionStorage.getItem('topicUser')
+    topicBody: string = sessionStorage.getItem('topicBody') || localStorage.getItem('topicBody')
+    topicUser: string = sessionStorage.getItem('topicUser') || localStorage.getItem('topicUser')
     constructor(private messageService: MessageService) {}
 
     onSubmit(form: NgForm) {

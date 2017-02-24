@@ -44,7 +44,8 @@ export class CirclesComponent implements OnInit {
                         var theData = data
 
                         for (var circle of theData.circlesObj) {
-                          this.finalComparedCircles.push(circle.name);
+                          this.finalComparedCircles.push([circle.name,circle.id]);
+                          console.log(this.finalComparedCircles)
                         }
           })
   }
@@ -96,8 +97,38 @@ export class CirclesComponent implements OnInit {
   }//end getTopics
 
   circleClicked(circleName) {
-    console.log('the circle clicked on is!', circleName);
+    // console.log('the circle clicked on is!', circleName);
+    for(var circle of this.finalComparedCircles) {
+      // console.log('these are the circles!', circle);
+      if(circleName === circle[0]) {
+        localStorage.setItem('currentCircleId', circle[1]);
+        // console.log('this is the circles id', circle[1]);
+      }
+    }
     localStorage.setItem('currentCircle', circleName);
   }
+
+
+  createCircle() {
+
+  }
+
+
+    // addMessage(message: Message) {
+    //     let body = JSON.stringify(message);
+    //     let headers = new Headers({'Content-Type': 'application/json'});
+    //     return this.http.post('/api/messages', body, {headers: headers})
+    //         .map((response: Response) => {
+    //             let result = response.json();
+    //             console.log('result', result);
+    //             let message = new Message(result.body, 'Dummy', result.id, null);
+    //             this.messages.push(message);
+    //             return message;
+    //         })
+    //         .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
+
+
+
+    // }
 
 }
