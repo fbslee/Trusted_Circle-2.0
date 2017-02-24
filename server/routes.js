@@ -327,6 +327,8 @@ router.post('/topics', (req, res) => {
 
 router.post('/poll', controller.poll.post) 
 
+router.get('/votes', controller.vote.get)
+
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);
 // router.post('/favtrain', controller.favTrain.post);

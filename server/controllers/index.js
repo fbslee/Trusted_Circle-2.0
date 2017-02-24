@@ -129,11 +129,63 @@ var poll = {
 
 var vote= {
   get: function(req, res){
-    
+    var userId = req.user.dataValues.id;
+    var pollId;
+    var voteId;
+    var suggestedMemberId;
+    var suggestedMemberName;
+    var suggestorId;
+    var suggestorName;
+    var circleId;
+    var circleName;
+    Vote.findOne({
+      where:{
+        userId: userId
+      }
+    }).then((data)=>{
+      pollId = data.dataValues.pollId;
+      voteId = data.dataValues.id;
+      Poll.findOne({
+        where:{
+          id: data.dataValues.pollId
+        }
+      }).then((data) => {
+        circleId = data.dataValues.circleId
+        suggestedMemberId = data.dataValues.suggestedMemberId
+        suggestorId = data.dataValues.suggestorId
+        Circle.findOne({
+          where:{
+            id: data.dataValues.circleId
+          }
+        }).then((data) => {
+          circleName = data.dataValues.name
+          userModel.findOne({
+            where:{
+              id: suggestedMemberId
+            }
+          }).then((data) => {
+            suggestedMemberName = data.dataValues.username
+            userModel.findOne({
+              where: {
+                id: suggestorId
+              }
+            }).then((data) => {
+              suggestorName = data.dataValues.username
+              res.send({suggestor: data.dataValues.username,
+              suggestedMember: suggestedMemberName,
+              circle: circleName,
+              voteId: voteId,
+              pollId: pollId})
+            })
+          })
+        })
+      })
+    })
   }
 }
 
 module.exports = {
   signup: signup,
-  poll: poll
+  poll: poll,
+  vote: vote
 };
