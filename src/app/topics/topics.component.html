@@ -25,6 +25,9 @@
   <input mdInput #myInput placeholder="Add a User" [(ngModel)]="name" (input)="filterItem(myInput.value)" >
 </md-input-container>
 
-<div *ngFor="let item of filteredItems" (click)="printuser(item)" [routerLink]="['/poll']" >
+<div>
+  People in the Current Circle
+<div *ngFor="let item of usersOfCircle" (click)="printuser(item)" [routerLink]="['/poll']" >
    {{item.username}}
+</div>
 </div>

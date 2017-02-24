@@ -23,6 +23,7 @@ export class TopicsComponent implements OnInit {
   allCircles : any = [];
   userInfo: {};
   filteredItems: {};
+  usersOfCircle: any [];
 
   user_topic: any;
 
@@ -59,7 +60,7 @@ export class TopicsComponent implements OnInit {
   ngOnInit() {
     // sessionStorage.removeItem('topic')
     this.setTopics()
-    
+    this.davidGetUsers();
   }
 
 
@@ -187,12 +188,12 @@ export class TopicsComponent implements OnInit {
   //   sessionStorage.setItem('topicUser', sessionStorage.getItem('topicOwner'));
   // }
 
-  // filterItem(value){
-  //  if(!value) this.filteredItems = Object.assign([], this.userInfo); //when nothing has typed
-  //  this.filteredItems = Object.assign([], this.userInfo).filter(
-  //     item => item.username.toLowerCase().indexOf(value.toLowerCase()) > -1
-  //  )
-  // }
+  filterItem(value){
+   if(!value) this.filteredItems = Object.assign([], this.userInfo); //when nothing has typed
+   this.filteredItems = Object.assign([], this.userInfo).filter(
+      item => item.username.toLowerCase().indexOf(value.toLowerCase()) > -1
+   )
+  }
 
   // printuser(user) {
   //   console.log(user)
@@ -200,16 +201,27 @@ export class TopicsComponent implements OnInit {
   //   sessionStorage.setItem('suggestedUserId', user.id)
   // }
 
-  // getUsers() {
-  //   this._TopicsService.getUsers()
-  //                     .subscribe( (data) => {
-  //                       console.log("Where is this data man", data)
-  //                       this.userInfo = data;
-  //                       this.filterItem('');
-  //                       console.log('yo wtf', this.userInfo)
-  //                       console.log('goddamnit', this.filteredItems)
-  //                     })
-  // }
+  getUsers() {
+    this._TopicsService.getUsers()
+                      .subscribe( (data) => {
+                        console.log("Where is this data man", data)
+                        this.userInfo = data;
+                        this.filterItem('');
+                        console.log('yo wtf', this.userInfo)
+                        console.log('goddamnit', this.filteredItems)
+                      })
+  }
+
+  davidGetUsers() {
+    console.log('davidGetUsers Lawnches')
+    console.log(typeof localStorage.getItem('currentCircleId'))
+    this.DavidDataService.davidGetUsers(localStorage.getItem('currentCircleId'))
+    .subscribe( (data) => {
+      console.log(data);
+        this.usersOfCircle = data;
+      console.log('lame');
+    });
+  }
 
   // getTopics() {
   //   console.log('inside getTopics function inside CirclesComponent')
