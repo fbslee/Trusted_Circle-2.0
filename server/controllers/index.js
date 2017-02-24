@@ -181,6 +181,10 @@ var vote= {
         })
       })
     })
+  },
+  post: function(req, res){
+    console.log('HIIIIIIIIII',req.body)
+    res.send('yay')
   }
 }
 
