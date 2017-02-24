@@ -39,6 +39,21 @@ public clickedTopic: any;
     // console.log(this.getAllCurrentUserDataStorage);
     // this.getAllCurrentUserDataStorage = data;
     return data;
+  }
+  
+    davidGetUsers(circleId: string): Observable<any> {
+
+    var data = this.http.get('/api/get_users_circles/'+circleId)
+                    .map( ( res:Response ) => {
+                      console.log('getting in here!!')
+                      console.log(res.json());
+                      return res.json()
+                    })
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+
+    // console.log(this.getAllCurrentUserDataStorage);
+    // this.getAllCurrentUserDataStorage = data;
+    return data;
     }
 
 
