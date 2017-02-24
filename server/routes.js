@@ -450,6 +450,7 @@ router.post('/topics', (req, res) => {
 router.post('/poll', controller.poll.post) 
 
 router.get('/votes', controller.vote.get)
+router.post('/votes', controller.vote.post)
 
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);

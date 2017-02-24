@@ -4,7 +4,12 @@
 <h3 style="text-align:center">{{suggestor}} suggested that {{suggestedMember}} join your circle {{circle}} </h3>
 
 <div style="text-align:center">
-<button type="button" class="btn btn-success" (click)="accept()" [routerLink]="['/results']" >Accept</button>
-<button type="button" class="btn btn-danger" (click)="deny()" [routerLink]="['/results']" >Deny</button>
+<button type="button" class="btn btn-success" (click)="accept()" >Accept</button>
+<button type="button" class="btn btn-danger" (click)="deny()" >Deny</button>
 </div>
 </div>
+
+<div *ngIf="voteComplete">
+    <h1 style="text-align:center"><strong>Ballot Complete</strong></h1>
+    <h3 style="text-align:center">Thank you for your vote!<br>Please wait for the results.</h3>
+    </div>
