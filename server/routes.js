@@ -91,9 +91,26 @@ router.get('/roomList', (req, res) => {
 
 router.get('/circles', (req, res) => {
     console.log('/circles being hit!!! for GET');
-    console.log(req.query);
+    console.log(req.params);
     
     Circle.findAll().then( (val) => {
+            res.send(val) 
+    })
+  
+
+});
+
+router.get('/circles/:circleName', (req, res) => {
+    console.log('/circlesName being hit!!! for GET');
+    console.log(req.params);
+    
+    Circle.findAll({
+        where: {
+            name: req.params.circleName
+        }
+    }).then( (val) => {
+            console.log(val);
+            
             res.send(val) 
     })
   
@@ -354,26 +371,43 @@ router.post('/topics', (req, res) => {
 
     })
 
+})
+
+
+router.post('/circles', (req, res) => {
+    var body = req.body
+    console.log('THIS IS BODY of circles!!', body);
+    // body = JSON.stringify(body)
+    // res.send(body);
+    let newCircle = {
+        name: body.body,
+        userId: body.userId,
+        totalMembers: 1
+    };
+
+
+    Circle.create(newCircle)
+    .then( (data) => {
+        // res.status(200).json(data);
+        return data;
+    }).then( (data) => {
+
+        console.log(data.dataValues, ' DATATATATATATATATAATATA');
+
+        User_Circles.create({
+        status: "true",
+        userId: body.userId,
+        circleId: data.dataValues.id
+        })
+        .then( (data) => {
+            res.status(200).json(data);
+        })
 
 
 
+    })
 
-
-
-
-    // var username = req.body.username
-    // console.log('this is data', req.body)
-    // let newMessage = {
-    //     body: body,
-    //     username: username
-    // }
-    // Message.create(newMessage).then(function (newMessage) {
-    //     res.status(200).json(newMessage);
-    //   })
-    //   .catch(function (error){
-    //     res.status(500).json(error);
-    //   });
-  })
+})
 
 router.patch('/messages/:id', (req, res) => {
     console.log("EDIT", req.params);
