@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CirclesService } from '../services/circles.service';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { Http, HttpModule, Response, Headers, JsonpModule } from "@angular/http";
 
 import { DavidDataService } from '../services/david-data.service';
 
@@ -20,7 +20,8 @@ export class CirclesComponent implements OnInit {
   //['Hack Reactor', 'Movies', 'Soccer'];
 
   constructor(private _CirclesService: CirclesService,
-              private DavidDataService: DavidDataService
+              private DavidDataService: DavidDataService,
+              private http: Http
               ) { }
 
   ngOnInit() {
@@ -109,26 +110,41 @@ export class CirclesComponent implements OnInit {
   }
 
 
-  createCircle() {
+  createCircle(name) {
+
+    console.log(name);
+    let body = {
+      body: name,
+      userId: localStorage.getItem('userID') || sessionStorage.getItem('userId')
+    }
+    console.log(body);
+
+    let headers = new Headers({'Content-Type': 'application/json'});
+
+    var nameCheck = name;
+
+    if (name) {
+              this.http.get('/api/circles/'+nameCheck).map(res => res.json()).subscribe((data) => {
+              console.log(data, 'this is the returned data from the nameCheckGet')
+
+              if(data.length !== 0) {
+                      return alert('That Circle Already Exists!');
+              } else {
+                this.newCircle = '';
+                      return this.http.post('/api/circles', body, {headers: headers})
+                      .map(res => res.json()).subscribe((data) => {
+                        // this.finalComparedCircles.push([body.body, data.topicId]);
+                        // this.finalComparedCircles.push()
+                        this.finalComparedCircles.push([ name, data.circleId]);
+                        console.log(data, 'this is the returned data/1')
+                      })
+
+              }
+            })   
+    } else {
+        return alert('Please Have a Valid Name for a Circle!')
+    }
 
   }
-
-
-    // addMessage(message: Message) {
-    //     let body = JSON.stringify(message);
-    //     let headers = new Headers({'Content-Type': 'application/json'});
-    //     return this.http.post('/api/messages', body, {headers: headers})
-    //         .map((response: Response) => {
-    //             let result = response.json();
-    //             console.log('result', result);
-    //             let message = new Message(result.body, 'Dummy', result.id, null);
-    //             this.messages.push(message);
-    //             return message;
-    //         })
-    //         .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
-
-
-
-    // }
 
 }

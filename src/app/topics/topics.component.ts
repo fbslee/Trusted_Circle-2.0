@@ -108,21 +108,22 @@ export class TopicsComponent implements OnInit {
 
   topicClicked(topicName, idx) {
     console.log('THISSSS', this.user_topic)
-    var arr_user_topic = this.user_topic;
-    this.DavidDataService.getUser(idx) 
-    .subscribe( (data) => {
-      console.log(data, 'DATA!!!!')
-      for(var user_topic of arr_user_topic) {
-        if(user_topic.userId == data.id) {
-          console.log(data.username);
-          sessionStorage.setItem('topicUser', data.username);
-        }
-      }
+    console.log('this is the selected topic\'s id', idx);
+    // var arr_user_topic = this.user_topic;
+    // this.DavidDataService.getUser(idx) 
+    // .subscribe( (data) => {
+    //   console.log(data, 'DATA!!!!')
+    //   for(var user_topic of arr_user_topic) {
+    //     if(user_topic.userId == data.id) {
+    //       console.log(data.username);
+    //       sessionStorage.setItem('topicUser', data.username);
+    //     }
+    //   }
 
 
 
 
-    })
+    // })
     console.log('this is the id of the topic selected', idx)
 
     sessionStorage.setItem('topicSelectedIdx', idx);
@@ -267,6 +268,7 @@ export class TopicsComponent implements OnInit {
     console.log(body);
 
     let headers = new Headers({'Content-Type': 'application/json'});
+        this.newTopic.body = '';
         return this.http.post('/api/topics', body, {headers: headers})
         .map(res => res.json()).subscribe((data) => {
           this.topics.push([body.body, data.topicId]);
