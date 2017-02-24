@@ -12,6 +12,7 @@ public allTopics: any;
 public allUserTopics: any;
 public allUserCircles: any;
 public allCircles: any;
+public gotUser: any;
 
 public currentCircle: any;
 public currentUsername: any;
@@ -23,6 +24,8 @@ public currentUserTopicBelong: any;
 public currentUserCircleToTopicBelong: any; 
 
 public getAllCurrentUserDataStorage: any;
+
+public clickedTopic: any;
 
   constructor(private http: Http) { }
 
@@ -39,6 +42,16 @@ public getAllCurrentUserDataStorage: any;
     }
 
 
+  getUser(id): Observable<any> {
+    console.log('INSIDE DAVID service for getUsers')
+
+    var data = this.http.get('/api/user/'+id)
+                    .map( ( res:Response ) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+
+    this.gotUser = data;
+    return data;
+  }
 
 
   getUsers(): Observable<any> {

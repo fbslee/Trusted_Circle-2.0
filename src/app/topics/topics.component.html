@@ -1,10 +1,10 @@
 <h1>These are the Topics being discussed in the Circle {{circle}} </h1>
 
 <ul>
-
+      Topics:
       <!--(click)="clicked(topic)"-->
-      <li *ngFor="let topic of topics" [routerLink]="['/messages']" >
-        <strong (click)="topicClicked(topic)">{{ topic }} </strong> 
+      <li *ngFor="let topic of topics; let i = index" [routerLink]="['/messages']" >
+        <strong (click)="topicClicked(topic[0], topic[1])">{{ topic[0] }} </strong> 
         <!--<strong>{{topic.user}}</strong>-->
       </li>
 </ul>
@@ -12,7 +12,7 @@
 <input type="text" placeholder="New Topic To Discuss" 
     [(ngModel)]="newTopic.body" 
     name="body"
-    (keyup.enter)="createTopic()"
+    (keyup.enter)="createTopic(newTopic.body)"
     >
 
 <ul>

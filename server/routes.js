@@ -52,6 +52,19 @@ router.get('/users/:username', (req, res) => {
     })
 })
 
+router.get('/user/:id', (req, res) => {
+    console.log('getting specific user');
+    console.log(req.params);
+
+    User.find({
+    where: {
+        id: req.params.id
+     }
+    }).then( (data) => {
+        res.send(data)
+    })
+})
+
 router.get('/users_circles', (req, res) => {
     console.log('getting users circles');
     User_Circles.findAll().then( (data) => {
@@ -95,8 +108,10 @@ router.get('/userCircleTopic/:userId'
 
     var userId = req.params.userId;
 
-    console.log('/circles being hit!!! for GET from param');
-    console.log(req.params);
+    // console.log('/circles being hit!!! for GET from param');
+    // console.log(req.params);
+
+
 
     User.find({
         where: {
@@ -144,7 +159,7 @@ router.get('/userCircleTopic/:userId'
                 Topic.findAll({})
                 .then ( (topicInfo) => {
                     for(topic of topicInfo) {
-                        console.log(topic.dataValues,'------2------');
+                        // console.log(topic.dataValues,'------2------');
                         for(cirId of returnInfo.circleId) {
                             if(cirId === topic.dataValues.circleId) {
                                 returnInfo.topicId.push(topic.dataValues.id);
@@ -171,7 +186,22 @@ router.get('/userCircleTopic/:userId'
                 }
 
                 
-                res.send(returnInfo)
+                return returnInfo
+                // res.send(returnInfo)
+                }).then( () => {
+                        User_Topics.findAll()
+                        .then( (data) => {
+                            // console.log(data, 'this is Data');
+                            
+                            var dataArray = data;
+                            for( topics of dataArray) {
+                                console.log(topics.dataValues);
+                                returnInfo.users_topicsALL.push(topics.dataValues);
+                            }
+                            res.send(returnInfo)
+                        })
+
+                    
                 })
 
 
@@ -191,6 +221,7 @@ router.get('/userCircleTopic/:userId'
         topicsObj: [],
         topicId: [],
         circles_topics: {},
+        users_topicsALL: []
     };
 
 
@@ -288,6 +319,60 @@ router.post('/messages', (req, res) => {
       .catch(function (error){
         res.status(500).json(error);
       });
+  })
+
+
+router.post('/topics', (req, res) => {
+    var body = req.body
+    console.log('THIS IS BODY!!', body);
+    // body = JSON.stringify(body)
+    // res.send(body);
+    let newTopic = {
+        body: body.body,
+        circleId: body.circleId
+    }
+
+
+    Topic.create(newTopic)
+    .then( (data) => {
+        // res.status(200).json(data);
+        return data;
+    }).then( (data) => {
+
+        console.log(data.dataValues, ' DATATATATATATATATAATATA');
+
+        User_Topics.create({
+        status: "original poster",
+        userId: body.userId,
+        topicId: data.dataValues.id
+        })
+        .then( (data) => {
+            res.status(200).json(data);
+        })
+
+
+
+    })
+
+
+
+
+
+
+
+
+    // var username = req.body.username
+    // console.log('this is data', req.body)
+    // let newMessage = {
+    //     body: body,
+    //     username: username
+    // }
+    // Message.create(newMessage).then(function (newMessage) {
+    //     res.status(200).json(newMessage);
+    //   })
+    //   .catch(function (error){
+    //     res.status(500).json(error);
+    //   });
   })
 
 router.patch('/messages/:id', (req, res) => {

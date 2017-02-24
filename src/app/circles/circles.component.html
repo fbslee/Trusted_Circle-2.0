@@ -6,7 +6,7 @@
       <li *ngFor="let circle of finalComparedCircles">
 
         <div>
-          <strong (click)="circleClicked(circle)" [routerLink]="['/topics']" >{{ circle }}</strong>
+          <strong (click)="circleClicked(circle[0])" [routerLink]="['/topics']" >{{ circle[0] }}</strong>
           </div>
       </li>
 </ul>
