@@ -23,7 +23,9 @@ export class TopicsComponent implements OnInit {
   allCircles : any = [];
   userInfo: {};
   filteredItems: {};
+  currentCircle: string; 
   usersOfCircle: any [];
+
 
   user_topic: any;
 
@@ -60,7 +62,12 @@ export class TopicsComponent implements OnInit {
   ngOnInit() {
     // sessionStorage.removeItem('topic')
     this.setTopics()
+
+    this.currentCircle = localStorage.getItem('currentCircle');
+    
+
     this.davidGetUsers();
+
   }
 
 
