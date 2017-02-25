@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive,  } from '@angular/core';
+import { Component, OnInit, Directive  } from '@angular/core';
 import { Parallax, ParallaxConfig  } from '../parallax.directive';
 
 @Component({
