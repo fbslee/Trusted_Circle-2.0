@@ -343,22 +343,65 @@ router.get('/topics/:id', (req, res) => {
 });
 
 
-router.get('/messages', (req, res) => {
-    Message.findAll().then( (val) => {
-            res.send(val) 
+// router.get('/messages/:idx', (req, res) => {
+//     Message.findAll({
+//         where: {
+//             topicId: req.params.topicId
+//         },
+//         include: [User],
+//         order: 'votes DESC'
+
+//     }).then( messages => {
+//         const resObj = messages.map(message => {
+//             return Object.assign(
+//                 {},
+//                 {   body: message.dataValues.body,
+//                     messageId: message.dataValues.id,
+//                     topicId: message.dataValues.topicId,
+//                     userId: message.dataValues.userId,
+//                     votes: message.dataValues.votes,
+//                     username: message.dataValues.user.dataValues.username
+//                 }
+//             )
+//         })
+//         console.log(resObj);
+//             res.send(messages) 
+//     })
+//   });
+  router.get('/messages', (req, res) => {
+    Message.findAll({
+        include: [User],
+        order: 'votes DESC'
+
+    }).then( messages => {
+        const resObj = messages.map(message => {
+            return Object.assign(
+                {},
+                {   body: message.dataValues.body,
+                    messageId: message.dataValues.id,
+                    topicId: message.dataValues.topicId,
+                    userId: message.dataValues.userId,
+                    votes: message.dataValues.votes,
+                    username: message.dataValues.user.dataValues.username
+                }
+            )
+        })
+        console.log(resObj);
+            res.send(messages) 
     })
   });
 
 router.post('/messages', (req, res) => {
     var body = req.body.body;
-    var username = req.body.username;
+    var votes = req.body.votes;
     var userId = req.body.userId;
-    console.log('this is data', req.body)
+    var topicId = req.body.topicId;
+    console.log(req.body);
     let newMessage = {
         body: body,
-        username: username,
-        userId: userId
-
+        votes: votes,
+        userId: userId,
+        topicId: topicId
     }
     Message.create(newMessage).then(function (newMessage) {
         res.status(200).json(newMessage);

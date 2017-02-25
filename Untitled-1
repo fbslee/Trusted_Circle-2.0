@@ -1,0 +1,25 @@
+router.get('/messages/:topicIden', (req, res) => {
+    var topicIden = req.params.topicIden;
+    Message.findAll({
+        include: [User],
+        order: 'votes DESC',
+        where: {
+            topicId: topicIden,
+        }
+    }).then( messages => {
+        const resObj = messages.map(message => {
+            return Object.assign(
+                {},
+                {   body: message.dataValues.body,
+                    messageId: message.dataValues.id,
+                    topicId: message.dataValues.topicId,
+                    userId: message.dataValues.userId,
+                    votes: message.dataValues.votes,
+                    username: message.dataValues.user.dataValues.username
+                }
+            )
+        })
+        console.log(resObj);
+            res.send(messages) 
+    })
+  });
