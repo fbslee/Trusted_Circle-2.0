@@ -453,6 +453,34 @@ router.get('/topics_to_user/:topicsId', (req, res) => {
     })
   });
 
+  router.get('/getTopicmessages/:topicId', (req, res) => {
+    console.log('======================IDX IS===================', req.params.topicId);
+
+    Message.findAll({
+        include: [User],
+        order: 'votes DESC',
+        where: {
+            topicId: req.params.topicId 
+        }
+
+    }).then( messages => {
+        const resObj = messages.map(message => {
+            return Object.assign(
+                {},
+                {   body: message.dataValues.body,
+                    messageId: message.dataValues.id,
+                    topicId: message.dataValues.topicId,
+                    userId: message.dataValues.userId,
+                    votes: message.dataValues.votes,
+                    username: message.dataValues.user.dataValues.username
+                }
+            )
+        })
+        console.log(resObj);
+            res.send(messages) 
+    })
+  });
+
 router.post('/messages', (req, res) => {
     var body = req.body.body;
     var votes = req.body.votes;
