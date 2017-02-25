@@ -6,7 +6,7 @@
                 [class.highlighted]="myVote == 1"
                 (click)="upVote()"
             ></li>
-            <span class="vote-count">{{ voteCount + myVote }}</span>
+            <span class="vote-count">{{ message.votes + myVote }}</span>
             <li
                 class="glyphicon glyphicon-menu-down vote-button"
                 [class.highlighted]="myVote == -1"

@@ -13,7 +13,8 @@ export class MessageService {
 
     private messages: Message[] = [];
     username: string = localStorage.getItem('username');
-    userId: string = localStorage.getItem('userId');
+    userId: any = localStorage.getItem('userID');
+    topicId: any = sessionStorage.getItem('topicSelectedIdx');
 
 
 
@@ -30,13 +31,21 @@ export class MessageService {
 
     addMessage(message: Message) {
         let body = JSON.stringify(message);
+        console.log('body in add message', body);
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('/api/messages', body, {headers: headers})
             .map((response: Response) => {
                 let result = response.json();
                 console.log('result', result);
-                let message = new Message(result.body, this.username, result.votes ,result.id, this.userId);
-                console.log('message defined inside of the post', message)
+                let message = new Message(
+                    result.body, 
+                    this.username, 
+                    result.votes,
+                    this.userId,
+                    result.topicId,
+                    result.id
+                    );
+                console.log('Add Message', message)
                 this.messages.push(message);
                 return message;
             })
@@ -45,13 +54,21 @@ export class MessageService {
     }
 
      getMessages() {
-        return this.http.get('/api/messages')
+        let idx = sessionStorage.getItem('topicSelectedIdx');
+        return this.http.get('/api/messages/')
             .map((response: Response) => {
                 let messages = response.json();
                 console.log('inside getMessages in service', messages);
                 let transformedMessages: Message[] = [];
                 for (let message of messages) {
-                    transformedMessages.push(new Message(message.body, this.username, message.votes, message.id, this.userId));
+                    transformedMessages.push(new Message(
+                        message.body, 
+                        message.user.username, 
+                        message.votes, 
+                        message.userId,
+                        message.topicId,
+                        message.id
+                        ));
                 }
                 this.messages = transformedMessages;
                 console.log('transformedMessages ', transformedMessages);

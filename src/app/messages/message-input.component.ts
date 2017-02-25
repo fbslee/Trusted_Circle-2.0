@@ -34,7 +34,8 @@ export class MessageInputComponent implements OnInit {
     topicUser: string = sessionStorage.getItem('topicUser') || localStorage.getItem('topicUser')
     constructor(private messageService: MessageService) {}
     username: string = localStorage.getItem('username');
-    userId: any = localStorage.getItem('userID');
+    userID: any = localStorage.getItem('userID');
+    topicId: any = sessionStorage.getItem('topicSelectedIdx');
 
 
     onSubmit(form: NgForm) {
@@ -49,8 +50,13 @@ export class MessageInputComponent implements OnInit {
         } else {
             // Create
             console.log( 'username' ,this.username);
-            console.log("message in on submit", this.message);
-            const message = new Message(form.value.content, this.username);
+            const message = new Message(
+                form.value.content, 
+                this.username,
+                1,
+                this.userID,
+                this.topicId
+                );
             this.messageService.addMessage(message)
                 .subscribe(
                     data => console.log("succss here is the data ", data),
