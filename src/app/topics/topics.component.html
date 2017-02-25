@@ -1,10 +1,10 @@
-<h1>These are the Topics being discussed in the Circle {{currentCircle}}</h1>
+<h1>These are the Topics being discussed in the Circle: <strong>[{{currentCircle}}]</strong></h1>
 
 <ul>
       Topics:
       <!--(click)="clicked(topic)"-->
       <li *ngFor="let topic of topics; let i = index" [routerLink]="['/messages']" >
-        <strong (click)="topicClicked(topic[0], topic[1])">{{ topic[0] }} </strong> 
+        <strong (click)="topicClicked(topic[0], topic[1])">{{topic[0]}} {{ topic[1] }} </strong> 
         <!--<strong>{{topic.user}}</strong>-->
       </li>
 </ul>
@@ -25,9 +25,18 @@
   <input mdInput #myInput placeholder="Add a User" [(ngModel)]="name" (input)="filterItem(myInput.value)" >
 </md-input-container>
 
+<span>
 <div>
   People in the Current Circle
 <div *ngFor="let item of usersOfCircle" (click)="printuser(item)" [routerLink]="['/poll']" >
    {{item.username}}
 </div>
 </div>
+
+<div>
+  People "NOT" in Current Circle
+<div *ngFor="let item of usersNotOfCircle" (click)="printuser(item)" [routerLink]="['/poll']" >
+   {{item.username}}
+</div>
+</div>
+</span>

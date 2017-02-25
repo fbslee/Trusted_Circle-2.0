@@ -26,6 +26,8 @@ export class TopicsComponent implements OnInit {
   currentCircle: string; 
   usersOfCircle: any [];
 
+  usersNotOfCircle: any [];
+
 
   user_topic: any;
 
@@ -67,7 +69,7 @@ export class TopicsComponent implements OnInit {
     
 
     this.davidGetUsers();
-
+    this.davidGetNotUsers();
   }
 
 
@@ -127,6 +129,8 @@ export class TopicsComponent implements OnInit {
     //       sessionStorage.setItem('topicUser', data.username);
     //     }
     //   }
+
+
 
 
 
@@ -226,6 +230,15 @@ export class TopicsComponent implements OnInit {
     .subscribe( (data) => {
       console.log(data);
         this.usersOfCircle = data;
+      console.log('lame');
+    });
+  }
+
+  davidGetNotUsers() {
+    this.DavidDataService.davidGetNotUsers(localStorage.getItem('currentCircleId'))
+    .subscribe( (data) => {
+      console.log(data);
+        this.usersNotOfCircle = data;
       console.log('lame');
     });
   }
