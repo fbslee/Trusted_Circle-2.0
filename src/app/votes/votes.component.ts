@@ -15,6 +15,7 @@ export class VotesComponent implements OnInit {
   voteId: number;
   isDataAvailable: boolean = false;
   voteComplete: boolean = false;
+  noVotes: boolean = false;
   
   constructor(private _VoteService: VoteService) { }
 
@@ -41,12 +42,16 @@ export class VotesComponent implements OnInit {
   ngOnInit() {
     this._VoteService.getVote()
     .subscribe(data => {
-      this.suggestor = data.suggestor
-      this.suggestedMember = data.suggestedMember
-      this.circle = data.circle
-      this.pollId = data.pollId
-      this.voteId = data.voteId
-      this.isDataAvailable = true
+      if(data.noVotes === true){
+        this.noVotes = true;
+      } else {
+        this.suggestor = data.suggestor
+        this.suggestedMember = data.suggestedMember
+        this.circle = data.circle
+        this.pollId = data.pollId
+        this.voteId = data.voteId
+        this.isDataAvailable = true
+      }
     })
   }
 
