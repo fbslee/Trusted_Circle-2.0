@@ -37,6 +37,8 @@ export class MessageInputComponent implements OnInit {
     userID: any = localStorage.getItem('userID');
     topicId: any = sessionStorage.getItem('topicSelectedIdx');
 
+    topicOwner: string;
+
 
     onSubmit(form: NgForm) {
         if(this.message) {
@@ -74,6 +76,8 @@ export class MessageInputComponent implements OnInit {
         this.messageService.messageIsEdit.subscribe(
             (message: Message) => this.message = message
         );
+
+        // this.topicOwner = sessionStorage
     }
 
 

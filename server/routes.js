@@ -99,6 +99,32 @@ router.get('/get_users_circles/:circleId', (req, res) => {
     })
 })
 
+router.get('/get_users_non_circles/:circleId', (req, res) => {
+    console.log(req.params.circleId, 'this is circle Id!');
+    console.log('getting users of a circle !!!!');
+    User_Circles.findAll({
+        where: {
+            circleId: req.params.circleId
+        }
+    }).then( (data) => {
+        var arrUsers = [];
+        data.forEach( (val, i) => {
+            arrUsers.push(val.dataValues.userId);
+        })
+        console.log(arrUsers);
+        return arrUsers;
+    }).then( (arrUsers) => {
+        User.findAll({
+            where: {
+                id: { $notIn: arrUsers }
+            }
+        })
+            .then( (dataUsers) => {
+            res.send(dataUsers);
+        })
+    })
+})
+
 router.get('/users_topics', (req, res) => {
     console.log('getting users topics');
     User_Topics.findAll().then( (data) => {
@@ -337,6 +363,38 @@ router.get('/topics/:id', (req, res) => {
      }
     }).then( (val) => {
             res.send(val) 
+    })
+  
+
+});
+
+router.get('/topics_to_user/:topicsId', (req, res) => {
+    //purpose to get topic owner
+
+
+    console.log('/topics being hit!!! for GET from param')
+    console.log(req.params);
+    console.log(req.params.topicsId);
+    
+    User_Topics.find({
+    where: {
+        topicId: req.params.topicsId,
+        status: "original poster"
+     }
+    }).then( (val) => {
+      console.log(val.dataValues);
+
+      var userId = val.dataValues.userId;
+
+      User.find({
+          where: {
+              id: userId
+          }
+      }).then ( (data) => {
+          res.send(data);
+      })
+
+            // res.send(val) 
     })
   
 
