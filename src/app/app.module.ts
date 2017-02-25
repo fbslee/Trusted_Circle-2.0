@@ -47,6 +47,7 @@ import { ResultsComponent } from './results/results.component';
 import { PopoverModule } from 'ng2-popover';
 
 import { DavidDataService } from './services/david-data.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { DavidDataService } from './services/david-data.service';
     Parallax,
     PollComponent,
     AlertComponent,
-    ResultsComponent
+    ResultsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +89,9 @@ import { DavidDataService } from './services/david-data.service';
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'chat', component: ChatComponent 
+      , canActivate: [AuthGuard] 
+      },
+      { path: 'dashboard', component: DashboardComponent
       , canActivate: [AuthGuard] 
       },
       { path: 'messages', component: MessagesComponent
