@@ -77,8 +77,11 @@ router.get('/get_users_circles/:circleId', (req, res) => {
     console.log('getting users of a circle !!!!');
     User_Circles.findAll({
         where: {
-            circleId: req.params.circleId
+            circleId: req.params.circleId,
+            status: { $ne: "blacklisted" },
+            $and: { status : "member" } 
         }
+    
     }).then( (data) => {
         var arrUsers = [];
         data.forEach( (val, i) => {
@@ -104,7 +107,8 @@ router.get('/get_users_non_circles/:circleId', (req, res) => {
     console.log('getting users of a circle !!!!');
     User_Circles.findAll({
         where: {
-            circleId: req.params.circleId
+            circleId: req.params.circleId,
+            status: { $ne: "blacklisted" }
         }
     }).then( (data) => {
         var arrUsers = [];
