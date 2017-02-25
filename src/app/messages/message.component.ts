@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Message } from './message.model';
 
+
 import { MessageService } from '../services/message.service'
 
 @Component({
@@ -12,6 +13,9 @@ export class MessageComponent {
     @Input() message: Message;
     @Input() voteCount = 0;
     @Input() myVote = 0;
+    private userInfo = {
+        username: ''
+    };
 
     @Output('vote') change = new EventEmitter();
 
@@ -22,6 +26,21 @@ export class MessageComponent {
 
         this.messageService.editMessage(this.message)
       
+    }
+
+    ttp(user) {
+
+        if(this.userInfo.username === user) {
+            return;
+        }
+        else {
+
+        this.messageService.findUser(user)
+        .subscribe( (data) => {
+                        this.userInfo = data[0];
+                        console.log(this.userInfo, 'this is data and its subscribed');
+                        }) 
+        }
     }
 
     onDelete() {

@@ -12,7 +12,7 @@ import { DavidDataService } from '../services/david-data.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private status = localStorage.getItem('username');
+  private status = localStorage.getItem('username') || false;
   private n = 1;
 
   constructor(overlay: Overlay, 

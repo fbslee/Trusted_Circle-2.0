@@ -72,6 +72,33 @@ router.get('/users_circles', (req, res) => {
     })
 })
 
+router.get('/get_users_circles/:circleId', (req, res) => {
+    console.log(req.params.circleId, 'this is circle Id!');
+    console.log('getting users of a circle !!!!');
+    User_Circles.findAll({
+        where: {
+            circleId: req.params.circleId
+        }
+    }).then( (data) => {
+        var arrUsers = [];
+        data.forEach( (val, i) => {
+            arrUsers.push(val.dataValues.userId);
+        })
+        console.log(arrUsers);
+        return arrUsers;
+    }).then( (arrUsers) => {
+        User.findAll({
+        where: {
+            id: arrUsers
+        }
+        }).then( (dataUsers) => {
+        
+        
+        res.send(dataUsers);
+        })
+    })
+})
+
 router.get('/users_topics', (req, res) => {
     console.log('getting users topics');
     User_Topics.findAll().then( (data) => {
@@ -398,7 +425,7 @@ router.post('/circles', (req, res) => {
         console.log(data.dataValues, ' DATATATATATATATATAATATA');
 
         User_Circles.create({
-        status: "true",
+        status: "member",
         userId: body.userId,
         circleId: data.dataValues.id
         })
@@ -450,6 +477,7 @@ router.post('/topics', (req, res) => {
 router.post('/poll', controller.poll.post) 
 
 router.get('/votes', controller.vote.get)
+router.post('/votes', controller.vote.post)
 
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);
