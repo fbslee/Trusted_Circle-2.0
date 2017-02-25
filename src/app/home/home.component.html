@@ -1,37 +1,65 @@
 
 <div class="parallaxOne" parallax ></div> 
 
-<div class="jumbotron">
-  <div style="margin-left: 2em">
-  <h1>Trusted Circle</h1>
-  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <p><input type="" name="" value=""><a class="ui primary basic button">create circle</a></p>
+<div class="jumbotron container jOne">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="col-md-6">
+        <img src="http://www.free-icons-download.net/images/red-circle-icon-69788.png" class="img-responsive center-block">
+      </div>
+      <div class="col-md-6" style="text-align: center">
+          <h1>Trusted Circle</h1>
+          <p>Who do you trust?</p>
+            <a routerLink="/signup" class="btn btn-default">Sign Up</a>
+      </div>
+      
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="user.username" #username="ngModel" required />
+            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required />
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" (click)='submitLogin(username)' class="btn btn-primary">Login</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+    </form>
   </div>
-  
+      </div>
+  </div>
 </div>
 
-<div class="parallaxTwo" parallax>
-</div>
+
+<div class="parallaxTwo" parallax></div>
 
   <div class="jumbotron">
     <div class="container">
 
 <div class="row">
 <div class="col-lg-4">
-      <div class="panel panel-info">
-      <div class="panel-heading">Panel Header</div>
+      <div class="panel">
+      <div class="panel-heading">Connect</div>
       <div class="panel-body">Panel Content</div>
     </div>
 </div>
 <div class="col-lg-4">
-      <div class="panel panel-default">
-      <div class="panel-heading">Panel Header</div>
+      <div class="panel ">
+      <div class="panel-heading">Share</div>
       <div class="panel-body">Panel Content</div>
     </div>
 </div>
 <div class="col-lg-4">
-      <div class="panel panel-primary">
-      <div class="panel-heading">Panel Header</div>
+      <div class="panel">
+      <div class="panel-heading">Trust</div>
       <div class="panel-body">Panel Content</div>
     </div>
 </div>
