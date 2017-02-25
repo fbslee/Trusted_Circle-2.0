@@ -17,6 +17,7 @@ export class CirclesComponent implements OnInit {
   circlesUser: any = [];
   finalComparedCircles: any = [];
   circles: any = [];
+
   //['Hack Reactor', 'Movies', 'Soccer'];
 
   constructor(private _CirclesService: CirclesService,
