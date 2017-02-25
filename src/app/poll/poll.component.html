@@ -1,3 +1,4 @@
+<div *ngIf="showThis">
 <h1 style="text-align:center"><strong>Poll</strong></h1>
 
 <h3 style="text-align:center">Would you like to suggest that {{suggestedMember}} join the circle {{circle}}?</h3>
@@ -6,3 +7,11 @@
 <button type="button" class="btn btn-success" (click)="yes()">Yes</button>
 <button type="button" class="btn btn-danger" [routerLink]="['/topics']">No</button>
 </div>
+</div>
+
+<div *ngIf="pollCreated">
+    <h1 style="text-align:center"><strong>Poll</strong></h1>
+    <h3 style="text-align:center">You have invited {{suggestedMember}} to join the circle {{circle}}.
+        <br>A ballot was sent to the members of this circle to determine the acceptance of this new member.
+    </h3>
+    <div>

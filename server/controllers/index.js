@@ -140,7 +140,8 @@ var vote= {
     var circleName;
     Vote.findOne({
       where:{
-        userId: userId
+        userId: userId,
+        complete: false
       }
     }).then((data)=>{
       pollId = data.dataValues.pollId;
