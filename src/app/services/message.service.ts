@@ -55,7 +55,7 @@ export class MessageService {
 
      getMessages() {
         let idx = sessionStorage.getItem('topicSelectedIdx');
-        return this.http.get('/api/messages/')
+        return this.http.get('/api/getTopicmessages/'+idx)
             .map((response: Response) => {
                 let messages = response.json();
                 console.log('inside getMessages in service', messages);

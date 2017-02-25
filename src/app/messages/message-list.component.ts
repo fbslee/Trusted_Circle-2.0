@@ -22,7 +22,7 @@ export class MessageListComponent implements OnInit {
        this.messageService.getMessages()
        .subscribe( (data) => {
            console.log('this is messages data inside list', data) 
-           console.log(this.username)
+           console.log(this.username, 'this is the username from message page')
            this.messages = data;
     }
         // console.log()  
