@@ -4,14 +4,19 @@ import { DavidDataService } from '../services/david-data.service';
 @Component({
   selector: 'app-messages',
   template: `
+    <div class="container">
+
   <div class="row">
   <app-message-input></app-message-input>
   </div>
   <hr>
   <div class="row">
     <app-message-list></app-message-list>
-  </div>
-  `
+  </div></div>
+  `,
+    styleUrls: ['./messages.component.scss']
+
+
 })
 export class MessagesComponent {
 
