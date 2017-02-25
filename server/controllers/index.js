@@ -117,7 +117,6 @@ var poll = {
                 console.log(error)
               })
             } else {
-              console.log('DAVID IS SO SMART')
               res.redirect('/results')
             }
           })
@@ -144,48 +143,83 @@ var vote= {
         complete: false
       }
     }).then((data)=>{
-      pollId = data.dataValues.pollId;
-      voteId = data.dataValues.id;
-      Poll.findOne({
-        where:{
-          id: data.dataValues.pollId
-        }
-      }).then((data) => {
-        circleId = data.dataValues.circleId
-        suggestedMemberId = data.dataValues.suggestedMemberId
-        suggestorId = data.dataValues.suggestorId
-        Circle.findOne({
+      if(data !== null){
+        pollId = data.dataValues.pollId;
+        voteId = data.dataValues.id;
+        Poll.findOne({
           where:{
-            id: data.dataValues.circleId
+            id: data.dataValues.pollId
           }
         }).then((data) => {
-          circleName = data.dataValues.name
-          userModel.findOne({
+          circleId = data.dataValues.circleId
+          suggestedMemberId = data.dataValues.suggestedMemberId
+          suggestorId = data.dataValues.suggestorId
+          Circle.findOne({
             where:{
-              id: suggestedMemberId
+              id: data.dataValues.circleId
             }
           }).then((data) => {
-            suggestedMemberName = data.dataValues.username
+            circleName = data.dataValues.name
             userModel.findOne({
-              where: {
-                id: suggestorId
+              where:{
+                id: suggestedMemberId
               }
             }).then((data) => {
-              suggestorName = data.dataValues.username
-              res.send({suggestor: data.dataValues.username,
-              suggestedMember: suggestedMemberName,
-              circle: circleName,
-              voteId: voteId,
-              pollId: pollId})
+              suggestedMemberName = data.dataValues.username
+              userModel.findOne({
+                where: {
+                  id: suggestorId
+                }
+              }).then((data) => {
+                suggestorName = data.dataValues.username
+                res.send({suggestor: data.dataValues.username,
+                suggestedMember: suggestedMemberName,
+                circle: circleName,
+                voteId: voteId,
+                pollId: pollId})
+              })
             })
           })
         })
-      })
+      } else {
+        res.send({
+          noVotes: true
+        })
+      }
     })
   },
   post: function(req, res){
-    console.log('HIIIIIIIIII',req.body)
-    res.send('yay')
+    Vote.findOne({
+      where:{
+        id: req.body.voteId
+      }
+    }).then((data) =>{
+      data.updateAttributes({
+        complete: req.body.complete,
+        choice: req.body.choice
+      }).then(() => {
+        Poll.findOne({
+          where:{
+            id: req.body.pollId
+          }
+        }).then((data)=>{
+          if(req.body.choice === 'accept'){
+            data.updateAttributes({
+              votesIn: (data.dataValues.votesIn + 1),
+              votesFor: (data.dataValues.votesFor + 1)
+            }).then((data)=>{
+              console.log(data, 'what happens to poll if i accept')
+            })
+          } else {
+            data.updateAttributes({
+              votesIn: (data.dataValues.votesIn + 1)
+            }).then((data) =>{
+              console.log(data, 'what happens to poll if i deny')
+            })
+          }
+        })
+      })
+    })
   }
 }
 
