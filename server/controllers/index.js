@@ -189,6 +189,9 @@ var vote= {
     })
   },
   post: function(req, res){
+    var circleId;
+    var suggestedMemberId;
+    var suggestedMemberEmail;
     Vote.findOne({
       where:{
         id: req.body.voteId
@@ -203,18 +206,106 @@ var vote= {
             id: req.body.pollId
           }
         }).then((data)=>{
+          circleId = data.dataValues.circleId
+          suggestedMemberId = data.dataValues.suggestedMemberId
           if(req.body.choice === 'accept'){
             data.updateAttributes({
               votesIn: (data.dataValues.votesIn + 1),
               votesFor: (data.dataValues.votesFor + 1)
             }).then((data)=>{
               console.log(data, 'what happens to poll if i accept')
+              if(data.dataValues.votesIn === data.dataValues.maxVotes){
+                data.updateAttributes({
+                  status: 'complete'
+                }).then((data) => {
+                  if(Math.floor(data.dataValues.maxVotes*0.7) <= data.dataValues.votesFor){
+                    data.updateAttributes({
+                      result: 'accepted'
+                    }).then((data) =>{
+                      User_Circles.create({
+                        userId: suggestedMemberId,
+                        circleId: circleId,
+                        status: 'pending'
+                      }).then((data)=>{
+                        userModel.findOne({
+                          where:{
+                            id: suggestedMemberId
+                          }
+                        }).then((data) => {
+                          suggestedMemberEmail = data.dataValues.email
+                          console.log('new user accepted', data.dataValues)
+                          res.send('new user accepted')
+                        })
+                      })
+                    })
+                  } else {
+                    data.updateAttributes({
+                      result: 'denied'
+                    }).then((data) => {
+                      User_Circles.create({
+                        userId: suggestedMemberId,
+                        circleId: circleId,
+                        status: 'blacklist'
+                      }).then((data)=>{
+                        console.log('new user denied', data.dataValues)
+                        res.send('new user denied')
+                      })
+                    })                    
+                  }
+                })                
+              } else {
+                console.log('poll is still incomplete')
+                res.send('poll is still incomplete')
+              }
             })
           } else {
             data.updateAttributes({
               votesIn: (data.dataValues.votesIn + 1)
             }).then((data) =>{
               console.log(data, 'what happens to poll if i deny')
+              if(data.dataValues.votesIn === data.dataValues.maxVotes){
+                data.updateAttributes({
+                  status: 'complete'
+                }).then((data) => {
+                  if(Math.floor(data.dataValues.maxVotes*0.7) <= data.dataValues.votesFor){
+                    data.updateAttributes({
+                      result: 'accepted'
+                    }).then((data) =>{
+                      User_Circles.create({
+                        userId: suggestedMemberId,
+                        circleId: circleId,
+                        status: 'pending'
+                      }).then((data)=>{
+                        userModel.findOne({
+                          where:{
+                            id: suggestedMemberId
+                          }
+                        }).then((data) => {
+                          suggestedMemberEmail = data.dataValues.email
+                          console.log('new user accepted', data.dataValues)
+                          res.send('new user accepted')
+                        })
+                      })
+                    })
+                  } else {
+                    data.updateAttributes({
+                      result: 'denied'
+                    }).then((data) => {
+                      User_Circles.create({
+                        userId: suggestedMemberId,
+                        circleId: circleId,
+                        status: 'blacklist'
+                      }).then((data)=>{
+                        console.log('new user denied', data.dataValues)
+                        res.send('new user denied')
+                      })
+                    })                    
+                  }
+                })  
+              } else {
+                console.log('poll is still incomplete')
+                res.send('poll is still incomplete')
+              }
             })
           }
         })
