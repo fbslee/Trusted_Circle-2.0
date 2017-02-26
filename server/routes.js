@@ -612,6 +612,9 @@ router.post('/poll', controller.poll.post)
 router.get('/votes', controller.vote.get)
 router.post('/votes', controller.vote.post)
 
+router.get('/results', controller.result.get)
+router.post('/results', controller.result.post)
+
 // router.post('/addsongtotrain', controller.song.post);
 // router.post('/addtrain', controller.train.post);
 // router.post('/favtrain', controller.favTrain.post);
