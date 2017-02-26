@@ -60,66 +60,90 @@ var poll = {
     var maxVotes;
     var userIds = [];
     var pollId;
-    Circle.findOne({
-      where: {
-        name: circleName
+    userModel.findOne({
+      where:{
+        username: suggestedUser
       }
     }).then((data) => {
-      circleId = data.dataValues.id;
-      maxVotes = data.dataValues.totalMembers;
+      suggestedUserId = data.dataValues.id
     }).then(()=>{
-      userModel.findOne({
+      Circle.findOne({
         where: {
-          username: suggestedUser
+          name: circleName
         }
       }).then((data) => {
-        suggestedUserId = data.dataValues.id;
-      }).then(() => {
-        userModel.findOne({
+        circleId = data.dataValues.id;
+        User_Circles.findOne({
           where: {
-            username: suggestor
+            userId: suggestedUserId,
+            circleId: data.dataValues.id
           }
         }).then((data) => {
-          suggestorId = data.dataValues.id;
-        }).then(() => {
-          Poll.findOne({
-            where:{
-              circleId: circleId,
-              status: 'incomplete'
-            }
-          }).then((data) => {
-            if(data === null){
-                var newPoll = {
-                maxVotes: maxVotes,
-                suggestorId: suggestorId,
-                circleId: circleId,
-                suggestedMemberId: suggestedUserId
+          if(data.dataValues.status === 'blacklist'){
+            res.send({
+              blacklist: true
+            })
+          } else if(data.dataValues.status === 'member'){
+            res.send({
+              member: true
+            })
+          } else {
+            Circle.findOne({
+              where: {
+                circleId: circleId
               }
-              Poll.create(newPoll).then((data) => {
-                pollId = data.dataValues.id;
-                User_Circles.findAll({
-                  where: {
-                    circleId: circleId
+            }).then((data) =>{
+              maxVotes = data.dataValues.totalMembers;
+              userModel.findOne({
+                where: {
+                  username: suggestor
+                }
+              }).then((data) => {
+                suggestorId = data.dataValues.id;
+              }).then(() => {
+                Poll.findOne({
+                  where:{
+                    circleId: circleId,
+                    status: 'incomplete'
                   }
-                }).then((data) =>{
-                  console.log('what is the pollId', pollId)
-                  data.forEach(function(instance){
-                    var newVote = {
-                      userId: instance.dataValues.userId,
-                      pollId: pollId
+                }).then((data) => {
+                  if(data === null){
+                      var newPoll = {
+                      maxVotes: maxVotes,
+                      suggestorId: suggestorId,
+                      circleId: circleId,
+                      suggestedMemberId: suggestedUserId
                     }
-                    Vote.create(newVote).then((data) => {
-                      console.log('vote was successfully created', data)
+                    Poll.create(newPoll).then((data) => {
+                      pollId = data.dataValues.id;
+                      User_Circles.findAll({
+                        where: {
+                          circleId: circleId
+                        }
+                      }).then((data) =>{
+                        console.log('what is the pollId', pollId)
+                        data.forEach(function(instance){
+                          var newVote = {
+                            userId: instance.dataValues.userId,
+                            pollId: pollId
+                          }
+                          Vote.create(newVote).then((data) => {
+                            console.log('vote was successfully created', data)
+                          })
+                        })
+                      })
+                    }).catch( (error) => {
+                      console.log(error)
                     })
-                  })
+                  } else {
+                    res.send({
+                      pollInProgress: true
+                    })
+                  }
                 })
-              }).catch( (error) => {
-                console.log(error)
               })
-            } else {
-              res.redirect('/results')
-            }
-          })
+            })
+          }
         })
       })
     })
@@ -314,8 +338,65 @@ var vote= {
   }
 }
 
+var result = {
+  get: function(req, res){
+    var userId = req.user.dataValues.id;
+    var circleId;
+    var circleName;
+    User_Circles.findOne({
+      where:{
+        userId: req.user.dataValues.id,
+        status: 'pending'
+      }
+    }).then((data) => {
+      if(data !== null){
+        circleId = data.dataValues.circleId
+        Circle.findOne({
+          where:{
+            id: data.dataValues.circleId
+          }
+        }).then((data) =>{
+          circleName = data.dataValues.name
+          res.send({
+            circleName: data.dataValues.name,
+            circleId: circleId,
+            userId: userId
+          })
+        })
+      } else {
+        res.send({
+          noInvites: true
+        })
+      }
+    })
+  },
+  post: function(req, res){
+    if(req.body.choice === 'accept'){
+      User_Circles.findOne({
+        where:{
+          userId: req.body.userId,
+          circleId: req.body.circleId
+        }
+      }).then((data)=>{
+        data.updateAttributes({
+          status: 'member'
+        })
+      })
+    } else {
+      User_Circles.findOne({
+        where: {
+          userId: req.body.userId,
+          circleId:req.body.circleId
+        }
+      }).then((data)=>{
+        return data.destroy()
+      })
+    }
+  }
+}
 module.exports = {
   signup: signup,
   poll: poll,
-  vote: vote
+  vote: vote,
+  result: result
 };

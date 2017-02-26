@@ -15,3 +15,9 @@
         <br>A ballot was sent to the members of this circle to determine the acceptance of this new member.
     </h3>
     <div>
+
+<div *ngIf="pollInProgress">
+    <h1 style="text-align:center">Sorry! But at this time there's
+        <br>already a poll in progress for circle {{circle}}
+    </h1>
+    <div>

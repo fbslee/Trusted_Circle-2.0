@@ -1,3 +1,21 @@
-<h1 style="text-align:center">Poll for the acceptance of <strong>{{suggestedMember}}</strong>
-<br>in the circle <strong>{{circle}}</strong>
-<br>is currently in progress</h1>
+<div *ngIf="isDataAvailable">
+    <h1 style="text-align:center"><strong>Congratulations {{suggestedMember}}!</strong>
+    <br>You have been accepted to the circle <strong>{{circle}}</strong></h1>
+    <h3 style="text-align:center">Would you like to join {{circle}}?</h3>
+    <div style="text-align:center">
+    <button type="button" class="btn btn-success" (click)="accept()">Accept</button>
+    <button type="button" class="btn btn-danger" (click)="reject()">Reject</button>
+    </div>
+</div>
+
+<div *ngIf="joinCircle">
+    <h1 style="text-align:center">You have chosen to join the circle {{circle}}</h1>
+</div>
+
+<div *ngIf="rejectCircle">
+    <h1 style="text-align:center">You have chosen to reject to join the circle {{circle}}</h1>
+</div>
+
+<div *ngIf="noInvites">
+    <h1 style="text-align:center">Sorry! But you don't have any pending invitations at this time.</h1>
+</div>

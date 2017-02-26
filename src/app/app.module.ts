@@ -35,6 +35,7 @@ import { TopicsService } from './services/topics.service';
 import { AlertService } from './services/alert.service';
 import { DataService } from './services/data.service';
 import { VoteService } from './services/vote.service';
+import { ResultService } from './services/result.service';
 import { ModalModule } from 'angular2-modal';
 
 import { FooterComponent } from './footer/footer.component';
@@ -120,7 +121,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PollService,
     DataService,
     DavidDataService,
-    VoteService
+    VoteService,
+    ResultService
     ],
   bootstrap: [AppComponent]
 })

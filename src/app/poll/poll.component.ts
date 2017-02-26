@@ -12,15 +12,23 @@ export class PollComponent implements OnInit {
   suggestor: string = localStorage.getItem('username')
   showThis: boolean = true
   pollCreated: boolean = false
+  pollInProgress: boolean = false
 
   constructor(private _PollService: PollService) { }
 
 
   yes(){
     console.log(this.suggestedMember, this.circle, this.suggestor)
-    this._PollService.yes(this.suggestedMember, this.circle, this.suggestor).subscribe(data => console.log(data, 'dis da data'))
-    this.showThis = false
-    this.pollCreated = true
+    this._PollService.yes(this.suggestedMember, this.circle, this.suggestor)
+    .subscribe(data => {
+      if(data.pollInProgress === true){
+        this.showThis = false;
+        this.pollInProgress = true;
+      } else {
+        this.showThis = false
+        this.pollCreated = true
+      }
+    })
   }
 
   ngOnInit() {
