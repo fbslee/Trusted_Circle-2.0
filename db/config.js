@@ -16,6 +16,9 @@ const initDatabase = () => {
 		var Chatrooms = require('./../models/chatrooms.model');
 
 		var User_Message_Votes = require('./../models/user_message_votes.model');
+
+		var Comment = require('./../models/comment.model');
+
 		
 		User.hasMany(Message);
 		Message.belongsTo(User);
@@ -65,7 +68,12 @@ const initDatabase = () => {
 		Message.belongsToMany(User, {
             through: User_Message_Votes
         })
-	
+
+		User.hasMany(Comment);
+        Message.hasMany(Comment);
+        Comment.belongsTo(User);
+        Comment.belongsTo(Message);
+			
 		sequelize.sync().then(err => {
 
 
