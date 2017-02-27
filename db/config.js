@@ -60,9 +60,9 @@ const initDatabase = () => {
             through: User_Topic
         })
 
-		User.belongsToMany(Message, {
-            through: User_Topic
-        })
+		// User.belongsToMany(Message, {
+        //     through: User_Topic
+        // })
 
 		// .has
 		Message.belongsToMany(User, {
