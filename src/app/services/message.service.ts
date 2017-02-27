@@ -58,6 +58,7 @@ export class MessageService {
         console.log(idx, 'from getMessage WHAT AMMM I BITCHE!!!!!!!!');
         return this.http.get('/api/getMessagesAndVotes/'+idx)
             .map((response: Response) => {
+                console.log('==================', response)
                 let messages = response.json();
                 console.log('inside getMessages in service', messages);
                 let transformedMessages: Message[] = [];
@@ -65,17 +66,18 @@ export class MessageService {
                     console.log(message);
                         var body = message.body;
                         var user =  message.user.username;
-                        var votes = message.votes;
+                        // var votes = message.votes;
                         var userId = message.userId;
                         var topicId = message.topicId;
                         var id = message.id;
-                        var voteCount = message.voteCount;
-                        console.log(voteCount)
+                        var votes = message.voteCount;
+                        console.log(votes);
+                        // console.log(voteCount)
 
                     transformedMessages.push(new Message(
                         body, 
                         user, 
-                        voteCount, 
+                        votes, 
                         userId,
                         topicId,
                         id,
