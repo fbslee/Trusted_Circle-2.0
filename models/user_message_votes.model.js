@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./../db/connection');
 
-var User_Message_Votes = sequelize.define('user_message_votes', {
+var User_Message_Votes = sequelize.define('usermessagevotes', {
   userId: Sequelize.STRING,
   messageId: Sequelize.STRING
 });

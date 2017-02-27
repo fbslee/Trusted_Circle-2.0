@@ -14,6 +14,8 @@ const Circle = require('../models/circles.model');
 const User_Circles = require('../models/user_circle.model');
 const Message = require('../models/messages.model');
 const User_Topics = require('../models/user_topic.model');
+const User_Message_Votes = require('../models/user_message_votes.model');
+
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
@@ -430,28 +432,28 @@ router.get('/topics_to_user/:topicsId', (req, res) => {
 //             res.send(messages) 
 //     })
 //   });
-  router.get('/messages', (req, res) => {
-    Message.findAll({
-        include: [User],
-        order: 'votes DESC'
+//   router.get('/messages', (req, res) => {
+//     Message.findAll({
+//         include: [User],
+//         order: 'votes DESC'
 
-    }).then( messages => {
-        const resObj = messages.map(message => {
-            return Object.assign(
-                {},
-                {   body: message.dataValues.body,
-                    messageId: message.dataValues.id,
-                    topicId: message.dataValues.topicId,
-                    userId: message.dataValues.userId,
-                    votes: message.dataValues.votes,
-                    username: message.dataValues.user.dataValues.username
-                }
-            )
-        })
-        console.log(resObj);
-            res.send(messages) 
-    })
-  });
+//     }).then( messages => {
+//         const resObj = messages.map(message => {
+//             return Object.assign(
+//                 {},
+//                 {   body: message.dataValues.body,
+//                     messageId: message.dataValues.id,
+//                     topicId: message.dataValues.topicId,
+//                     userId: message.dataValues.userId,
+//                     votes: message.dataValues.votes,
+//                     username: message.dataValues.user.dataValues.username
+//                 }
+//             )
+//         })
+//         console.log(resObj);
+//             res.send(messages) 
+//     })
+//   });
 
 router.get('/getMessagesAndVotes', (req, res) => {
 
@@ -611,6 +613,24 @@ router.post('/messages', (req, res) => {
         res.status(500).json(error);
       });
   })
+
+  router.post('/messagesvotes/:id', (req, res) => {
+
+    var userId = req.body.userId;
+    var messageId = req.params.id;
+    console.log(req.body);
+    let newMessageVote = {
+        userId: userId,
+        messageId: messageId
+    }
+    User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+        res.status(200).json(newMessageVote);
+      })
+      .catch(function (error){
+        res.status(500).json(error);
+      });
+  })
+
 
 
 router.post('/topics', (req, res) => {
