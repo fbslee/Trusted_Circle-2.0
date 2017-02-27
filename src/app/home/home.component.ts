@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
       this.user.username = '';
       this.user.password = '';
 
-    this.router.navigate(['/login'])
+    this.flag = !this.flag;
     this.alertService.success('Registration successful', true)
     }
     , err => {
