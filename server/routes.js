@@ -631,6 +631,21 @@ router.post('/messages', (req, res) => {
       });
   })
 
+  router.delete('/messagesvotes/:id/:uid', (req, res) => {
+    console.log("req params", req.params);
+    console.log("req params id",req.params.id);
+        console.log("req params id",req.params.uid);
+
+    User_Message_Votes.destroy({
+        where: {
+            messageId: req.params.id,
+            userId: req.params.uid
+        }
+    }).then( val => {
+        console.log(val);
+    })
+});
+
 
 
 router.post('/topics', (req, res) => {

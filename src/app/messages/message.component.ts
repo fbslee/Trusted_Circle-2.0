@@ -68,7 +68,9 @@ export class MessageComponent {
         }
 
         this.myVote--;
-        this.emitEvent();
+        this.messageService.downVoteMessage(this.message)
+        .subscribe(
+            result => console.log(result));
     }
 
     emitEvent() {

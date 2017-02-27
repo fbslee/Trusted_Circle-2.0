@@ -87,6 +87,12 @@ export class MessageService {
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('/api/messagesvotes/' + message.messageId, body, {headers: headers})    
     }
+    downVoteMessage(message: Message) {
+        let body = JSON.stringify(message);
+        console.log('getting in the message service for vote', body);
+        let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.delete('/api/messagesvotes/' + message.messageId +'/'+ message.userId)    
+    }
 
     updateMessage(message: Message) {
         let body = JSON.stringify(message);
