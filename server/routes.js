@@ -492,6 +492,8 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
             }
         }).then( (stupidData) => {
 
+            console.log('check if stupid Data returns anything!!!', stupidData)
+
             var countObj = {};
 
             for(var messageObj of stupidData.rows) {
@@ -507,8 +509,16 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
 
         }).then ( (countObj) => {
 
+            console.log('this is countObj!!!!!', countObj)
+            console.log('this is messageIndexArrayObj', messageIndexArrayObj);
+
             var newCountObj = Object.assign({}, countObj);
 
+            console.log('==========================', newCountObj ,'========================',
+            Object.keys(countObj).length)
+
+            if(Object.keys(countObj).length !== 0) {
+                console.log('got in here!====================')
             for(var targetObj of messageIndexArrayObj) {
                 for(var indexThis in newCountObj) {
                     if(indexThis === targetObj.id.toString() && !targetObj.voteCount ) {
@@ -522,10 +532,22 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
                     
                 }
             }
+        } else {
+            console.log('got in here3333333')
+             for(var targetObj of messageIndexArrayObj) {
+                 targetObj.voteCount = 0;
+                 console.log(targetObj, 'target OBJECT IS ===========');
+                 
+             }
+
+        }
+        
+
 
 
             // console.log('should be changed!!!!!');
-            console.log(messageIndexArrayObj, 'yoooooooooo');
+            // console.log(newCountObj);
+            // console.log(messageIndexArrayObj, 'yoooooooooo');
 
         }).then( (mang) => {
             res.send(messageIndexArrayObj);
