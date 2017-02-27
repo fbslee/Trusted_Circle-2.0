@@ -14,6 +14,7 @@ const Circle = require('../models/circles.model');
 const User_Circles = require('../models/user_circle.model');
 const Message = require('../models/messages.model');
 const User_Topics = require('../models/user_topic.model');
+const User_Message_Votes = require('../models/user_message_votes.model');
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
@@ -453,6 +454,21 @@ router.get('/topics_to_user/:topicsId', (req, res) => {
     })
   });
 
+// router.post('/addVoteToMessage/', (res, req) => {
+//     console.log('hitting the post route!')
+//     // console.log(req);
+//     console.log(res.body);
+//     console.log ("messageId", res.body.messageId);
+//     User_Message_Votes.findOrCreate({
+//         where: {
+//             // userId: 
+//             // messageId: 
+//         }
+//     }).then( () => {
+
+//     })
+
+// })
 
 router.get('/getMessagesAndVotes/:topicId', (req, res) => {
     console.log('hitting this, the end point is:', req.params)

@@ -22,6 +22,12 @@ export class MessageComponent {
 
     constructor(private messageService: MessageService) {}
 
+    ngOnInit() {
+        console.log('myVote', this.myVote)
+    }
+
+
+
     onEdit() {    
 
         this.messageService.editMessage(this.message)
