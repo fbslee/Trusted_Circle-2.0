@@ -55,19 +55,32 @@ export class MessageService {
 
      getMessages() {
         let idx = sessionStorage.getItem('topicSelectedIdx');
-        return this.http.get('/api/getTopicmessages/'+idx)
+        console.log(idx, 'from getMessage WHAT AMMM I BITCHE!!!!!!!!');
+        return this.http.get('/api/getMessagesAndVotes/'+idx)
             .map((response: Response) => {
+                console.log('==================', response)
                 let messages = response.json();
                 console.log('inside getMessages in service', messages);
                 let transformedMessages: Message[] = [];
                 for (let message of messages) {
+                    console.log(message);
+                        var body = message.body;
+                        var user =  message.user.username;
+                        // var votes = message.votes;
+                        var userId = message.userId;
+                        var topicId = message.topicId;
+                        var id = message.id;
+                        var votes = message.voteCount;
+                        console.log(votes);
+                        // console.log(voteCount)
+
                     transformedMessages.push(new Message(
-                        message.body, 
-                        message.user.username, 
-                        message.votes, 
-                        message.userId,
-                        message.topicId,
-                        message.id
+                        body, 
+                        user, 
+                        votes, 
+                        userId,
+                        topicId,
+                        id,
                         ));
                 }
                 this.messages = transformedMessages;
