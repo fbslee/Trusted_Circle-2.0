@@ -57,12 +57,15 @@ export class MessageComponent {
     }
 
     upVote() {
+        console.log(this.message);
         if (this.myVote == 1) {
             return;
         }
 
         this.myVote++;
-        this.emitEvent();
+        this.messageService.upVoteMessage(this.message)
+        .subscribe(
+            result => console.log(result));
     }
 
     downVote() {
@@ -71,7 +74,9 @@ export class MessageComponent {
         }
 
         this.myVote--;
-        this.emitEvent();
+        this.messageService.downVoteMessage(this.message)
+        .subscribe(
+            result => console.log(result));
     }
 
     emitEvent() {
