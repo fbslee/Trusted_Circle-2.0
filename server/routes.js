@@ -548,6 +548,8 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
                     
                 }
             }
+
+            console.log('finished with loop', messageIndexArrayObj);
         } else {
             console.log('got in here3333333')
              for(var targetObj of messageIndexArrayObj) {

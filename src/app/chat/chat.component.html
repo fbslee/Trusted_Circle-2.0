@@ -35,7 +35,7 @@
 Please Log In to Chat
 </div>-->
 
-<div class="col-md-8 col-md-offset-2">
+<!--<div class="col-md-8 col-md-offset-2">-->
 
 <!--<div>
 
@@ -70,9 +70,9 @@ Please Log In to Chat
         <!--<button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
         <button class="btn btn-primary" type="submit">Save</button>-->
 
-</div>
+<!--</div>-->
 
-<br />
+<!--<br />-->
 
 
   <div class="jumbotron">
@@ -106,10 +106,17 @@ Please Log In to Chat
                 <!--<div class="col-lg-4">-->
                 <div class="panel panel-default">
                 <div class="panel-heading">User: {{message.username}}</div>
-                <div class="panel-body">
+                <div class="panel-body" responsive>
                     <strong (click)="usernameClick(messages[i].username, i)"><a style="color:black;text-decoration: none" href="https://www.thesitewizard.com/" target="_blank">
                     <!--{{message.username}}-->
-                    </a></strong>Message: {{message.text}}
+                    </a></strong> <span style="display: block; 
+  display: -webkit-box;
+  margin: 0 auto;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;"> Message: {{message.text}} </span>
                     <!--<strong id="{{item}}"> Index {{item}} </strong>-->
                </div>
                </div>
@@ -122,13 +129,13 @@ Please Log In to Chat
 </div> <!-- Row Close -->
 
 
-      <div class="panel panel-default">
-            <div *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
+      <div class="panel panel-default" *ngIf="usernameStatus === true && username !== undefined && roomnameStatus">
+            <div >
                 <input type="text" placeholder="Enter a Message..." 
                 [(ngModel)]="message" 
                 name="message"
                 (keyup.enter)="sendMessage()"
-                style="min-width: 100%;">
+                style="min-width: 100%;" maxlength="100">
             </div>
       </div>
 
