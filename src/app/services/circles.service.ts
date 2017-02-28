@@ -5,7 +5,7 @@ import { Http, JsonpModule, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Circle } from './Circle';
+// import { Circle } from './Circle';
 
 //Circle Model
 // var Circle = sequelize.define('circles', {

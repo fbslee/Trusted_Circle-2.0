@@ -11,10 +11,13 @@ export class PollService {
 
   yes(suggestedUser, circle, suggestor): Observable<any> {
     console.log('INSIDE postpoll in service')
-    return this._http.post('http://localhost:4200/api/poll', {
+    var data = this._http.post('http://localhost:4200/api/poll', {
       suggestedUser:suggestedUser,
       circle: circle,
       suggestor: suggestor
     })
+      .map( ( res:Response ) => res.json() )
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+    return data;
   }
 }

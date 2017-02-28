@@ -79,18 +79,10 @@ var poll = {
             circleId: data.dataValues.id
           }
         }).then((data) => {
-          if(data.dataValues.status === 'blacklist'){
-            res.send({
-              blacklist: true
-            })
-          } else if(data.dataValues.status === 'member'){
-            res.send({
-              member: true
-            })
-          } else {
+          if (data === null) {
             Circle.findOne({
               where: {
-                circleId: circleId
+                id: circleId
               }
             }).then((data) =>{
               maxVotes = data.dataValues.totalMembers;
@@ -118,7 +110,8 @@ var poll = {
                       pollId = data.dataValues.id;
                       User_Circles.findAll({
                         where: {
-                          circleId: circleId
+                          circleId: circleId,
+                          status: 'member'
                         }
                       }).then((data) =>{
                         console.log('what is the pollId', pollId)
@@ -128,7 +121,10 @@ var poll = {
                             pollId: pollId
                           }
                           Vote.create(newVote).then((data) => {
-                            console.log('vote was successfully created', data)
+                            console.log('vote was successfully created', data.dataValues)
+                            res.send({
+                              pollCreated: true
+                            })
                           })
                         })
                       })
@@ -142,6 +138,14 @@ var poll = {
                   }
                 })
               })
+            })
+          } else if(data.dataValues.status === 'blacklist'){
+            res.send({
+              blacklist: true
+            })
+          } else if(data.dataValues.status === 'member'){
+            res.send({
+              member: true
             })
           }
         })
@@ -293,7 +297,7 @@ var vote= {
                 }).then((data) => {
                   if(Math.floor(data.dataValues.maxVotes*0.7) <= data.dataValues.votesFor){
                     data.updateAttributes({
-                      result: 'accepted'
+                      result: 'denied'
                     }).then((data) =>{
                       User_Circles.create({
                         userId: suggestedMemberId,
