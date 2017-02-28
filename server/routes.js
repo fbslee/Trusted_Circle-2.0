@@ -557,24 +557,6 @@ router.post('/messages', (req, res) => {
         res.status(500).json(error);
       });
   })
-
-router.get('/messagesvotes/:messageId/:userId', (req, res) => {
-    
-    var userId = req.params.userId;
-    var messageId = req.params.messageId;
-
-
-    User_Message_Votes.findAll({
-        where: {
-            userId: userId,
-            messageId: messageId
-        }
-    })
-    .then(function (data ) {
-        res.send(data);
-      })
-
-  })
   
 
   router.post('/messagesvotes/:id', (req, res) => {
@@ -586,31 +568,12 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
         userId: userId,
         messageId: messageId
     }
-
-    User_Message_Votes.findAll({
-        where: {
-            userId: userId,
-            messageId: messageId
-        }
-    })
-    .then(function (data) {
-        console.log(data, 'this is DATA FROM THE POST')
-        if(data.length === 0) {
-            
-            User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
-                res.status(200).json(newMessageVote);
-                })
-                .catch(function (error){
-                res.status(500).json(error);
-                });
-        } else {
-            console.log('the user already voted!')
-
-        }
-    })
-
-
-
+    User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+        res.status(200).json(newMessageVote);
+      })
+      .catch(function (error){
+        res.status(500).json(error);
+      });
   })
 
   //     router.post('/messagesvotes/:id', (req, res) => {
