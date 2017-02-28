@@ -21,12 +21,7 @@ router.get('/test', function(req,res) {
   res.send()
 })
 
-//'/api/signup
-// var Message = require('../models/message');
 router.get('/signup', controller.signup.get);
-// router.get('/trains', controller.train.get);
-// router.get('/gettrainsongs', controller.train.get);
-// router.get('/trainsbytag', controller.tags.get);
 
 router.get('/logout', (req, res) => {
     console.log('logged user out');
@@ -760,10 +755,8 @@ router.post('/votes', controller.vote.post)
 router.get('/results', controller.result.get)
 router.post('/results', controller.result.post)
 
-// router.post('/addsongtotrain', controller.song.post);
-// router.post('/addtrain', controller.train.post);
-// router.post('/favtrain', controller.favTrain.post);
-// router.post('/hypemSongs', controller.findHypemSongs.post);
+router.post('/trustedcircle', controller.trustedcircle.post)
+
 router.post('/signup', controller.signup.post);
 router.post('/login', (req, res, next) => {
 
