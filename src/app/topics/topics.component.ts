@@ -70,8 +70,8 @@ export class TopicsComponent implements OnInit {
     this.filterItem('');
     
     this.getUsers();
-    this.davidGetUsers();
-    this.davidGetNotUsers();
+    // this.davidGetUsers();
+    // this.davidGetNotUsers();
   }
 
 
@@ -228,25 +228,25 @@ export class TopicsComponent implements OnInit {
                       })
   }
 
-  davidGetUsers() {
-    console.log('davidGetUsers Lawnches')
-    console.log(typeof localStorage.getItem('currentCircleId'))
-    this.DavidDataService.davidGetUsers(localStorage.getItem('currentCircleId'))
-    .subscribe( (data) => {
-      console.log(data);
-        // this.usersOfCircle = data;
-      console.log('lame');
-    });
-  }
+  // davidGetUsers() {
+  //   console.log('davidGetUsers Lawnches')
+  //   console.log(typeof localStorage.getItem('currentCircleId'))
+  //   this.DavidDataService.davidGetUsers(localStorage.getItem('currentCircleId'))
+  //   .subscribe( (data) => {
+  //     console.log(data);
+  //       // this.usersOfCircle = data;
+  //     console.log('lame');
+  //   });
+  // }
 
-  davidGetNotUsers() {
-    this.DavidDataService.davidGetNotUsers(localStorage.getItem('currentCircleId'))
-    .subscribe( (data) => {
-      console.log(data);
-        // this.usersNotOfCircle = data;
-      console.log('lame');
-    });
-  }
+  // davidGetNotUsers() {
+  //   this.DavidDataService.davidGetNotUsers(localStorage.getItem('currentCircleId'))
+  //   .subscribe( (data) => {
+  //     console.log(data);
+  //       // this.usersNotOfCircle = data;
+  //     console.log('lame');
+  //   });
+  // }
 
   // getTopics() {
   //   console.log('inside getTopics function inside CirclesComponent')
