@@ -1,4 +1,4 @@
-<div *ngIf="isDataAvailable">
+<div *ngIf="isDataAvailable" class="container">
 <h1 style="text-align:center"><strong>Ballot</strong></h1>
 
 <h3 style="text-align:center">{{suggestor}} suggested that {{suggestedMember}} join your circle {{circle}} </h3>
@@ -9,12 +9,12 @@
 </div>
 </div>
 
-<div *ngIf="voteComplete">
+<div *ngIf="voteComplete" class="container">
     <h1 style="text-align:center"><strong>Ballot Complete</strong></h1>
     <h3 style="text-align:center">Thank you for your vote!<br>Please wait for the results.</h3>
     </div>
 
-<div *ngIf="noVotes">
+<div *ngIf="noVotes" class="container">
     <h1 style="text-align:center"><strong>No Ballot</strong></h1>
     <h3 style="text-align:center">You don't have any active ballots.</h3>
     </div>

@@ -1,4 +1,4 @@
-<div *ngIf="showThis">
+<div *ngIf="showThis" class="container">
 <h1 style="text-align:center"><strong>Poll</strong></h1>
 
 <h3 style="text-align:center">Would you like to suggest that {{suggestedMember}} join the circle {{circle}}?</h3>
@@ -9,7 +9,7 @@
 </div>
 </div>
 
-<div *ngIf="pollCreated">
+<div *ngIf="pollCreated" class="container">
     <h1 style="text-align:center"><strong>Poll</strong></h1>
     <h3 style="text-align:center">You have invited {{suggestedMember}} to join the circle {{circle}}.
         <br>A ballot was sent to the members of this circle
@@ -17,18 +17,22 @@
     </h3>
     </div>
 
-<div *ngIf="pollInProgress">
+<div *ngIf="pollInProgress" class="container">
     <h1 style="text-align:center">Sorry! But at this time there's
         <br>already a poll in progress for circle {{circle}}
     </h1>
     </div>
 
-<div *ngIf="blacklist">
-    <h1 style="text-align:center">Sorry! But {{suggestMember}} is currently blacklisted from {{circle}}.</h1>
-    </div>
-
-<div *ngIf="alreadyMember">
-    <h1 style="text-align:center">{{suggestMember}} is already a member of {{circle}}.</h1>
+<div *ngIf="blacklist" class="container">
+    <h1 style="text-align:center">Sorry! But {{suggestedMember}} is currently blacklisted from {{circle}}.</h1>
     <div style="text-align:center">
         <button type="button" class="btn btn-primary" [routerLink]="['/topics']">Suggest Another Member?</button>
     </div>
+    </div>
+
+<div *ngIf="alreadyMember" class="container">
+    <h1 style="text-align:center">{{suggestedMember}} is already a member of {{circle}}.</h1>
+    <div style="text-align:center">
+        <button type="button" class="btn btn-primary" [routerLink]="['/topics']">Suggest Another Member?</button>
+    </div>
+</div>

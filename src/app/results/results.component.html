@@ -1,4 +1,4 @@
-<div *ngIf="isDataAvailable">
+<div *ngIf="isDataAvailable" class="container">
     <h1 style="text-align:center"><strong>Congratulations {{suggestedMember}}!</strong>
     <br>You have been accepted to the circle <strong>{{circle}}</strong></h1>
     <h3 style="text-align:center">Would you like to join {{circle}}?</h3>
@@ -8,14 +8,14 @@
     </div>
 </div>
 
-<div *ngIf="joinCircle">
+<div *ngIf="joinCircle" class="container">
     <h1 style="text-align:center">You have chosen to join the circle {{circle}}</h1>
 </div>
 
-<div *ngIf="rejectCircle">
+<div *ngIf="rejectCircle" class="container">
     <h1 style="text-align:center">You have chosen to reject to join the circle {{circle}}</h1>
 </div>
 
-<div *ngIf="noInvites">
+<div *ngIf="noInvites" class="container">
     <h1 style="text-align:center">Sorry! But you don't have any pending invitations at this time.</h1>
 </div>
