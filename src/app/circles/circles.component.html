@@ -1,10 +1,12 @@
+
+
 <div class="container">
   <div class="container">
     <div class="row profile">
       <div class="col-md-3">
         <div class="profile-sidebar">
           <div class="profile-userpic">
-            <img src={{profilePicLink}} class="img-responsive" >
+            <img on-mouseover='over()' src={{profilePicLink}} class="img-responsive" >
           </div>
 
           <div class="profile-usertitle">
@@ -51,7 +53,14 @@
             <div class="col-8 col-sm-6">
 
               <div class="thumbnail">
-                <img src="http://www.free-icons-download.net/images/red-circle-icon-69788.png" alt="...">
+
+                <div *ngIf="loadTopic === false">
+
+                <img src="http://www.free-icons-download.net/images/red-circle-icon-69788.png" alt="..." 
+                style="max-width: 100%;
+                max-height: 100%;
+                display: block;
+                margin: auto auto;">
                 <div class="caption">
 
                   <h1>Your circles, <strong> {{username}}</strong></h1>
@@ -59,7 +68,8 @@
                     <li *ngFor="let circle of finalComparedCircles">
 
                       <div>
-                        <strong (click)="circleClicked(circle[0])" [routerLink]="['/topics']">{{ circle[0] }}</strong>
+                        <!--[routerLink]="['/topics']"-->
+                        <strong (click)="circleClicked(circle[0])" >{{ circle[0] }}</strong>
                       </div>
                     </li>
                   </ul>
@@ -68,8 +78,24 @@
                 </div>
               </div>
 
+            <div *ngIf="loadTopic === true">
+              <img src="http://www.iconsfind.com/wp-content/uploads/2013/11/20131104_527706bcf3fca.png" 
+              style="max-width: 100%;
+              max-height: 100%;
+              display: block;
+              margin: auto auto;"
+              />
+              <app-topics></app-topics>
+            </div>
+
 
             </div>
+
+
+
+            <!--left side panel of the two-->
+            </div>
+
             <div class="col-4 col-sm-6">
 
               <div class="thumbnail">

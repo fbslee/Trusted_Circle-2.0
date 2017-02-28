@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { CirclesService } from '../services/circles.service';
 import { Http, HttpModule, Response, Headers, JsonpModule } from "@angular/http";
-
+import { Router } from '@angular/router';
 import { DavidDataService } from '../services/david-data.service';
+
+import { TopicsComponent } from '../topics/topics.component';
 
 @Component({
   selector: 'app-circles',
@@ -18,12 +20,14 @@ export class CirclesComponent implements OnInit {
   finalComparedCircles: any = [];
   circles: any = [];
   profilePicLink: string = sessionStorage.getItem('userPhoto');
+  loadTopic: any = false;
 
   //['Hack Reactor', 'Movies', 'Soccer'];
 
   constructor(private _CirclesService: CirclesService,
               private DavidDataService: DavidDataService,
-              private http: Http
+              private http: Http,
+              private router: Router
               ) { }
 
   ngOnInit() {
@@ -111,6 +115,8 @@ export class CirclesComponent implements OnInit {
       }
     }
     localStorage.setItem('currentCircle', circleName);
+    this.loadTopic = true;
+    
   }
 
 
@@ -149,6 +155,10 @@ export class CirclesComponent implements OnInit {
         return alert('Please Have a Valid Name for a Circle!')
     }
 
+  }
+
+  over () {
+    console.log('went over!!')
   }
 
 }
