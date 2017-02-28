@@ -40,6 +40,20 @@ public clickedTopic: any;
     // this.getAllCurrentUserDataStorage = data;
     return data;
   }
+
+    getUserMessageVotes (messageId: string, userId: string): Observable<any> {
+      console.log('got inside here!!! getUserMessageVotesgetUserMessageVotesgetUserMessageVotes')
+    var data = this.http.get('/api/messagesvotes/' + messageId + '/' + userId)
+                    .map( ( res:Response ) => {
+                      console.log(res.json(), 'inside getUserMessageVotes SERVICE DAvID');
+                      return res.json()
+                    } )
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+
+    // console.log(this.getAllCurrentUserDataStorage);
+    // this.getAllCurrentUserDataStorage = data;
+    return data;
+  }
   
     davidGetUsers(circleId: string): Observable<any> {
 
