@@ -320,6 +320,7 @@ var vote= {
                           }
                         }).then((data) => {
                           suggestedMemberEmail = data.dataValues.email
+                          emailer.emailer(data.dataValues.email, 'New Trusted Circle Invitation', 'You have been invited to join a new trusted circle. Please visit http://localhost:4200/results')
                           console.log('new user accepted', data.dataValues)
                           res.send('new user accepted')
                         })
