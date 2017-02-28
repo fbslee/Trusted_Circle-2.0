@@ -27,7 +27,13 @@
 </md-input-container>
 
 <span>
-<div>
+
+  <div *ngFor="let item of filteredItems" (click)="printuser(item)" [routerLink]="['/poll']" >
+   {{item.username}}
+</div>
+
+
+<!--<div>
   People in the Current Circle
 <div *ngFor="let item of usersOfCircle">
    {{item.username}}
@@ -39,6 +45,6 @@
 <div *ngFor="let item of usersNotOfCircle" (click)="printuser(item)" [routerLink]="['/poll']" >
    {{item.username}}
 </div>
-</div>
+</div>-->
 </span>
 </div>

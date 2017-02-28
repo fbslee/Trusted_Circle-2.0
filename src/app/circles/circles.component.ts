@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { CirclesService } from '../services/circles.service';
 import { Http, HttpModule, Response, Headers, JsonpModule } from "@angular/http";
 
@@ -11,7 +11,7 @@ import { DavidDataService } from '../services/david-data.service';
 })
 export class CirclesComponent implements OnInit {
 
-
+  public picture: "http://santetotal.com/wp-content/uploads/2014/05/default-user.png";
   username: string = localStorage.getItem('username');
   newCircle: string;
   circlesUser: any = [];
@@ -26,7 +26,9 @@ export class CirclesComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    // sessionStorage.removeItem('circle')
+    sessionStorage.removeItem('circle')
+    console.log(localStorage.getItem('photo'));
+
     // this.getTopics();
     // this.getCircles();
     // this.getCurrentUserCircles();

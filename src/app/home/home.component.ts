@@ -67,9 +67,10 @@ export class HomeComponent implements OnInit {
                                 .subscribe( (data) => {
                                   // console.log("WHAT AM I???", data)
                                   data.forEach((val)=>{
-                                    // console.log('this is val:', val)
+                                    console.log('this is val:', val)
                                     if(val["username"] === localStorage.getItem('username') ) {
                                       localStorage.setItem('userID', val["id"])
+                                      localStorage.setItem('photo', val["photo"])
                                       this.DavidDataService.getAllCurrentUserData( localStorage.getItem('userID') );
 
                                     }

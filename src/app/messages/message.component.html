@@ -30,9 +30,10 @@
         </div>
 
         <popover-content #myPopover 
-                title="Popover title" [closeOnMouseOutside]="true">
+                [title]="userInfo.username" [closeOnMouseOutside]="true">
                 <div class="pfp">
-                    <img src="https://en.gravatar.com/userimage/35505219/a9313ffc6c7b5f8b4f49f704c1035ce0.jpg?size=200" alt="profile picture" class="profile-photo">
+                    <img [src]="userInfo.photo" class="profile-photo">
+                    <h2 class='fullname'> {{userInfo.firstname}}, {{userInfo.lastname}} </h2>
                 </div>
             </popover-content>
         
@@ -45,3 +46,5 @@
     </footer>
 </article>
 </div>
+
+

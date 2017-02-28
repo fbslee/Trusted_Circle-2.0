@@ -25,6 +25,7 @@ export class TopicsComponent implements OnInit {
   filteredItems: {};
   currentCircle: string; 
   usersOfCircle: any [];
+  temp : any = {};
 
   usersNotOfCircle: any [];
 
@@ -66,8 +67,9 @@ export class TopicsComponent implements OnInit {
     this.setTopics()
 
     this.currentCircle = localStorage.getItem('currentCircle');
+    this.filterItem('');
     
-
+    this.getUsers();
     this.davidGetUsers();
     this.davidGetNotUsers();
   }
@@ -200,10 +202,13 @@ export class TopicsComponent implements OnInit {
   // }
 
   filterItem(value){
-   if(!value) this.filteredItems = Object.assign([], this.userInfo); //when nothing has typed
+   if(value === '') {this.filteredItems = null;} //when nothing has typed
+   else {
+   this.filteredItems = Object.assign([], this.userInfo)
    this.filteredItems = Object.assign([], this.userInfo).filter(
       item => item.username.toLowerCase().indexOf(value.toLowerCase()) > -1
    )
+   }
   }
 
   printuser(user) {
@@ -229,7 +234,7 @@ export class TopicsComponent implements OnInit {
     this.DavidDataService.davidGetUsers(localStorage.getItem('currentCircleId'))
     .subscribe( (data) => {
       console.log(data);
-        this.usersOfCircle = data;
+        // this.usersOfCircle = data;
       console.log('lame');
     });
   }
@@ -238,7 +243,7 @@ export class TopicsComponent implements OnInit {
     this.DavidDataService.davidGetNotUsers(localStorage.getItem('currentCircleId'))
     .subscribe( (data) => {
       console.log(data);
-        this.usersNotOfCircle = data;
+        // this.usersNotOfCircle = data;
       console.log('lame');
     });
   }

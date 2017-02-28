@@ -14,7 +14,10 @@ export class MessageComponent {
     @Input() voteCount = 0;
     @Input() myVote = 0;
     private userInfo = {
-        username: ''
+        username: '',
+        disp: '',
+        firstname: '',
+        lastname: ''
     };
 
     @Output('vote') change = new EventEmitter();
@@ -44,6 +47,7 @@ export class MessageComponent {
         this.messageService.findUser(user)
         .subscribe( (data) => {
                         this.userInfo = data[0];
+                        this.userInfo.disp = this.userInfo.username + '<flex class="flex"> </flex>' + this.userInfo.firstname +','+ this.userInfo.lastname;
                         console.log(this.userInfo, 'this is data and its subscribed');
                         }) 
         }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Overlay } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
 import { DataService } from '../services/data.service';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 import { DavidDataService } from '../services/david-data.service';
 
@@ -14,18 +15,24 @@ export class HeaderComponent implements OnInit {
 
   private status = localStorage.getItem('username') || false;
   private n = 1;
+  private userInfo = {
+    photo: ''
+  }
 
   constructor(overlay: Overlay, 
   vcRef: ViewContainerRef, 
   public modal: Modal,
+  private sanitizer: DomSanitizer,
   private DavidDataService: DavidDataService) {
     overlay.defaultViewContainer = vcRef;
   }
 
   ngOnInit() {
+    this.sanitizer.bypassSecurityTrustHtml;
     // console.log(localStorage.getItem('username')) {
     //   this.status=true;
     // }
+    this.userInfo.photo = localStorage.getItem('photo');
     this.getAllUsers();
     this.getAllTopics();
     this.getAllUsersTopics();
@@ -48,8 +55,9 @@ export class HeaderComponent implements OnInit {
     this.modal.alert()
         .size('lg')
         .showClose(true)
-        .title('A simple Alert style modal window')
+        .title('Welcome, ' + localStorage.getItem('username'))
         .body(`
+            <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" style="width:20%;" class="profile-photo">
             <h4>Alert is a classic (title/body/footer) 1 button modal window that 
             does not block.</h4>
             <b>Configuration:</b>
