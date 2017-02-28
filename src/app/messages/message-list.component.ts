@@ -16,16 +16,19 @@ export class MessageListComponent implements OnInit {
     messages: Message[];
     // username: string = localStorage.getItem('username');
 
-    constructor(private messageService: MessageService) {}
+    constructor(private messageService: MessageService) {
+    // setTimeout(() => {
+    //     this.messageService.getMessages();
+    //     }, 2000);
+        }
+
 
     ngOnInit() {
        this.messageService.getMessages()
        .subscribe( (data) => {
            console.log('this is messages data inside list', data) 
-           console.log(this.username, 'this is the username from message page')
            this.messages = data;
+           });
     }
-        // console.log()  
-       );
-    }
+    
 }

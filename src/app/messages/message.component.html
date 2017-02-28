@@ -18,8 +18,16 @@
 <article class="panel panel-default">
 
     <div class="panel-body">
+        <span>
+            <p class="p1">
+            {{ message.body }}
+            </p> 
+            <p class="p2">
+                <a (click)="onEdit()">Edit</a>
+                <a (click)="onDelete()">Delete</a>
+            </p> 
+        </span>
         
-        {{ message.body }}
                     
     </div>
     <footer class="panel-footer">
@@ -38,9 +46,8 @@
             </popover-content>
         
         <div class="config">
-            <a (click)="onEdit()">Edit</a>
-            <a (click)="onDelete()">Delete</a>
-            
+         <a (click)="onComment()">Comment</a>
+
         </div>
 
     </footer>
