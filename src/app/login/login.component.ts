@@ -65,6 +65,7 @@ export class LoginComponent {
         // console.log('session username is:', localStorage.getItem('username'))
         // console.log('res.status from login is: ', res.status);
         sessionStorage.setItem('userId', res.json().id)
+        sessionStorage.setItem('userPhoto', res.json().photo);
         // console.log('user id ', sessionStorage.getItem('userId'))
         this.authService.isLoggedIn = true;
         this.alertService.clear();
