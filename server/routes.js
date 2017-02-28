@@ -497,11 +497,6 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
         
 
 
-        //finall sort the array by vote count!
-        messageIndexArrayObj = messageIndexArrayObj.sort(function (a,b) {
-            return b.voteCount - a.voteCount;
-        })
-
 
             // console.log('should be changed!!!!!');
             // console.log(newCountObj);
