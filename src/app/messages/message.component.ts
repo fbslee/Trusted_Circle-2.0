@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Message } from './message.model';
-import { Http, Headers } from '@angular/http';
+
 
 import { MessageService } from '../services/message.service'
 
@@ -23,8 +23,7 @@ export class MessageComponent {
     @Output('vote') change = new EventEmitter();
 
 
-    constructor(private messageService: MessageService,
-                private http: Http) {}
+    constructor(private messageService: MessageService) {}
 
     ngOnInit() {
         console.log('myVote', this.myVote)
@@ -62,41 +61,15 @@ export class MessageComponent {
     }
 
     upVote() {
-        // console.log(this.message);
+        console.log(this.message);
         if (this.myVote == 1) {
             return;
         }
-        let body = JSON.stringify(this.message);
-        let headers = new Headers({'Content-Type': 'application/json'});
 
-        
-        this.messageService.upVoteMessage(this.message).subscribe( (result) => {
-            // console.log(result);
-            if(result.length > 0) {
-                alert('You already Voted!!!!')
-            } else {
-                // console.log('got inside NOT!!!  true!')
-                this.myVote++;
-            return this.http.post('/api/messagesvotes/' + this.message.messageId, body, {headers: headers}) 
-            }
-
-
-
-
-        })
-
-
-        // })
-        // console.log(bool, 'BOOL!!!!!!!!!!!!!!!!!!!!')
-        // if(bool) {
-        //     alert('You Already Voted!!!!') 
-        // } else {
-        //     this.myVote++;
-        // }
-
-
-
-        
+        this.myVote++;
+        this.messageService.upVoteMessage(this.message)
+        .subscribe(
+            result => console.log(result));
     }
 
     downVote() {

@@ -3,17 +3,13 @@ import { Injectable, EventEmitter } from "@angular/core";
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
-import { DavidDataService } from './david-data.service';
-
-
 import { Message } from '../messages/message.model';
 
 @Injectable()
 
 export class MessageService {
 
-    constructor(private http: Http,
-                private DavidDataService: DavidDataService) {}
+    constructor(private http: Http) {}
 
     private messages: Message[] = [];
     username: string = localStorage.getItem('username');
@@ -100,21 +96,10 @@ export class MessageService {
     }
 
     upVoteMessage(message: Message) {
-        // let body = JSON.stringify(message);
-        // console.log('getting in the message service for vote', body);
-        // let headers = new Headers({'Content-Type': 'application/json'});
-        console.log(message.messageId, localStorage.getItem('userID'))
-        
-        return this.DavidDataService.getUserMessageVotes( message.messageId, localStorage.getItem('userID') )            
-        // .subscribe( (data) => {
-        //     console.log(data, ' DATATATATATA');
-
-        //     
-        //   })
-
-
-
-        //    
+        let body = JSON.stringify(message);
+        console.log('getting in the message service for vote', body);
+        let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('/api/messagesvotes/' + message.messageId, body, {headers: headers})    
     }
     downVoteMessage(message: Message) {
         let body = JSON.stringify(message);
