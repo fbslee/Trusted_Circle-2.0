@@ -558,11 +558,35 @@ router.post('/messages', (req, res) => {
       });
   })
   
+router.get('/messagesvotes/:messageId/:userId', (req, res) => {		
+     		
+     var userId = req.params.userId;		
+     var messageId = req.params.messageId;		
+ 		
+ 		
+     User_Message_Votes.findAll({		
+         where: {		
+             userId: userId,		
+             messageId: messageId		
+         }		
+     })		
+     .then(function (data ) {		
+         res.send(data);		
+       })		
+ 		
+   })
 
-  router.post('/messagesvotes/:id', (req, res) => {
 
-    var userId = req.body.userId;
-    var messageId = req.params.id;
+
+
+
+
+
+
+  router.post('/messagesvotes/', (req, res) => {
+
+    var userId = req.body.userId
+    var messageId = req.body.messageId
     console.log(req.body);
     let newMessageVote = {
         userId: userId,
