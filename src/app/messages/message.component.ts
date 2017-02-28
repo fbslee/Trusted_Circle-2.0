@@ -95,7 +95,7 @@ export class MessageComponent {
         this.messageService.findUser(user)
         .subscribe( (data) => {
                         this.userInfo = data[0];
-                        this.userInfo.disp = this.userInfo.username + '<flex class="flex"> </flex>' + this.userInfo.firstname +','+ this.userInfo.lastname;
+                        this.userInfo.disp = this.userInfo.lastname + ', ' + this.userInfo.firstname;
                         console.log(this.userInfo, 'this is data and its subscribed');
                         }) 
         }

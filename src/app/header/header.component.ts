@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
         .showClose(true)
         .title('Welcome, ' + localStorage.getItem('username'))
         .body(`
-            <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" style="width: 20%;">
+            <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" height="256px" width="256px">
             <h4>Alert is a classic (title/body/footer) 1 button modal window that 
             does not block.</h4>
             <b>Configuration:</b>

@@ -7,11 +7,9 @@ import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import 'hammerjs';
-// import 'underscore';
  
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -24,15 +22,11 @@ import { MessageInputComponent } from './messages/message-input.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageListComponent } from './messages/message-list.component';
 
-import { SignupComponent } from './signup/signup.component';
-import { SignupService } from './signup/signup.service';
-import { LoginService } from './login/login.service';
 import { VotesComponent } from './votes/votes.component';
 import { CirclesComponent } from './circles/circles.component';
 import { CirclesService } from './services/circles.service';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicsService } from './services/topics.service';
-import { AlertService } from './services/alert.service';
 import { DataService } from './services/data.service';
 import { VoteService } from './services/vote.service';
 import { ResultService } from './services/result.service';
@@ -42,9 +36,10 @@ import { ModalModule } from 'angular2-modal';
 import { FooterComponent } from './footer/footer.component';
 import { PollComponent } from './poll/poll.component';
 import { PollService } from './services/poll.service';
+import { LoginService } from './services/login.service';
+import { SignupService } from './services/signup.service';
 
 import { Parallax, ParallaxConfig  } from './parallax.directive';
-import { AlertComponent } from './alert/alert.component';
 import { ResultsComponent } from './results/results.component';
 import { PopoverModule } from 'ng2-popover';
 import { PushNotificationComponent } from './notification.component';
@@ -57,11 +52,9 @@ import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.c
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     HeaderComponent,
     ChatComponent,
     MessageComponent,
-    SignupComponent,
     MessageInputComponent,
     MessagesComponent,
     MessageListComponent,
@@ -71,7 +64,6 @@ import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.c
     FooterComponent,
     Parallax,
     PollComponent,
-    AlertComponent,
     ResultsComponent,
     TrustedcounselorComponent,
     PushNotificationComponent,
@@ -86,13 +78,9 @@ import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.c
     PopoverModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent
-        ,canActivate: [AuthGuard]
       },
       { path: 'home', component: HomeComponent
-      ,canActivate: [AuthGuard] 
       },
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
       { path: 'chat', component: ChatComponent 
       , canActivate: [AuthGuard] 
       },
@@ -118,7 +106,6 @@ import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.c
     AuthService,
     SignupService,
     LoginService,
-    AlertService,
     MessageService,
     PollService,
     DataService,

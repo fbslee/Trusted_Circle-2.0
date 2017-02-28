@@ -20,17 +20,20 @@
         </span>
     </div>
 
+
     <footer class="panel-footer">
       <div class="author" [popover]="myPopover" popoverPlacement="right" [popoverOnHover]="true" (mouseenter)="ttp( message.username )"
         [popoverCloseOnMouseOutside]="true">
         {{ message.username }}
       </div>
 
-      <popover-content #myPopover [title]="userInfo.username" [closeOnMouseOutside]="true">
-        <div class="pfp">
-          <img [src]="userInfo.photo" class="profile-photo">
-          <h2 class='fullname'> {{userInfo.firstname}}, {{userInfo.lastname}} </h2>
-        </div>
+      <popover-content #myPopover [title]="userInfo.disp" [closeOnMouseOutside]="true">
+                <div class="pfp">
+                    <div class="profile-userpic">
+                    <img [src]="userInfo.photo" class="img-responsive">
+                    </div>
+                    <h2 class='username'> {{userInfo.username}} </h2>
+                </div>
       </popover-content>
 
       <div class="config">

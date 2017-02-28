@@ -9,6 +9,16 @@
     width: 80%;
     }
 
+    .profile-userpic img {
+  float: none;
+  margin: 0;
+  width: 25%;
+  height: 25%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
 .config {
     display: inline-block;
     text-align: right;
@@ -47,7 +57,7 @@
     margin: 0px;
 }
 
-.fullname {
+.username {
 
     font-size: 1.5em;
     margin: 0px;

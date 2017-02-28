@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Directive } from '@angular/core';
 import { trigger, state, animate, style, transition } from '@angular/core';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { AuthService} from '../services/auth.service';
-import { AlertService } from '../services/alert.service';
 import { DataService } from '../services/data.service';
-import { SignupService } from '../signup/signup.service';
+import { SignupService } from '../services/signup.service';
 
 import { DavidDataService } from '../services/david-data.service';
 import { Parallax, ParallaxConfig  } from '../parallax.directive';
@@ -27,7 +26,6 @@ export class HomeComponent implements OnInit {
   constructor(private loginService: LoginService, 
               private router: Router, 
               private authService: AuthService,
-              private alertService: AlertService,
               private DavidDataService: DavidDataService,
               private signUpService: SignupService
               ) { }
@@ -47,7 +45,6 @@ export class HomeComponent implements OnInit {
       this.user.password = '';
 
     this.flag = !this.flag;
-    this.alertService.success('Registration successful', true)
     }
     , err => {
       console.log('err', err);
@@ -92,12 +89,10 @@ export class HomeComponent implements OnInit {
         sessionStorage.setItem('userId', res.json().id)
         // console.log('user id ', sessionStorage.getItem('userId'))
         this.authService.isLoggedIn = true;
-        this.alertService.clear();
-        this.router.navigate(['']);
+        this.router.navigate(['/circles']);
       }, err => {
         // console.log('err', err)
         err = 'Bad Login'
-        this.alertService.error(err);
       });
   }
 
