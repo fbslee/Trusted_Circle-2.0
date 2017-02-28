@@ -55,7 +55,7 @@ export class MessageInputComponent implements OnInit {
             const message = new Message(
                 form.value.content, 
                 this.username,
-                1,
+                0,
                 this.userID,
                 this.topicId
                 );
