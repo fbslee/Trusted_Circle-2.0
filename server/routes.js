@@ -405,71 +405,6 @@ router.get('/topics_to_user/:topicsId', (req, res) => {
 
 });
 
-
-// router.get('/messages/:idx', (req, res) => {
-//     Message.findAll({
-//         where: {
-//             topicId: req.params.topicId
-//         },
-//         include: [User],
-//         order: 'votes DESC'
-
-//     }).then( messages => {
-//         const resObj = messages.map(message => {
-//             return Object.assign(
-//                 {},
-//                 {   body: message.dataValues.body,
-//                     messageId: message.dataValues.id,
-//                     topicId: message.dataValues.topicId,
-//                     userId: message.dataValues.userId,
-//                     votes: message.dataValues.votes,
-//                     username: message.dataValues.user.dataValues.username
-//                 }
-//             )
-//         })
-//         console.log(resObj);
-//             res.send(messages) 
-//     })
-//   });
-//   router.get('/messages', (req, res) => {
-//     Message.findAll({
-//         include: [User],
-//         order: 'votes DESC'
-
-//     }).then( messages => {
-//         const resObj = messages.map(message => {
-//             return Object.assign(
-//                 {},
-//                 {   body: message.dataValues.body,
-//                     messageId: message.dataValues.id,
-//                     topicId: message.dataValues.topicId,
-//                     userId: message.dataValues.userId,
-//                     votes: message.dataValues.votes,
-//                     username: message.dataValues.user.dataValues.username
-//                 }
-//             )
-//         })
-//         console.log(resObj);
-//             res.send(messages) 
-//     })
-//   });
-
-// router.post('/addVoteToMessage/', (res, req) => {
-//     console.log('hitting the post route!')
-//     // console.log(req);
-//     console.log(res.body);
-//     console.log ("messageId", res.body.messageId);
-//     User_Message_Votes.findOrCreate({
-//         where: {
-//             // userId: 
-//             // messageId: 
-//         }
-//     }).then( () => {
-
-//     })
-
-// })
-
 router.get('/getMessagesAndVotes/:topicId', (req, res) => {
     console.log('hitting this, the end point is:', req.params)
     var UserMessageVotes = sequelize.define('usermessagevotes', {
@@ -622,6 +557,7 @@ router.post('/messages', (req, res) => {
         res.status(500).json(error);
       });
   })
+  
 
   router.post('/messagesvotes/:id', (req, res) => {
 
@@ -639,6 +575,36 @@ router.post('/messages', (req, res) => {
         res.status(500).json(error);
       });
   })
+
+  //     router.post('/messagesvotes/:id', (req, res) => {
+
+//     var userId = req.body.userId;
+//     var messageId = req.params.id;
+//     console.log(req.body);
+//     let newMessageVote = {
+//         userId: userId,
+//         messageId: messageId
+//     }
+
+//     User_Message_Votes.findOne({
+//         userId: userId,
+//         messageId: messageId
+//     }).then(
+//         function(usermessagevote) {
+//             if(!usermessagevote) {
+//                 return User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+//                     res.status(200).json(newMessageVote);
+//                     })
+//                     .catch(function (error){
+//                     res.status(500).json(error);
+//                     });
+//             } else {
+//                 return;
+//             }
+//         }
+//     )
+    
+//   })
 
   router.delete('/messagesvotes/:id/:uid', (req, res) => {
     console.log("req params", req.params);

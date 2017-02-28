@@ -30,6 +30,7 @@ export class MessageService {
     }
 
     addMessage(message: Message) {
+        let un = message.username;
         let body = JSON.stringify(message);
         console.log('body in add message', body);
         let headers = new Headers({'Content-Type': 'application/json'});
@@ -39,7 +40,7 @@ export class MessageService {
                 console.log('result', result);
                 let message = new Message(
                     result.body, 
-                    this.username, 
+                    un, 
                     result.votes,
                     this.userId,
                     result.topicId,
