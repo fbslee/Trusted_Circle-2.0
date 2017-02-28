@@ -10,9 +10,12 @@ import { MessageService } from '../services/message.service'
   template: `
   <h3>{{topicBody}} posted by {{topicUser}}</h3>
   <div class="col-md-8 col-md-offset-2">
+    <div *ngIf="flag">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
-            <label for="content">Content</label>
+           <span> <label for="content">Post As {{username}} or </label>
+           <a (click)="anon()" >switch to Anonymous</a>
+           </span>
             <input
                     type="text"
                     id="content"
@@ -22,25 +25,51 @@ import { MessageService } from '../services/message.service'
                     required>
         </div>
         <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-default" type="submit">Post as Username</button>
+        <button class="btn btn-default" type="submit">Post as {{username}}</button>
     </form>
+    </div>
+     <div *ngIf="!flag">
+        <form #f="ngForm">
+        <div class="form-group">
+            <label for="content">Post As Anonymous</label>
+            <input
+                    type="text"
+                    id="content"
+                    class="form-control"
+                    [ngModel]="message?.body"
+                    name="content"
+                    required>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-danger" (click)='anonSubmit(f)'>Post as Anonymous</button> <a (click)="anon()" >Cancel</a>
+
+    </form>
+    </div>
 </div>
   `
 })
 
 export class MessageInputComponent implements OnInit {
     message: Message;
+    private flag = true;
+
     topicBody: string = sessionStorage.getItem('topicBody') || localStorage.getItem('topicBody')
     topicUser: string = sessionStorage.getItem('topicUser') || localStorage.getItem('topicUser')
     constructor(private messageService: MessageService) {}
-    username: string = localStorage.getItem('username');
     userID: any = localStorage.getItem('userID');
     topicId: any = sessionStorage.getItem('topicSelectedIdx');
-
+    username: string = localStorage.getItem('username');
     topicOwner: string;
 
+    anon() {
+        console.log('i hate everyone');
+    this.flag = !this.flag;
+
+    }
 
     onSubmit(form: NgForm) {
+        var username: string = localStorage.getItem('username');
+
         if(this.message) {
             // Edit
             this.message.body = form.value.content;
@@ -51,12 +80,41 @@ export class MessageInputComponent implements OnInit {
             this.message = null;
         } else {
             // Create
-            console.log( 'username' ,this.username);
+            console.log( 'username' , username);
             const message = new Message(
                 form.value.content, 
-                this.username,
+                username,
                 0,
                 this.userID,
+                this.topicId
+                );
+            this.messageService.addMessage(message)
+                .subscribe(
+                    data => console.log("succss here is the data ", data),
+                    error => console.error("error here is the error ", error)
+            );
+        }
+        form.resetForm();
+    }
+        anonSubmit(form: NgForm) {
+                    var username: string = 'Anonymous';
+
+        if(this.message) {
+            // Edit
+            this.message.body = form.value.content;
+            this.messageService.updateMessage(this.message)
+            .subscribe(
+                result => console.log("here is the result", result)
+            );
+            this.message = null;
+        } else {
+            // Create
+            console.log( "AM I IN HERE?");
+            const message = new Message(
+                form.value.content, 
+                'Anonymous',
+                0,
+                54,
                 this.topicId
                 );
             this.messageService.addMessage(message)

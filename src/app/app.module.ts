@@ -47,6 +47,7 @@ import { AlertComponent } from './alert/alert.component';
 import { ResultsComponent } from './results/results.component';
 import { PopoverModule } from 'ng2-popover';
 
+
 import { DavidDataService } from './services/david-data.service';
 
 @NgModule({

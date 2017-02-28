@@ -14,7 +14,7 @@ import { MessageService } from '../services/message.service'
 })
 export class MessageListComponent implements OnInit {
     messages: Message[];
-    username: string = localStorage.getItem('username');
+    // username: string = localStorage.getItem('username');
 
     constructor(private messageService: MessageService) {}
 
