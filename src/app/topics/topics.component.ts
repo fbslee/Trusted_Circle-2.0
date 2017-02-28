@@ -206,11 +206,11 @@ export class TopicsComponent implements OnInit {
    )
   }
 
-  // printuser(user) {
-  //   console.log(user)
-  //   sessionStorage.setItem('suggestedUsername', user.username)
-  //   sessionStorage.setItem('suggestedUserId', user.id)
-  // }
+  printuser(user) {
+    console.log(user)
+    sessionStorage.setItem('suggestedUsername', user.username)
+    sessionStorage.setItem('suggestedUserId', user.id)
+  }
 
   getUsers() {
     this._TopicsService.getUsers()

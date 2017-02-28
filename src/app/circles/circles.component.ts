@@ -26,7 +26,7 @@ export class CirclesComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    sessionStorage.removeItem('circle')
+    // sessionStorage.removeItem('circle')
     // this.getTopics();
     // this.getCircles();
     // this.getCurrentUserCircles();

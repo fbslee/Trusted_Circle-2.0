@@ -8,11 +8,13 @@ import { PollService } from '../services/poll.service';
 })
 export class PollComponent implements OnInit {
   suggestedMember: string = sessionStorage.getItem('suggestedUsername')
-  circle: string = sessionStorage.getItem('circle')
+  circle: string = localStorage.getItem('currentCircle')
   suggestor: string = localStorage.getItem('username')
   showThis: boolean = true
   pollCreated: boolean = false
   pollInProgress: boolean = false
+  blacklist: boolean = false
+  alreadyMember: boolean = false
 
   constructor(private _PollService: PollService) { }
 
@@ -21,12 +23,20 @@ export class PollComponent implements OnInit {
     console.log(this.suggestedMember, this.circle, this.suggestor)
     this._PollService.yes(this.suggestedMember, this.circle, this.suggestor)
     .subscribe(data => {
-      if(data.pollInProgress === true){
-        this.showThis = false;
-        this.pollInProgress = true;
-      } else {
-        this.showThis = false
+      console.log('what is the data over here eh?', data)
+      this.showThis = false
+      if(data.pollCreated === true){
+        console.log('poll created')
         this.pollCreated = true
+      } else if(data.pollInProgress === true){
+        console.log('poll in progress')
+        this.pollInProgress = true;
+      } else if(data.blacklist === true){
+        console.log('member blacklisted')
+        this.blacklist = true
+      } else if(data.member === true){
+        console.log('already member')
+        this.alreadyMember = true
       }
     })
   }

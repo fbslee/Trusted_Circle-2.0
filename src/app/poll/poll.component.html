@@ -12,12 +12,23 @@
 <div *ngIf="pollCreated">
     <h1 style="text-align:center"><strong>Poll</strong></h1>
     <h3 style="text-align:center">You have invited {{suggestedMember}} to join the circle {{circle}}.
-        <br>A ballot was sent to the members of this circle to determine the acceptance of this new member.
+        <br>A ballot was sent to the members of this circle
+        <br>to determine the acceptance of this new member.
     </h3>
-    <div>
+    </div>
 
 <div *ngIf="pollInProgress">
     <h1 style="text-align:center">Sorry! But at this time there's
         <br>already a poll in progress for circle {{circle}}
     </h1>
-    <div>
+    </div>
+
+<div *ngIf="blacklist">
+    <h1 style="text-align:center">Sorry! But {{suggestMember}} is currently blacklisted from {{circle}}.</h1>
+    </div>
+
+<div *ngIf="alreadyMember">
+    <h1 style="text-align:center">{{suggestMember}} is already a member of {{circle}}.</h1>
+    <div style="text-align:center">
+        <button type="button" class="btn btn-primary" [routerLink]="['/topics']">Suggest Another Member?</button>
+    </div>

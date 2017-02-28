@@ -29,7 +29,7 @@
 <span>
 <div>
   People in the Current Circle
-<div *ngFor="let item of usersOfCircle" (click)="printuser(item)" [routerLink]="['/poll']" >
+<div *ngFor="let item of usersOfCircle">
    {{item.username}}
 </div>
 </div>
