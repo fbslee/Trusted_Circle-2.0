@@ -7,6 +7,7 @@ const User_Circles = require('../../models/user_circle.model');
 const Vote = require('../../models/votes.model');
 const Poll = require('../../models/polls.model');
 var emailer = require('./emailer')
+const Sequelize = require('sequelize');
 
 var signup = {
   get: function(req, res){
@@ -419,9 +420,26 @@ var result = {
     }
   }
 }
+
+var trustedcircle = {
+  post: function (req,res){
+    userModel.findOne({
+      where: {
+        trustedCounselor: true
+      },
+      order: [
+        Sequelize.fn( 'RAND' ),
+        ]
+    }).then((data)=>{
+      console.log(data)
+    })
+  }
+}
+
 module.exports = {
   signup: signup,
   poll: poll,
   vote: vote,
-  result: result
+  result: result,
+  trustedcircle: trustedcircle
 };
