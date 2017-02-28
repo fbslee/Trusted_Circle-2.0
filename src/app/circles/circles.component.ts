@@ -17,6 +17,7 @@ export class CirclesComponent implements OnInit {
   circlesUser: any = [];
   finalComparedCircles: any = [];
   circles: any = [];
+  profilePicLink: string = sessionStorage.getItem('userPhoto');
 
   //['Hack Reactor', 'Movies', 'Soccer'];
 
