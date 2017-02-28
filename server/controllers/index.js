@@ -6,6 +6,7 @@ const Circle = require('../../models/circles.model');
 const User_Circles = require('../../models/user_circle.model');
 const Vote = require('../../models/votes.model');
 const Poll = require('../../models/polls.model');
+var emailer = require('./emailer')
 
 var signup = {
   get: function(req, res){
@@ -59,6 +60,7 @@ var poll = {
     var suggestorId;
     var maxVotes;
     var userIds = [];
+    var userEmails = [];
     var pollId;
     userModel.findOne({
       where:{
@@ -122,10 +124,17 @@ var poll = {
                           }
                           Vote.create(newVote).then((data) => {
                             console.log('vote was successfully created', data.dataValues)
-                            res.send({
-                              pollCreated: true
+                            userModel.findOne({
+                              where: {
+                                id: data.dataValues.userId
+                              }
+                            }).then((data)=>{
+                              emailer.emailer(data.dataValues.email, 'New Vote Enquiry', 'Please visit http://localhost:4200/votes to vote for the addition of a new member into one of your trusted circles.')
                             })
                           })
+                        })
+                        res.send({
+                          pollCreated: true
                         })
                       })
                     }).catch( (error) => {
@@ -261,6 +270,7 @@ var vote= {
                           }
                         }).then((data) => {
                           suggestedMemberEmail = data.dataValues.email
+                          emailer.emailer(data.dataValues.email, 'New Trusted Circle Invitation', 'You have been invited to join a new trusted circle. Please visit http://localhost:4200/results')
                           console.log('new user accepted', data.dataValues)
                           res.send('new user accepted')
                         })
@@ -384,6 +394,16 @@ var result = {
       }).then((data)=>{
         data.updateAttributes({
           status: 'member'
+        }).then((data) => {
+          Circle.findOne({
+            where:{
+              id: data.dataValues.circleId
+            }
+          }).then((data) => {
+            data.updateAttributes({
+              totalMembers: (data.dataValues.totalMembers + 1)
+            })
+          })
         })
       })
     } else {
