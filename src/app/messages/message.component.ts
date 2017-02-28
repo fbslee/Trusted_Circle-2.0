@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Message } from './message.model';
-
+import { Observable } from 'rxjs/Observable';
+import { Http, JsonpModule, Response, Headers } from '@angular/http';
 
 import { MessageService } from '../services/message.service'
 
@@ -23,7 +24,8 @@ export class MessageComponent {
     @Output('vote') change = new EventEmitter();
 
 
-    constructor(private messageService: MessageService) {}
+    constructor(private messageService: MessageService,
+                private http: Http) {}
 
     ngOnInit() {
         console.log('myVote', this.myVote)
@@ -60,16 +62,32 @@ export class MessageComponent {
         );
     }
 
-    upVote() {
+    upVote(): Observable<any> {
         console.log(this.message);
         if (this.myVote == 1) {
             return;
         }
 
-        this.myVote++;
-        this.messageService.upVoteMessage(this.message)
-        .subscribe(
-            result => console.log(result));
+
+        this.messageService.upVoteMessage(this.message).map( (res:Response) => {
+            return res.json();
+        }).subscribe( (data) => {
+            let body = this.message;
+            console.log(data, ' DATATATATATA');
+            let headers = new Headers({'Content-Type': 'application/json'});
+            if(data.length === 0) { //then create the post
+                this.myVote++;
+                this.http.post('/api/messagesvotes/', body,  {headers: headers}).map((data) => {
+                    console.log('mapped!')
+                }).subscribe( (result) => {
+                    console.log(result,'adbaaadbd');
+                })    
+            } else {
+            return alert('You Already Voted!!!')
+            }
+        })
+        // .subscribe(
+        //     result => console.log(result));
     }
 
     downVote() {
