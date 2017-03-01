@@ -58,7 +58,7 @@
                 <div *ngIf="loadTopic === false">
 
                 <img src="http://www.free-icons-download.net/images/red-circle-icon-69788.png" alt="..." 
-                style="max-width: 100%;
+                style="max-width: 30%;
                 max-height: 100%;
                 display: block;
                 margin: auto auto;">
@@ -85,12 +85,12 @@
 
             <div *ngIf="loadTopic === true">
               <img src="http://www.iconsfind.com/wp-content/uploads/2013/11/20131104_527706bcf3fca.png" 
-              style="max-width: 100%;
+              style="max-width: 30%;
               max-height: 100%;
               display: block;
               margin: auto auto;"
               />
-              <app-topics></app-topics>
+              <app-topics class='topic'></app-topics>
             </div>
 
 
@@ -104,7 +104,7 @@
             <div class="col-4 col-sm-6">
 
               <div class="thumbnail">
-                <img src="http://www.freeiconspng.com/uploads/live-chat-icon-13.png" alt="..." height="256px" width="256px">
+                <img src="http://www.freeiconspng.com/uploads/live-chat-icon-13.png" style="max-width: 30%;" alt="..." height="256px" width="256px">
                 <div class="caption">
                   <a [routerLink]="['/chat']" routerLinkActive="active">
                     <h3>Chat</h3>

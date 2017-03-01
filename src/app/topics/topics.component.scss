@@ -1,10 +1,13 @@
 .container {
     padding-top: 50px;
-    
+}
+
+_ngcontent-gch-77 {
+    box-shadow: 5px 5px 5px black;
 }
 
 .keepInside {
-    display: block; 
+    display: block;
     display: -webkit-box;
     margin: 0 auto;
     // -webkit-line-clamp: 3;
@@ -12,4 +15,8 @@
     // overflow:hidden;
     // word-wrap: break-word;
     text-overflow: ellipsis;
+}
+
+#n {
+    text-align: center;
 }
