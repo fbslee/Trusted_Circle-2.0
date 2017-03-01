@@ -8,6 +8,15 @@ import { MessageService } from '../services/message.service'
 @Component({
   selector: 'app-message-input',
   template: `
+
+      <push-notification #myNotification
+        title="Trusted Circle"
+        body="message Posted"
+        icon="http://www.free-icons-download.net/images/red-circle-icon-69788.png"
+        closeDelay="5000">
+
+        </push-notification>
+
   <h3>{{topicBody}} posted by {{topicUser}}</h3>
   <div class="col-md-8 col-md-offset-2">
     <div *ngIf="flag">
@@ -25,7 +34,8 @@ import { MessageService } from '../services/message.service'
                     required>
         </div>
         <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-default" type="submit">Post as {{username}}</button>
+        <button class="btn btn-default" type="submit" (click)="myNotification.show(f)">Post as {{username}}</button>
+
     </form>
     </div>
      <div *ngIf="!flag">
@@ -42,6 +52,7 @@ import { MessageService } from '../services/message.service'
         </div>
         <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
         <button class="btn btn-danger" (click)='anonSubmit(f)'>Post as Anonymous</button> <a (click)="anon()" >Cancel</a>
+        
 
     </form>
     </div>
@@ -69,7 +80,6 @@ export class MessageInputComponent implements OnInit {
 
     onSubmit(form: NgForm) {
         var username: string = localStorage.getItem('username');
-
         if(this.message) {
             // Edit
             this.message.body = form.value.content;
