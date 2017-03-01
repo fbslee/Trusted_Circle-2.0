@@ -12,8 +12,6 @@
     .profile-userpic img {
   float: none;
   margin: 0;
-  width: 25%;
-  height: 25%;
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
@@ -26,8 +24,24 @@
     width: 19%;
     float: right;
 }
+
+.pfp {
+    width: 33.333%;
+    text-align: center;
+    display: inline-block;
+}
+
+.desc {
+    text-align: right;
+    display: inline-block;
+}
+
+#k {
+    font-size: 12px;
+}
+
 .p1 {
-        display: inline-block;
+    display: inline-block;
     text-align: left;
 
 }
