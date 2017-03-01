@@ -10,7 +10,7 @@ export class TrustedcounselorService {
   private url = "http://localhost:4200";
 
   invite(circle): Observable<any> {
-    var data = this._http.post('/api/trustedcounselor', {
+    var data = this._http.post('http://localhost:4200/api/trustedcounselor', {
       circle: circle
     })
       .map( ( res:Response ) => res.json() )

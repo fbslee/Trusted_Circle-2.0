@@ -15,9 +15,9 @@ import { Parallax, ParallaxConfig  } from '../parallax.directive';
   styleUrls: ['./home.component.scss']
 })
 
-// @Directive({
+@Directive({
   
-// })
+})
 export class HomeComponent implements OnInit {
 
   private flag = true;
