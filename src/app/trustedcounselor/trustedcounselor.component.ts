@@ -12,16 +12,20 @@ export class TrustedcounselorComponent implements OnInit {
   suggestor: string = localStorage.getItem('username')
   showThis: boolean = true
   invited: boolean = false
+  noCounselors: boolean = false
 
   constructor(private _TrustedcounselorService: TrustedcounselorService) { }
 
   invite(){
+    this.showThis = false;
     this._TrustedcounselorService.invite(this.circle)
     .subscribe(data => {
-      console.log(data)
+      if(data === null){
+        this.invited = true;
+      } else if(data.noCounselors === true){
+        this.noCounselors = true;
+      }
     })
-    this.showThis = false;
-    this.invited = true;
   }
   ngOnInit() {
   }
