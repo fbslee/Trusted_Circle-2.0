@@ -102,9 +102,6 @@ export class MessageService {
 
         return this.http.get('/api/messagesvotes/' + message.messageId + '/' + localStorage.getItem('userID') )
 
-
-
-        // 
     }
     downVoteMessage(message: Message) {
         let body = JSON.stringify(message);

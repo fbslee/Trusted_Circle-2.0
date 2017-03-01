@@ -1,7 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgForm } from "@angular/forms";
+
 import { Message } from './message.model';
 import { Observable } from 'rxjs/Observable';
 import { Http, JsonpModule, Response, Headers } from '@angular/http';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { DialogRef } from 'angular2-modal';
+
 
 import { MessageService } from '../services/message.service'
 
@@ -20,12 +25,16 @@ export class MessageComponent {
         firstname: '',
         lastname: ''
     };
+      
+
 
     @Output('vote') change = new EventEmitter();
 
 
     constructor(private messageService: MessageService,
-                private http: Http) {}
+                private http: Http,
+                public modal: Modal
+                ) {}
 
     ngOnInit() {
         console.log('myVote', this.myVote)
@@ -33,11 +42,28 @@ export class MessageComponent {
 
 
 
-    onEdit() {    
-
+    onEdit() {
         this.messageService.editMessage(this.message)
-      
     }
+    openModal() {
+        let comment = this.modal.prompt()
+            .size('lg')
+            .isBlocking(false)
+            .showClose(false)
+            .keyboard(27)
+            .dialogClass('dialog')
+            .headerClass('comment')
+            .body('Post A Comment')
+            .bodyClass('modal-body')
+            .okBtn('Post')
+            .open();
+            
+            comment
+            .then((d) => d.result)
+            .then((r) => { 
+                console.log(r);  
+            });          
+  }
 
     ttp(user) {
 

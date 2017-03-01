@@ -47,6 +47,7 @@ import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { AlertComponent } from './alert/alert.component';
 import { ResultsComponent } from './results/results.component';
 import { PopoverModule } from 'ng2-popover';
+import { PushNotificationComponent } from './notification.component';
 
 
 import { DavidDataService } from './services/david-data.service';
@@ -72,7 +73,8 @@ import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.c
     PollComponent,
     AlertComponent,
     ResultsComponent,
-    TrustedcounselorComponent
+    TrustedcounselorComponent,
+    PushNotificationComponent,
   ],
   imports: [
     BrowserModule,
