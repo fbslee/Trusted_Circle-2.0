@@ -540,7 +540,7 @@ router.post('/messages', (req, res) => {
     var userId = req.body.userId;
     var topicId = req.body.topicId;
     console.log(req.body);
-    let newMessage = {
+    var newMessage = {
         body: body,
         votes: votes,
         userId: userId,
@@ -584,7 +584,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
     var userId = req.body.userId
     var messageId = req.body.messageId
     console.log(req.body);
-    let newMessageVote = {
+    var newMessageVote = {
         userId: userId,
         messageId: messageId
     }
@@ -648,7 +648,7 @@ router.post('/topics', (req, res) => {
     console.log('THIS IS BODY!!', body);
     // body = JSON.stringify(body)
     // res.send(body);
-    let newTopic = {
+    var newTopic = {
         body: body.body,
         circleId: body.circleId
     }
@@ -683,7 +683,7 @@ router.post('/circles', (req, res) => {
     console.log('THIS IS BODY of circles!!', body);
     // body = JSON.stringify(body)
     // res.send(body);
-    let newCircle = {
+    var newCircle = {
         name: body.body,
         userId: body.userId,
         totalMembers: 1
