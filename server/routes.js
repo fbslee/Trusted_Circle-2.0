@@ -793,7 +793,7 @@ router.post('/comment', (req, res) => {
             userId: req.body.userId,
             messageId: req.body.messageId
     }).then( (data) => {
-        console.log('data! from comment create', data)
+        console.log('data! from comment create', data.dataValues)
         res.status(200).json(data)
     })
 })

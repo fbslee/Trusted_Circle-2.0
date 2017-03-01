@@ -72,9 +72,9 @@ export class MessageComponent {
                 var text = r;
 
                 var sendThis = {
-                    userId: userId,
-                    messageId: messageId,
-                    text: text
+                    "userId": userId,
+                    "messageId": messageId,
+                    "text": text
                 }
                 console.log(sendThis);
                 if(text) {
