@@ -1,0 +1,15 @@
+<div *ngIf="showThis" class="container">
+<h1 style="text-align:center">Would you like to invite a Trusted Counselor to the circle {{circle}}?</h1>
+
+<div style="text-align:center">
+<button type="button" class="btn btn-success" (click)="invite()">Yes</button>
+<button type="button" class="btn btn-danger" [routerLink]="['/topics']">No</button>
+</div>
+</div>
+
+<div *ngIf="invited" class="container">
+  <h1 style="text-align:center">An invite was sent to a Trusted Counselor to join your circle.</h1>
+  <div style="text-align:center">
+  <button type="button" class="btn btn-primary" [routerLink]="['/topics']">Go back to your circle</button>
+  </div>
+</div>

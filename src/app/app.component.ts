@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { PushNotificationComponent } from './notification.component';
 
 @Component({
   selector: 'app-root',

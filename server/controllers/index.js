@@ -423,15 +423,27 @@ var result = {
 
 var trustedcircle = {
   post: function (req,res){
-    userModel.findOne({
+    var circleName = req.body.circle
+    var randTrustCounselor
+    userModel.findAll({
       where: {
         trustedCounselor: true
-      },
-      order: [
-        Sequelize.fn( 'RAND' ),
-        ]
+      }
     }).then((data)=>{
-      console.log(data)
+      var rand = Math.floor(Math.random() * data.length)
+      randTrustCounselor = data[rand].dataValues
+      emailer.emailer(randTrusCounselor.email, 'You have been invited into a new Trusted Circle', 'Hello! For having given so much good advice throughout your use of our app, one of our users was wondering if you would like to join their Trusted Circle. Please visit http://localhost:4200/results to make your decision.')
+      Circle.findOne({
+        where: {
+          name: circleName
+        }
+      }).then((data) => {
+        User_Circles.create({
+          userId: randTrustCounselor.id,
+          circleId: data.dataValues.id,
+          status: 'pending'
+        })
+      })
     })
   }
 }

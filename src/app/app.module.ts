@@ -36,6 +36,7 @@ import { AlertService } from './services/alert.service';
 import { DataService } from './services/data.service';
 import { VoteService } from './services/vote.service';
 import { ResultService } from './services/result.service';
+import { TrustedcounselorService } from './services/trustedcounselor.service';
 import { ModalModule } from 'angular2-modal';
 
 import { FooterComponent } from './footer/footer.component';
@@ -46,9 +47,11 @@ import { Parallax, ParallaxConfig  } from './parallax.directive';
 import { AlertComponent } from './alert/alert.component';
 import { ResultsComponent } from './results/results.component';
 import { PopoverModule } from 'ng2-popover';
+import { PushNotificationComponent } from './notification.component';
 
 
 import { DavidDataService } from './services/david-data.service';
+import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +72,9 @@ import { DavidDataService } from './services/david-data.service';
     Parallax,
     PollComponent,
     AlertComponent,
-    ResultsComponent
+    ResultsComponent,
+    TrustedcounselorComponent,
+    PushNotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +105,8 @@ import { DavidDataService } from './services/david-data.service';
       }, 
       { path: 'topics', component: TopicsComponent },
       { path: 'poll', component: PollComponent },
-      { path: 'results', component: ResultsComponent }
+      { path: 'results', component: ResultsComponent },
+      { path: 'trustedcounselor', component: TrustedcounselorComponent }
     ]),
     MaterialModule.forRoot()
   ],
@@ -118,7 +124,8 @@ import { DavidDataService } from './services/david-data.service';
     DataService,
     DavidDataService,
     VoteService,
-    ResultService
+    ResultService,
+    TrustedcounselorService
     ],
   bootstrap: [AppComponent]
 })
