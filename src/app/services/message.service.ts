@@ -131,6 +131,11 @@ export class MessageService {
         console.log('in service', sendThis);
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('/api/comment', sendThis, {headers: headers})
+        .map((data) => {
+                    console.log('mapped!')
+                }).subscribe( (result) => {
+                    console.log(result,'adbaaadbd');
+                })    
 
     }
 }
