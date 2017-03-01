@@ -125,4 +125,12 @@ export class MessageService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
     }
+
+
+    addComment (sendThis) {
+        console.log('in service', sendThis);
+        let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('/api/comment', sendThis, {headers: headers})
+
+    }
 }

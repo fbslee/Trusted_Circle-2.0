@@ -15,6 +15,7 @@ const User_Circles = require('../models/user_circle.model');
 const Message = require('../models/messages.model');
 const User_Topics = require('../models/user_topic.model');
 const User_Message_Votes = require('../models/user_message_votes.model');
+const Comment = require('../models/comment.model');
 
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
@@ -746,6 +747,59 @@ router.post('/topics', (req, res) => {
     })
 
 });
+
+
+// router.post('/circles', (req, res) => {
+//     var body = req.body
+//     console.log('THIS IS BODY of circles!!', body);
+//     // body = JSON.stringify(body)
+//     // res.send(body);
+//     let newCircle = {
+//         name: body.body,
+//         userId: body.userId,
+//         totalMembers: 1
+//     };
+
+
+//     Circle.create(newCircle)
+//     .then( (data) => {
+//         // res.status(200).json(data);
+//         return data;
+//     }).then( (data) => {
+
+//         console.log(data.dataValues, ' DATATATATATATATATAATATA');
+
+//         User_Circles.create({
+//         status: "member",
+//         userId: body.userId,
+//         circleId: data.dataValues.id
+//         })
+//         .then( (data) => {
+//             res.status(200).json(data);
+//         })
+
+
+
+//     })
+
+// })
+
+router.post('/comment', (req, res) => {
+    var body = req.body;
+    console.log('this is req.body from comments!!!!', req.body);
+
+    Comment.create({
+            text: req.body.text,
+            userId: req.body.userId,
+            messageId: req.body.messageId
+    }).then( (data) => {
+        console.log('data! from comment create', data)
+        res.status(200).json(data)
+    })
+})
+
+
+
 
 router.post('/poll', controller.poll.post) 
 

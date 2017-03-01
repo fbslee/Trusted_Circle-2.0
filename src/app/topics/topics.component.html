@@ -16,20 +16,25 @@
     (keyup.enter)="createTopic(newTopic.body)"
     >
 
+<div>
 <ul>
     <li *ngFor="let user of users">
       {{user}}
     </li>
 </ul>
+</div>
+
+<div>
 
 <md-input-container>
   <input mdInput #myInput placeholder="Add a User" [(ngModel)]="name" (input)="filterItem(myInput.value)" >
 </md-input-container>
 
-<span>
 
   <div *ngFor="let item of filteredItems" (click)="printuser(item)" [routerLink]="['/poll']" >
-   {{item.username}}
+   <strong>Add: {{item.username}}</strong>
+</div>
+
 </div>
 
 <div style="text-align:center">
@@ -48,5 +53,4 @@
    {{item.username}}
 </div>
 </div>-->
-</span>
 </div>

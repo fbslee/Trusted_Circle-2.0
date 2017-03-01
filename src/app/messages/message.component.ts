@@ -59,9 +59,29 @@ export class MessageComponent {
             .open();
             
             comment
-            .then((d) => d.result)
+            .then((d) => {
+                console.log(d);
+                return d.result
+            })
             .then((r) => { 
-                console.log(r);  
+                //i need the userid / messageId
+                // console.log('userId', localStorage.getItem('userID'), 'messageId', this.message.messageId );
+
+                var userId = localStorage.getItem('userID');
+                var messageId = this.message.messageId;
+                var text = r;
+
+                var sendThis = {
+                    userId: userId,
+                    messageId: messageId,
+                    text: text
+                }
+                console.log(sendThis);
+                if(text) {
+                this.messageService.addComment(sendThis);
+                }
+
+                // console.log(this.message, r);  
             });          
   }
 
