@@ -423,26 +423,72 @@ var result = {
 
 var trustedcircle = {
   post: function (req,res){
-    var circleName = req.body.circle
-    var randTrustCounselor
+    var circleName = req.body.circle;
+    var userIds = [];
+    var alreadyMembers = [];
+    var randTrustCounselor;
+    var users = []
     userModel.findAll({
       where: {
         trustedCounselor: true
       }
     }).then((data)=>{
-      var rand = Math.floor(Math.random() * data.length)
-      randTrustCounselor = data[rand].dataValues
-      emailer.emailer(randTrusCounselor.email, 'You have been invited into a new Trusted Circle', 'Hello! For having given so much good advice throughout your use of our app, one of our users was wondering if you would like to join their Trusted Circle. Please visit http://localhost:4200/results to make your decision.')
+      data.forEach(function(instance){
+        users.push(instance.dataValues)
+        usersId.push(instance.dataValues.id)
+      })
       Circle.findOne({
         where: {
           name: circleName
         }
       }).then((data) => {
-        User_Circles.create({
-          userId: randTrustCounselor.id,
-          circleId: data.dataValues.id,
-          status: 'pending'
-        })
+       User_Circles.findAll({
+         where:{
+           circleId: data.dataValues.id,
+           userId: userIds
+         }
+       }).then((data)=>{
+         if(data === null){
+           var rand = Math.random() * users.length;
+           randTrustCounselor = users[rand];
+           emailer.emailer(randTrusCounselor.email, 'You have been invited into a new Trusted Circle', 'Hello! For having given so much good advice throughout your use of our app, one of our users was wondering if you would like to join their Trusted Circle. Please visit http://localhost:4200/results to make your decision.');
+           User_Circles.create({
+             where:{
+               userId: randTrustCounselor.id,
+               circleId: circleId,
+               status: 'pending'
+             }
+           })
+         } else {
+           data.forEach(function(instance){
+             if(userIds.indexOf(instance.dataValues.id) !== - 1){
+               userIds.splice(userIds.indexOf(instance.dataValues.id), 1)
+             }
+           })
+           if(userIds.length === 0){
+             res.send({
+               noCounselors: true
+             })
+           } else {
+             userMode.findAll({
+               where:{
+                 userId: userIds
+               }
+             }).then((data)=>{
+               var rand = Math.random() * data.length;
+               randTrustCounselor = users[rand];
+                emailer.emailer(randTrusCounselor.email, 'You have been invited into a new Trusted Circle', 'Hello! For having given so much good advice throughout your use of our app, one of our users was wondering if you would like to join their Trusted Circle. Please visit http://localhost:4200/results to make your decision.');
+                User_Circles.create({
+                  where:{
+                    userId: randTrustCounselor.id,
+                    circleId: circleId,
+                    status: 'pending'
+                  }
+                })
+             })
+           }
+         }
+       })
       })
     })
   }

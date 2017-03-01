@@ -13,3 +13,13 @@
   <button type="button" class="btn btn-primary" [routerLink]="['/topics']">Go back to your circle</button>
   </div>
 </div>
+
+<div *ngIf="noCounselors" class="container">
+  <h1 style="text-align:center">Sorry! There are no Trusted Counselors that can join your circle
+    <br>They are either blacklisted, or a member of your circle already.
+    <br>Please try to add a Trusted Counselor again in the future.
+  </h1>
+  <div style="text-align:center">
+  <button type="button" class="btn btn-primary" [routerLink]="['/topics']">Go back to your circle</button>
+  </div>
+</div>
