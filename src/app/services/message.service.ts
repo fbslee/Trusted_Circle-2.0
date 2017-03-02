@@ -155,7 +155,7 @@ export class MessageService {
                     result.messageId,
                     result.id
                     );
-                this.comments.push(comment);
+                // this.comments.push(comment);
             
                 return comment;
             }) 
