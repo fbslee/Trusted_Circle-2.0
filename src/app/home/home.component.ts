@@ -69,6 +69,7 @@ export class HomeComponent implements OnInit {
                                       localStorage.setItem('userID', val["id"])
                                       localStorage.setItem('photo', val["photo"])
                                       localStorage.setItem('desc', val["desc"])
+                                      localStorage.setItem('email', val["email"])
                                       this.DavidDataService.getAllCurrentUserData( localStorage.getItem('userID') );
 
                                     }

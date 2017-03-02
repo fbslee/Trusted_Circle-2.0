@@ -1,6 +1,6 @@
 <div id='cnt' class="col-xs-12 col-md-10 offset-md-1">
   <div class="profile-userpic">
-          <img class="user-img" [src]="https://static.productionready.io/images/smiley-cyrus.jpg" class="img-responsive">
+          <img class="user-img" [src]="wew" class="img-responsive">
   </div>
           <h4 id='uname'>02l</h4>
 
@@ -16,18 +16,18 @@
 
                 <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
-                        <label for="description">New description</label>
-                        <input id='owo' type="text" class="form-control" name="description" [placeholder]="desc" />
+                        <label for="description">New bio</label>
+                        <input id='owo' type="text" class="form-control" name="description" [(ngModel)]="model.desc" #desc="ngModel" />
                         <div *ngIf="f.submitted && !firstname.valid" class="help-block">First name is required</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
                         <label for="image">New Image URL</label>
-                        <input id='owo' type="text" class="form-control" name="image" [placeholder]="wew" />
+                        <input id='owo' type="text" class="form-control" name="image" [(ngModel)]="model.image" #image="ngModel" />
                         <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name is required</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
                         <label for="email">New email</label>
-                        <input id='owo' type="text" class="form-control" name="email" placeholder="Mitrakos12@gmail.com"  />
+                        <input id='owo' type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel"  />
                         <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name is required</div>
                     </div>
                     

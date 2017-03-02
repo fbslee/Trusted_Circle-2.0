@@ -130,10 +130,14 @@ export class HeaderComponent implements OnInit {
   styleUrls: ['./header.component.css']
 })
 export class DialogOverviewExampleDialog {
+  private model = {
+    email: 'example@placeholder.com',
+    desc: 'Enter a new bio here!',
+    image: 'http://example.com/img/12345.png'
+  };
   private flag = false;
   private loading = false;
   private wew = localStorage.getItem('photo');
-  private desc = localStorage.getItem('desc');
 
 
   toggle() {
