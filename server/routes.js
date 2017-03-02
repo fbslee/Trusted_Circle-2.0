@@ -594,21 +594,30 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
                 id: data.dataValues.userId
             }
         }).then((data)=>{
-            data.updateAttributes({
-                upvotes: (data.dataValues.upvotes + 1)
-            }).then((data)=>{
-                if(data.dataValues.upvotes >= 10){
-                    data.updateAttributes({
-                        trustedCounselor: true
+            if(data.dataValues.username !== 'Anonymous'){
+                data.updateAttributes({
+                    upvotes: (data.dataValues.upvotes + 1)
+                }).then((data)=>{
+                    if(data.dataValues.upvotes >= 10){
+                        data.updateAttributes({
+                            trustedCounselor: true
+                        })
+                    }
+                    User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+                        res.status(200).json(newMessageVote);
                     })
-                }
+                    .catch(function (error){
+                        res.status(500).json(error);
+                    });
+                })
+            } else {
                 User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
                     res.status(200).json(newMessageVote);
                 })
                 .catch(function (error){
                     res.status(500).json(error);
                 });
-            })
+            }
         })
     })
   })
