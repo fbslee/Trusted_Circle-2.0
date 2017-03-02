@@ -779,6 +779,7 @@ router.post('/topics', (req, res) => {
 // })
 
 
+
 router.post('/comment', (req, res) => {
     var body = req.body;
     console.log('this is req.body from comments!!!!', req.body);
@@ -792,6 +793,7 @@ router.post('/comment', (req, res) => {
         res.status(200).json(data)
     })
 })
+
 
 
   router.get('/comments/:messageId', (req, res) => {
