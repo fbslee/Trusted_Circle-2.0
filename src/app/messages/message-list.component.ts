@@ -15,7 +15,6 @@ import { MessageService } from '../services/message.service'
 export class MessageListComponent implements OnInit {
     messages: Message[];
     // username: string = localStorage.getItem('username');
-
     constructor(private messageService: MessageService) {
     // setTimeout(() => {
     //     this.messageService.getMessages();
@@ -29,6 +28,7 @@ export class MessageListComponent implements OnInit {
            console.log('this is messages data inside list', data) 
            this.messages = data;
            });
+           
     }
     
 }

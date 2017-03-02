@@ -18,7 +18,7 @@ const User_Message_Votes = require('../models/user_message_votes.model');
 const Comment = require('../models/comment.model');
 
 
-router.get('/test', function(req,res) {
+router.get('/test', function (req, res) {
   console.log('yuri is gay')
   res.send()
 })
@@ -26,157 +26,165 @@ router.get('/test', function(req,res) {
 router.get('/signup', controller.signup.get);
 
 router.get('/logout', (req, res) => {
-    console.log('logged user out');
-    req.logout();
+  console.log('logged user out');
+  req.logout();
 });
 
 router.get('/users', (req, res) => {
-    console.log('getting users');
-    User.findAll().then( (data) => {
-        res.send(data)
-    })
+  console.log('getting users');
+  User.findAll().then((data) => {
+    res.send(data)
+  })
 })
 
 router.get('/users/:username', (req, res) => {
-    console.log('getting specific user');
-    console.log(req.params.username);
+  console.log('getting specific user');
+  console.log(req.params.username);
 
-    User.findAll({
+  User.findAll({
     where: {
-        username: req.params.username
-     }
-    }).then( (data) => {
-        res.send(data)
-    })
+      username: req.params.username
+    }
+  }).then((data) => {
+    res.send(data)
+  })
 })
 
 router.get('/user/:id', (req, res) => {
-    console.log('getting specific user');
-    console.log(req.params);
+  console.log('getting specific user');
+  console.log(req.params);
 
-    User.find({
+  User.find({
     where: {
-        id: req.params.id
-     }
-    }).then( (data) => {
-        res.send(data)
-    })
+      id: req.params.id
+    }
+  }).then((data) => {
+    res.send(data)
+  })
 })
 
 router.get('/users_circles', (req, res) => {
-    console.log('getting users circles');
-    User_Circles.findAll().then( (data) => {
-        res.send(data)
-    })
+  console.log('getting users circles');
+  User_Circles.findAll().then((data) => {
+    res.send(data)
+  })
 })
 
 router.get('/get_users_circles/:circleId', (req, res) => {
-    console.log(req.params.circleId, 'this is circle Id!');
-    console.log('getting users of a circle !!!!');
-    User_Circles.findAll({
-        where: {
-            circleId: req.params.circleId,
-            status: { $ne: "blacklisted" },
-            $and: { status : "member" } 
-        }
-    
-    }).then( (data) => {
-        var arrUsers = [];
-        data.forEach( (val, i) => {
-            arrUsers.push(val.dataValues.userId);
-        })
-        console.log(arrUsers);
-        return arrUsers;
-    }).then( (arrUsers) => {
-        User.findAll({
-        where: {
-            id: arrUsers
-        }
-        }).then( (dataUsers) => {
-        
-        
-        res.send(dataUsers);
-        })
+  console.log(req.params.circleId, 'this is circle Id!');
+  console.log('getting users of a circle !!!!');
+  User_Circles.findAll({
+    where: {
+      circleId: req.params.circleId,
+      status: {
+        $ne: "blacklisted"
+      },
+      $and: {
+        status: "member"
+      }
+    }
+
+  }).then((data) => {
+    var arrUsers = [];
+    data.forEach((val, i) => {
+      arrUsers.push(val.dataValues.userId);
     })
+    console.log(arrUsers);
+    return arrUsers;
+  }).then((arrUsers) => {
+    User.findAll({
+      where: {
+        id: arrUsers
+      }
+    }).then((dataUsers) => {
+
+
+      res.send(dataUsers);
+    })
+  })
 })
 
 router.get('/get_users_non_circles/:circleId', (req, res) => {
-    console.log(req.params.circleId, 'this is circle Id!');
-    console.log('getting users of a circle !!!!');
-    User_Circles.findAll({
-        where: {
-            circleId: req.params.circleId,
-            status: { $ne: "blacklisted" }
-        }
-    }).then( (data) => {
-        var arrUsers = [];
-        data.forEach( (val, i) => {
-            arrUsers.push(val.dataValues.userId);
-        })
-        console.log(arrUsers);
-        return arrUsers;
-    }).then( (arrUsers) => {
-        User.findAll({
-            where: {
-                id: { $notIn: arrUsers }
-            }
-        })
-            .then( (dataUsers) => {
-            res.send(dataUsers);
-        })
+  console.log(req.params.circleId, 'this is circle Id!');
+  console.log('getting users of a circle !!!!');
+  User_Circles.findAll({
+    where: {
+      circleId: req.params.circleId,
+      status: {
+        $ne: "blacklisted"
+      }
+    }
+  }).then((data) => {
+    var arrUsers = [];
+    data.forEach((val, i) => {
+      arrUsers.push(val.dataValues.userId);
     })
+    console.log(arrUsers);
+    return arrUsers;
+  }).then((arrUsers) => {
+    User.findAll({
+        where: {
+          id: {
+            $notIn: arrUsers
+          }
+        }
+      })
+      .then((dataUsers) => {
+        res.send(dataUsers);
+      })
+  })
 })
 
 router.get('/users_topics', (req, res) => {
-    console.log('getting users topics');
-    User_Topics.findAll().then( (data) => {
-        res.send(data)
-    })
+  console.log('getting users topics');
+  User_Topics.findAll().then((data) => {
+    res.send(data)
+  })
 })
 
 router.get('/roomList', (req, res) => {
-    console.log('/roomlist being hit!!!')
-    
-    Chatrooms.findAll().then( (val) => {
-            res.send(val) 
-    })
-  
+  console.log('/roomlist being hit!!!')
+
+  Chatrooms.findAll().then((val) => {
+    res.send(val)
+  })
+
 
 });
 
 router.get('/circles', (req, res) => {
-    console.log('/circles being hit!!! for GET');
-    console.log(req.params);
-    
-    Circle.findAll().then( (val) => {
-            res.send(val) 
-    })
-  
+  console.log('/circles being hit!!! for GET');
+  console.log(req.params);
+
+  Circle.findAll().then((val) => {
+    res.send(val)
+  })
+
 
 });
 
 router.get('/circles/:circleName', (req, res) => {
-    console.log('/circlesName being hit!!! for GET');
-    console.log(req.params);
-    
-    Circle.findAll({
-        where: {
-            name: req.params.circleName
-        }
-    }).then( (val) => {
-            console.log(val);
-            
-            res.send(val) 
-    })
-  
+  console.log('/circlesName being hit!!! for GET');
+  console.log(req.params);
+
+  Circle.findAll({
+    where: {
+      name: req.params.circleName
+    }
+  }).then((val) => {
+    console.log(val);
+
+    res.send(val)
+  })
+
 
 });
 
 
 //ROUTE TO FIND ALL THE CIRCLES THEY BELONG TO...
 router.get('/userCircleTopic/:userId'
-    // /:circleId/:topicId'
-, (req, res) => {
+  // /:circleId/:topicId'
+  , (req, res) => {
 
     var userId = req.params.userId;
 
@@ -187,353 +195,359 @@ router.get('/userCircleTopic/:userId'
 
     User.find({
         where: {
-            id: userId
+          id: userId
         }
-    })
-    .then( (userData) => {
+      })
+      .then((userData) => {
         returnInfo.usernameData = userData
         return returnInfo
-    })
-    //Username has been Found [Step 2 Find the circles]
-    .then( () => {
+      })
+      //Username has been Found [Step 2 Find the circles]
+      .then(() => {
         //find all user_circle relationship [step 3 ]
         User_Circles.findAll({
-            where : {
-                userId: userId
-            }
-        }).then( (uCircleData) => {
-            // console.log(uCircleData, 'this is user circle data');
-            returnInfo.user_circles_Obj = uCircleData;
-            for( obj of uCircleData ) {
-                // console.log(obj.dataValues, '------------------0----------------');
-                returnInfo.circleId.push(obj.dataValues.circleId);
-            }
-            // res.send(returnInfo); check getting all the circles
-            return returnInfo
-        }).then( ()=> {
-            //I HAVE CIRCLE IDS from here
-            //FIND ALL CIRCLES
+          where: {
+            userId: userId
+          }
+        }).then((uCircleData) => {
+          // console.log(uCircleData, 'this is user circle data');
+          returnInfo.user_circles_Obj = uCircleData;
+          for (obj of uCircleData) {
+            // console.log(obj.dataValues, '------------------0----------------');
+            returnInfo.circleId.push(obj.dataValues.circleId);
+          }
+          // res.send(returnInfo); check getting all the circles
+          return returnInfo
+        }).then(() => {
+          //I HAVE CIRCLE IDS from here
+          //FIND ALL CIRCLES
 
-            Circle.findAll({
-                where: {'id': returnInfo.circleId }
-            }).then( (circleData) => {
-                // console.log(circleData, '---------1---------')
-                for(cir of circleData) {
-                    // console.log(cir.dataValues,'------2------');
-                    returnInfo.circlesObj.push(cir.dataValues);
-                }
-                // returnInfo.circlesObj.push(circleData.dataValues);
-                // res.send(returnInfo)
-                // returnInfo;
-                returnInfo
-            }).then( () => {
-                //FINDING CIRCLES AND TOPICS
-                Topic.findAll({})
-                .then ( (topicInfo) => {
-                    for(topic of topicInfo) {
-                        // console.log(topic.dataValues,'------2------');
-                        for(cirId of returnInfo.circleId) {
-                            if(cirId === topic.dataValues.circleId) {
-                                returnInfo.topicId.push(topic.dataValues.id);
-                                returnInfo.topicsObj.push(topic.dataValues);
-                            }
-                        }
-
+          Circle.findAll({
+            where: {
+              'id': returnInfo.circleId
+            }
+          }).then((circleData) => {
+            // console.log(circleData, '---------1---------')
+            for (cir of circleData) {
+              // console.log(cir.dataValues,'------2------');
+              returnInfo.circlesObj.push(cir.dataValues);
+            }
+            // returnInfo.circlesObj.push(circleData.dataValues);
+            // res.send(returnInfo)
+            // returnInfo;
+            returnInfo
+          }).then(() => {
+            //FINDING CIRCLES AND TOPICS
+            Topic.findAll({})
+              .then((topicInfo) => {
+                for (topic of topicInfo) {
+                  // console.log(topic.dataValues,'------2------');
+                  for (cirId of returnInfo.circleId) {
+                    if (cirId === topic.dataValues.circleId) {
+                      returnInfo.topicId.push(topic.dataValues.id);
+                      returnInfo.topicsObj.push(topic.dataValues);
                     }
+                  }
+
+                }
                 //WORK IN HERE
 
                 return returnInfo
-                }).then( () => {
-                for(circlesData of returnInfo.circlesObj) {
-                    for(topicsData of returnInfo.topicsObj) {
-                        if(circlesData.id === topicsData.circleId) {
-                            if(returnInfo.circles_topics[circlesData.id]) {
-                                returnInfo.circles_topics[circlesData.id].push (topicsData)
-                            } else {
-                                returnInfo.circles_topics[circlesData.id] = [];
-                                returnInfo.circles_topics[circlesData.id].push (topicsData);
-                            }
-                        }
+              }).then(() => {
+                for (circlesData of returnInfo.circlesObj) {
+                  for (topicsData of returnInfo.topicsObj) {
+                    if (circlesData.id === topicsData.circleId) {
+                      if (returnInfo.circles_topics[circlesData.id]) {
+                        returnInfo.circles_topics[circlesData.id].push(topicsData)
+                      } else {
+                        returnInfo.circles_topics[circlesData.id] = [];
+                        returnInfo.circles_topics[circlesData.id].push(topicsData);
+                      }
                     }
+                  }
                 }
 
-                
+
                 return returnInfo
                 // res.send(returnInfo)
-                }).then( () => {
-                        User_Topics.findAll()
-                        .then( (data) => {
-                            // console.log(data, 'this is Data');
-                            
-                            var dataArray = data;
-                            for( topics of dataArray) {
-                                console.log(topics.dataValues);
-                                returnInfo.users_topicsALL.push(topics.dataValues);
-                            }
-                            res.send(returnInfo)
-                        })
+              }).then(() => {
+                User_Topics.findAll()
+                  .then((data) => {
+                    // console.log(data, 'this is Data');
 
-                    
-                })
+                    var dataArray = data;
+                    for (topics of dataArray) {
+                      console.log(topics.dataValues);
+                      returnInfo.users_topicsALL.push(topics.dataValues);
+                    }
+                    res.send(returnInfo)
+                  })
 
 
-            })
-            
-            
+              })
+
+
+          })
+
+
 
         })
 
-    })
+      })
 
     var returnInfo = {
-        userId: userId,
-        user_circles_Obj: [],
-        circlesObj: [],
-        circleId: [],
-        topicsObj: [],
-        topicId: [],
-        circles_topics: {},
-        users_topicsALL: []
+      userId: userId,
+      user_circles_Obj: [],
+      circlesObj: [],
+      circleId: [],
+      topicsObj: [],
+      topicId: [],
+      circles_topics: {},
+      users_topicsALL: []
     };
 
 
     // res.send(returnInfo)
 
-})
+  })
 
 
 router.get('/circles/:id', (req, res) => {
-    console.log('/circles being hit!!! for GET from param');
-    console.log(req.params);
-    console.log(req.params.id);
-    
+  console.log('/circles being hit!!! for GET from param');
+  console.log(req.params);
+  console.log(req.params.id);
 
-  
+
+
 
 });
 
 router.get('/messages/:id', (req, res) => {
-    console.log('/messages being hit!!! for GET from param');
-    console.log(req.params);
-    console.log(req.params.id);
-    
-    Message.findAll({
+  console.log('/messages being hit!!! for GET from param');
+  console.log(req.params);
+  console.log(req.params.id);
+
+  Message.findAll({
     where: {
-        id: req.params.id
-     }
-    }).then( (val) => {
-            res.send(val) 
-    })
-  
+      id: req.params.id
+    }
+  }).then((val) => {
+    res.send(val)
+  })
+
 
 });
 
 router.delete('/messages/:id', (req, res) => {
 
-    console.log(req.params);
-    console.log(req.params.id);
-    Message.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then( val => {
-        console.log(val);
-        res.send('deleted amount:'+val)
-    })
+  console.log(req.params);
+  console.log(req.params.id);
+  Message.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(val => {
+    console.log(val);
+    res.send('deleted amount:' + val)
+  })
 });
 
 
 
 router.get('/topics', (req, res) => {
-    console.log('/topics being hit!!! for GET')
-    
-    Topic.findAll().then( (val) => {
-            res.send(val) 
-    })
-  
+  console.log('/topics being hit!!! for GET')
+
+  Topic.findAll().then((val) => {
+    res.send(val)
+  })
+
 
 });
 
 router.get('/topics/:id', (req, res) => {
-    console.log('/topics being hit!!! for GET from param')
-    console.log(req.params);
-    console.log(req.params.id);
-    
-    Topic.findAll({
-    where: {
-        id: req.params.id
-     }
-    }).then( (val) => {
-            res.send(val) 
-    })
-  
+  console.log('/topics being hit!!! for GET from param')
+  console.log(req.params);
+  console.log(req.params.id);
 
+  Topic.findAll({
+    where: {
+      id: req.params.id
+    }
+  }).then((val) => {
+    res.send(val)
+  })
 });
 
 router.get('/topics_to_user/:topicsId', (req, res) => {
-    //purpose to get topic owner
+  //purpose to get topic owner
 
 
-    console.log('/topics being hit!!! for GET from param')
-    console.log(req.params);
-    console.log(req.params.topicsId);
-    
-    User_Topics.find({
+  console.log('/topics being hit!!! for GET from param')
+  console.log(req.params);
+  console.log(req.params.topicsId);
+
+  User_Topics.find({
     where: {
-        topicId: req.params.topicsId,
-        status: "original poster"
-     }
-    }).then( (val) => {
-      console.log(val.dataValues);
+      topicId: req.params.topicsId,
+      status: "original poster"
+    }
+  }).then((val) => {
+    console.log(val.dataValues);
 
-      var userId = val.dataValues.userId;
+    var userId = val.dataValues.userId;
 
-      User.find({
-          where: {
-              id: userId
-          }
-      }).then ( (data) => {
-          res.send(data);
-      })
-
-            // res.send(val) 
+    User.find({
+      where: {
+        id: userId
+      }
+    }).then((data) => {
+      res.send(data);
     })
-  
+
+    // res.send(val) 
+  })
+
 
 });
 
 router.get('/getMessagesAndVotes/:topicId', (req, res) => {
-    console.log('hitting this, the end point is:', req.params)
-    var UserMessageVotes = sequelize.define('usermessagevotes', {
+  console.log('hitting this, the end point is:', req.params)
+  var UserMessageVotes = sequelize.define('usermessagevotes', {
     userId: Sequelize.INTEGER,
     messageId: Sequelize.INTEGER
-    });
+  });
 
-    var theArray = [];
-    
+  var theArray = [];
 
-    Message.findAll({
-        order: 'votes DESC',
-        where: {
-            topicId: req.params.topicId
-        },
-        include: [User]
+  Message.findAll({
+      order: 'votes DESC',
+      where: {
+        topicId: req.params.topicId
+      },
+      include: [
+          {
+              model: User,
+              include: [
+                  {
+                      model: Comment
+                  }
+              ]
+          }
+        ]
     })
-    .then( (data) => {
+    .then((data) => {
+      var sendMe = data.map((value, index, array) => {
+        var messageInfoObj = value.dataValues;
+                console.log("MESSAGEINFOOBJJJJJJJJJ",messageInfoObj)
 
-        var sendMe = data.map((value, index, array) => {
-            var messageInfoObj = value.dataValues;
+        return messageInfoObj;
+      })
 
-            return messageInfoObj;
-        })
-        var messageIndexArray = [];
-        var messageIndexArrayObj = [];
 
-        for(var message of sendMe) {
-            messageIndexArrayObj.push(message);
-            messageIndexArray.push(message.id);
-        }
+      var messageIndexArray = [];
+      var messageIndexArrayObj = [];
 
-        UserMessageVotes.findAndCountAll({
-            where: {
-                messageId: messageIndexArray
+      for (var message of sendMe) {
+        messageIndexArrayObj.push(message);
+        messageIndexArray.push(message.id);
+      }
+      UserMessageVotes.findAndCountAll({
+          where: {
+            messageId: messageIndexArray
+          }
+        }).then((stupidData) => {
+          var countObj = {};
+
+          for (var messageObj of stupidData.rows) {
+            if (countObj[messageObj.dataValues.messageId]) {
+              countObj[messageObj.dataValues.messageId]++;
+            } else {
+              countObj[messageObj.dataValues.messageId] = 1;
             }
-        }).then( (stupidData) => {
+          }
+          return countObj;
 
-            console.log('check if stupid Data returns anything!!!', stupidData)
+        }).then((countObj) => {
+          console.log('this is countObj!!!!!', countObj)
+          console.log('this is messageIndexArrayObj', messageIndexArrayObj);
 
-            var countObj = {};
+          var newCountObj = Object.assign({}, countObj);
 
-            for(var messageObj of stupidData.rows) {
-                if(countObj[messageObj.dataValues.messageId]) {
-                    countObj[messageObj.dataValues.messageId]++;
-                } else {
-                    countObj[messageObj.dataValues.messageId] = 1;
-                }
-                
-            }
-
-            return countObj;
-
-        }).then ( (countObj) => {
-
-            console.log('this is countObj!!!!!', countObj)
-            console.log('this is messageIndexArrayObj', messageIndexArrayObj);
-
-            var newCountObj = Object.assign({}, countObj);
-
-            console.log('==========================', newCountObj ,'========================',
+          console.log('==========================', newCountObj, '========================',
             Object.keys(countObj).length)
 
-            if(Object.keys(countObj).length !== 0) {
-                console.log('got in here!====================')
-            for(var targetObj of messageIndexArrayObj) {
-                for(var indexThis in newCountObj) {
-                    if(indexThis === targetObj.id.toString() && !targetObj.voteCount ) {
-                        targetObj.voteCount = newCountObj[indexThis];
-                    }
-
-                    if(!targetObj.voteCount) {
-                        targetObj.voteCount = 0;
-                    }
-                        
-                    
+          if (Object.keys(countObj).length !== 0) {
+            console.log('got in here!====================')
+            for (var targetObj of messageIndexArrayObj) {
+              for (var indexThis in newCountObj) {
+                if (indexThis === targetObj.id.toString() && !targetObj.voteCount) {
+                  targetObj.voteCount = newCountObj[indexThis];
                 }
+
+                if (!targetObj.voteCount) {
+                  targetObj.voteCount = 0;
+                }
+
+
+              }
+            }
+            console.log('finished with loop', messageIndexArrayObj);
+          } else {
+            console.log('got in here3333333')
+            for (var targetObj of messageIndexArrayObj) {
+              targetObj.voteCount = 0;
+              console.log(targetObj, 'target OBJECT IS ===========');
+
             }
 
-            console.log('finished with loop', messageIndexArrayObj);
-        } else {
-            console.log('got in here3333333')
-             for(var targetObj of messageIndexArrayObj) {
-                 targetObj.voteCount = 0;
-                 console.log(targetObj, 'target OBJECT IS ===========');
-                 
-             }
-
-        }
-        
+          }
 
 
+          // console.log('should be changed!!!!!');
+          // console.log(newCountObj);
+          // console.log(messageIndexArrayObj, 'yoooooooooo');
 
-            // console.log('should be changed!!!!!');
-            // console.log(newCountObj);
-            // console.log(messageIndexArrayObj, 'yoooooooooo');
+    
+        // .then(messageIndexArrayObj => {
+        //   const resObj = messageIndexArrayObj.map(
 
-        }).then( (mang) => {
-            res.send(messageIndexArrayObj);
+        //   )
+        })
+
+        .then((mang) => {
+          console.log('return from message', messageIndexArrayObj)
+          res.send(messageIndexArrayObj);
         })
 
 
-  })
+    })
 })
 
-  router.get('/getTopicmessages/:topicId', (req, res) => {
-    console.log('======================IDX IS===================', req.params.topicId);
+router.get('/getTopicmessages/:topicId', (req, res) => {
+  console.log('======================IDX IS===================', req.params.topicId);
 
-    Message.findAll({
-        include: [User],
-        order: 'votes DESC',
-        where: {
-            topicId: req.params.topicId 
-        }
+  Message.findAll({
+    include: [User],
+    order: 'votes DESC',
+    where: {
+      topicId: req.params.topicId
+    }
 
-    }).then( messages => {
-        const resObj = messages.map(message => {
-            return Object.assign(
-                {},
-                {   body: message.dataValues.body,
-                    messageId: message.dataValues.id,
-                    topicId: message.dataValues.topicId,
-                    userId: message.dataValues.userId,
-                    votes: message.dataValues.votes,
-                    username: message.dataValues.user.dataValues.username
-                }
-            )
-        })
-        console.log(resObj);
-            res.send(messages) 
+  }).then(messages => {
+    const resObj = messages.map(message => {
+      return Object.assign({}, {
+        body: message.dataValues.body,
+        messageId: message.dataValues.id,
+        topicId: message.dataValues.topicId,
+        userId: message.dataValues.userId,
+        votes: message.dataValues.votes,
+        username: message.dataValues.user.dataValues.username
+      })
     })
-  });
+    console.log(resObj);
+    res.send(messages)
+  })
+});
 
 router.post('/messages', (req, res) => {
     var body = req.body.body;
@@ -622,7 +636,24 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
     })
   })
 
-  //     router.post('/messagesvotes/:id', (req, res) => {
+router.post('/messagesvotes/', (req, res) => {
+
+  var userId = req.body.userId
+  var messageId = req.body.messageId
+  console.log(req.body);
+  let newMessageVote = {
+    userId: userId,
+    messageId: messageId
+  }
+  User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+      res.status(200).json(newMessageVote);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+})
+
+//     router.post('/messagesvotes/:id', (req, res) => {
 
 //     var userId = req.body.userId;
 //     var messageId = req.params.id;
@@ -649,52 +680,52 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
 //             }
 //         }
 //     )
-    
+
 //   })
 
-  router.delete('/messagesvotes/:id/:uid', (req, res) => {
-    console.log("req params", req.params);
-    console.log("req params id",req.params.id);
-        console.log("req params id",req.params.uid);
+router.delete('/messagesvotes/:id/:uid', (req, res) => {
+  console.log("req params", req.params);
+  console.log("req params id", req.params.id);
+  console.log("req params id", req.params.uid);
 
-    User_Message_Votes.destroy({
-        where: {
-            messageId: req.params.id,
-            userId: req.params.uid
-        }
-    }).then( val => {
-        console.log(val);
-    })
+  User_Message_Votes.destroy({
+    where: {
+      messageId: req.params.id,
+      userId: req.params.uid
+    }
+  }).then(val => {
+    console.log(val);
+  })
 });
 
 
 
 router.post('/topics', (req, res) => {
-    var body = req.body
-    console.log('THIS IS BODY!!', body);
-    // body = JSON.stringify(body)
-    // res.send(body);
-    let newTopic = {
-        body: body.body,
-        circleId: body.circleId
-    }
+  var body = req.body
+  console.log('THIS IS BODY!!', body);
+  // body = JSON.stringify(body)
+  // res.send(body);
+  let newTopic = {
+    body: body.body,
+    circleId: body.circleId
+  }
 
 
-    Topic.create(newTopic)
-    .then( (data) => {
-        // res.status(200).json(data);
-        return data;
-    }).then( (data) => {
+  Topic.create(newTopic)
+    .then((data) => {
+      // res.status(200).json(data);
+      return data;
+    }).then((data) => {
 
-        console.log(data.dataValues, ' DATATATATATATATATAATATA');
+      console.log(data.dataValues, ' DATATATATATATATATAATATA');
 
-        User_Topics.create({
-        status: "original poster",
-        userId: body.userId,
-        topicId: data.dataValues.id
+      User_Topics.create({
+          status: "original poster",
+          userId: body.userId,
+          topicId: data.dataValues.id
         })
-        .then( (data) => {
-            res.status(200).json(data);
+        .then((data) => {
+          res.status(200).json(data);
         })
 
 
@@ -705,32 +736,32 @@ router.post('/topics', (req, res) => {
 
 
 router.post('/circles', (req, res) => {
-    var body = req.body
-    console.log('THIS IS BODY of circles!!', body);
-    // body = JSON.stringify(body)
-    // res.send(body);
-    let newCircle = {
-        name: body.body,
-        userId: body.userId,
-        totalMembers: 1
-    };
+  var body = req.body
+  console.log('THIS IS BODY of circles!!', body);
+  // body = JSON.stringify(body)
+  // res.send(body);
+  let newCircle = {
+    name: body.body,
+    userId: body.userId,
+    totalMembers: 1
+  };
 
 
-    Circle.create(newCircle)
-    .then( (data) => {
-        // res.status(200).json(data);
-        return data;
-    }).then( (data) => {
+  Circle.create(newCircle)
+    .then((data) => {
+      // res.status(200).json(data);
+      return data;
+    }).then((data) => {
 
-        console.log(data.dataValues, ' DATATATATATATATATAATATA');
+      console.log(data.dataValues, ' DATATATATATATATATAATATA');
 
-        User_Circles.create({
-        status: "member",
-        userId: body.userId,
-        circleId: data.dataValues.id
+      User_Circles.create({
+          status: "member",
+          userId: body.userId,
+          circleId: data.dataValues.id
         })
-        .then( (data) => {
-            res.status(200).json(data);
+        .then((data) => {
+          res.status(200).json(data);
         })
 
 
@@ -740,37 +771,37 @@ router.post('/circles', (req, res) => {
 })
 
 router.patch('/messages/:id', (req, res) => {
-    console.log("EDIT", req.params.id);
-    console.log("EDIT",req.body.userId);
-    Message.update(req.body,{
-        where: {
-            id: req.params.id
-        }
-    }).then( val => {
-        console.log(val);
-    })
+  console.log("EDIT", req.params.id);
+  console.log("EDIT", req.body.userId);
+  Message.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  }).then(val => {
+    console.log(val);
+  })
 });
 
 router.delete('/messages/:id', (req, res) => {
-    console.log("req params", req.params);
-    console.log("req params id",req.params.id);
-    Message.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then( val => {
-        console.log(val);
-    })
+  console.log("req params", req.params);
+  console.log("req params id", req.params.id);
+  Message.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(val => {
+    console.log(val);
+  })
 });
 
 
 
 router.post('/topics', (req, res) => {
-    console.log('/topics posting!!! from backend')
-    
-    Topic.findAll().then( (val) => {
-            res.send(val) 
-    })
+  console.log('/topics posting!!! from backend')
+
+  Topic.findAll().then((val) => {
+    res.send(val)
+  })
 
 });
 
@@ -813,50 +844,47 @@ router.post('/topics', (req, res) => {
 
 
 router.post('/comment', (req, res) => {
-    var body = req.body;
-    console.log('this is req.body from comments!!!!', req.body);
+  var body = req.body;
+  console.log('this is req.body from comments!!!!', req.body);
 
-    Comment.create({
-            text: req.body.text,
-            userId: req.body.userId,
-            messageId: req.body.messageId
-    }).then( (data) => {
-        console.log('data! from comment create', data.dataValues)
-        res.status(200).json(data)
-    })
+  Comment.create({
+    text: req.body.text,
+    userId: req.body.userId,
+    messageId: req.body.messageId
+  }).then((data) => {
+    console.log('data! from comment create', data.dataValues)
+    res.status(200).json(data)
+  })
 })
 
 
 
-  router.get('/comments/:messageId', (req, res) => {
-     var messageId = req.params.messageId;	
-     Comment.findAll({		
-        where: {
-            messageId: messageId
-        },
-        include: [User]
-     })
-     .then( comments => {
-         const resObj = comments.map( comment => {
-         return Object.assign(
-             {},
-             {
-             text: comment.dataValues.text,
-             date: comment.dataValues.createdAt,
-             userId: comment.dataValues.userId,
-             messageId: comment.dataValues.messageId,
-             id: comment.dataValues.id,
-             username: comment.dataValues.user.username
-            }
-         )
-     })		
-     res.json(resObj);
-     })
-  });
+router.get('/comments/:messageId', (req, res) => {
+  var messageId = req.params.messageId;
+  Comment.findAll({
+      where: {
+        messageId: messageId
+      },
+      include: [User]
+    })
+    .then(comments => {
+      const resObj = comments.map(comment => {
+        return Object.assign({}, {
+          text: comment.dataValues.text,
+          date: comment.dataValues.createdAt,
+          userId: comment.dataValues.userId,
+          messageId: comment.dataValues.messageId,
+          id: comment.dataValues.id,
+          username: comment.dataValues.user.username
+        })
+      })
+      res.json(resObj);
+    })
+});
 
 
 
-router.post('/poll', controller.poll.post) 
+router.post('/poll', controller.poll.post)
 
 router.get('/votes', controller.vote.get)
 router.post('/votes', controller.vote.post)
@@ -870,14 +898,18 @@ router.post('/signup', controller.signup.post);
 router.post('/login', (req, res, next) => {
 
   passport.authenticate('local', (err, user, info) => {
-    if (err) { return next(err); }
+    if (err) {
+      return next(err);
+    }
     if (!user) {
-        res.status(400);
-        return res.send('false'); 
+      res.status(400);
+      return res.send('false');
     }
 
     req.logIn(user, (err) => {
-      if (err) { return next(err); }
+      if (err) {
+        return next(err);
+      }
       return res.send(user);
     });
 

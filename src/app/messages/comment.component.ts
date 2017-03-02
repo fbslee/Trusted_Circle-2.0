@@ -1,7 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgForm } from "@angular/forms";
+
 import { Message } from './message.model';
 import { Comment } from './comment.model';
 
+import { Observable } from 'rxjs/Observable';
+import { Http, JsonpModule, Response, Headers } from '@angular/http';
 import { MessageService } from '../services/message.service'
 
 @Component({
@@ -10,8 +14,9 @@ import { MessageService } from '../services/message.service'
     styleUrls: ['./comment.scss']
 })
 export class CommentComponent implements OnInit {
-    messages: Message[];
-    @Input() comments: Comment[];
+    @Input() message: Message;
+    @Input() comment: Comment;
+    // username: string = localStorage.getItem('username');
     // username: string = localStorage.getItem('username');
 
     constructor(private messageService: MessageService) {
@@ -22,7 +27,7 @@ export class CommentComponent implements OnInit {
 
 
     ngOnInit() {
-      
+        
+
     }
-    
 }

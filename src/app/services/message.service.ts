@@ -58,6 +58,7 @@ export class MessageService {
             .map((response: Response) => {
                 let messages = response.json();
                 let transformedMessages: Message[] = [];
+                
                 for (let message of messages) {
                         var body = message.body;
                         var user =  message.user.username;
@@ -66,6 +67,23 @@ export class MessageService {
                         var topicId = message.topicId;
                         var id = message.id;
                         var votes = message.voteCount;
+                        var Tcomments = [];
+                        var comments = message.user.comments;
+                        for(let comment of comments) {
+                            var commentText = comment.text;
+                            var commentDate = comment.createdAt;
+                            var commentUserId = comment.userId;
+                            var commentmessageId = comment.messageId;
+                            var commentId = comment.id
+                            Tcomments.push(new Comment(
+                                commentText, 
+                                user, 
+                                commentDate, 
+                                commentUserId,
+                                commentmessageId,
+                                commentId,
+                        ));
+                        }
                         console.log(votes);
                         // console.log(voteCount)
 
@@ -76,6 +94,7 @@ export class MessageService {
                         userId,
                         topicId,
                         id,
+                        Tcomments,
                         ));
                 }
                 this.messages = transformedMessages;
@@ -122,14 +141,24 @@ export class MessageService {
             
     }
     addComment (sendThis) {
+        let username = sendThis.username;
         console.log('in service', sendThis);
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('/api/comment', sendThis, {headers: headers})
-        .map((data) => {
-                    console.log('mapped!')
-                }).subscribe( (result) => {
-                    console.log(result,'adbaaadbd');
-                })    
+        .map((response: Response) => {
+                let result = response.json();
+                let comment = new Comment(
+                    result.text, 
+                    this.username, 
+                    result.createdAt,
+                    result.userId,
+                    result.messageId,
+                    result.id
+                    );
+                this.comments.push(comment);
+            
+                return comment;
+            }) 
 
     }
 

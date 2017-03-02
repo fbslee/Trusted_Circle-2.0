@@ -19,8 +19,7 @@ import { MessageService } from '../services/message.service'
 })
 export class MessageComponent {
     @Input() message: Message;
-    comments: Comment;
-
+    comments: Comment[];
     @Input() voteCount = 0;
     @Input() myVote = 0;
     private userInfo = {
@@ -44,8 +43,8 @@ export class MessageComponent {
         console.log('myVote', this.myVote)
         this.messageService.getComments(this.message)
         .subscribe( (data) => {
-           console.log('this is messages data inside Comments', data);
-           this.comments;
+           console.log('this is COMMENTSSSS data inside Comments', data);
+           this.comments = data;
            });
     }
 
@@ -77,17 +76,24 @@ export class MessageComponent {
                 // console.log('userId', localStorage.getItem('userID'), 'messageId', this.message.messageId );
 
                 var userId = localStorage.getItem('userID');
+                var username = localStorage.getItem('localStorage');
                 var messageId = this.message.messageId;
                 var text = r;
 
                 var sendThis = {
+                    "text": text,
+                    "username": username,
                     "userId": userId,
                     "messageId": messageId,
-                    "text": text
                 }
                 console.log(sendThis);
                 if(text) {
-                this.messageService.addComment(sendThis);
+                this.messageService.addComment(sendThis)
+                .subscribe(
+                   data => console.log("succss here is the data ", data),
+                   error => console.error("error here is the error ", error)
+                )   
+                
                 }
 
                 // console.log(this.message, r);  
