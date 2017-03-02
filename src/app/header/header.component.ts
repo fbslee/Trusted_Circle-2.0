@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Overlay } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { MdDialog } from '@angular/material';
 import { DataService } from '../services/data.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   vcRef: ViewContainerRef, 
   public modal: Modal,
   private sanitizer: DomSanitizer,
+  public dialog: MdDialog,
   private DavidDataService: DavidDataService) {
     overlay.defaultViewContainer = vcRef;
   }
@@ -52,23 +54,25 @@ export class HeaderComponent implements OnInit {
   }
 
   openModal() {
-    this.modal.alert()
-        .size('lg')
-        .showClose(true)
-        .title('Welcome, ' + localStorage.getItem('username'))
-        .body(`
-            <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" height="256px" width="256px">
-            <h4>Alert is a classic (title/body/footer) 1 button modal window that 
-            does not block.</h4>
-            <b>Configuration:</b>
-            <ul>
-                <li>Non blocking (click anywhere outside to dismiss)</li>
-                <li>Size large</li>
-                <li>Dismissed with default keyboard key (ESC)</li>
-                <li>Close wth button click</li>
-                <li>HTML content</li>
-            </ul>`)
-        .open();
+    this.dialog.open(DialogOverviewExampleDialog);
+
+    // this.modal.alert()
+    //     .size('lg')
+    //     .showClose(true)
+    //     .title('Welcome, ' + localStorage.getItem('username'))
+    //     .body(`
+    //         <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" height="256px" width="256px">
+    //         <h4>Alert is a classic (title/body/footer) 1 button modal window that 
+    //         does not block.</h4>
+    //         <b>Configuration:</b>
+    //         <ul>
+    //             <li>Non blocking (click anywhere outside to dismiss)</li>
+    //             <li>Size large</li>
+    //             <li>Dismissed with default keyboard key (ESC)</li>
+    //             <li>Close wth button click</li>
+    //             <li>HTML content</li>
+    //         </ul>`)
+    //     .open();
   }
 
 
@@ -119,3 +123,10 @@ export class HeaderComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+  styleUrls: ['./header.component.css']
+})
+export class DialogOverviewExampleDialog {}

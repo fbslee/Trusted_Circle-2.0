@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
@@ -13,7 +13,7 @@ import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, DialogOverviewExampleDialog } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { MessageComponent } from './messages/message.component';
@@ -54,6 +54,7 @@ import { CommentComponent } from './messages/comment.component'
     AppComponent,
     HomeComponent,
     HeaderComponent,
+    DialogOverviewExampleDialog,
     ChatComponent,
     MessageComponent,
     MessageInputComponent,
@@ -73,6 +74,7 @@ import { CommentComponent } from './messages/comment.component'
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
     ModalModule.forRoot(),
@@ -116,6 +118,6 @@ import { CommentComponent } from './messages/comment.component'
     ResultService,
     TrustedcounselorService
     ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, DialogOverviewExampleDialog]
 })
 export class AppModule { }

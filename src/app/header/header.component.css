@@ -10,3 +10,21 @@
     background: rgb(68, 68, 68); 
     background: rgba(0, 0, 0, 0.78); 
 }
+
+.uname {
+    text-align: center;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.col-md-10 {
+    width: 100%;
+}
