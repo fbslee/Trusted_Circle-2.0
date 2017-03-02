@@ -1,12 +1,10 @@
-
-
 <div class="container">
   <div class="container">
     <div class="row profile">
       <div class="col-md-3">
         <div class="profile-sidebar">
           <div class="profile-userpic">
-            <img on-mouseover='over()' src={{profilePicLink}} class="img-responsive" >
+            <img on-mouseover='over()' src={{profilePicLink}} class="img-responsive">
           </div>
 
           <div class="profile-usertitle">
@@ -47,6 +45,7 @@
           <!-- END MENU -->
         </div>
       </div>
+
       <div class="col-md-9">
         <div class="profile-content">
           <div class="row">
@@ -56,44 +55,41 @@
 
                 <div *ngIf="loadTopic === false">
 
-                <img src="http://www.free-icons-download.net/images/red-circle-icon-69788.png" alt="..." 
-                style="max-width: 100%;
+                  <img src="http://www.free-icons-download.net/images/red-circle-icon-69788.png" alt="..." style="max-width: 100%;
                 max-height: 100%;
                 display: block;
                 margin: auto auto;">
-                <div class="caption">
+                  <div class="caption">
 
-                  <h1>Your circles, <strong> {{username}}</strong></h1>
-                  <ul>
-                    <li *ngFor="let circle of finalComparedCircles">
+                    <h1>Your circles, <strong> {{username}}</strong></h1>
+                    <ul>
+                      <li *ngFor="let circle of finalComparedCircles">
 
-                      <div>
-                        <!--[routerLink]="['/topics']"-->
-                        <strong (click)="circleClicked(circle[0])" >{{ circle[0] }}</strong>
-                      </div>
-                    </li>
-                  </ul>
+                        <div>
+                          <!--[routerLink]="['/topics']"-->
+                          <strong (click)="circleClicked(circle[0])">{{ circle[0] }}</strong>
+                        </div>
+                      </li>
+                    </ul>
 
-                  <input type="text" placeholder="New Circle Name" [(ngModel)]="newCircle" name="newCircle" (keyup.enter)="createCircle(newCircle)">
+                    <input type="text" placeholder="New Circle Name" [(ngModel)]="newCircle" name="newCircle" (keyup.enter)="createCircle(newCircle)">
+                  </div>
                 </div>
-              </div>
 
-            <div *ngIf="loadTopic === true">
-              <img src="http://www.iconsfind.com/wp-content/uploads/2013/11/20131104_527706bcf3fca.png" 
-              style="max-width: 100%;
+                <div *ngIf="loadTopic === true">
+                  <img src="http://www.iconsfind.com/wp-content/uploads/2013/11/20131104_527706bcf3fca.png" style="max-width: 100%;
               max-height: 100%;
               display: block;
-              margin: auto auto;"
-              />
-              <app-topics></app-topics>
-            </div>
+              margin: auto auto;" />
+                  <app-topics></app-topics>
+                </div>
 
 
-            </div>
+              </div>
 
 
 
-            <!--left side panel of the two-->
+              <!--left side panel of the two-->
             </div>
 
             <div class="col-4 col-sm-6">
@@ -111,6 +107,111 @@
 
             </div>
           </div>
+
+
+          <div class="row">
+        
+
+            <div class="col-md-12 col-sm-6">
+
+              <div class="thumbnail">
+
+<div class="ui feed">
+  <div class="event">
+    <div class="label">
+      <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a class="user">
+          Elliot Fu
+        </a> added you to Test Circle 2
+        <div class="date">
+          1 Hour Ago
+        </div>
+      </div>
+      <div class="meta">
+        <a class="like">
+          <i class="like icon"></i> 4 Likes
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="event">
+    <div class="label">
+      <img src="http://semantic-ui.com/images/avatar/small/helen.jpg">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a>Helen Troy</a> added <a>2 new illustrations</a>
+        <div class="date">
+          4 days ago
+        </div>
+      </div>
+      <div class="extra images">
+        <a><img src="http://semantic-ui.com/images/wireframe/image.png"></a>
+        <a><img src="http://semantic-ui.com/images/wireframe/image.png"></a>
+      </div>
+      <div class="meta">
+        <a class="like">
+          <i class="like icon"></i> 1 Like
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="event">
+    <div class="label">
+      <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a class="user">
+          Jenny Hess
+        </a> added as trusted advisor for Test circle 2
+        <div class="date">
+          2 Days Ago
+        </div>
+      </div>
+      <div class="meta">
+        <a class="like">
+          <i class="like icon"></i> 8 Likes
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="event">
+    <div class="label">
+      <img src="http://semantic-ui.com/images/avatar/small/joe.jpg">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a>Joe Henderson</a> posted on Test circle 2
+        <div class="date">
+          3 days ago
+        </div>
+      </div>
+      <div class="extra text">
+        Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
+      </div>
+      <div class="meta">
+        <a class="like">
+          <i class="like icon"></i> 5 Likes
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+
         </div>
       </div>
     </div>

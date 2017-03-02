@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@
 import { trigger, state, animate, style, transition } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
-import { AuthService} from '../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { AlertService } from '../services/alert.service';
 import { DataService } from '../services/data.service';
 

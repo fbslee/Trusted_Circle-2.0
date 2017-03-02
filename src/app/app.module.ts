@@ -52,6 +52,7 @@ import { PushNotificationComponent } from './notification.component';
 
 import { DavidDataService } from './services/david-data.service';
 import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.component';
+import { CommentComponent } from './messages/comment.component'
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { TrustedcounselorComponent } from './trustedcounselor/trustedcounselor.c
     ResultsComponent,
     TrustedcounselorComponent,
     PushNotificationComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
