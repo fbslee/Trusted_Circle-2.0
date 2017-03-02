@@ -17,7 +17,7 @@ declare var Notification;
   template: ''
 })
 
-export class PushNotificationComponent implements OnInit, OnChanges, OnDestroy {
+export class PushNotificationComponent implements OnInit, OnChanges {
 
   @Input() public title: string;
   @Input() public body: string;
@@ -96,9 +96,9 @@ export class PushNotificationComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  public closeAll (): void {
-    Notification.close();
-  }
+  // public closeAll (): void {
+  //   Notification.close();
+  // }
 
   attachEventHandlers (notification): void {
     notification.onshow = () => {
@@ -122,9 +122,9 @@ export class PushNotificationComponent implements OnInit, OnChanges, OnDestroy {
     this.onLoad.emit({});
   }
 
-  public ngOnDestroy (): void {
-    this.closeAll();
-  }
+  // public ngOnDestroy (): void {
+  //   this.closeAll();
+  // }
 
   public ngOnChanges(): void {
   }
