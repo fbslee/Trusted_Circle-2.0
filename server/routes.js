@@ -17,6 +17,7 @@ const User_Topics = require('../models/user_topic.model');
 const User_Message_Votes = require('../models/user_message_votes.model');
 const Comment = require('../models/comment.model');
 
+
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
   res.send()
@@ -572,13 +573,6 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
  		
    })
 
-
-
-
-
-
-
-
   router.post('/messagesvotes/', (req, res) => {
 
     var userId = req.body.userId
@@ -714,8 +708,8 @@ router.post('/circles', (req, res) => {
 })
 
 router.patch('/messages/:id', (req, res) => {
-    console.log("EDIT", req.params);
-    console.log("EDIT",req.body);
+    console.log("EDIT", req.params.id);
+    console.log("EDIT",req.body.userId);
     Message.update(req.body,{
         where: {
             id: req.params.id
@@ -784,6 +778,8 @@ router.post('/topics', (req, res) => {
 
 // })
 
+
+
 router.post('/comment', (req, res) => {
     var body = req.body;
     console.log('this is req.body from comments!!!!', req.body);
@@ -798,6 +794,33 @@ router.post('/comment', (req, res) => {
     })
 })
 
+
+
+  router.get('/comments/:messageId', (req, res) => {
+     var messageId = req.params.messageId;	
+     Comment.findAll({		
+        where: {
+            messageId: messageId
+        },
+        include: [User]
+     })
+     .then( comments => {
+         const resObj = comments.map( comment => {
+         return Object.assign(
+             {},
+             {
+             text: comment.dataValues.text,
+             date: comment.dataValues.createdAt,
+             userId: comment.dataValues.userId,
+             messageId: comment.dataValues.messageId,
+             id: comment.dataValues.id,
+             username: comment.dataValues.user.username
+            }
+         )
+     })		
+     res.json(resObj);
+     })
+  });
 
 
 
