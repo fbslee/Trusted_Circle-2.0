@@ -16,18 +16,7 @@ import { MessageService } from '../services/message.service'
 export class CommentComponent implements OnInit {
     @Input() message: Message;
     @Input() comment: Comment;
-    // username: string = localStorage.getItem('username');
-    // username: string = localStorage.getItem('username');
 
-    constructor(private messageService: MessageService) {
-    // setTimeout(() => {
-    //     this.messageService.getMessages();
-    //     }, 2000);
-        }
-
-
-    ngOnInit() {
-        
-
-    }
+    constructor(private messageService: MessageService) {}
+    ngOnInit() {}
 }

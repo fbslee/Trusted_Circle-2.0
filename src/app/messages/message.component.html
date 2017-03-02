@@ -28,16 +28,16 @@
       </div>
 
       <popover-content #myPopover [title]="userInfo.disp" [closeOnMouseOutside]="true">
-                <div class="pfp">
-                    <div class="profile-userpic">
-                    <img [src]="userInfo.photo" class="img-responsive">
-                    </div>
-                    <h2 class='username'> {{userInfo.username}} </h2>
-                </div>
-                <div class='desc'>
-                <h1 id="k"> THIS IS MY DESCRIPTION WOW IM RAD </h1>
-                </div>
-            </popover-content>
+        <div class="pfp">
+          <div class="profile-userpic">
+            <img [src]="userInfo.photo" class="img-responsive">
+          </div>
+          <h2 class='username'> {{userInfo.username}} </h2>
+        </div>
+        <div class='desc'>
+          <h1 id="k"> THIS IS MY DESCRIPTION WOW IM RAD </h1>
+        </div>
+      </popover-content>
 
       <div class="config">
         <a (click)="openModal()">Comment</a>
@@ -45,31 +45,4 @@
     </footer>
   </article>
 
-<app-message-comment [comment]="comment"
-                    *ngFor="let comment of comments"> {{comment}}</app-message-comment>
-
-<!--<div class ="container">
-<div class=" col-md-offset-2">
-  <div class="ui feed">
-    <div class="event">
-      <div class="label">
-        <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a class="user">
-        </a>           {{comments.text}}
-
-          <div class="date">
-            1 Hour Ago
-          </div>
-        </div>
-        <div class="meta">
-          <a class="like">
-            <i class="like icon"></i> 4 Likes
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>-->
+  <app-message-comment [comment]="comment" *ngFor="let comment of comments"> {{comment}}</app-message-comment>
