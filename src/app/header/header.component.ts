@@ -4,6 +4,7 @@ import { Modal } from 'angular2-modal/plugins/bootstrap';
 import { MdDialog } from '@angular/material';
 import { DataService } from '../services/data.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { Http, Response, Headers, JsonpModule } from "@angular/http";
 
 import { DavidDataService } from '../services/david-data.service';
 
@@ -139,12 +140,24 @@ export class DialogOverviewExampleDialog {
   private loading = false;
   private wew = localStorage.getItem('photo');
 
+  constructor(private http: Http) { }
 
   toggle() {
     this.flag = !this.flag;
   }
 
   save() {
-    this.loading = true;
+    console.log('started')
+    let body = {
+      email: this.model.email,
+      desc: this.model.desc,
+      image: this.model.image
+    }
+
+    let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('/api/edit', body, {headers: headers})
+        .map(res => res.json()).subscribe((data) => {
+          console.log(data)
+        })
   }
 }
