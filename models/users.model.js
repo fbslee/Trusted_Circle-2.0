@@ -7,7 +7,7 @@ var User = sequelize.define('users', {
   desc: {
     type: Sequelize.STRING,
     defaultValue: 'This user has no description :('
-  }
+  },
   username: {
     type: Sequelize.STRING,
     unique: true
