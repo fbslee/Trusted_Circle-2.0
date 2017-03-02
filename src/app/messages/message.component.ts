@@ -76,17 +76,19 @@ export class MessageComponent {
                 // console.log('userId', localStorage.getItem('userID'), 'messageId', this.message.messageId );
 
                 var userId = localStorage.getItem('userID');
-                var username = localStorage.getItem('localStorage');
+                var username = localStorage.getItem('username');
                 var messageId = this.message.messageId;
                 var text = r;
-
                 var sendThis = {
                     "text": text,
                     "username": username,
+                    "date": 'Just Now',
                     "userId": userId,
                     "messageId": messageId,
-                }
-                console.log(sendThis);
+                    "commentId": 0,
+                };
+                this.comments.push(sendThis)
+
                 if(text) {
                 this.messageService.addComment(sendThis)
                 .subscribe(
@@ -97,7 +99,8 @@ export class MessageComponent {
                 }
 
                 // console.log(this.message, r);  
-            });          
+            });   
+                   
   }
 
     ttp(user) {
