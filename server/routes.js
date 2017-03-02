@@ -577,17 +577,40 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
 
     var userId = req.body.userId
     var messageId = req.body.messageId
+    var upvotedUserId;
     console.log(req.body);
     let newMessageVote = {
         userId: userId,
         messageId: messageId
     }
-    User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
-        res.status(200).json(newMessageVote);
-      })
-      .catch(function (error){
-        res.status(500).json(error);
-      });
+    Message.findOne({
+        where:{
+            id: messageId
+        }
+    }).then((data)=>{
+        upvotedUserId = data.dataValues.userId
+        User.findOne({
+            where:{
+                id: data.dataValues.userId
+            }
+        }).then((data)=>{
+            data.updateAttributes({
+                upvotes: (data.dataValues.upvotes + 1)
+            }).then((data)=>{
+                if(data.dataValues.upvotes >= 10){
+                    data.updateAttributes({
+                        trustedCounselor: true
+                    })
+                }
+                User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+                    res.status(200).json(newMessageVote);
+                })
+                .catch(function (error){
+                    res.status(500).json(error);
+                });
+            })
+        })
+    })
   })
 
   //     router.post('/messagesvotes/:id', (req, res) => {
