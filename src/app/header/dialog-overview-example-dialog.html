@@ -1,10 +1,43 @@
-<div class="col-xs-12 col-md-10 offset-md-1">
+<div id='cnt' class="col-xs-12 col-md-10 offset-md-1">
   <div class="profile-userpic">
-          <img class="user-img" ng-reflect-src="https://static.productionready.io/images/smiley-cyrus.jpg" src="https://static.productionready.io/images/smiley-cyrus.jpg" class="img-responsive">
+          <img class="user-img" [src]="https://static.productionready.io/images/smiley-cyrus.jpg" class="img-responsive">
   </div>
-          <h4 class='uname'>02l</h4>
+          <h4 id='uname'>02l</h4>
+
+          <div *ngIf="!flag">
+          <p class='uname2'> This user doesn't have a description yet :( </p>
           <p></p>
-           <a>
-              <p> Edit Profile Settings </p>
-            </a>
+          <a>
+          <p id='uname3' class="btn btn-link" (click)="toggle()" > Edit Profile Settings </p>
+          </a>
+          </div>
+
+          <div *ngIf="flag">
+
+                <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
+                        <label for="description">New description</label>
+                        <input id='owo' type="text" class="form-control" name="description" [placeholder]="desc" />
+                        <div *ngIf="f.submitted && !firstname.valid" class="help-block">First name is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
+                        <label for="image">New Image URL</label>
+                        <input id='owo' type="text" class="form-control" name="image" [placeholder]="wew" />
+                        <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
+                        <label for="email">New email</label>
+                        <input id='owo' type="text" class="form-control" name="email" placeholder="Mitrakos12@gmail.com"  />
+                        <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name is required</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <a> 
+                                <p id='uname4' class="btn btn-link" (click)="save()" > Save Settings </p>
+                        </a>
+                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                    </div>
+                </form>
+          </div>
         </div>

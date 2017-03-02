@@ -129,4 +129,18 @@ export class HeaderComponent implements OnInit {
   templateUrl: './dialog-overview-example-dialog.html',
   styleUrls: ['./header.component.css']
 })
-export class DialogOverviewExampleDialog {}
+export class DialogOverviewExampleDialog {
+  private flag = false;
+  private loading = false;
+  private wew = localStorage.getItem('photo');
+  private desc = localStorage.getItem('desc');
+
+
+  toggle() {
+    this.flag = !this.flag;
+  }
+
+  save() {
+    this.loading = true;
+  }
+}

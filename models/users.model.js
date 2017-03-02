@@ -4,6 +4,10 @@ const sequelize = require('../db/connection');
 var User = sequelize.define('users', {
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
+  desc: {
+    type: Sequelize.STRING,
+    defaultValue: 'This user has no description :('
+  }
   username: {
     type: Sequelize.STRING,
     unique: true
@@ -15,7 +19,7 @@ var User = sequelize.define('users', {
   password: Sequelize.STRING,
   photo: {
     type : Sequelize.STRING,
-    defaultValue: 'http://santetotal.com/wp-content/uploads/2014/05/default-user.png'
+    defaultValue: 'https://static.productionready.io/images/smiley-cyrus.jpg'
   },
   upvotes: {
       type: Sequelize.INTEGER,

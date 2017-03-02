@@ -11,8 +11,43 @@
     background: rgba(0, 0, 0, 0.78); 
 }
 
-.uname {
+#uname {
     text-align: center;
+    margin-top: 0px;
+}
+
+.uname2 {
+    text-align: center;
+    margin-top: 0px;
+    font-size: 1em;
+}
+
+#owo {
+    border-left: 5px solid indianred;
+}
+
+.mat-dialog-container {
+    padding: 12px;
+}
+
+#uname3 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 6%;
+}
+
+#uname4 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 17%;
+}
+
+#cnt {
+    width: 14em;
 }
 
 .profile-userpic img {
