@@ -10,10 +10,11 @@ import { MessageService } from '../services/message.service'
   template: `
 
       <push-notification #myNotification
-        title="Trusted Circle"
+        title="Trusted Circle message Posted"
         body="message Posted"
         icon="http://www.free-icons-download.net/images/red-circle-icon-69788.png"
-        closeDelay="5000">
+        closeDelay="5000"
+          (error)="handleError($event)">
 
         </push-notification>
 
