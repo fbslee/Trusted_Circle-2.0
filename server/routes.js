@@ -17,6 +17,7 @@ const User_Topics = require('../models/user_topic.model');
 const User_Message_Votes = require('../models/user_message_votes.model');
 const Comment = require('../models/comment.model');
 
+
 router.get('/test', function(req,res) {
   console.log('yuri is gay')
   res.send()
