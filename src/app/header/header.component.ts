@@ -139,6 +139,7 @@ export class DialogOverviewExampleDialog {
   private flag = false;
   private loading = false;
   private wew = localStorage.getItem('photo');
+  private udesc = localStorage.getItem('desc');
 
   constructor(private http: Http) { }
 
