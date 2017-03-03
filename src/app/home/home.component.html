@@ -11,7 +11,7 @@
           <h1>Trusted Circle</h1>
           <p>Who do you trust?</p>
             <!--<a routerLink="/signup" >Sign Up</a>-->
-                <a *ngIf="registerClicked === false" (click)="register()" class="btn btn-danger" >Register</a>
+                <a *ngIf="flag" (click)="register()" class="btn btn-danger" >Register</a>
       </div>
       
       </div>

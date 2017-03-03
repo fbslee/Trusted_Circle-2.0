@@ -132,9 +132,9 @@ export class HeaderComponent implements OnInit {
 })
 export class DialogOverviewExampleDialog {
   private model = {
-    email: 'example@placeholder.com',
-    desc: 'Enter a new bio here!',
-    image: 'http://example.com/img/12345.png'
+    email: '',
+    desc: '',
+    image: ''
   };
   private flag = false;
   private loading = false;
@@ -160,5 +160,7 @@ export class DialogOverviewExampleDialog {
         .map(res => res.json()).subscribe((data) => {
           console.log(data)
         })
+
+    this.flag = !this.flag;
   }
 }

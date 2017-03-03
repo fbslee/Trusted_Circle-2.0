@@ -104,7 +104,6 @@ export class HomeComponent implements OnInit {
 
     console.log('fuk')
     this.flag = !this.flag;
-    this.registerClicked = !this.registerClicked;
   }
 
 }

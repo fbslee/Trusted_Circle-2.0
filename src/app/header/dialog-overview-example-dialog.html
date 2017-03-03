@@ -17,17 +17,17 @@
                 <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
                         <label for="description">New bio</label>
-                        <input id='owo' type="text" class="form-control" name="description" [(ngModel)]="model.desc" #desc="ngModel" />
+                        <input id='owo' type="text" class="form-control" name="description" [(ngModel)]="model.desc" #desc="ngModel" placeholder="Enter new bio here!" />
                         <div *ngIf="f.submitted && !firstname.valid" class="help-block">First name is required</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
                         <label for="image">New Image URL</label>
-                        <input id='owo' type="text" class="form-control" name="image" [(ngModel)]="model.image" #image="ngModel" />
+                        <input id='owo' type="text" class="form-control" name="image" [(ngModel)]="model.image" #image="ngModel" placeholder="www.placecage.com/g/200/300" />
                         <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name is required</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
                         <label for="email">New email</label>
-                        <input id='owo' type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel"  />
+                        <input id='owo' type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" placeholder="kanpantyparty@gmail.com"  />
                         <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name is required</div>
                     </div>
                     
