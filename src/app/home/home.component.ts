@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Directive } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Directive, Renderer } from '@angular/core';
 import { trigger, state, animate, style, transition } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
@@ -28,8 +28,10 @@ export class HomeComponent implements OnInit {
               private router: Router, 
               private authService: AuthService,
               private DavidDataService: DavidDataService,
-              private signUpService: SignupService
-              ) { }
+              private signUpService: SignupService,
+              private renderer: Renderer
+              ) {this.renderer.listenGlobal('window', 'scroll', (event) => { console.log('scroll'); });
+}
 
   ngOnInit() {
     
