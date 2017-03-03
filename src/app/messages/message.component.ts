@@ -48,8 +48,6 @@ export class MessageComponent {
            });
     }
 
-
-
     onEdit() {
         this.messageService.editMessage(this.message)
     }
@@ -72,9 +70,6 @@ export class MessageComponent {
                 return d.result
             })
             .then((r) => { 
-                //i need the userid / messageId
-                // console.log('userId', localStorage.getItem('userID'), 'messageId', this.message.messageId );
-
                 var userId = localStorage.getItem('userID');
                 var username = localStorage.getItem('username');
                 var messageId = this.message.messageId;
@@ -97,8 +92,6 @@ export class MessageComponent {
                 )   
                 
                 }
-
-                // console.log(this.message, r);  
             });   
                    
   }

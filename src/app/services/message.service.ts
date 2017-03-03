@@ -112,15 +112,12 @@ export class MessageService {
 
     upVoteMessage(message: Message) {
         let body = JSON.stringify(message);
-        console.log('getting in the message service for vote', body);
         let headers = new Headers({'Content-Type': 'application/json'});
-
         return this.http.get('/api/messagesvotes/' + message.messageId + '/' + localStorage.getItem('userID') )
 
     }
     downVoteMessage(message: Message) {
         let body = JSON.stringify(message);
-        console.log('getting in the message service for vote', body);
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.delete('/api/messagesvotes/' + message.messageId +'/'+ message.userId)    
     }
@@ -136,7 +133,6 @@ export class MessageService {
 
     deleteMessage(message: Message) {
         this.messages.splice(this.messages.indexOf(message), 1);
-       
         return this.http.delete('/api/messages/' + message.messageId)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json() || 'Server error'));
@@ -144,7 +140,6 @@ export class MessageService {
     }
     addComment (sendThis) {
         let username = sendThis.username;
-        console.log('in service', sendThis);
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('/api/comment', sendThis, {headers: headers})
         .map((response: Response) => {
@@ -157,7 +152,6 @@ export class MessageService {
                     result.messageId,
                     result.id
                     );
-                // this.comments.push(comment);
             
                 return comment;
             }) 
@@ -169,10 +163,8 @@ export class MessageService {
         return this.http.get('/api/comments/'+ message.messageId)
             .map((response: Response) => {
                 let comments = response.json();
-                console.log('comments ===========', comments);
                 let transformedComments: Comment[] = [];
                 for (let comment of comments) {
-                    console.log("inside loop", comment);
                         var text = comment.text;
                         var username =  comment.username;
                         // var votes = message.votes;
@@ -181,9 +173,7 @@ export class MessageService {
                         var userId = comment.userId;
                         var messageId = comment.messageId;
                         var commentId = comment.id;
-                        // var votes = comment.voteCount;
-                        // console.log(votes);
-                        // console.log(voteCount)
+
 
                     transformedComments.push(new Comment(
                         text, 
@@ -195,7 +185,6 @@ export class MessageService {
                         ));
                 }
                 this.comments = transformedComments;
-                console.log('transfromed COMMMENTSSSSSSS ', transformedComments);
                 return transformedComments;
             })
 
