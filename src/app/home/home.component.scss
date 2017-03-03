@@ -1,38 +1,42 @@
- .body{
-   background-color: #eeeeee !important; 
-}
-.btn-primary {
-    background: #811e1f;
-}
+ .body {
+   background-color: #eeeeee !important;
+ }
+ 
+ .btn-primary {
+   background: #811e1f;
+ }
+ 
+ .parallaxOne {
+   background-image: url("http://i.imgur.com/0Nc2WIq.jpg");
+ }
+ 
+ *[parallax] {
+   height: 400px;
+   background-size: cover;
+   background-position: center;
+   background-attachment: fixed;
+ }
+ 
+ .panel-heading {
+   background: #811e1f;
+   color: white;
+ }
+ 
+ .parallaxThree {
+   background-image: url("http://s3.thingpic.com/images/uk/MoKSQ2LqGaN1i2ByWNEVSKg6.jpeg");
+   background-size: cover;
+      position: absolute;
+   width: 100%;
+   height: 100%;
 
-.parallaxOne {
-background-image: url("http://i.imgur.com/0Nc2WIq.jpg");
-}
-*[parallax] {
-    height: 400px;
-    
-    background-size: cover;
-    background-position: center;
-background-attachment: fixed;
-}
-.panel-heading{
-    background: #811e1f;
-    color: white;
-}
-.parallaxThree {
-background-image: url('http://i.vimeocdn.com/video/393718537_1280x720.jpg');
-background-attachment: fixed;
-
-    
-}
-
-.frow {
-    display: inline;
-}
+ }
+ 
+ .frow {
+   display: inline;
+ }
+ 
+ .parallaxTwo {
+   background-image: url("http://i.imgur.com/0Nc2WIq.jpg");
+ }
 
 
-.parallaxTwo {
-background-image: url("http://i.imgur.com/0Nc2WIq.jpg");
-
-    
-}
