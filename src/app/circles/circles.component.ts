@@ -64,7 +64,19 @@ import { TopicsComponent } from '../topics/topics.component';
             offset: 1
           })
         ]))
+      ]),
+      transition('* => void', [
+        group([
+          animate(300, style({
+            color: 'red'
+          })),
+          animate(800, style({
+            transform: 'translateX(100px)',
+            opacity: 0
+          }))
+        ])
       ])
+    ]),
   ]
 })
 export class CirclesComponent implements OnInit {
