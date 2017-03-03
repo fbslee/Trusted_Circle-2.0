@@ -620,7 +620,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
         let newMessageVote = {
           userId: userId,
           messageId: messageId,
-          vote: 'downvote'
+          vote: 'upvote'
         }
         Message.findOne({
           where:{
@@ -670,7 +670,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             id: messageId
           }
         }).then((data)=>{
-          downvotedUserId = data.dataValues.userId
+          upvotedUserId = data.dataValues.userId
           data.updateAttributes({
             votes:(data.dataValues.votes + 1)
           }).then((data)=>{
@@ -775,7 +775,7 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
             id: messageId
           }
         }).then((data)=>{
-          upvotedUserId = data.dataValues.userId
+          downvotedUserId = data.dataValues.userId
           data.updateAttributes({
             votes: (data.dataValues.votes - 1)
           }).then((data)=>{
@@ -818,7 +818,7 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
             id: messageId
           }
         }).then((data)=>{
-          upvotedUserId = data.dataValues.userId
+          downvotedUserId = data.dataValues.userId
           data.updateAttributes({
             votes:(data.dataValues.votes - 1)
           }).then((data)=>{
