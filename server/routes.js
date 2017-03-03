@@ -619,7 +619,8 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
       if(data === null){
         let newMessageVote = {
           userId: userId,
-          messageId: messageId
+          messageId: messageId,
+          vote: 'downvote'
         }
         Message.findOne({
           where:{
@@ -628,7 +629,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
         }).then((data)=>{
           upvotedUserId = data.dataValues.userId
           data.updateAttributes({
-            votes: (data.dataValues.votes + 1)
+            votes: (data.dataValues.votes - 1)
           }).then((data)=>{
             User.findOne({
               where:{
@@ -637,11 +638,11 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             }).then((data)=>{
               if(data.dataValues.username !== 'Anonymous'){
                 data.updateAttributes({
-                  upvotes: (data.dataValues.upvotes + 1)
+                  upvotes: (data.dataValues.upvotes - 1)
                 }).then((data)=>{
-                  if(data.dataValues.upvotes >= 10){
+                  if(data.dataValues.upvotes < 10){
                     data.updateAttributes({
-                      trustedCounselor: true
+                      trustedCounselor: false
                     })
                   }
                   User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
@@ -662,8 +663,38 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             })
           })
         })
-      } else {
-        res.send('already voted')
+      } else if(data.dataValues.vote === 'upvote'){
+        data.destroy()
+        Message.findOne({
+          where:{
+            id: messageId
+          }
+        }).then((data)=>{
+          downvotedUserId = data.dataValues.userId
+          data.updateAttributes({
+            votes:(data.dataValues.votes - 1)
+          }).then((data)=>{
+            User.findOne({
+              where:{
+                id: data.dataValues.userId
+              }
+            }).then((data)=>{
+              if(data.dataValues.username !== 'Anonymous'){
+                data.updateAttributes({
+                  upvotes: (data.dataValues.upvotes - 1)
+                }).then((data)=>{
+                  if(data.dataValues.upvotes < 10){
+                    data.updateAttributes({
+                      trustedCounselor: false
+                    })
+                  }
+                })
+              }
+            })
+          })
+        })
+      } else if(data.dataValues.vote === 'downvote'){
+        res.send('already downvoted')
       }
     })
   })
@@ -719,6 +750,101 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
   console.log("req params", req.params);
   console.log("req params id", req.params.id);
   console.log("req params id", req.params.uid);
+  var userId = req.params.uid
+  var messageId = req.params.id
+  var downvotedUserId;
+
+    console.log('messagesvotes', req.body);
+
+    User_Message_Votes.findOne({
+      where:{
+        userId: userId,
+        messageId: messageId
+      }
+    }).then((data)=>{
+      console.log('DATAAAAT FROM UMV', data);
+
+      if(data === null){
+        let newMessageVote = {
+          userId: userId,
+          messageId: messageId,
+          vote: 'upvote'
+        }
+        Message.findOne({
+          where:{
+            id: messageId
+          }
+        }).then((data)=>{
+          upvotedUserId = data.dataValues.userId
+          data.updateAttributes({
+            votes: (data.dataValues.votes + 1)
+          }).then((data)=>{
+            User.findOne({
+              where:{
+                id: data.dataValues.userId
+              }
+            }).then((data)=>{
+              if(data.dataValues.username !== 'Anonymous'){
+                data.updateAttributes({
+                  upvotes: (data.dataValues.upvotes + 1)
+                }).then((data)=>{
+                  if(data.dataValues.upvotes >= 10){
+                    data.updateAttributes({
+                      trustedCounselor: true
+                    })
+                  }
+                  User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+                    res.status(200).json(newMessageVote);
+                  })
+                  .catch(function (error){
+                    res.status(500).json(error);
+                  });
+                })
+              } else {
+                User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+                  res.status(200).json(newMessageVote);
+                })
+                .catch(function (error){
+                  res.status(500).json(error);
+                });
+              }
+            })
+          })
+        })
+      } else if(data.dataValues.vote === 'downvote'){
+        data.destroy()
+        Message.findOne({
+          where:{
+            id: messageId
+          }
+        }).then((data)=>{
+          upvotedUserId = data.dataValues.userId
+          data.updateAttributes({
+            votes:(data.dataValues.votes + 1)
+          }).then((data)=>{
+            User.findOne({
+              where:{
+                id: data.dataValues.userId
+              }
+            }).then((data)=>{
+              if(data.dataValues.username !== 'Anonymous'){
+                data.updateAttributes({
+                  upvotes: (data.dataValues.upvotes + 1)
+                }).then((data)=>{
+                  if(data.dataValues.upvotes >= 10){
+                    data.updateAttributes({
+                      trustedCounselor: true
+                    })
+                  }
+                })
+              }
+            })
+          })
+        })
+      } else if(data.dataValues.vote === 'upvote'){
+        res.send('already upvoted')
+      }
+    })
 
   User_Message_Votes.destroy({
     where: {
