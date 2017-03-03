@@ -911,6 +911,31 @@ router.get('/comments/:messageId', (req, res) => {
     })
 });
 
+router.get('/topicOwner/:topicId', (req, res) => {
+  var topicId = req.params.topicId;
+  User_Topics.find({
+    where: {
+      status: "original poster",
+      topicId: topicId
+    }
+  }).then( (data) => {
+    var userId = data.dataValues.userId;
+    console.log('THIS IS USER ID', userId)
+    console.log('this is the person found!', data.dataValues)
+    // res.json(data);
+    return userId
+  })
+  .then( (userId) => {
+      User.find({
+        where: {
+          id: userId
+        }
+      }).then( (dataum) => {
+        res.send(dataum);
+      })
+  })
+});
+
 
 
 router.post('/poll', controller.poll.post)

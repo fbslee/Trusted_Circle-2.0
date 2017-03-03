@@ -198,4 +198,12 @@ export class MessageService {
             })
 
     }
+
+    //find topicOwner
+    getTopicowner(topicSelected) {
+        return this.http.get('/api/topicOwner/'+ topicSelected )
+            .map((response: Response) => {
+                return response.json();
+            })
+    }
 }

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
 
   private flag = true;
   user: any = {};
+  registerClicked: any = false;
 
   constructor(private loginService: LoginService, 
               private router: Router, 
@@ -103,7 +104,7 @@ export class HomeComponent implements OnInit {
 
     console.log('fuk')
     this.flag = !this.flag;
-
+    this.registerClicked = !this.registerClicked;
   }
 
 }

@@ -5,7 +5,7 @@
       Topics:
       <!--(click)="clicked(topic)"-->
       <li *ngFor="let topic of topics; let i = index" [routerLink]="['/messages']" >
-        <strong (click)="topicClicked(topic[0], topic[1])">{{topic[0]}} {{ topic[1] }} </strong> 
+        <strong (click)="topicClicked(topic[0], topic[1])">{{topic[0]}}</strong> 
         <!--<strong>{{topic.user}}</strong>-->
       </li>
 </ul>

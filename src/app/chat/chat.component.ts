@@ -96,11 +96,35 @@ export class ChatComponent implements OnInit, OnDestroy {
     console.log('inside chat ChatComponent')
     this._chatService.getRoomlist()
                       .subscribe( (data) => {
+                        if(data.length > 0) {
                         console.log("WHAT AM I???", data)
                         data.forEach((val)=>{
                           this.listOfRooms.push(val)
                         }) 
                         console.log('list of rooms', this.listOfRooms)
+
+                      } else {
+
+                          var sample = [
+                            'Movies',
+                            'TV Shows',
+                            '	Music',
+                            'Food',
+                            'Politics',
+                            '	Video Games',
+                            'Religion',
+                            '	Random',
+                            'Today\'s News',
+                            'Travel'
+                          ]
+                        sample.forEach((val)=>{
+                          console.log(val)
+                          this.listOfRooms.push(val)
+                        }) 
+
+                      }
+
+
                         }
                       )
   }

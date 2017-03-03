@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const connection = 'postgres://aolbzfzg:1CjvX_i8ai9n1NwjurXZ0Q4ueYsY0BFQ@babar.elephantsql.com:5432/aolbzfzg';
+const connection = 'postgres://teampassive:plantlife@trustedcircle.c7a9s4oomcjk.us-west-2.rds.amazonaws.com:5432/trustedcircles';
 
 const sequelize = new Sequelize(connection, {
   dialect: 'postgres',
