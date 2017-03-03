@@ -161,6 +161,5 @@ export class DialogOverviewExampleDialog {
           console.log(data)
         })
 
-    this.flag = !this.flag;
   }
 }

@@ -40,8 +40,9 @@ import { MessageService } from '../services/message.service'
                     name="content"
                     required>
         </div>
-        <button id="bt1" type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
+        <button id="bt1" type="button" class="btn btn-default" (click)="onClear(f)">Clear</button>
         <button id="bt2" class="btn btn-default" type="submit" (click)="myNotification.show(f)">Post as {{username}}</button>
+        <button id="bt3" type="button" class="btn btn-default" (click)="anon()" [ngStyle]="{'background-image': color}" > ? </button>
 
     </form>
     </div>
@@ -59,7 +60,6 @@ import { MessageService } from '../services/message.service'
         </div>
         <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
         <button class="btn btn-danger" (click)='anonSubmit(f)'>Post as Anonymous</button> <a (click)="anon()" >Cancel</a>
-        
 
     </form>
     </div>
@@ -71,6 +71,8 @@ import { MessageService } from '../services/message.service'
 export class MessageInputComponent implements OnInit {
     message: Message;
     private flag = true;
+    private flagf = true;
+    private color = 'linear-gradient(red, darkred, red)';
 
     topicBody: string = sessionStorage.getItem('topicBody') || localStorage.getItem('topicBody')
     topicUser: string = '';
@@ -82,10 +84,18 @@ export class MessageInputComponent implements OnInit {
     topicOwnerFound: any = false;
 
     anon() {
-        console.log('i hate everyone');
-    this.flag = !this.flag;
+    
+    if(this.flagf) {
+        this.color='linear-gradient(lightgreen,green, lightgreen)';
+    }
+    else {
+        this.color='linear-gradient(red, darkred, red)'
+    }
+
+    this.flagf = !this.flagf;
 
     }
+
 
     onSubmit(form: NgForm) {
         var username: string = localStorage.getItem('username');

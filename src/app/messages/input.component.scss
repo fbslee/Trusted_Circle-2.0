@@ -19,20 +19,32 @@
 
 #content {
   border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 #bt1 {
   border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
-        background-image: linear-gradient(white, black, #4B4D4D);
+    border-bottom-left-radius: 7px;
     border-color: #DDDDDD;
+    border-top-color: #464848;
 }
 
 #bt2 {
-    border-top-left-radius: 0px;
+        border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 7px;
     border-top-right-radius: 0px;
-        background-image: linear-gradient(white, black, #4B4D4D);
     border-color: #DDDDDD;
+    border-top-color: #464848;
+}
+
+#bt3 {
+      border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-color: #DDDDDD;
+
+    float: right;
+    background-image: linear-gradient(red, darkred, red);
 }
