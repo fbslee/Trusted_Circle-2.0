@@ -11,6 +11,7 @@
 
     #as {
         margin-top: 10px;
+        margin-bottom: 5px;
     }
 
     .profile-userpic img {
@@ -62,6 +63,9 @@
 }
 
 .voter {
+        position: relative;
+    top: 30px;
+    left: 30px;
         width: 15px;
         font-size: 15px;
         color: #999;
@@ -71,6 +75,10 @@
         }
         .highlighted {
             color: gold;
+        }
+        .vote-count {
+            position: relative;
+            left: 3px;
         }
 
 .profile-photo {

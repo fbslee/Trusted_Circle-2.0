@@ -12,3 +12,27 @@
 #topic {
   font-style: italic;
 }
+
+#inp {
+  margin-bottom: 0px;
+}
+
+#content {
+  border-bottom-left-radius: 0px;
+}
+
+#bt1 {
+  border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+        background-image: linear-gradient(white, black, #4B4D4D);
+    border-color: #DDDDDD;
+}
+
+#bt2 {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+        background-image: linear-gradient(white, black, #4B4D4D);
+    border-color: #DDDDDD;
+}

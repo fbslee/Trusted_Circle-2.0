@@ -28,7 +28,7 @@ import { MessageService } from '../services/message.service'
 
     <div *ngIf="flag">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="form-group">
+        <div class="form-group" id="inp">
            <span> <label for="content">Post As {{username}} or </label>
            <a (click)="anon()" >switch to Anonymous</a>
            </span>
@@ -40,8 +40,8 @@ import { MessageService } from '../services/message.service'
                     name="content"
                     required>
         </div>
-        <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-default" type="submit" (click)="myNotification.show(f)">Post as {{username}}</button>
+        <button id="bt1" type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
+        <button id="bt2" class="btn btn-default" type="submit" (click)="myNotification.show(f)">Post as {{username}}</button>
 
     </form>
     </div>
