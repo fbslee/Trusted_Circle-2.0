@@ -17,7 +17,11 @@ import { MessageService } from '../services/message.service'
 
         </push-notification>
 
-  <h3>{{topicBody}} posted by {{topicUser}}</h3>
+  <h3>{{topicBody}} posted by 
+
+  <span *ngIf="topicOwnerFound === true">{{topicUser}} </span>
+  
+  </h3>
   <div class="col-md-8 col-md-offset-2">
     <div *ngIf="flag">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
@@ -65,12 +69,13 @@ export class MessageInputComponent implements OnInit {
     private flag = true;
 
     topicBody: string = sessionStorage.getItem('topicBody') || localStorage.getItem('topicBody')
-    topicUser: string = sessionStorage.getItem('topicUser') || localStorage.getItem('topicUser')
+    topicUser: string = '';
     constructor(private messageService: MessageService) {}
     userID: any = localStorage.getItem('userID');
     topicId: any = sessionStorage.getItem('topicSelectedIdx');
     username: string = localStorage.getItem('username');
     topicOwner: string;
+    topicOwnerFound: any = false;
 
     anon() {
         console.log('i hate everyone');
@@ -144,7 +149,15 @@ export class MessageInputComponent implements OnInit {
         this.messageService.messageIsEdit.subscribe(
             (message: Message) => this.message = message
         );
-
+        //get the topic owner here...
+        this.messageService.getTopicowner( sessionStorage.getItem('topicSelectedIdx') ).subscribe(
+            (data) => {
+                console.log('data from getTopicowner', data);
+                this.topicUser = data.username;
+                console.log(this.topicOwner, 'Topic Owner!!!')
+                this.topicOwnerFound = true;
+            }
+        )
         // this.topicOwner = sessionStorage
     }
 

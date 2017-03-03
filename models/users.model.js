@@ -4,10 +4,10 @@ const sequelize = require('../db/connection');
 var User = sequelize.define('users', {
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
-  desc: {
-    type: Sequelize.STRING,
-    defaultValue: 'This user has no description :('
-  },
+  // desc: {
+  //   type: Sequelize.STRING,
+  //   defaultValue: 'This user has no description :('
+  // },
   username: {
     type: Sequelize.STRING,
     unique: true
