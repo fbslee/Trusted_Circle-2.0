@@ -7,7 +7,7 @@ import { MessageService } from '../services/message.service'
 
 @Component({
   selector: 'app-message-input',
-  template: `
+  template:  `
 
       <push-notification #myNotification
         title="Trusted Circle message Posted"
@@ -17,57 +17,52 @@ import { MessageService } from '../services/message.service'
           (error)="handleError($event)">
 
         </push-notification>
-<div id="title">
-  <h3><strong id="topic">{{topicBody}}</strong> | Posted by 
+
+  <h3>{{topicBody}} posted by 
 
   <span *ngIf="topicOwnerFound === true">{{topicUser}} </span>
   
   </h3>
-  </div>
-  <div class="col-md-8 col-md-offset-2" id="minput">
-
+  <div class="col-md-8 col-md-offset-2">
     <div *ngIf="flag">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="form-group" id="inp">
-        
+        <div class="form-group">
+           <span> <label for="content">Post As {{username}} or </label>
+           <a (click)="anon()" >switch to Anonymous</a>
+           </span>
             <input
                     type="text"
                     id="content"
                     class="form-control"
                     [ngModel]="message?.body"
-                    placeholder="Send a message, {{username}}!"
                     name="content"
                     required>
         </div>
-        <button id="bt1" class="btn btn-default" type="submit" (click)="myNotification.show(f)">Post as {{username}}</button>
-        <button id="bt2" type="button" class="btn btn-default" (click)="onClear(f)">Clear</button>
-        <button id="bt3" type="button" class="btn btn-default" (click)="anon()" [ngStyle]="{'background-image': color}" > ? </button>
+        <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-default" type="submit" (click)="myNotification.show(f)">Post as {{username}}</button>
 
     </form>
     </div>
      <div *ngIf="!flag">
         <form #f="ngForm">
-        <div class="form-group" id="inp">
-            
+        <div class="form-group">
+            <label for="content">Post As Anonymous</label>
             <input
                     type="text"
                     id="content"
                     class="form-control"
                     [ngModel]="message?.body"
                     name="content"
-                    placeholder="Send a message, Anon!"
                     required>
         </div>
-        <button id="bt1" class="btn btn-default" type="submit" (click)='anonSubmit(f)'>Post as Anonymous</button>
-        <button id="bt2" type="button" class="btn btn-default" (click)="onClear(f)">Clear</button>
-        <button id="bt3" type="button" class="btn btn-default" (click)="anon()" [ngStyle]="{'background-image': color}" > ? </button>
-
+        <button type="button" class="btn btn-primary" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-danger" (click)='anonSubmit(f)'>Post as Anonymous</button> <a (click)="anon()" >Cancel</a>
+        
 
     </form>
     </div>
 </div>
-  `,
-  styleUrls: ['./input.component.scss']
+  `
 })
 
 export class MessageInputComponent implements OnInit {
