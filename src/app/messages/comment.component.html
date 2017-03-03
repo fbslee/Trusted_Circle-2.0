@@ -1,15 +1,15 @@
 <div class="col-md-8 col-md-offset-2">
-  <div class="ui feed">
+  <div class="ui feed" id="cnt">
     <div class="event">
       <div class="label">
         <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
       </div>
       <div class="content">
         <div class="summary">
-          <a class="user">
-            {{comment.username}}
+          <a id="user">
+            {{comment.username}} :
         </a> {{ comment.text }}
-          <div class="date">
+          <div class="date" id="date">
             {{comment.date}}
           </div>
         </div>

@@ -11,7 +11,7 @@ import { MessageService } from '../services/message.service'
 @Component({
     selector: 'app-message-comment',
     templateUrl: './comment.component.html',
-    styleUrls: ['./comment.scss']
+    styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
     @Input() message: Message;

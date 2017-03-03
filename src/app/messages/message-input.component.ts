@@ -17,13 +17,15 @@ import { MessageService } from '../services/message.service'
           (error)="handleError($event)">
 
         </push-notification>
-
-  <h3>{{topicBody}} posted by 
+<div id="title">
+  <h3><strong id="topic">{{topicBody}}</strong> | Posted by 
 
   <span *ngIf="topicOwnerFound === true">{{topicUser}} </span>
   
   </h3>
-  <div class="col-md-8 col-md-offset-2">
+  </div>
+  <div class="col-md-8 col-md-offset-2" id="minput">
+
     <div *ngIf="flag">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
@@ -62,7 +64,8 @@ import { MessageService } from '../services/message.service'
     </form>
     </div>
 </div>
-  `
+  `,
+  styleUrls: ['./input.component.scss']
 })
 
 export class MessageInputComponent implements OnInit {
