@@ -18,10 +18,6 @@ const User_Message_Votes = require('../models/user_message_votes.model');
 const Comment = require('../models/comment.model');
 
 
-router.get('/test', function (req, res) {
-  console.log('yuri is gay')
-  res.send()
-})
 
 router.get('/signup', controller.signup.get);
 
@@ -698,7 +694,38 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
   })
 });
 
+router.post('/edit', (req, res) => {
+  var body = req.body
+  console.log('THIS IS BODY!!', body);
+  // body = JSON.stringify(body)
+  // res.send(body);
+  let newTopic = {
+    
+  }
 
+
+  // Topic.create(newTopic)
+  //   .then((data) => {
+  //     // res.status(200).json(data);
+  //     return data;
+  //   }).then((data) => {
+
+  //     console.log(data.dataValues, ' DATATATATATATATATAATATA');
+
+  //     User_Topics.create({
+  //         status: "original poster",
+  //         userId: body.userId,
+  //         topicId: data.dataValues.id
+  //       })
+  //       .then((data) => {
+  //         res.status(200).json(data);
+  //       })
+
+
+
+  //   })
+
+})
 
 router.post('/topics', (req, res) => {
   var body = req.body
@@ -769,6 +796,8 @@ router.post('/circles', (req, res) => {
     })
 
 })
+
+
 
 router.patch('/messages/:id', (req, res) => {
   console.log("EDIT", req.params.id);
