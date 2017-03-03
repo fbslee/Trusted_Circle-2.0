@@ -92,6 +92,7 @@ export class CirclesComponent implements OnInit {
   circles: any = [];
   profilePicLink: string = sessionStorage.getItem('userPhoto');
   loadTopic: any = false;
+  loadCircle: any = false;
 
   //['Hack Reactor', 'Movies', 'Soccer'];
 
@@ -137,7 +138,7 @@ export class CirclesComponent implements OnInit {
 
 
   setCircles() {
-    this.DavidDataService.getAllCurrentUserData(localStorage.getItem('userID'))
+    this.DavidDataService.getAllCurrentUserData(sessionStorage.getItem('userId'))
             .subscribe( (data) => {
                         var theData = data
                         console.log("HOW CAN I USE THIS", theData)
@@ -146,6 +147,8 @@ export class CirclesComponent implements OnInit {
                           this.finalComparedCircles.push([circle.name,circle.id]);
                           console.log(this.finalComparedCircles)
                         }
+
+                        this.loadCircle = true;
           })
   }
 
