@@ -629,7 +629,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
         }).then((data)=>{
           upvotedUserId = data.dataValues.userId
           data.updateAttributes({
-            votes: (data.dataValues.votes - 1)
+            votes: (data.dataValues.votes + 1)
           }).then((data)=>{
             User.findOne({
               where:{
@@ -638,11 +638,11 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             }).then((data)=>{
               if(data.dataValues.username !== 'Anonymous'){
                 data.updateAttributes({
-                  upvotes: (data.dataValues.upvotes - 1)
+                  upvotes: (data.dataValues.upvotes + 1)
                 }).then((data)=>{
-                  if(data.dataValues.upvotes < 10){
+                  if(data.dataValues.upvotes >= 10){
                     data.updateAttributes({
-                      trustedCounselor: false
+                      trustedCounselor: true
                     })
                   }
                   User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
@@ -663,7 +663,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             })
           })
         })
-      } else if(data.dataValues.vote === 'upvote'){
+      } else if(data.dataValues.vote === 'downvote'){
         data.destroy()
         Message.findOne({
           where:{
@@ -672,7 +672,7 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
         }).then((data)=>{
           downvotedUserId = data.dataValues.userId
           data.updateAttributes({
-            votes:(data.dataValues.votes - 1)
+            votes:(data.dataValues.votes + 1)
           }).then((data)=>{
             User.findOne({
               where:{
@@ -681,11 +681,11 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             }).then((data)=>{
               if(data.dataValues.username !== 'Anonymous'){
                 data.updateAttributes({
-                  upvotes: (data.dataValues.upvotes - 1)
+                  upvotes: (data.dataValues.upvotes + 1)
                 }).then((data)=>{
-                  if(data.dataValues.upvotes < 10){
+                  if(data.dataValues.upvotes >= 10){
                     data.updateAttributes({
-                      trustedCounselor: false
+                      trustedCounselor: true
                     })
                   }
                 })
@@ -693,28 +693,28 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
             })
           })
         })
-      } else if(data.dataValues.vote === 'downvote'){
-        res.send('already downvoted')
+      } else if(data.dataValues.vote === 'upvote'){
+        res.send('already upvoted')
       }
     })
   })
 
-router.post('/messagesvotes/', (req, res) => {
+// router.post('/messagesvotes/', (req, res) => {
 
-  var userId = req.body.userId
-  var messageId = req.body.messageId
-  console.log(req.body);
-  let newMessageVote = {
-    userId: userId,
-    messageId: messageId
-  }
-  User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
-      res.status(200).json(newMessageVote);
-    })
-    .catch(function (error) {
-      res.status(500).json(error);
-    });
-})
+//   var userId = req.body.userId
+//   var messageId = req.body.messageId
+//   console.log(req.body);
+//   let newMessageVote = {
+//     userId: userId,
+//     messageId: messageId
+//   }
+//   User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+//       res.status(200).json(newMessageVote);
+//     })
+//     .catch(function (error) {
+//       res.status(500).json(error);
+//     });
+// })
 
 //     router.post('/messagesvotes/:id', (req, res) => {
 
@@ -768,7 +768,7 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
         let newMessageVote = {
           userId: userId,
           messageId: messageId,
-          vote: 'upvote'
+          vote: 'downvote'
         }
         Message.findOne({
           where:{
@@ -777,7 +777,7 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
         }).then((data)=>{
           upvotedUserId = data.dataValues.userId
           data.updateAttributes({
-            votes: (data.dataValues.votes + 1)
+            votes: (data.dataValues.votes - 1)
           }).then((data)=>{
             User.findOne({
               where:{
@@ -786,11 +786,11 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
             }).then((data)=>{
               if(data.dataValues.username !== 'Anonymous'){
                 data.updateAttributes({
-                  upvotes: (data.dataValues.upvotes + 1)
+                  upvotes: (data.dataValues.upvotes - 1)
                 }).then((data)=>{
-                  if(data.dataValues.upvotes >= 10){
+                  if(data.dataValues.upvotes < 10){
                     data.updateAttributes({
-                      trustedCounselor: true
+                      trustedCounselor: false
                     })
                   }
                   User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
@@ -811,7 +811,7 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
             })
           })
         })
-      } else if(data.dataValues.vote === 'downvote'){
+      } else if(data.dataValues.vote === 'upvote'){
         data.destroy()
         Message.findOne({
           where:{
@@ -820,7 +820,7 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
         }).then((data)=>{
           upvotedUserId = data.dataValues.userId
           data.updateAttributes({
-            votes:(data.dataValues.votes + 1)
+            votes:(data.dataValues.votes - 1)
           }).then((data)=>{
             User.findOne({
               where:{
@@ -829,11 +829,11 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
             }).then((data)=>{
               if(data.dataValues.username !== 'Anonymous'){
                 data.updateAttributes({
-                  upvotes: (data.dataValues.upvotes + 1)
+                  upvotes: (data.dataValues.upvotes - 1)
                 }).then((data)=>{
-                  if(data.dataValues.upvotes >= 10){
+                  if(data.dataValues.upvotes < 10){
                     data.updateAttributes({
-                      trustedCounselor: true
+                      trustedCounselor: false
                     })
                   }
                 })
@@ -841,19 +841,10 @@ router.delete('/messagesvotes/:id/:uid', (req, res) => {
             })
           })
         })
-      } else if(data.dataValues.vote === 'upvote'){
-        res.send('already upvoted')
+      } else if(data.dataValues.vote === 'downvote'){
+        res.send('already downvoted')
       }
     })
-
-  User_Message_Votes.destroy({
-    where: {
-      messageId: req.params.id,
-      userId: req.params.uid
-    }
-  }).then(val => {
-    console.log(val);
-  })
 });
 
 router.post('/edit', (req, res) => {
