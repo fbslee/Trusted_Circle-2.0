@@ -588,47 +588,61 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
     var userId = req.body.userId
     var messageId = req.body.messageId
     var upvotedUserId;
-    console.log(req.body);
-    let newMessageVote = {
+    User_Message_Votes.findOne({
+      where:{
         userId: userId,
         messageId: messageId
-    }
-    Message.findOne({
-        where:{
-            id: messageId
-        }
+      }
     }).then((data)=>{
-        upvotedUserId = data.dataValues.userId
-        User.findOne({
-            where:{
-                id: data.dataValues.userId
-            }
+      if(data === null){
+        let newMessageVote = {
+          userId: userId,
+          messageId: messageId
+        }
+        Message.findOne({
+          where:{
+            id: messageId
+          }
         }).then((data)=>{
-            if(data.dataValues.username !== 'Anonymous'){
+          upvotedUserId = data.dataValues.userId
+          data.updateAttributes({
+            votes: (data.dataValues.votes + 1)
+          }).then((data)=>{
+            User.findOne({
+              where:{
+                id: data.dataValues.userId
+              }
+            }).then((data)=>{
+              if(data.dataValues.username !== 'Anonymous'){
                 data.updateAttributes({
-                    upvotes: (data.dataValues.upvotes + 1)
+                  upvotes: (data.dataValues.upvotes + 1)
                 }).then((data)=>{
-                    if(data.dataValues.upvotes >= 10){
-                        data.updateAttributes({
-                            trustedCounselor: true
-                        })
-                    }
-                    User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
-                        res.status(200).json(newMessageVote);
+                  if(data.dataValues.upvotes >= 10){
+                    data.updateAttributes({
+                      trustedCounselor: true
                     })
-                    .catch(function (error){
-                        res.status(500).json(error);
-                    });
-                })
-            } else {
-                User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+                  }
+                  User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
                     res.status(200).json(newMessageVote);
+                  })
+                  .catch(function (error){
+                    res.status(500).json(error);
+                  });
+                })
+              } else {
+                User_Message_Votes.create(newMessageVote).then(function (newMessageVote) {
+                  res.status(200).json(newMessageVote);
                 })
                 .catch(function (error){
-                    res.status(500).json(error);
+                  res.status(500).json(error);
                 });
-            }
+              }
+            })
+          })
         })
+      } else {
+        res.send('already voted')
+      }
     })
   })
 
