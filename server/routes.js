@@ -19,6 +19,7 @@ const Comment = require('../models/comment.model');
 
 
 
+
 router.get('/signup', controller.signup.get);
 
 router.get('/logout', (req, res) => {
@@ -408,10 +409,10 @@ router.get('/topics_to_user/:topicsId', (req, res) => {
 
 router.get('/getMessagesAndVotes/:topicId', (req, res) => {
   console.log('hitting this, the end point is:', req.params)
-  var UserMessageVotes = sequelize.define('usermessagevotes', {
-    userId: Sequelize.INTEGER,
-    messageId: Sequelize.INTEGER
-  });
+  // var UserMessageVotes = sequelize.define('usermessagevotes', {
+  //   userId: Sequelize.INTEGER,
+  //   messageId: Sequelize.INTEGER
+  // });
 
   var theArray = [];
 
@@ -434,10 +435,12 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
     .then((data) => {
       var sendMe = data.map((value, index, array) => {
         var messageInfoObj = value.dataValues;
-                console.log("MESSAGEINFOOBJJJJJJJJJ",messageInfoObj)
+                // console.log("MESSAGEINFOOBJJJJJJJJJ",messageInfoObj)
 
         return messageInfoObj;
       })
+
+      console.log('==========', sendMe);
 
 
       var messageIndexArray = [];
@@ -447,77 +450,91 @@ router.get('/getMessagesAndVotes/:topicId', (req, res) => {
         messageIndexArrayObj.push(message);
         messageIndexArray.push(message.id);
       }
-      UserMessageVotes.findAndCountAll({
-          where: {
-            messageId: messageIndexArray
-          }
-        }).then((stupidData) => {
-          var countObj = {};
 
-          for (var messageObj of stupidData.rows) {
-            if (countObj[messageObj.dataValues.messageId]) {
-              countObj[messageObj.dataValues.messageId]++;
-            } else {
-              countObj[messageObj.dataValues.messageId] = 1;
-            }
-          }
-          return countObj;
+      console.log(messageIndexArrayObj);
+      console.log(messageIndexArray);
 
-        }).then((countObj) => {
-          console.log('this is countObj!!!!!', countObj)
-          console.log('this is messageIndexArrayObj', messageIndexArrayObj);
+      res.send(messageIndexArrayObj);
 
-          var newCountObj = Object.assign({}, countObj);
+      // User_Message_Votes.findAndCountAll({
+      //     where: {
+      //       messageId: {
+      //         $in: messageIndexArray
+      //       }
+      //     }
+      //   }).then((stupidData) => {
+      //     var countObj = {};
 
-          console.log('==========================', newCountObj, '========================',
-            Object.keys(countObj).length)
+      //     for (var messageObj of stupidData.rows) {
+      //       if (countObj[messageObj.dataValues.messageId]) {
+      //         countObj[messageObj.dataValues.messageId]++;
+      //       } else {
+      //         countObj[messageObj.dataValues.messageId] = 1;
+      //       }
+      //     }
+      //     return countObj;
 
-          if (Object.keys(countObj).length !== 0) {
-            console.log('got in here!====================')
-            for (var targetObj of messageIndexArrayObj) {
-              for (var indexThis in newCountObj) {
-                if (indexThis === targetObj.id.toString() && !targetObj.voteCount) {
-                  targetObj.voteCount = newCountObj[indexThis];
-                }
+      //   }).then((countObj) => {
+      //     console.log('this is countObj!!!!!', countObj)
+      //     console.log('this is messageIndexArrayObj', messageIndexArrayObj);
 
-                if (!targetObj.voteCount) {
-                  targetObj.voteCount = 0;
-                }
+      //     var newCountObj = Object.assign({}, countObj);
 
+      //     console.log('==========================', newCountObj, '========================',
+      //       Object.keys(countObj).length)
 
-              }
-            }
-            console.log('finished with loop', messageIndexArrayObj);
-          } else {
-            console.log('got in here3333333')
-            for (var targetObj of messageIndexArrayObj) {
-              targetObj.voteCount = 0;
-              console.log(targetObj, 'target OBJECT IS ===========');
+      //     if (Object.keys(countObj).length !== 0) {
+      //       console.log('got in here!====================')
+      //       for (var targetObj of messageIndexArrayObj) {
+      //         for (var indexThis in newCountObj) {
+      //           if (indexThis === targetObj.id.toString() && !targetObj.voteCount) {
+      //             targetObj.voteCount = newCountObj[indexThis];
+      //           }
 
-            }
-
-          }
+      //           if (!targetObj.voteCount) {
+      //             targetObj.voteCount = 0;
+      //           }
 
 
-          // console.log('should be changed!!!!!');
-          // console.log(newCountObj);
-          // console.log(messageIndexArrayObj, 'yoooooooooo');
+      //         }
+      //       }
+      //       console.log('finished with loop', messageIndexArrayObj);
+      //     } else {
+      //       console.log('got in here3333333')
+      //       for (var targetObj of messageIndexArrayObj) {
+      //         targetObj.voteCount = 0;
+      //         console.log(targetObj, 'target OBJECT IS ===========');
+
+      //       }
+
+      //     }
+
+
+      //     // console.log('should be changed!!!!!');
+      //     // console.log(newCountObj);
+      //     // console.log(messageIndexArrayObj, 'yoooooooooo');
 
     
-        // .then(messageIndexArrayObj => {
-        //   const resObj = messageIndexArrayObj.map(
+      //   // .then(messageIndexArrayObj => {
+      //   //   const resObj = messageIndexArrayObj.map(
 
-        //   )
-        })
+      //   //   )
+      //   })
 
-        .then((mang) => {
-          console.log('return from message', messageIndexArrayObj)
-          res.send(messageIndexArrayObj);
-        })
+        // .then((mang) => {
+        //   console.log('return from message', messageIndexArrayObj)
+        //   res.send(messageIndexArrayObj);
+        // })
 
 
     })
 })
+
+// route.get('/getMessagesAndVotes/', (req,res) => {
+//   Message.find({
+
+//   })
+// })
 
 router.get('/getTopicmessages/:topicId', (req, res) => {
   console.log('======================IDX IS===================', req.params.topicId);
@@ -588,12 +605,17 @@ router.get('/messagesvotes/:messageId/:userId', (req, res) => {
     var userId = req.body.userId
     var messageId = req.body.messageId
     var upvotedUserId;
+
+    console.log('messagesvotes', req.body);
+
     User_Message_Votes.findOne({
       where:{
         userId: userId,
         messageId: messageId
       }
     }).then((data)=>{
+      console.log('DATAAAAT FROM UMV', data);
+
       if(data === null){
         let newMessageVote = {
           userId: userId,
