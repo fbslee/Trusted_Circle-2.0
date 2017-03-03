@@ -60,13 +60,15 @@ export class MessageService {
                 let transformedMessages: Message[] = [];
                 
                 for (let message of messages) {
+                    console.log('message from message service', message)
                         var body = message.body;
                         var user =  message.user.username;
                         // var votes = message.votes;
                         var userId = message.userId;
                         var topicId = message.topicId;
                         var id = message.id;
-                        var votes = message.voteCount;
+                        // var votes = message.voteCount;
+                        var votes = message.votes;
                         var Tcomments = [];
                         var comments = message.user.comments;
                         for(let comment of comments) {
